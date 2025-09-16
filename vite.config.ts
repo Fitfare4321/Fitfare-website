@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: '/Fitfare-website/', // Add this line for GitHub Pages
   server: {
     host: "::",
     port: 8080,
@@ -19,4 +20,7 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    outDir: 'dist', // Ensure build output goes to dist folder
+  },
 }));
