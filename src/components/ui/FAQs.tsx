@@ -77,12 +77,7 @@ const FAQ = () => {
           ))}
         </div>
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600 mb-4">Still have questions?</p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors">
-            Contact Support
-          </button>
-        </div>
+        
       </div>
     </section>
   );

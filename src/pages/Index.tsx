@@ -50,7 +50,7 @@ const Index = () => {
     rating: 5,
     text: "As a college student, I love that I can hit the gym without any monthly commitment. FitFare gives me the flexibility to work out wherever and whenever I want!",
     transformation: "Lost 28 lbs in 4 months",
-    image: "https://plus.unsplash.com/premium_photo-1723485686323-37eb3394405a?q=80&w=924&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "https://media.istockphoto.com/id/1338134319/photo/portrait-of-young-indian-businesswoman-or-school-teacher-pose-indoors.jpg?s=612x612&w=0&k=20&c=Dw1nKFtnU_Bfm2I3OPQxBmSKe9NtSzux6bHqa9lVZ7A="
   },
   {
     name: "Jai Kaushik ",
@@ -58,7 +58,7 @@ const Index = () => {
     rating: 5,
     text: "With my hectic work schedule, FitFare pay-per-use model fits perfectly into my lifestyle. I’ve discovered new gyms nearby and only pay when I actually go!",
     transformation: "Gained 12 lbs muscle",
-    image: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "/JaiKaushik.jpg"
   },
   {
     name: "Rohit Mote",
@@ -66,7 +66,7 @@ const Index = () => {
     rating: 5,
     text: "Staying fit was hard with my travel-packed job, but FitFare made it seamless. I now explore different gyms without locking into long-term plans or wasting money.",
     transformation: "200% energy increase",
-    image: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    image: "/RohitMote.jpg"
   }
 ];
 
@@ -99,12 +99,7 @@ const Index = () => {
               <a href="#contact" className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">Contact</a>
             </div>
             
-            <div className="hidden md:flex items-center space-x-4">
-              
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg">
-                Sign In
-              </Button>
-            </div>
+  
 
             <button 
               className="md:hidden p-2"
@@ -275,10 +270,8 @@ const Index = () => {
                 ))}
               </div>
               
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg" size="lg">
-                Contact Us
-                <ArrowRight className="ml-1 h-5 w-5" />
-              </Button>
+              
+
             </div>
             
             {/* Trust and collaboration */}
@@ -341,7 +334,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="space-y-8">
-              <div className="space-y-6">
+              <div className="space-y-12">
                 <h2 className="text-4xl lg:text-5xl font-bold">Ready to Grow Your Gym?</h2>
                 <p className="text-xl text-blue-100 leading-relaxed">
                   Join FitFare to boost your reach, attarct members, and unlock powerful grwoth opportunities.
@@ -355,9 +348,10 @@ const Index = () => {
                   </div>
                   <div>
                     <h4 className="font-semibold text-lg">Call Us</h4>
-                    <p className="text-blue-100">+91 7420946744</p>
+                    <p className="text-blue-100">+91 9356859874</p>
                   </div>
                 </div>
+
                 <div className="flex items-center space-x-4">
                   <div className="bg-white/20 backdrop-blur-sm p-3 rounded-xl">
                     <Mail className="h-6 w-6" />
@@ -367,43 +361,22 @@ const Index = () => {
                     <p className="text-blue-100">team.fitfare@gmail.com</p>
                   </div>
                 </div>
+
+                <Button
+                  className="bg-white text-blue-600 border border-blue-600 hover:bg-blue-600 hover:text-white hover:shadow-xl transition-all duration-300"
+                  size="lg"
+                >
+                  Contact Us
+                  <ArrowRight className="ml-1 h-5 w-5 text-blue-600" />
+                </Button>
                 
               </div>
             </div>
             
-            <Card className="border-0 shadow-2xl bg-white text-gray-900">
-              <CardHeader className="text-center pb-6">
-                <CardTitle className="text-2xl font-bold">Get In Touch With Us</CardTitle>
-                
-              </CardHeader>
-              <CardContent className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="firstName" className="text-sm font-medium">First Name</Label>
-                    <Input id="firstName" placeholder="John" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500" />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="lastName" className="text-sm font-medium">Last Name</Label>
-                    <Input id="lastName" placeholder="Doe" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500" />
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="email" className="text-sm font-medium">Email Address</Label>
-                  <Input id="email" type="email" placeholder="john@example.com" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="phone" className="text-sm font-medium">Phone Number</Label>
-                  <Input id="phone" type="tel" placeholder="(555) 123-4567" className="border-gray-300 focus:border-blue-500 focus:ring-blue-500" />
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-lg py-4 shadow-lg">
-                  Submit
-                </Button>
-                <p className="text-sm text-gray-500 text-center">
-                  No credit card required. Free consultation included.
-                </p>
-              </CardContent>
-            </Card>
+            <div>
+                 <img src="/Contact-us.png" alt="FitFare Logo" className="h-43 w-auto rounded-xl" />
+            </div>
+
           </div>
         </div>
       </section>
@@ -428,20 +401,11 @@ const Index = () => {
               <h4 className="font-semibold mb-6 text-lg">Connect</h4>
 
               <div className="flex space-x-4 mb-6">
-                  {/* Twitter */}
-                  <a 
-                    href="https://twitter.com/yourprofile" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="bg-gray-800 p-3 rounded-lg transition-all duration-300 cursor-pointer
-                              hover:bg-blue-500 hover:scale-110 hover:shadow-lg hover:shadow-blue-500/50"
-                  >
-                    <Twitter className="w-5 h-5 text-white" />
-                  </a>
+                  
 
                   {/* Instagram */}
                   <a 
-                    href="https://instagram.com/yourprofile" 
+                    href="https://www.instagram.com/fitfare.official/?igsh=MWRnbWVoZmR3MXc4Zg%3D%3D#" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="bg-gray-800 p-3 rounded-lg transition-all duration-300 cursor-pointer

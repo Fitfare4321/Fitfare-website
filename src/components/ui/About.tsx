@@ -9,7 +9,7 @@ const About = () => {
 
   const stats = [
     { number: 2000000, suffix: "+", label: "Active Users" },
-    { number: 150, suffix: "+", label: "Countries" },
+    { number: 150, suffix: "+", label: "Gyms" },
     { number: 95, suffix: "%", label: "Success Rate" },
     { number: 50, suffix: "+", label: "Team Members" },
   ];
@@ -104,24 +104,29 @@ const About = () => {
           </div>
           
           <div className="relative">
-      <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 text-white">
-        <div className="grid grid-cols-2 gap-6">
-          {stats.map((stat, index) => (
-            <div key={index} className="text-center">
-              <div className="text-3xl font-bold mb-2">
-                <CountUp
-                  start={0}
-                  end={stat.number}
-                  duration={2.5}
-                  formattingFn={(val) => formatNumber(val) + stat.suffix}
-                />
+
+            <h4 className="text-3xl font-bold text-gray-900 mb-4 text-center">
+              Upcoming Goal
+            </h4>
+
+            <div className="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 text-white">
+              <div className="grid grid-cols-2 gap-6">
+                {stats.map((stat, index) => (
+                  <div key={index} className="text-center">
+                    <div className="text-3xl font-bold mb-2">
+                      <CountUp
+                        start={0}
+                        end={stat.number}
+                        duration={2.5}
+                        formattingFn={(val) => formatNumber(val) + stat.suffix}
+                      />
+                    </div>
+                    <div className="text-blue-100">{stat.label}</div>
+                  </div>
+                ))}
               </div>
-              <div className="text-blue-100">{stat.label}</div>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
+          </div>
         </div>
 
         <div className="mb-24">
