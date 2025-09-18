@@ -337,7 +337,7 @@ const Index = () => {
               <div className="space-y-12">
                 <h2 className="text-4xl lg:text-5xl font-bold">Ready to Grow Your Gym?</h2>
                 <p className="text-xl text-blue-100 leading-relaxed">
-                  Join FitFare to boost your reach, attarct members, and unlock powerful grwoth opportunities.
+                  Join FitFare to boost your reach, attract members, and unlock powerful growth opportunities.
                 </p>
               </div>
               

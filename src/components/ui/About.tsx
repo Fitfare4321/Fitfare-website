@@ -74,7 +74,7 @@ const About = () => {
                     About FitFare
                 </h2>
                 <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                    FitFare helps gyms to increase increase revenue, reduce commission, and reach untapped fitness enthusiasts effortlessly.
+                    FitFare helps gyms to increase revenue, reduce commission, and reach untapped fitness enthusiasts effortlessly.
                     Also, gives users freedom to train anywhere, anytime, no subscriptions, and no boundaries.
                 </p>
             </div>

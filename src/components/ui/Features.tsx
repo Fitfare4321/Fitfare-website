@@ -11,7 +11,7 @@ const Features = () => {
     {
       icon: TrendingUp,
       title: "Revenue Engine",
-      description: "Tools to boost sales through flexible, dynmaic pricing."
+      description: "Tools to boost sales through flexible, dynamic pricing."
     },
     {
       icon: BarChart3,
