@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   motion,
   AnimatePresence,
@@ -24,9 +24,7 @@ const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
-
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-  const [logoAnimating, setLogoAnimating] = useState(false);
+  const [logoHover, setLogoHover] = useState(false);
 
   const { scrollY } = useScroll();
   const { theme, setTheme } = useTheme();
@@ -35,23 +33,12 @@ const Navbar = () => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const handleLogoClick = () => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    setLogoAnimating(true);
-    video.currentTime = 0;
-    video.play();
-
-    setTimeout(() => {
-      setLogoAnimating(false);
-    }, 1800);
-  };
-
+  /* ---------- Scroll Detection ---------- */
   useMotionValueEvent(scrollY, "change", (latest) => {
     setScrolled(latest > 40);
   });
 
+  /* ---------- Active Section Detection ---------- */
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
@@ -73,7 +60,7 @@ const Navbar = () => {
   }, []);
 
   /* ---------------- NAV LINK COMPONENT ---------------- */
-  const NavItem = ({ link, onClick = () => {} }: any) => {
+  const NavItem = ({ link, onClick = () => { } }: any) => {
     const isActive = activeSection === link.href.slice(1);
 
     return (
@@ -107,9 +94,8 @@ const Navbar = () => {
             </div>
 
             <div
-              className={`absolute inset-0 flex items-center justify-center backface-hidden ${
-                isActive ? "text-white" : ""
-              }`}
+              className={`absolute inset-0 flex items-center justify-center backface-hidden ${isActive ? "text-white" : ""
+                }`}
               style={{ transform: "rotateX(180deg)" }}
             >
               {link.label}
@@ -142,30 +128,33 @@ const Navbar = () => {
             href="#home"
             className="flex items-center gap-3"
             whileTap={{ scale: 0.95 }}
-            onClick={handleLogoClick}
           >
             <motion.div
               className="relative w-11 h-11 rounded-xl overflow-hidden"
               whileHover={{ scale: 1.08 }}
+              onMouseEnter={() => setLogoHover(true)}
+              onMouseLeave={() => setLogoHover(false)}
             >
+              {/* Normal Logo */}
               <img
                 src={logo}
                 alt="Logo"
-                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
-                  logoAnimating ? "opacity-0" : "opacity-100"
-                }`}
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${logoHover ? "opacity-0" : "opacity-100"
+                  }`}
               />
 
+              {/* Animated Video Logo */}
               <video
-                ref={videoRef}
                 src={logoVideo}
+                autoPlay
                 muted
+                loop
                 playsInline
-                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${
-                  logoAnimating ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-300 ${logoHover ? "opacity-100" : "opacity-0"
+                  }`}
               />
             </motion.div>
+
 
             <span className="text-xl font-bold tracking-tight">
               FitFare
@@ -198,6 +187,7 @@ const Navbar = () => {
                     {isDark ? (
                       <Sun size={20} className="text-yellow-400" />
                     ) : (
+                      // <Sun size={20} className="text-yellow-400" />
                       <Moon size={20} className="text-blue-500" />
                     )}
                   </motion.div>
@@ -235,9 +225,7 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className={`md:hidden border-t ${
-                isDark
-                  ? "bg-white text-slate-900"
-                  : "bg-slate-900 text-white"
+                isDark ? "bg-slate-900" : "bg-white"
               }`}
             >
               <div className="p-6 flex flex-col items-center gap-4">
@@ -249,16 +237,13 @@ const Navbar = () => {
                   />
                 ))}
 
+                {/* 🔥 THEME TOGGLE ADDED BACK */}
                 {mounted && (
                   <button
                     onClick={() =>
                       setTheme(theme === "dark" ? "light" : "dark")
                     }
-                    className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border font-medium ${
-                      isDark
-                        ? "border-slate-300 text-slate-900"
-                        : "border-white/20 text-white"
-                    }`}
+                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border"
                   >
                     {isDark ? (
                       <>
@@ -278,7 +263,7 @@ const Navbar = () => {
                   href="#contact"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setMobileOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border bg-blue-600 hover:bg-blue-700"
                 >
                   <Zap size={16} />
                   Join Now
@@ -291,5 +276,4 @@ const Navbar = () => {
     </motion.nav>
   );
 };
-
 export default Navbar;

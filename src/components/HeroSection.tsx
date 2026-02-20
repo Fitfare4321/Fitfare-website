@@ -250,7 +250,7 @@ const HeroSection = () => {
                 : "text-white/90"
                 } font-normal text-base sm:text-lg`}
             >
-             Experience on-demand fitness with the top gyms and trainers, empowering users to stay active and helping partners grow through seamless collaboration.
+              Experience on-demand fitness with the top gyms and trainers.
             </span>
           </motion.p>
 
