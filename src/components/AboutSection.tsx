@@ -166,30 +166,33 @@ const CradleCards = ({ isDark }: { isDark: boolean }) => {
       <div
         className="flex flex-col items-center text-center gap-3 rounded-3xl w-[230px] md:w-[240px] py-7 px-6 backdrop-blur-sm"
         style={{
-          background:
-            "linear-gradient(145deg, rgba(15,23,42,0.06), rgba(15,23,42,0.02))",
-          boxShadow: "0 26px 70px rgba(15,23,42,0.65)",
-          border: "1px solid rgba(255,255,255,0.16)",
+          background: isDark
+            ? "linear-gradient(135deg, rgba(128, 229, 202, 0.98) 0%, rgba(240,253,244,0.97) 100%)"
+            : "linear-gradient(135deg, rgba(109, 180, 231, 0.83) 0%, rgba(236,252,245,0.95) 100%)",
+          boxShadow: "0 10px 36px rgba(0, 0, 0, 0.14)",
+          border: "1px solid rgba(16,185,129,0.18)",
         }}
       >
         <div
           className="inline-flex items-center justify-center w-11 h-11 rounded-full mb-1"
           style={{
-            boxShadow: "0 0 0 1px rgba(255,255,255,0.18)",
-            background: "rgba(255,255,255,0.08)",
+            boxShadow: "0 0 0 1px rgba(16,185,129,0.25)",
+            background: isDark
+              ? "linear-gradient(135deg, rgba(16,185,129,0.20), rgba(16,185,129,0.10))"
+              : "linear-gradient(135deg, rgba(16,185,129,0.18), rgba(16,185,129,0.08))",
             backdropFilter: "saturate(120%) blur(10px)",
           }}
         >
-          <Icon size={22} style={{ color: "#6ee7b7" }} />
+          <Icon size={22} style={{ color: "#10B981" }} />
         </div>
         <h4
-          className={`font-semibold text-base md:text-lg text-white`}
+          className={`font-semibold text-base md:text-lg text-gray-900`}
           style={{ letterSpacing: "-0.01em" }}
         >
           {title}
         </h4>
         <p
-          className={`text-[13px] md:text-sm leading-relaxed text-slate-200`}
+          className={`text-[13px] md:text-sm leading-relaxed text-gray-600`}
         >
           {desc}
         </p>
@@ -256,7 +259,7 @@ const AboutSection = () => {
     <section
       id="about"
       ref={containerRef}
-      className={`relative h-[400vh] ${
+      className={`relative h-[300vh] ${
         isMoon ? "bg-white" : "bg-[#071A2F]"
       }`}
       
@@ -270,98 +273,108 @@ const AboutSection = () => {
           className={`relative w-full overflow-hidden ${isMoon ? "bg-white" : "bg-[#071A2F]"
             }`}
         >
-          {/* ===== SAME GRADIENT FROM FIRST CODE ===== */}
+          {/* ===== SOLID GREEN BACKGROUND (ZOMATO STYLE) ===== */}
           <div
             className="absolute inset-0"
             style={{
-              background: isDark
-                ? "linear-gradient(135deg, #6CA6CF 0%, #58B3CF 42%, #4CCF9C 100%)"
-                : "linear-gradient(135deg, #2B6E95 0%, #2F88A5 45%, #23A97B 100%)",
-
+              background: "#10B981", // Solid emerald green
             }}
           />
-          {/* ===== LIVE MOVING COLORS ===== */}
-          {/* ===== CURVE MASK WRAPPER ===== */}
-<div className="absolute inset-0 overflow-hidden">
-
-{/* Moving Gradient */}
-<motion.div
-  className="absolute inset-0"
-  style={{
-    background:
-      "linear-gradient(120deg, #6CA6CF, #58B3CF, #4CCF9C, #58B3CF, #6CA6CF)",
-    backgroundSize: "300% 300%",
-  }}
-  animate={{
-    backgroundPosition: [
-      "0% 50%",
-      "100% 50%",
-      "0% 50%",
-    ],
-  }}
-  transition={{
-    duration: 14,
-    repeat: Infinity,
-    ease: "linear",
-  }}
-/>
-
-{/* TOP CURVE CUT */}
-<div
-  className="absolute top-0 left-1/2 -translate-x-1/2"
-  style={{
-    width: "160%",
-    height: "260px",
-    background: isMoon ? "#ffffff" : "#071A2F",
-    borderBottomLeftRadius: "60% 120%",
-    borderBottomRightRadius: "60% 120%",
-    zIndex: 2,
-  }}
-/>
-
-{/* BOTTOM CURVE CUT */}
-<div
-  className="absolute bottom-0 left-1/2 -translate-x-1/2"
-  style={{
-    width: "160%",
-    height: "260px",
-    background: isMoon ? "#ffffff" : "#071A2F",
-    borderTopLeftRadius: "60% 120%",
-    borderTopRightRadius: "60% 120%",
-    zIndex: 2,
-  }}
-/>
-
-</div>
-
           
-          {/* ===== ARC STRUCTURE FROM FIRST CODE (UNCHANGED) ===== */}
+          {/* ===== CURVE MASK WRAPPER (ZOMATO STYLE CURVED CARDS) ===== */}
+          <div className="absolute inset-0 overflow-hidden">
+            {/* TOP CURVE CUT */}
+            <div
+              className="absolute top-0 left-1/2 -translate-x-1/2"
+              style={{
+                width: "180%",
+                height: "200px",
+                background: isMoon ? "#ffffff" : "#071A2F",
+                borderBottomLeftRadius: "60% 120%",
+                borderBottomRightRadius: "60% 120%",
+                zIndex: 2,
+              }}
+            />
 
-          <div
-            className="absolute bottom-0 left-1/2 -translate-x-1/2"
-            style={{
-              width: "160%",
-              height: "260px",
-              background: isDark ? "#f3f4f6" : "#0f172a",
-              borderTopLeftRadius: "60% 120%",
-              borderTopRightRadius: "60% 120%",
-            }}
-          />
+            {/* BOTTOM CURVE CUT */}
+            <div
+              className="absolute bottom-0 left-1/2 -translate-x-1/2"
+              style={{
+                width: "180%",
+                height: "200px",
+                background: isMoon ? "#ffffff" : "#071A2F",
+                borderTopLeftRadius: "60% 120%",
+                borderTopRightRadius: "60% 120%",
+                zIndex: 2,
+              }}
+            />
+          </div>
 
-          <div
-            className="absolute top-0 left-1/2 -translate-x-1/2"
-            style={{
-              width: "160%",
-              height: "260px",
-              background: isDark ? "#f3f4f6" : "#0f172a",
-              borderBottomLeftRadius: "60% 120%",
-              borderBottomRightRadius: "60% 120%",
-            }}
-          />
+          <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 3 }}>
+            <motion.div
+              className="absolute rounded-full overflow-hidden shadow-2xl"
+              style={{
+                top: 140,
+                left: -24,
+                width: 150,
+                height: 150,
+                background:
+                  "radial-gradient(circle at 30% 30%, #f5d38a 0%, #e0b95d 35%, #c79a3a 65%, #a87926 100%)",
+                boxShadow: "0 30px 60px rgba(0,0,0,0.35)",
+                border: "3px solid rgba(255,255,255,0.2)",
+              }}
+              animate={{ y: [0, -12, 0], rotate: [0, 6, 0] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(140deg, rgba(255,255,255,0.28) 0%, transparent 40%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ color: "#0f172a" }}
+              >
+                <Dumbbell size={42} color="#0f172a" />
+              </div>
+            </motion.div>
 
-          {/* ===== CONTENT LAYER (Premium Layout from Code 2) ===== */}
+            <motion.div
+              className="absolute rounded-full overflow-hidden shadow-2xl"
+              style={{
+                top: 130,
+                right: -28,
+                width: 170,
+                height: 170,
+                background:
+                  "radial-gradient(circle at 70% 30%, #f5d38a 0%, #e0b95d 35%, #c79a3a 65%, #a87926 100%)",
+                boxShadow: "0 30px 60px rgba(0,0,0,0.35)",
+                border: "3px solid rgba(255,255,255,0.2)",
+              }}
+              animate={{ y: [0, -10, 0], rotate: [0, -6, 0] }}
+              transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <div
+                className="absolute inset-0"
+                style={{
+                  background:
+                    "linear-gradient(160deg, rgba(255,255,255,0.26) 0%, transparent 40%)",
+                }}
+              />
+              <div
+                className="absolute inset-0 flex items-center justify-center"
+                style={{ color: "#0f172a" }}
+              >
+                <Trophy size={48} color="#0f172a" />
+              </div>
+            </motion.div>
+          </div>
 
-          <div className="relative z-10 min-h-[900px] flex items-center justify-center py-32">
+          {/* ===== CONTENT LAYER (Zomato Style Layout) ===== */}
+
+          <div className="relative z-10 min-h-[1100px] flex items-center justify-center py-32">
             <div className="w-full max-w-6xl px-6 md:px-12 text-center text-white">
 
               <AnimatePresence mode="wait">
@@ -380,8 +393,8 @@ const AboutSection = () => {
 
 
                     <h2
-                      className="text-4xl md:text-5xl font-bold tracking-tight"
-                      style={{ color: isDark ? "#223548" : "#301934", textShadow: isDark ? "none" : "0 0 30px rgba(70, 198, 209, 0.3)" }}
+                      className="text-4xl md:text-5xl font-bold tracking-tight text-white"
+                      style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)" }}
                     >
                       Built For Results
                     </h2>
@@ -400,29 +413,22 @@ const AboutSection = () => {
                     className="max-w-3xl mx-auto space-y-8"
                   >
                     <span
-                      className="inline-block text-xs md:text-sm uppercase tracking-[0.3em] font-bold"
-                      style={{
-                        color: isDark ? "#334155" : "#301934"
-                      }}
+                      className="inline-block text-xs md:text-sm uppercase tracking-[0.3em] font-bold text-white/80"
                     >
                       Our Story
                     </span>
 
                     <h2
-                      className="text-3xl md:text-5xl font-bold tracking-tight px-4"
+                      className="text-3xl md:text-5xl font-bold tracking-tight px-4 text-white"
                       style={{
-                        color: isDark ? "#223548" : "#301934",
-                        textShadow: isDark ? "none" : "0 0 40px rgba(70, 198, 209, 0.4)"
+                        textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)"
                       }}
                     >
                       Building The Future  of Flexible Fitness
                     </h2>
 
                     <p
-                      className="text-md md:text-[16px] leading-relaxed max-w-2xl mx-auto px-6"
-                      style={{
-                        color: isDark ? "#475569" : "#fff"
-                      }}
+                      className="text-md md:text-[16px] leading-relaxed max-w-2xl mx-auto px-6 text-white/90"
                     >
                       We started FitFare after facing the same problem ourselves —
                       expensive, rigid gym memberships that didn’t match modern schedules.
@@ -459,9 +465,9 @@ const AboutSection = () => {
                         >
                           <CheckCircle
                             size={20}
-                            className="text-primary shrink-0"
+                            className="text-white shrink-0"
                           />
-                          <span className="text-gray-200 text-base leading-relaxed">
+                          <span className="text-white/90 text-base leading-relaxed">
                             {item}
                           </span>
                         </div>
@@ -481,29 +487,50 @@ const AboutSection = () => {
                     className="space-y-12"
                   >
                     <h3
-                      className="text-2xl md:text-5xl font-bold tracking-tight"
-                      style={{ color: isDark ? "#223548" : "#301934", textShadow: isDark ? "none" : "0 0 30px rgba(70, 198, 209, 0.3)" }}
+                      className="text-2xl md:text-5xl font-bold tracking-tight text-white"
+                      style={{ textShadow: "0 2px 10px rgba(0, 0, 0, 0.2)" }}
                     >
                       Upcoming Goals
                     </h3>
 
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto px-4">
                       {trustStats.map((s, i) => (
-                        <div
+                        <motion.div
                           key={i}
-                          className={`p-8 rounded-[2rem] border transition-all duration-500 hover:-translate-y-2 ${isDark
-                            ? "bg-slate-50 border-slate-200 shadow-xl"
-                            : "bg-[#0F172A] border-black backdrop-blur-xl"
-
-                            }`}
+                          initial={{ opacity: 0, y: 24, scale: 0.96 }}
+                          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                          viewport={{ once: true, amount: 0.3 }}
+                          transition={{ duration: 0.6, delay: i * 0.08, type: "spring", stiffness: 160 }}
+                          whileHover={{ scale: 1.04 }}
+                          className="relative p-8 rounded-[2rem] border overflow-hidden"
+                          style={{
+                            background: isDark
+                              ? "linear-gradient(180deg, rgba(16,23,42,0.92) 0%, rgba(12,20,33,0.92) 100%)"
+                              : "linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(236,252,245,0.75) 100%)",
+                            borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(16,185,129,0.18)",
+                            boxShadow: isDark
+                              ? "0 14px 36px rgba(0,0,0,0.35)"
+                              : "0 12px 30px rgba(16,185,129,0.15)",
+                            backdropFilter: "blur(8px)",
+                          }}
                         >
-                          <div className={`text-3xl md:text-4xl font-black mb-3 ${isDark ? "text-slate-500" : "text-gray-300"}`}>
+                          <motion.div
+                            className="absolute inset-0 pointer-events-none"
+                            initial={{ x: "-120%" }}
+                            whileHover={{ x: "120%" }}
+                            transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+                            style={{
+                              background:
+                                "linear-gradient(120deg, transparent 40%, rgba(255,255,255,0.25) 50%, transparent 60%)",
+                            }}
+                          />
+                          <div className={`text-3xl md:text-4xl font-black mb-3 ${isDark ? "text-white/90" : "text-[#0f172a]"}`}>
                             {s.value}
                           </div>
-                          <div className={`text-xs md:text-sm font-bold uppercase tracking-[0.2em] ${isDark ? "text-slate-500" : "text-gray-300"}`}>
+                          <div className={`text-xs md:text-sm font-bold uppercase tracking-[0.2em] ${isDark ? "text-white/70" : "text-[#0f172a]/70"}`}>
                             {s.label}
                           </div>
-                        </div>
+                        </motion.div>
                       ))}
                     </div>
                   </motion.div>
