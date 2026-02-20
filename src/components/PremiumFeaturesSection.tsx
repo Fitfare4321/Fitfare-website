@@ -74,8 +74,8 @@ const PremiumFeaturesSection = () => {
       description: "of gym memberships go completely unused",
       color: isDark ? "#1e40af" : "#3b82f6",
       bgGradient: isDark
-        ? "from-blue-100 to-blue-50"
-        : "from-blue-500/20 to-blue-600/10",
+        ? "from-blue-500/20 to-blue-600/10":"from-blue-100 to-blue-50"
+        
     },
     {
       percentage: 46,
@@ -309,21 +309,26 @@ const PremiumFeaturesSection = () => {
             >
               <div className="flex items-center gap-3 mb-4">
                 <div
-                  className="w-11 h-11 rounded-full flex items-center justify-center"
-                  style={{
-                    background: sectionDark
-                      ? "linear-gradient(135deg, #22c55e 0%, #16a34a 40%, #0f766e 100%)"
-                      : "transparent",
-                    boxShadow: sectionDark ? "0 12px 30px rgba(34,197,94,0.45)" : "none",
-                    border: sectionDark ? "none" : "1px solid rgba(15,23,42,0.12)",
-                  }}
-                >
-                  <Shield className="w-6 h-6" style={{ color: sectionDark ? "#ffffff" : "#16a34a" }} />
-                </div>
+  className="w-11 h-11 flex items-center justify-center"
+>
+  <Shield
+    className="w-6 h-6"
+    style={{
+      color: sectionDark ? "#16a34a" : "#16a34a"
+    }}
+  />
+</div>
+
                 <div className="text-left">
-                  <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/80">
-                    Problem Lens
-                  </p>
+                 <p
+  className="text-xs uppercase tracking-[0.25em]"
+  style={{
+    color: sectionDark ? "#6ee7b7" : "#059669"
+  }}
+>
+  Problem Lens
+</p>
+
                   <h3
                     className="text-lg font-semibold mt-1"
                     style={{ color: sectionDark ? "#e2e8f0" : "#0f172a" }}
@@ -370,9 +375,15 @@ const PremiumFeaturesSection = () => {
                     >
                       <AnimatedCounter value={c.percentage} suffix="%" />
                     </span>
-                    <p className="text-xs font-semibold text-slate-200/90 uppercase tracking-wide">
-                      {c.title}
-                    </p>
+                   <p
+  className="text-xs font-semibold uppercase tracking-wide"
+  style={{
+    color: sectionDark ? "#e2e8f0" : "#0f172a",
+  }}
+>
+  {c.title}
+</p>
+
                     <p className="text-[11px] text-slate-400 leading-snug">
                       {c.description}
                     </p>
@@ -435,19 +446,15 @@ const PremiumFeaturesSection = () => {
           className="mb-28"
         >
           <div className="flex items-center gap-6 mb-12">
-            <div
-              className="w-20 h-20 rounded-2xl flex items-center justify-center"
-              style={{
-                background: sectionDark
-                  ? "linear-gradient(135deg, #2563eb 0%, #1e40af 100%)"
-                  : "linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%)",
-                boxShadow: sectionDark
-                  ? "0 10px 40px rgba(37,99,235,0.3)"
-                  : "0 10px 40px rgba(59,130,246,0.4), 0 0 60px rgba(59,130,246,0.2)",
-              }}
-            >
-              <BarChart3 className="w-10 h-10 text-white" />
-            </div>
+          <div className="flex items-center justify-center">
+  <BarChart3
+    className="w-12 h-12"
+    style={{
+      color: sectionDark ? "#60a5fa" : "#2563eb"
+    }}
+  />
+</div>
+
             <div>
               <h3
                 className="text-2xl md:text-3xl"
@@ -493,39 +500,33 @@ const PremiumFeaturesSection = () => {
                       : "0 20px 50px rgba(0,0,0,0.3)",
                   }}
                 >
-                  <motion.div
-                    className="mb-6 inline-flex items-center justify-center p-4 rounded-2xl"
-                    style={{
-                      background: stat.color,
-                      boxShadow: isDark
-                        ? `0 10px 25px ${stat.color}30`
-                        : `0 10px 30px ${stat.color}40`,
-                      transform: "translateZ(0)",
-                      transformStyle: "flat",
-                      backfaceVisibility: "hidden",
-                    }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    <Icon size={30} className="text-white" />
-                  </motion.div>
+               <div className="flex items-center gap-4 mb-5">
 
-                  <motion.div
-                    className="text-4xl md:text-5xl font-black mb-4"
-                    style={{
-                      color: stat.color,
-                      textShadow: isDark
-                        ? "none"
-                        : `0 0 30px ${stat.color}60`,
-                    }}
-                    whileHover={{ scale: 1.1 }}
-                  >
-                    <AnimatedCounter
-                      value={parseFloat(stat.value)}
-                      suffix={stat.suffix}
-                      prefix={stat.prefix}
-                      decimals={stat.value.includes(".") ? 1 : 0}
-                    />
-                  </motion.div>
+  {/* ICON */}
+  <div className="p-2 rounded-xl">
+    <Icon size={34} style={{ color: stat.color }} />
+  </div>
+
+  {/* VALUE NUMBER */}
+  <motion.div
+    className="text-4xl md:text-5xl font-black tracking-tight"
+    style={{
+      color: stat.color, // 👈 VALUE COLOR CONTROL HERE
+      textShadow: isDark ? "none" : `0 0 30px ${stat.color}60`,
+    }}
+    whileHover={{ scale: 1.1 }}
+  >
+    <AnimatedCounter
+      value={parseFloat(stat.value)}
+      suffix={stat.suffix}
+      prefix={stat.prefix}
+      decimals={stat.value.includes(".") ? 1 : 0}
+    />
+  </motion.div>
+
+</div>
+
+                   
                   <h4
                     className={`text-xl font-black mb-3 ${isDark ? "text-slate-900" : "text-white"
                       }`}
@@ -614,7 +615,13 @@ const PremiumFeaturesSection = () => {
                       ? "0 24px 55px rgba(15,23,42,0.8)"
                       : "0 30px 70px rgba(15,23,42,0.95)",
                   }}
-                  className={`relative group flex flex-col items-center md:items-start text-center md:text-left gap-3 ${i > 0 ? "md:pl-8 md:border-l" : ""}`}
+                 className={`
+relative group flex flex-col items-center md:items-start 
+text-center md:text-left gap-3 
+rounded-3xl p-6 transition-all duration-300
+${i > 0 ? "md:pl-8 md:border-l" : ""}
+`}
+
                   style={{
                     borderColor: sectionDark ? "rgba(15,23,42,0.1)" : "rgba(226,232,240,0.16)",
                   }}
@@ -623,12 +630,9 @@ const PremiumFeaturesSection = () => {
                   <div
                     className="pointer-events-none absolute inset-x-[-18px] inset-y-[-12px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-xl"
                     style={{
-                      background:
-                        i === 0
-                          ? "radial-gradient(circle at 0% 0%, rgba(45,212,191,0.45), transparent 60%)"
-                          : i === 1
-                          ? "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.45), transparent 60%)"
-                          : "radial-gradient(circle at 0% 0%, rgba(59,130,246,0.5), transparent 60%)",
+                      background: sectionDark
+  ? "radial-gradient(circle at 0% 0%, rgba(148,163,184,0.15), transparent 60%)"
+  : "radial-gradient(circle at 0% 0%, rgba(15,23,42,0.08), transparent 60%)"
                     }}
                   />
                   <div
@@ -646,11 +650,10 @@ const PremiumFeaturesSection = () => {
                   </div>
                   <div className="space-y-2">
                     <h4
-                      className={`text-lg md:text-xl font-semibold bg-gradient-to-r ${feature.gradient} bg-clip-text`}
-                      style={{
-                        WebkitBackgroundClip: "text",
-                        WebkitTextFillColor: "transparent",
-                      }}
+                      className="text-lg md:text-xl font-semibold"
+style={{
+  color: sectionDark ? "#e2e8f0" : "#0f172a"
+}}
                     >
                       {feature.title}
                     </h4>
