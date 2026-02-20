@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
+import logo from "@/assets/blue-background-logo.png";
 
 const Preloader = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -108,10 +109,8 @@ const Preloader = () => {
 
           {/* MAIN CONTENT */}
           <div className="relative z-10 text-center">
-
             {/* ICON + RING */}
             <div className="relative w-40 h-40 mx-auto">
-
               {/* Glow */}
               <motion.div
                 className="absolute inset-0 rounded-full blur-2xl"
@@ -124,7 +123,10 @@ const Preloader = () => {
               />
 
               {/* Ring */}
-              <svg className="absolute inset-0 -rotate-90" viewBox="0 0 100 100">
+              <svg
+                className="absolute inset-0 -rotate-90"
+                viewBox="0 0 100 100"
+              >
                 <circle
                   cx="50"
                   cy="50"
@@ -144,8 +146,7 @@ const Preloader = () => {
                   strokeLinecap="round"
                   strokeDasharray={2 * Math.PI * 44}
                   animate={{
-                    strokeDashoffset:
-                      2 * Math.PI * 44 * (1 - progress / 100),
+                    strokeDashoffset: 2 * Math.PI * 44 * (1 - progress / 100),
                   }}
                   transition={{ duration: 0.3 }}
                 />
@@ -167,7 +168,7 @@ const Preloader = () => {
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <img
-                    src="/blue-background-logo.png"
+                    src={logo}
                     alt="FitFare Logo"
                     className="w-14 h-14 object-contain"
                   />
@@ -186,22 +187,22 @@ const Preloader = () => {
             </p>
 
             {/* STATUS TEXT */}
-           <div className="flex items-center justify-center gap-3 text-gray-400 text-sm mt-3">
-  <motion.div
-    className="w-2 h-2 rounded-full bg-emerald-400"
-    animate={{
-      scale: [1, 1.6, 1],
-      opacity: [0.5, 1, 0.5],
-    }}
-    transition={{
-      duration: 1.4,
-      repeat: Infinity,
-    }}
-  />
+            <div className="flex items-center justify-center gap-3 text-gray-400 text-sm mt-3">
+              <motion.div
+                className="w-2 h-2 rounded-full bg-emerald-400"
+                animate={{
+                  scale: [1, 1.6, 1],
+                  opacity: [0.5, 1, 0.5],
+                }}
+                transition={{
+                  duration: 1.4,
+                  repeat: Infinity,
+                }}
+              />
 
-  <span>{loadingText}</span>
-</div>
-</div>
+              <span>{loadingText}</span>
+            </div>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>
