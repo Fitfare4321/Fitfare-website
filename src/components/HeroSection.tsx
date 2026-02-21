@@ -31,7 +31,7 @@ const FloatingParticle = ({
       width: size,
       height: size,
       background: `radial-gradient(circle, hsl(217 91% 60% / 0.8), transparent)`,
-      filter: isDark ? "blur(4px)" : "blur(1.5px)",
+      filter: isDark ? "blur(1.5px)" : "blur(4px)",
     }}
     animate={{
       y: [0, -250, 0],
@@ -62,7 +62,7 @@ const LiveNotification = ({
     initial={{ opacity: 0, scale: 0.5, y: 20 }}
     animate={{ opacity: 1, scale: 1, y: 0 }}
     exit={{ opacity: 0, scale: 0.5, y: -20 }}
-    className={`bg-background/60 ${isDark ? "backdrop-blur-xl" : "backdrop-blur-sm"
+    className={`bg-background/60 ${isDark ? "backdrop-blur-sm" : "backdrop-blur-xl"
       } border border-white/10 p-3 rounded-xl shadow-2xl flex items-center gap-3`}
   >
     <div
@@ -137,14 +137,14 @@ const HeroSection = () => {
 
         {/* Overlays */}
         <div
-          className={`absolute inset-0 ${isDark ? "bg-white/10" : "bg-black/20"
+          className={`absolute inset-0 ${isDark ? "bg-black/20" : "bg-white/10"
             }`}
         />
 
         <div
           className={`absolute inset-0 ${isDark
-            ? "bg-gradient-to-b from-white/10 via-transparent to-white"
-            : "bg-gradient-to-b from-black/40 via-transparent to-black/60"
+            ? "bg-gradient-to-b from-black/40 via-transparent to-black/60"
+            : "bg-gradient-to-b from-white/10 via-transparent to-white"
             }`}
         />
 
@@ -152,7 +152,7 @@ const HeroSection = () => {
 
       {/* Mouse Glow */}
       <motion.div
-        className={`absolute pointer-events-none rounded-full mix-blend-screen opacity-30 z-0 ${isDark ? "blur-[60px]" : "blur-[25px]"
+        className={`absolute pointer-events-none rounded-full mix-blend-screen opacity-30 z-0 ${isDark ? "blur-[25px]" : "blur-[60px]"
           }`}
         animate={{
           x: mousePos.x - 200,
@@ -219,7 +219,7 @@ const HeroSection = () => {
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 100 }}
-              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/15 ${isDark ? "backdrop-blur-md" : "backdrop-blur-sm"
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/30 bg-primary/15 ${isDark ? "backdrop-blur-sm" : "backdrop-blur-md"
                 } shadow-lg`}
             >
               <Zap className="w-4 h-4 text-primary animate-pulse" />
@@ -240,14 +240,14 @@ const HeroSection = () => {
           {/* Text */}
           <motion.p
             className={`text-lg sm:text-2xl max-w-2xl mb-12 leading-relaxed font-medium drop-shadow-md
-  ${isDark ? "text-black" : "text-white/90"}`}
+  ${isDark ? "text-white/90" : "text-black"}`}
           >
             Discover. Book. Train.
             <br />
             <span
               className={`${isDark
-                ? "text-black"
-                : "text-white/90"
+                ? "text-white/90"
+                : "text-black"
                 } font-normal text-base sm:text-lg`}
             >
               Experience on-demand fitness with the top gyms and trainers.
@@ -269,8 +269,8 @@ const HeroSection = () => {
               className={`group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border border-border 
   ${isDark
                   ?
-                  "backdrop-blur-none text-black"
-                  : "backdrop-blur-sm text-white"
+                  "backdrop-blur-sm text-white"
+                  : "backdrop-blur-none text-black"
 
                 }`}
             >

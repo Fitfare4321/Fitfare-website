@@ -91,8 +91,8 @@ const ContactSection = () => {
     focus:outline-none focus:ring-2 focus:ring-primary/20
     ${
       isMoon
-        ? "bg-gray-100 border-gray-300 text-black placeholder:text-gray-500 focus:border-primary"
-        : "bg-slate-800 border-slate-700 text-white placeholder:text-gray-400 focus:border-primary"
+        ? "bg-slate-800 border-slate-700 text-white placeholder:text-gray-400 focus:border-primary"
+        : "bg-gray-100 border-gray-300 text-black placeholder:text-gray-500 focus:border-primary"
     }
   `;
 
@@ -101,7 +101,7 @@ const ContactSection = () => {
       id="contact"
       className={`
         section-padding relative overflow-hidden transition-all duration-500
-        ${isMoon ? "bg-white text-black" : "bg-slate-900 text-white"}
+        ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"}
       `}
     >
       <div className="relative max-w-7xl mx-auto">
@@ -131,7 +131,7 @@ const ContactSection = () => {
           >
             <p
               className={`text-lg leading-relaxed ${
-                isMoon ? "text-gray-600" : "text-gray-300"
+                isMoon ? "text-gray-300" : "text-gray-600"
               }`}
             >
               Have questions about plans, pricing, or need a custom solution?
@@ -164,8 +164,8 @@ const ContactSection = () => {
                   flex items-center gap-4 p-5 rounded-xl transition-all duration-300 group
                   ${
                     isMoon
-                      ? "bg-gray-50 border border-gray-200"
-                      : "bg-slate-800 border border-slate-700"
+                      ? "bg-slate-800 border border-slate-700"
+                      : "bg-white border border-gray-200 shadow-sm"
                   }
                 `}
               >
@@ -178,12 +178,14 @@ const ContactSection = () => {
                 <div>
                   <p
                     className={`text-sm ${
-                      isMoon ? "text-gray-500" : "text-gray-400"
+                      isMoon ? "text-gray-400" : "text-gray-600"
                     }`}
                   >
                     {item.label}
                   </p>
-                  <p className="font-normal text-base group-hover:text-primary transition-colors">
+                  <p className={`font-normal text-base group-hover:text-primary transition-colors ${
+                    isMoon ? "text-white" : "text-gray-900"
+                  }`}>
                     {item.value}
                   </p>
                 </div>
@@ -201,8 +203,8 @@ const ContactSection = () => {
   p-8 rounded-2xl relative transition-all duration-500 border
   ${
     isMoon
-      ? "bg-gray-50 border-blue-400/70 shadow-[0_0_0_1px_rgba(59,130,246,0.2)]"
-      : "bg-slate-800 border-blue-500/60 shadow-[0_0_25px_rgba(59,130,246,0.15)]"
+      ? "bg-slate-800 border-blue-500/60 shadow-[0_0_25px_rgba(59,130,246,0.15)]"
+      : "bg-white border-gray-200 shadow-lg"
   }
 `}
 
@@ -210,7 +212,7 @@ const ContactSection = () => {
             <form onSubmit={handleSubmit} className="space-y-5">
               <div className="grid sm:grid-cols-2 gap-5">
                 <div>
-                  <label className="block text-sm mb-2">
+                  <label className={`block text-sm mb-2 ${isMoon ? "text-gray-300" : "text-gray-700"}`}>
                     Full Name
                   </label>
                   <input
@@ -224,7 +226,7 @@ const ContactSection = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm mb-2">
+                  <label className={`block text-sm mb-2 ${isMoon ? "text-gray-300" : "text-gray-700"}`}>
                     Email
                   </label>
                   <input
@@ -246,7 +248,7 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-sm mb-2">
+                <label className={`block text-sm mb-2 ${isMoon ? "text-gray-300" : "text-gray-700"}`}>
                   Phone
                 </label>
                 <input
@@ -266,7 +268,7 @@ const ContactSection = () => {
               </div>
 
               <div>
-                <label className="block text-sm mb-2">
+                <label className={`block text-sm mb-2 ${isMoon ? "text-gray-300" : "text-gray-700"}`}>
                   Message
                 </label>
                 <textarea

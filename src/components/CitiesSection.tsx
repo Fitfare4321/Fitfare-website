@@ -84,8 +84,8 @@ const CityCard = ({
         className={`relative z-10 w-[340px] h-[480px] rounded-[36px] border overflow-hidden backdrop-blur-xl transition-all duration-500
           ${
             isMoon
-              ? "bg-white border-slate-200 shadow-[0_35px_100px_rgba(0,0,0,0.15)]"
-              : "bg-slate-900/70 border-slate-700 shadow-[0_35px_100px_rgba(0,0,0,0.6)]"
+              ? "bg-slate-900/70 border-slate-700 shadow-[0_35px_100px_rgba(0,0,0,0.6)]"
+              : "bg-white border-slate-200 shadow-[0_35px_100px_rgba(0,0,0,0.15)]"
           }
         `}
       >
@@ -101,15 +101,15 @@ const CityCard = ({
             />
           </div>
 
-          <h3 className={`text-2xl font-bold mb-2 ${isMoon ? "text-slate-900" : "text-white"}`}>
+          <h3 className={`text-2xl font-bold mb-2 ${isMoon ? "text-white" : "text-slate-900"}`}>
             {city.name}
           </h3>
 
-          <p className={`text-sm font-medium mb-4 ${isMoon ? "text-slate-500" : "text-gray-400"}`}>
+          <p className={`text-sm font-medium mb-4 ${isMoon ? "text-gray-400" : "text-slate-500"}`}>
             {city.label}
           </p>
 
-          <p className={`text-sm leading-relaxed mb-6 ${isMoon ? "text-slate-600" : "text-gray-300"}`}>
+          <p className={`text-sm leading-relaxed mb-6 ${isMoon ? "text-gray-300" : "text-slate-600"}`}>
             Discover premium gyms, expert trainers, and high-performance
             workout programs designed to elevate your fitness journey in{" "}
             {city.name}. Train smarter. Achieve faster.
@@ -143,8 +143,8 @@ const CitiesSection = () => {
       className={`relative z-0 py-28 overflow-hidden transition-all duration-500
         ${
           isMoon
-            ? "bg-gradient-to-br from-slate-50 to-slate-100 text-black"
-            : "bg-slate-900 text-white"
+            ? "bg-slate-900 text-white"
+            : "bg-gradient-to-br from-slate-50 to-slate-100 text-black"
         }
       `}
     >
@@ -156,7 +156,7 @@ const CitiesSection = () => {
             Live Locations
           </span>
 
-          <h2 className={`text-5xl font-bold leading-tight ${isMoon ? "text-slate-900" : "text-white"}`}>
+          <h2 className={`text-5xl font-bold leading-tight ${isMoon ? "text-white" : "text-slate-900"}`}>
             We are Active in <br />
             <span className="bg-gradient-to-r 
                  from-[#1f6f8b] 
@@ -169,7 +169,7 @@ const CitiesSection = () => {
           </h2>
         </div>
 
-        <p className={`max-w-md text-lg ${isMoon ? "text-slate-600" : "text-gray-300"}`}>
+        <p className={`max-w-md text-lg ${isMoon ? "text-gray-300" : "text-slate-600"}`}>
           Find premium fitness centers, gym sessions, and expert trainers in your city.
         </p>
       </div>

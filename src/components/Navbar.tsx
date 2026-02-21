@@ -27,8 +27,9 @@ const Navbar = () => {
   const [logoHover, setLogoHover] = useState(false);
 
   const { scrollY } = useScroll();
-  const { theme, setTheme } = useTheme();
-  const isDark = theme === "dark";
+  const { theme, resolvedTheme, setTheme } = useTheme();
+  const effectiveTheme = resolvedTheme ?? theme;
+  const isDark = effectiveTheme === "dark";
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -69,10 +70,12 @@ const Navbar = () => {
         onClick={onClick}
         className={`relative px-4 py-2 text-sm font-semibold rounded-xl perspective group transition-colors duration-300 ${
           isActive
-            ? "text-blue-600"
+            ? isDark
+              ? "text-blue-400"
+              : "text-blue-600"
             : isDark
-            ? "text-gray-900 hover:text-black"
-            : "text-gray-400 hover:text-white"
+            ? "text-gray-300 hover:text-white"
+            : "text-gray-600 hover:text-gray-900"
         }`}
         whileHover="hover"
         whileTap="tap"
@@ -94,8 +97,15 @@ const Navbar = () => {
             </div>
 
             <div
-              className={`absolute inset-0 flex items-center justify-center backface-hidden ${isActive ? "text-white" : ""
-                }`}
+              className={`absolute inset-0 flex items-center justify-center backface-hidden ${
+                isActive
+                  ? isDark
+                    ? "text-blue-400"
+                    : "text-blue-600"
+                  : isDark
+                  ? "text-white"
+                  : "text-gray-900"
+              }`}
               style={{ transform: "rotateX(180deg)" }}
             >
               {link.label}
@@ -114,13 +124,9 @@ const Navbar = () => {
       className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
     >
       <div
-        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 ${
-          scrolled
-            ? isDark
-              ? "backdrop-blur-md bg-white/80 text-black shadow-xl border border-gray-200"
-              : "backdrop-blur-md bg-slate-900/80 text-white shadow-xl border border-white/10"
-            : ""
-        }`}
+        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 backdrop-blur-md shadow-xl border
+        bg-white text-gray-900 border-gray-200
+        dark:bg-black dark:text-white dark:border-white/10`}
       >
         <div className="px-6 h-20 flex items-center justify-between">
           {/* LOGO */}
@@ -130,7 +136,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
           >
             <motion.div
-              className="relative w-11 h-11 rounded-xl overflow-hidden"
+              className="relative w-11 h-11 rounded-full overflow-hidden"
               whileHover={{ scale: 1.08 }}
               onMouseEnter={() => setLogoHover(true)}
               onMouseLeave={() => setLogoHover(false)}
@@ -156,7 +162,7 @@ const Navbar = () => {
             </motion.div>
 
 
-            <span className="text-xl font-bold tracking-tight">
+            <span className={`text-xl font-bold tracking-tight ${isDark ? "text-white" : "text-gray-900"}`}>
               FitFare
             </span>
           </motion.a>
@@ -208,11 +214,19 @@ const Navbar = () => {
 
           {/* MOBILE BUTTON */}
           <button
-            className="md:hidden p-2"
+            className={`md:hidden p-2 rounded-lg transition-colors duration-300 ${
+              isDark
+                ? "text-white hover:bg-white/10"
+                : "text-gray-900 hover:bg-gray-100"
+            }`}
             onClick={() => setMobileOpen(!mobileOpen)}
           >
             <motion.div animate={{ rotate: mobileOpen ? 90 : 0 }}>
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              {mobileOpen ? (
+                <X size={24} className={isDark ? "text-white" : "text-gray-900"} />
+              ) : (
+                <Menu size={24} className={isDark ? "text-white" : "text-gray-900"} />
+              )}
             </motion.div>
           </button>
         </div>
@@ -224,46 +238,71 @@ const Navbar = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className={`md:hidden border-t ${
-                isDark ? "bg-slate-900" : "bg-white"
+              className={`md:hidden border-t transition-colors duration-300 ${
+                scrolled
+                  ? isDark
+                    ? "bg-slate-900/95 backdrop-blur-md border-white/10"
+                    : "bg-white backdrop-blur-md border-gray-200"
+                  : isDark
+                    ? "bg-slate-900/95 backdrop-blur-md border-white/10"
+                    : "bg-white backdrop-blur-md border-gray-200"
               }`}
             >
-              <div className="p-6 flex flex-col items-center gap-4">
+              <div className={`p-6 flex flex-col items-center gap-4 ${isDark ? "text-white" : "text-gray-900"}`}>
                 {navLinks.map((link) => (
-                  <NavItem
+                  <motion.a
                     key={link.href}
-                    link={link}
+                    href={link.href}
                     onClick={() => setMobileOpen(false)}
-                  />
+                    className={`w-full text-center py-3 px-4 rounded-xl font-semibold transition-all duration-300 ${
+                      activeSection === link.href.slice(1)
+                        ? isDark
+                          ? "bg-blue-600 text-white"
+                          : "bg-blue-600 text-white"
+                        : isDark
+                          ? "text-white hover:bg-white/10"
+                          : "text-gray-900 hover:bg-gray-100"
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {link.label}
+                  </motion.a>
                 ))}
 
-                {/* 🔥 THEME TOGGLE ADDED BACK */}
+                {/* THEME TOGGLE */}
                 {mounted && (
-                  <button
+                  <motion.button
                     onClick={() =>
                       setTheme(theme === "dark" ? "light" : "dark")
                     }
-                    className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border"
+                    className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl border transition-all duration-300 ${
+                      isDark
+                        ? "border-white/20 bg-white/10 text-white hover:bg-white/20"
+                        : "border-gray-300 bg-gray-50 text-gray-900 hover:bg-gray-100"
+                    }`}
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
                   >
                     {isDark ? (
                       <>
-                        <Moon size={18} className="text-blue-500" />
-                        Dark Mode
+                        <Sun size={18} className="text-yellow-500" />
+                        <span>Light Mode</span>
                       </>
                     ) : (
                       <>
-                        <Sun size={18} className="text-yellow-400" />
-                        Light Mode
+                        <Moon size={18} className="text-blue-400" />
+                        <span>Dark Mode</span>
                       </>
                     )}
-                  </button>
+                  </motion.button>
                 )}
 
                 <motion.a
                   href="#contact"
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setMobileOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border bg-blue-600 hover:bg-blue-700"
+                  className={`w-full flex items-center justify-center gap-2 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition-all duration-300`}
                 >
                   <Zap size={16} />
                   Join Now

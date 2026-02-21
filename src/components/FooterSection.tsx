@@ -48,7 +48,7 @@ const FooterSection = () => {
     <footer
       className={`
         relative overflow-hidden transition-all duration-500
-        ${isMoon ? "bg-white text-black" : "bg-slate-900 text-white"}
+        ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"}
       `}
     >
 
@@ -56,12 +56,12 @@ const FooterSection = () => {
       <div
         className={`
           absolute inset-0
-          ${isMoon ? "bg-white" : "bg-slate-900"}
+          ${isMoon ? "bg-slate-900" : "bg-white"}
         `}
       />
 
       {/* Glow ONLY for dark mode */}
-      {!isMoon && (
+      {isMoon && (
         <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 right-0 w-[500px] h-[500px] bg-blue-400/10 blur-3xl rounded-full" />
           <div className="absolute -bottom-40 left-0 w-[400px] h-[400px] bg-purple-400/10 blur-3xl rounded-full" />
@@ -81,13 +81,13 @@ const FooterSection = () => {
             className="lg:col-span-4 space-y-6"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-xl overflow-hidden">
+              <div className="w-12 h-12 rounded-full overflow-hidden">
                 <img src={logo} alt="FitFare" className="w-full h-full object-contain" />
               </div>
-              <span className="text-2xl font-bold">FitFare</span>
+              <span className={`text-2xl font-bold ${isMoon ? "text-white" : "text-gray-900"}`}>FitFare</span>
             </div>
 
-            <p className={isMoon ? "text-gray-700" : "text-gray-300"}>
+            <p className={isMoon ? "text-gray-300" : "text-gray-700"}>
               Empowering your fitness journey with flexible access to top gyms and trainers.
               Join the revolution today.
             </p>
@@ -107,8 +107,8 @@ const FooterSection = () => {
                     border transition-all duration-300
                     ${
                       isMoon
-                        ? "bg-white border-gray-200 shadow-sm text-gray-700 hover:shadow-md"
-                        : "bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700"
+                        ? "bg-slate-800 border-slate-700 text-gray-300 hover:bg-slate-700"
+                        : "bg-white border-gray-300 shadow-sm text-gray-900 hover:shadow-md hover:border-gray-400"
                     }
                   `}
                 >
@@ -128,7 +128,7 @@ const FooterSection = () => {
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
               >
-                <h4 className="font-semibold mb-6">{col.title}</h4>
+                <h4 className={`font-bold mb-6 ${isMoon ? "text-white" : "text-gray-900"}`}>{col.title}</h4>
 
                 <ul className="space-y-3">
                   {col.links.map((link, j) => (
@@ -139,8 +139,8 @@ const FooterSection = () => {
                           flex items-center gap-1 text-sm transition-all duration-300
                           ${
                             isMoon
-                              ? "text-gray-600 hover:text-black"
-                              : "text-gray-400 hover:text-white"
+                              ? "text-gray-400 hover:text-white"
+                              : "text-gray-700 hover:text-gray-900"
                           }
                         `}
                       >
@@ -156,8 +156,10 @@ const FooterSection = () => {
         </div>
 
         {/* BOTTOM */}
-        <div className="pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className={isMoon ? "text-gray-600 text-sm" : "text-gray-400 text-sm"}>
+        <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 ${
+          isMoon ? "border-gray-700" : "border-gray-300"
+        }`}>
+          <p className={isMoon ? "text-gray-400 text-sm" : "text-gray-700 text-sm"}>
             © 2025 FitFare. All rights reserved.
           </p>
 
@@ -170,8 +172,8 @@ const FooterSection = () => {
                   text-sm transition
                   ${
                     isMoon
-                      ? "text-gray-600 hover:text-black"
-                      : "text-gray-400 hover:text-white"
+                      ? "text-gray-400 hover:text-white"
+                      : "text-gray-700 hover:text-gray-900"
                   }
                 `}
               >

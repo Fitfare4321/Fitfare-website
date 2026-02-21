@@ -47,7 +47,7 @@ const FAQSection = () => {
   return (
     <section
       className={`section-padding relative overflow-hidden px-4 sm:px-6 lg:px-0 transition-all duration-500
-        ${isMoon ? "bg-white text-black" : "bg-slate-900 text-white"}
+        ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"}
       `}
     >
       <div className="relative max-w-3xl mx-auto">
@@ -65,7 +65,7 @@ const FAQSection = () => {
 
           <h2
             className={`text-[15px] sm:text-base lg:text-xl font-normal mt-6 leading-relaxed max-w-2xl mx-auto tracking-tight
-              ${isMoon ? "text-gray-600" : "text-gray-300"}
+              ${isMoon ? "text-gray-400" : "text-gray-600"}
             `}
           >
             Everything you need to know about FitFare. Can’t find the answer you're looking for?
@@ -83,11 +83,9 @@ const FAQSection = () => {
               viewport={{ once: true }}
               transition={{ delay: i * 0.06 }}
               className={`group relative overflow-hidden rounded-2xl transition-all duration-500
-                ${
-                  isMoon
-                    ? "bg-white border border-gray-200 shadow-sm hover:shadow-lg"
-                    : "bg-slate-800/70 backdrop-blur-xl border border-slate-700 hover:shadow-xl"
-                }
+                ${isMoon
+                  ? "bg-slate-800/70 backdrop-blur-xl border border-slate-700 hover:shadow-xl"
+                  : "bg-white border border-gray-200 shadow-sm hover:shadow-lg"}
               `}
             >
               {/* Subtle Shine */}
@@ -99,15 +97,13 @@ const FAQSection = () => {
               >
                 <span
                   className={`text-[20px] lg:text-[18px] font-bold tracking-tight transition-colors duration-300
-                    ${
-                      isMoon
-                        ? open === i
-                          ? "text-gray-900"
-                          : "text-gray-800 group-hover:text-gray-900"
-                        : open === i
+                    ${isMoon
+                      ? open === i
                         ? "text-white"
                         : "text-gray-300 group-hover:text-white"
-                    }
+                      : open === i
+                      ? "text-gray-900"
+                      : "text-gray-800 group-hover:text-gray-900"}
                   `}
                 >
                   {faq.q}
@@ -115,17 +111,14 @@ const FAQSection = () => {
 
                 <motion.div
                   animate={{ rotate: open === i ? 180 : 0 }}
-                  transition={{ duration: 0.35 }}
-                 className={`group relative overflow-hidden rounded-2xl transition-all duration-300
-  ${
-    isMoon
-      ? "bg-white border border-gray-200 shadow-sm hover:shadow-md"
-      : "bg-slate-800 border border-slate-700 shadow-sm hover:shadow-lg"
-  }
-`}
-
+                  transition={{ duration: 0.25 }}
+                  className={`flex items-center justify-center w-9 h-9 rounded-full border transition-colors duration-300
+                    ${isMoon
+                      ? "bg-slate-800/70 border-slate-700 text-gray-300 hover:bg-slate-700/50"
+                      : "bg-white border-gray-300 text-gray-600 hover:bg-gray-50"}`}
+                  aria-hidden="true"
                 >
-                  <ChevronDown size={16} />
+                  <ChevronDown size={18} />
                 </motion.div>
               </button>
 
@@ -139,11 +132,7 @@ const FAQSection = () => {
                   >
                     <div
                       className={`px-4 sm:px-6 pb-5 sm:pb-6 pt-4 text-[15px] leading-relaxed border-t
-                        ${
-                          isMoon
-                            ? "text-gray-600 border-gray-200"
-                            : "text-gray-300 border-slate-700"
-                        }
+                        ${isMoon ? "text-gray-300 border-slate-700" : "text-gray-600 border-gray-200"}
                       `}
                     >
                       {faq.a}

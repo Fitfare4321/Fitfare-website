@@ -51,7 +51,7 @@ const TestimonialsSection = () => {
   return (
     <section
       id="testimonials"
-      className={`section-padding transition-all duration-500 ${isMoon ? "bg-white text-black" : "bg-slate-900 text-white"
+      className={`section-padding transition-all duration-500 ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"
         }`}
     >
       <div className="relative max-w-7xl mx-auto">
@@ -85,8 +85,8 @@ const TestimonialsSection = () => {
               className={`
                 relative p-8 rounded-3xl transition-all duration-500
                 ${isMoon
-                  ? "bg-white border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
-                  : "bg-[#161a22] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.7)]"
+                  ? "bg-[#161a22] border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] hover:shadow-[0_25px_70px_rgba(0,0,0,0.7)]"
+                  : "bg-white border border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]"
                 }
                 ${current === i ? "ring-1 ring-primary/40" : ""}
               `}
@@ -106,7 +106,7 @@ const TestimonialsSection = () => {
 
               {/* Text */}
               <p
-                className={`mb-8 leading-relaxed text-[15px] ${isMoon ? "text-gray-600" : "text-gray-300"
+                className={`mb-8 leading-relaxed text-[15px] ${isMoon ? "text-gray-300" : "text-gray-600"
                   }`}
               >
                 "{t.text}"
@@ -118,20 +118,20 @@ const TestimonialsSection = () => {
                   src={t.image}
                   alt={t.name}
                   className={`w-12 h-12 rounded-full object-cover ${isMoon
-                      ? "border border-gray-200"
-                      : "border border-white/10"
+                      ? "border border-white/10"
+                      : "border border-gray-200"
                     }`}
                   whileHover={{ scale: 1.08 }}
                 />
                 <div>
                   <div
-                    className={`font-semibold ${isMoon ? "text-gray-900" : "text-white"
+                    className={`font-semibold ${isMoon ? "text-white" : "text-gray-900"
                       }`}
                   >
                     {t.name}
                   </div>
                   <div
-                    className={`text-sm ${isMoon ? "text-gray-500" : "text-gray-400"
+                    className={`text-sm ${isMoon ? "text-gray-400" : "text-gray-500"
                       }`}
                   >
                     {t.role}

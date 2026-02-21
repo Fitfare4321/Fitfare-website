@@ -49,10 +49,10 @@ const plans = [
 
 const PricingSection = () => {
   return (
-    <section id="pricing" className="section-padding bg-slate-900 relative overflow-hidden">
+    <section id="pricing" className="section-padding bg-white relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-900/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -61,13 +61,13 @@ const PricingSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-blue-400 font-semibold text-sm uppercase tracking-widest">
+          <span className="text-blue-600 font-semibold text-sm uppercase tracking-widest">
             Flexible Pricing
           </span>
-          <h2 className="text-4xl lg:text-5xl font-display font-bold text-white mt-3 mb-4">
+          <h2 className="text-4xl lg:text-5xl font-display font-bold text-gray-900 mt-3 mb-4">
             Simple Plans for <span className="text-blue-500">Everyone</span>
           </h2>
-          <p className="text-slate-400 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Whether you want to drop in occasionally or train everyday, we have a plan for you.
           </p>
         </motion.div>
@@ -93,12 +93,12 @@ const PricingSection = () => {
               )}
 
               <div className="mb-6">
-                <h3 className="text-xl font-bold text-white mb-2">{plan.name}</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{plan.name}</h3>
                 <p className="text-slate-400 text-sm h-10">{plan.description}</p>
               </div>
 
               <div className="mb-6">
-                <span className="text-4xl font-display font-bold text-white">
+                <span className="text-4xl font-display font-bold text-gray-900">
                   {plan.price}
                 </span>
                 <span className="text-slate-400 text-lg">{plan.period}</span>

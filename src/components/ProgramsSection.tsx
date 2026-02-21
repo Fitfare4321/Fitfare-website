@@ -113,7 +113,7 @@ const ProgramCard = ({ program, index, isMoon }) => {
         transition-all duration-500 border cursor-pointer
         ${isMoon
           ? "bg-white border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
-          : "bg-slate-900/70 border-slate-700 shadow-[0_25px_80px_rgba(0,0,0,0.65)]"
+          : "bg-slate-900/70 border-slate-700 shadow-[0_25px_80px_rgba(0,0,0,0.25)]"
         }
       `}
     >
@@ -147,7 +147,7 @@ const ProgramCard = ({ program, index, isMoon }) => {
       <div
         className={`absolute inset-0 ${isMoon
           ? "bg-gradient-to-t from-white/30 via-white/10 to-transparent"
-          : "bg-gradient-to-t from-black/70 via-black/30 to-transparent"
+          : "bg-gradient-to-t from-black/25 via-black/10 to-transparent"
         
           }`}
       />
@@ -181,7 +181,7 @@ const ProgramCard = ({ program, index, isMoon }) => {
             rounded-2xl p-5  border
             ${isMoon
               ? " border-white/60 shadow-lg"
-              : " border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.6)]"
+              : " border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.18)]"
             }
           `}
         >
@@ -238,7 +238,7 @@ const ProgramsSection = () => {
       id="programs"
       ref={sectionRef}
       className={`relative overflow-hidden pt-32 pb-24 transition-all duration-500
-        ${isMoon ? "bg-white text-black" : "bg-slate-900 text-white"}
+        ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"}
       `}
     >
 
@@ -259,7 +259,7 @@ const ProgramsSection = () => {
 
         <p
           className={`text-lg
-            ${isMoon ? "text-slate-600" : "text-gray-300"}
+            ${isMoon ? "text-gray-300" : "text-slate-600"}
           `}
         >
           From strength to serenity, discover a program built for your lifestyle.
