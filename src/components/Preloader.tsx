@@ -163,14 +163,14 @@ const Preloader = () => {
               {/* CENTER LOGO */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
-                  className="w-20 h-20 rounded-2xl overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center"
+                  className="w-20 h-20 rounded-lg overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center"
                   animate={{ scale: [1, 1.04, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <img
                     src={logo}
                     alt="FitFare Logo"
-                    className="w-14 h-14 object-contain"
+                    className="w-14 h-14 object-contain rounded-lg"
                   />
                 </motion.div>
               </div>

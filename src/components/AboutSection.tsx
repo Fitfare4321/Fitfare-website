@@ -329,7 +329,7 @@ const AboutSection = () => {
         isDark ? "bg-slate-900" : "bg-white"
       }`}
     >
-      {/* Sticky Wrapper */}
+      {/* Sticky Wrapper - Same for both mobile and desktop */}
       <div className="sticky top-0 h-screen flex items-center justify-center">
         {/* Container */}
         <div
@@ -383,7 +383,7 @@ const AboutSection = () => {
             </>
           )}
 
-          {/* ===== CURVE MASK WRAPPER - Hide completely on mobile ===== */}
+          {/* ===== CURVE MASK WRAPPER - Hide on mobile ===== */}
           {!isMobile && (
             <div className="absolute inset-0 overflow-hidden">
               {/* TOP CURVE CUT */}
@@ -392,7 +392,7 @@ const AboutSection = () => {
                 style={{
                   width: "160%",
                   height: "260px",
-                    background: isDark ? "#1e293b" : "#ffffff",
+                  background: isDark ? "#1e293b" : "#ffffff",
                   borderBottomLeftRadius: "60% 120%",
                   borderBottomRightRadius: "60% 120%",
                   zIndex: 2,
@@ -405,7 +405,7 @@ const AboutSection = () => {
                 style={{
                   width: "160%",
                   height: "260px",
-                    background: isDark ? "#1e293b" : "#ffffff",
+                  background: isDark ? "#1e293b" : "#ffffff",
                   borderTopLeftRadius: "60% 120%",
                   borderTopRightRadius: "60% 120%",
                   zIndex: 2,
@@ -417,7 +417,7 @@ const AboutSection = () => {
           {/* ===== CONTENT LAYER ===== */}
           <div className={`relative z-10 ${isMobile ? 'min-h-[600px] py-16' : 'min-h-[900px] py-32'} flex items-center justify-center`}>
             <div className={`w-full max-w-6xl px-6 md:px-12 text-center ${isDark ? 'text-white' : 'text-gray-900'}`}>
-
+              {/* Scroll-based animation - Same for mobile and desktop */}
               <AnimatePresence mode="wait">
 
 
@@ -574,7 +574,6 @@ const AboutSection = () => {
               </AnimatePresence>
             </div>
           </div>
-
         </div>
       </div>
     </section>

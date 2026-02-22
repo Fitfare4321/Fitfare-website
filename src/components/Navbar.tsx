@@ -124,9 +124,11 @@ const Navbar = () => {
       className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
     >
       <div
-        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 backdrop-blur-md shadow-xl border
-        bg-white text-gray-900 border-gray-200
-        dark:bg-black dark:text-white dark:border-white/10`}
+        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 shadow-xl border
+        ${isDark 
+          ? "bg-transparent text-white border-white/10" 
+          : "bg-transparent text-gray-900 border-gray-200/20"
+        }`}
       >
         <div className="px-6 h-20 flex items-center justify-between">
           {/* LOGO */}
@@ -136,7 +138,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
           >
             <motion.div
-              className="relative w-11 h-11 rounded-full overflow-hidden"
+              className="relative w-11 h-11 rounded-lg overflow-hidden"
               whileHover={{ scale: 1.08 }}
               onMouseEnter={() => setLogoHover(true)}
               onMouseLeave={() => setLogoHover(false)}
@@ -239,13 +241,9 @@ const Navbar = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className={`md:hidden border-t transition-colors duration-300 ${
-                scrolled
-                  ? isDark
-                    ? "bg-slate-900/95 backdrop-blur-md border-white/10"
-                    : "bg-white backdrop-blur-md border-gray-200"
-                  : isDark
-                    ? "bg-slate-900/95 backdrop-blur-md border-white/10"
-                    : "bg-white backdrop-blur-md border-gray-200"
+                isDark
+                  ? "bg-transparent border-white/10"
+                  : "bg-transparent border-gray-200/20"
               }`}
             >
               <div className={`p-6 flex flex-col items-center gap-4 ${isDark ? "text-white" : "text-gray-900"}`}>

@@ -81,7 +81,7 @@ const FooterSection = () => {
             className="lg:col-span-4 space-y-6"
           >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full overflow-hidden">
+              <div className="w-12 h-12 rounded-lg overflow-hidden">
                 <img src={logo} alt="FitFare" className="w-full h-full object-contain" />
               </div>
               <span className={`text-2xl font-bold ${isMoon ? "text-white" : "text-gray-900"}`}>FitFare</span>
