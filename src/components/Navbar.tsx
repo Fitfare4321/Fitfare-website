@@ -5,7 +5,7 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import { Menu, X, Zap, Moon, Sun } from "lucide-react";
+import { Menu, X, Zap, Moon, Lightbulb } from "lucide-react";
 import { useTheme } from "next-themes";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
@@ -74,8 +74,8 @@ const Navbar = () => {
               ? "text-blue-400"
               : "text-blue-600"
             : isDark
-            ? "text-gray-300 hover:text-white"
-            : "text-gray-600 hover:text-gray-900"
+            ? "text-white hover:text-blue-400"
+            : "text-gray-900 hover:text-blue-600"
         }`}
         whileHover="hover"
         whileTap="tap"
@@ -180,8 +180,10 @@ const Navbar = () => {
                 onClick={() =>
                   setTheme(theme === "dark" ? "light" : "dark")
                 }
-                className={`ml-3 w-10 h-10 flex items-center justify-center rounded-xl border ${
-                  isDark ? "bg-white" : "bg-slate-800"
+                className={`ml-3 w-10 h-10 flex items-center justify-center rounded-xl border transition-colors ${
+                  isDark 
+                    ? "bg-blue-500/20 border-blue-400/30 hover:bg-blue-500/30" 
+                    : "bg-blue-500/20 border-blue-400/30 hover:bg-blue-500/30"
                 }`}
               >
                 <AnimatePresence mode="wait">
@@ -193,9 +195,8 @@ const Navbar = () => {
                     transition={{ duration: 0.25 }}
                   >
                     {isDark ? (
-                      <Sun size={20} className="text-yellow-400" />
+                      <Lightbulb size={20} className="text-yellow-400" />
                     ) : (
-                      // <Sun size={20} className="text-yellow-400" />
                       <Moon size={20} className="text-blue-500" />
                     )}
                   </motion.div>
@@ -284,7 +285,7 @@ const Navbar = () => {
                   >
                     {isDark ? (
                       <>
-                        <Sun size={18} className="text-yellow-500" />
+                        <Lightbulb size={18} className="text-yellow-500" />
                         <span>Light Mode</span>
                       </>
                     ) : (

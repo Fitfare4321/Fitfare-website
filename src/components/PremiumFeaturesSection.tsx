@@ -937,3 +937,4 @@ const PremiumFeaturesSection = () => {
 };
 
 export default PremiumFeaturesSection;
+export { PremiumFeaturesSection };

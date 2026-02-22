@@ -325,15 +325,15 @@ const AboutSection = () => {
     <section
       id="about"
       ref={containerRef}
-      className={`relative h-[400vh] ${
-        isDark ? "bg-slate-900" : "bg-white"
+      className={`relative h-[400vh] transition-all duration-500 ${
+        isDark ? "bg-slate-900 text-white" : "bg-white text-black"
       }`}
     >
       {/* Sticky Wrapper - Same for both mobile and desktop */}
       <div className="sticky top-0 h-screen flex items-center justify-center">
         {/* Container */}
         <div
-          className={`relative w-full overflow-hidden ${
+          className={`relative w-full overflow-hidden transition-all duration-500 ${
             isDark ? "bg-slate-900" : "bg-white"
           }`}
         >
