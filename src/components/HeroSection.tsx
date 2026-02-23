@@ -5,8 +5,7 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { useTheme } from "next-themes";
 
-import heroVideo from "@/assets/home-1.mp4";
-// import heroVideo from "@/assets/v1.mp4";
+import heroVideo from "@/assets/allvideos-hero.mp4";
 
 
 /* Floating Particles */
@@ -125,6 +124,7 @@ const HeroSection = () => {
       {/* Background Video */}
       <motion.div className="absolute inset-0" style={{ y: bgY }}>
         <video
+          key={heroVideo}
           autoPlay
           loop
           muted
