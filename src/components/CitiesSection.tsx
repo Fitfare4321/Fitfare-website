@@ -81,16 +81,27 @@ const CityCard = ({
       }}
     >
       <div
-        className={`relative z-10 w-[340px] h-[480px] rounded-[36px] border overflow-hidden backdrop-blur-xl transition-all duration-500
-          ${
-            isMoon
-              ? "bg-slate-900/70 border-slate-700 shadow-[0_35px_100px_rgba(0,0,0,0.6)]"
-              : "bg-white border-slate-200 shadow-[0_35px_100px_rgba(0,0,0,0.15)]"
-          }
-        `}
-      >
-        <div className="absolute top-4 left-8 w-12 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full" />
-
+  className={`relative z-10 w-[340px] h-[480px] rounded-[36px] border overflow-hidden backdrop-blur-xl transition-all duration-500
+    ${
+      isHovered
+        ? "border-blue-500 shadow-[0_0_20px_rgba(59,130,246,0.2)]"
+        : isMoon
+        ? "bg-slate-900/70 border-slate-700 shadow-[0_35px_100px_rgba(0,0,0,0.6)]"
+        : "bg-white border-slate-200 shadow-[0_35px_100px_rgba(0,0,0,0.15)]"
+    }
+`}
+>
+        <motion.div
+          className="absolute top-4 left-8 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+          initial={false}
+          animate={{
+            width: isHovered ? "20%" : "2%",
+          }}
+          transition={{
+            duration: 0.8,
+            ease: "easeInOut",
+          }}
+        />
         <div className="p-8 flex flex-col h-full">
 
           <div className="w-full h-56 rounded-3xl overflow-hidden mb-6 shadow-lg">
@@ -141,10 +152,9 @@ const CitiesSection = () => {
     <section
       ref={ref}
       className={`relative z-0 py-28 overflow-hidden transition-all duration-500
-        ${
-          isMoon
-            ? "bg-slate-900 text-white"
-            : "bg-gradient-to-br from-slate-50 to-slate-100 text-black"
+        ${isMoon
+          ? "bg-slate-900 text-white"
+          : "bg-gradient-to-br from-slate-50 to-slate-100 text-black"
         }
       `}
     >
@@ -163,8 +173,8 @@ const CitiesSection = () => {
                  via-[#2a9d8f] 
                  to-[#3db4c7] 
                  bg-clip-text text-transparent">
-  Top Cities
-</span>
+              Top Cities
+            </span>
 
           </h2>
         </div>
