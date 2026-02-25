@@ -5,8 +5,7 @@ import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { useTheme } from "next-themes";
 
-import heroVideo from "@/assets/allvideos-hero.mp4";
-
+import heroVideo from "@/assets/s.mp4";
 
 /* Floating Particles */
 const FloatingParticle = ({
