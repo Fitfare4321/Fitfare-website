@@ -362,6 +362,50 @@ h1, h2, h3, h4, h5, h6 {
   animation: spin-slow 6s linear infinite;
 }
 
+/* ---------- Global UX polish: smooth scroll offset + micro-interactions ---------- */
+html {
+  /* Keep smooth anchor scrolling and ensure sections aren’t hidden under fixed navbar */
+  scroll-padding-top: 88px;
+}
+
+@supports (scroll-padding-top: env(safe-area-inset-top)) {
+  html {
+    scroll-padding-top: calc(88px + env(safe-area-inset-top));
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+/* Subtle “liveliness” on interactive elements without changing layouts */
+@media (prefers-reduced-motion: no-preference) {
+  :where(a, button) {
+    transition:
+      transform 180ms ease,
+      box-shadow 180ms ease,
+      background-color 180ms ease,
+      color 180ms ease,
+      opacity 180ms ease;
+    will-change: transform;
+  }
+  :where(a, button):hover {
+    transform: translateY(-1px);
+  }
+  :where(a, button):active {
+    transform: translateY(0);
+    opacity: 0.96;
+  }
+}
+
+/* Better keyboard focus visibility for accessibility */
+:where(a, button):focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
 
 
 @tailwind base;

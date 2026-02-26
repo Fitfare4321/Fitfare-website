@@ -143,7 +143,7 @@ const PremiumFeaturesSection = () => {
       icon: DollarSign,
       title: "Dynamic Price Allocation",
       description:
-        " AI-powered pricing adapting to demand, weather, and peak hours",
+        "AI-powered pricing adapting to demand, weather, and peak hours",
       gradient: sectionDark
         ? "from-emerald-600 via-teal-600 to-cyan-600"
         : "from-emerald-400 via-teal-500 to-cyan-500",
@@ -154,7 +154,7 @@ const PremiumFeaturesSection = () => {
     },
     {
       icon: Heart,
-      title: "Period Tracking for Women",
+      title: "Period Tracking  for Women",
       description:
         "Personalized workout recommendations for every menstrual phase",
       gradient: sectionDark
@@ -451,29 +451,16 @@ const PremiumFeaturesSection = () => {
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.45, delay: 0.4 + i * 0.12 }}
-                  whileHover={{
-                    x: 6,
-                    scale: 1.02,
-                  }}
-                  className="flex gap-4 items-start rounded-2xl px-4 py-3 transition-colors cursor-default backdrop-blur-md"
-                  style={{
-                    background: sectionDark
-                      ? "rgba(15,23,42,0.4)"
-                      : "rgba(255,255,255,0.6)",
-                    border: `1px solid ${sectionDark ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.3)"}`,
-                    boxShadow: sectionDark
-                      ? "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)"
-                      : "0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.4)",
-                  }}
+                  className="flex items-center gap-5"
                 >
                   <div
-                    className="mt-1 rounded-full px-3 py-1 text-xs font-semibold text-emerald-900 bg-emerald-100/90 shadow-sm shrink-0"
+                    className="rounded-full px-3 py-1 text-xs font-semibold text-emerald-900 bg-emerald-100/90 shadow-sm shrink-0"
                   >
                     Pain #{i + 1}
                   </div>
-                  <div>
+                  <div className="space-y-1">
                     <h4
-                      className="text-base md:text-lg font-semibold mb-1"
+                      className="text-base md:text-lg font-semibold"
                       style={{
                         color: sectionDark ? "#e2e8f0" : "#0f172a",
                       }}
@@ -533,7 +520,7 @@ const PremiumFeaturesSection = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-3 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {analysis.map((stat, i) => {
               const Icon = stat.icon;
               return (
@@ -548,20 +535,12 @@ const PremiumFeaturesSection = () => {
                     delay: 0.6 + i * 0.15,
                     type: "spring",
                   }}
-                  whileHover={{ scale: 1.08, y: -15 }}
-                  className={`relative group rounded-xl md:rounded-3xl p-3 md:p-8 backdrop-blur-xl overflow-hidden`}
+                  whileHover={{ scale: 1.06, y: -10 }}
+                  className={`relative group rounded-2xl md:rounded-3xl p-3 md:p-6 backdrop-blur-xl overflow-hidden`}
                   style={{
-                    background: i === 0
-                      ? sectionDark
-                        ? "linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08), rgba(255, 255, 255, 0.6))"
-                      : i === 1
-                      ? sectionDark
-                        ? "linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.08), rgba(255, 255, 255, 0.6))"
-                      : sectionDark
-                        ? "linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(219, 39, 119, 0.08), rgba(255, 255, 255, 0.6))",
+                    background: sectionDark
+                      ? "rgba(15, 23, 42, 0.4)"
+                      : "rgba(255, 255, 255, 0.6)",
                     border: `1px solid ${sectionDark ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.3)"}`,
                     boxShadow: sectionDark
                       ? "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)"
@@ -569,7 +548,7 @@ const PremiumFeaturesSection = () => {
                   }}
                 >
                   <motion.div
-                    className="mb-3 md:mb-6 inline-flex items-center justify-center p-2 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-md"
+                    className="mb-3 md:mb-5 inline-flex items-center justify-center p-2.5 md:p-3 rounded-2xl backdrop-blur-md"
                     style={{
                       background: sectionDark
                         ? "rgba(255, 255, 255, 0.05)"
@@ -584,11 +563,11 @@ const PremiumFeaturesSection = () => {
                     }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Icon size={24} className="md:w-[30px] md:h-[30px]" style={{ color: stat.color }} />
+                    <Icon size={30} style={{ color: stat.color }} />
                   </motion.div>
 
                   <motion.div
-                    className="text-2xl md:text-5xl font-black mb-2 md:mb-4"
+                    className="text-2xl md:text-4xl font-black mb-2.5 md:mb-3.5"
                     style={{
                       color: stat.color,
                       textShadow: sectionDark
@@ -605,13 +584,13 @@ const PremiumFeaturesSection = () => {
                     />
                   </motion.div>
                   <h4
-                    className={`text-sm md:text-xl font-black mb-1 md:mb-3 ${sectionDark ? "text-white" : "text-slate-900"
+                    className={`text-base md:text-lg font-black mb-1.5 md:mb-2.5 ${sectionDark ? "text-white" : "text-slate-900"
                       }`}
                   >
                     {stat.title}
                   </h4>
                   <p
-                    className="text-[10px] md:text-sm leading-relaxed mb-2 md:mb-4"
+                    className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4"
                     style={{ color: sectionDark ? "#cbd5e1" : "#475569" }}
                   >
                     {stat.description}
@@ -668,9 +647,9 @@ const PremiumFeaturesSection = () => {
               }}
             />
 
-            {/* desktop connector line */}
+            {/* desktop connector line (slightly lower so it doesn't cut text) */}
             <div
-              className="hidden md:block absolute top-10 left-4 right-4 h-px"
+              className="hidden md:block absolute top-12 left-4 right-4 h-px"
               style={{
                 background: sectionDark
                   ? "linear-gradient(to right, transparent, rgba(148,163,184,0.7), transparent)"
@@ -739,7 +718,21 @@ const PremiumFeaturesSection = () => {
                         >
                           <Icon
                             className="w-4 h-4"
-                            style={{ color: sectionDark ? "#e5e7eb" : "#0f172a" }}
+                            strokeWidth={2.4}
+                            style={{
+                              color:
+                                i === 0
+                                  ? sectionDark ? "#2dd4bf" : "#14b8a6"
+                                  : i === 1
+                                  ? sectionDark ? "#f43f5e" : "#e11d48"
+                                  : sectionDark ? "#3b82f6" : "#2563eb",
+                              filter:
+                                i === 0
+                                  ? "drop-shadow(0 0 6px rgba(45,212,191,0.5))"
+                                  : i === 1
+                                  ? "drop-shadow(0 0 6px rgba(244,63,94,0.5))"
+                                  : "drop-shadow(0 0 6px rgba(59,130,246,0.5))",
+                            }}
                           />
                         </div>
                       </div>
@@ -783,14 +776,6 @@ const PremiumFeaturesSection = () => {
                       type: "spring",
                       bounce: 0.4,
                     }}
-                    whileHover={{
-                      y: -20,
-                      scale: 1.1,
-                      rotateZ: i === 1 ? 2 : i === 2 ? -2 : 0,
-                      boxShadow: sectionDark
-                        ? "0 32px 80px rgba(15,23,42,0.9)"
-                        : "0 40px 100px rgba(15,23,42,0.95)",
-                    }}
                     className={`relative group flex flex-col items-center md:items-start text-center md:text-left gap-3 cursor-pointer transition-all duration-300 rounded-3xl overflow-hidden ${
                       i > 0 ? "md:pl-8 md:border-l" : ""
                     }`}
@@ -800,41 +785,6 @@ const PremiumFeaturesSection = () => {
                         : "rgba(226,232,240,0.16)",
                     }}
                   >
-                    <motion.div
-                      className="pointer-events-none absolute inset-x-[-18px] inset-y-[-12px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
-                      style={{
-                        background:
-                          i === 0
-                            ? "radial-gradient(circle at 0% 0%, rgba(45,212,191,0.6), transparent 60%)"
-                            : i === 1
-                            ? "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.6), transparent 60%)"
-                            : "radial-gradient(circle at 0% 0%, rgba(59,130,246,0.65), transparent 60%)",
-                        maskImage: "radial-gradient(120% 120% at 20% 20%, black 60%, transparent 70%)",
-                        WebkitMaskImage: "radial-gradient(120% 120% at 20% 20%, black 60%, transparent 70%)",
-                      }}
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0, 0.8, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
-                      }}
-                    />
-                    <motion.div
-                      className="pointer-events-none absolute inset-x-[-18px] inset-y-[-12px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl"
-                      style={{
-                        background:
-                          i === 0
-                            ? "radial-gradient(circle at 0% 0%, rgba(45,212,191,0.8), transparent 70%)"
-                            : i === 1
-                            ? "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.8), transparent 70%)"
-                            : "radial-gradient(circle at 0% 0%, rgba(59,130,246,0.85), transparent 70%)",
-                        maskImage: "radial-gradient(130% 130% at 20% 20%, black 65%, transparent 75%)",
-                        WebkitMaskImage: "radial-gradient(130% 130% at 20% 20%, black 65%, transparent 75%)",
-                      }}
-                    />
                     <motion.div
                       className="relative flex items-center justify-center rounded-full w-12 h-12 md:w-14 md:h-14 group-hover:bg-gradient-to-br transition-all duration-300"
                       style={{
@@ -864,6 +814,7 @@ const PremiumFeaturesSection = () => {
                     >
                       <Icon
                         className="w-6 h-6 group-hover:scale-125 transition-transform duration-300"
+                        strokeWidth={2.6}
                         style={{
                           color:
                             i === 0
@@ -871,6 +822,12 @@ const PremiumFeaturesSection = () => {
                               : i === 1
                               ? sectionDark ? "#f43f5e" : "#e11d48"
                               : sectionDark ? "#3b82f6" : "#2563eb",
+                          filter:
+                            i === 0
+                              ? "drop-shadow(0 0 8px rgba(45,212,191,0.55))"
+                              : i === 1
+                              ? "drop-shadow(0 0 8px rgba(244,63,94,0.55))"
+                              : "drop-shadow(0 0 8px rgba(59,130,246,0.55))",
                         }}
                       />
                     </motion.div>
@@ -937,4 +894,3 @@ const PremiumFeaturesSection = () => {
 };
 
 export default PremiumFeaturesSection;
-export { PremiumFeaturesSection };

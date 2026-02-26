@@ -180,16 +180,16 @@ const CradleCards = ({ isDark, isMobile }: { isDark: boolean; isMobile?: boolean
     const cardStyle = getMobileCardStyle();
 
     return (
-      <motion.div
-        animate={controls[i]}
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+    <motion.div
+      animate={controls[i]}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
         className={`relative select-none ${isMobileView ? 'w-full' : 'px-4 md:px-0'}`}
-        style={{
-          transformOrigin: "top center",
-          willChange: "transform, box-shadow",
-          zIndex: 2,
-        }}
+      style={{
+        transformOrigin: "top center",
+        willChange: "transform, box-shadow",
+        zIndex: 2,
+      }}
         whileHover={
           isMobileView
             ? {
@@ -203,7 +203,7 @@ const CradleCards = ({ isDark, isMobile }: { isDark: boolean; isMobile?: boolean
               }
         }
         transition={{ type: "spring", stiffness: 300, damping: 20 }}
-      >
+    >
         <motion.div
           className={`flex flex-col items-center text-center gap-2 rounded-2xl ${isMobileView ? 'w-full py-5 px-4' : 'w-[230px] md:w-[240px] py-7 px-6'} backdrop-blur-sm transition-all duration-300`}
           style={cardStyle}
@@ -213,11 +213,11 @@ const CradleCards = ({ isDark, isMobile }: { isDark: boolean; isMobile?: boolean
             : isDark
             ? "0 32px 80px rgba(110, 231, 183, 0.3), 0 0 40px rgba(110, 231, 183, 0.25)"
             : "0 32px 80px rgba(34, 197, 94, 0.25), 0 0 40px rgba(34, 197, 94, 0.2)",
-          }}
-        >
+        }}
+      >
           <motion.div
             className={`inline-flex items-center justify-center ${isMobileView ? 'w-10 h-10 mb-1' : 'w-11 h-11 mb-1'} rounded-full transition-all duration-300`}
-            style={{
+          style={{
             boxShadow: isDark && !isMobileView 
               ? "0 0 0 1px rgba(255, 255, 255, 0.2)" 
               : "0 0 0 1px rgba(0, 0, 0, 0.08)",
@@ -225,7 +225,7 @@ const CradleCards = ({ isDark, isMobile }: { isDark: boolean; isMobile?: boolean
               ? "rgba(255, 255, 255, 0.1)" 
               : "rgba(0, 0, 0, 0.05)",
             backdropFilter: "saturate(120%) blur(10px)",
-            }}
+          }}
             whileHover={{
               scale: 1.15,
               rotate: 360,
@@ -236,29 +236,29 @@ const CradleCards = ({ isDark, isMobile }: { isDark: boolean; isMobile?: boolean
               : "0 0 30px rgba(34, 197, 94, 0.35), 0 0 0 2px rgba(34, 197, 94, 0.3)",
             }}
             transition={{ type: "spring", stiffness: 400, damping: 15 }}
-          >
+        >
             <Icon size={isMobileView ? 20 : 22} style={{ color: isDark && !isMobileView ? "#6ee7b7" : "#10B981" }} />
           </motion.div>
           <motion.h4
           className={`font-semibold ${isMobileView ? 'text-sm' : 'text-base md:text-lg'} ${isDark && !isMobileView ? 'text-white' : 'text-slate-800'} transition-colors duration-300`}
-            style={{ letterSpacing: "-0.01em" }}
+          style={{ letterSpacing: "-0.01em" }}
             whileHover={{
               color: isDark && !isMobileView ? "#6ee7b7" : "#10B981",
             }}
-          >
-            {title}
+        >
+          {title}
           </motion.h4>
           <motion.p
           className={`${isMobileView ? 'text-xs' : 'text-[13px] md:text-sm'} leading-relaxed ${isDark && !isMobileView ? 'text-gray-300' : 'text-slate-600'} transition-colors duration-300`}
             whileHover={{
               color: isDark && !isMobileView ? "#6ee7b7" : "#047857",
             }}
-          >
-            {desc}
+        >
+          {desc}
           </motion.p>
         </motion.div>
-      </motion.div>
-    );
+    </motion.div>
+  );
   };
 
   return (
@@ -335,7 +335,7 @@ const AboutSection = () => {
         <div
           className={`relative w-full overflow-hidden transition-all duration-500 ${
             isDark ? "bg-slate-900" : "bg-white"
-          }`}
+            }`}
         >
           {/* ===== GRADIENT BACKGROUND ===== */}
           {isMobile ? (
@@ -349,69 +349,69 @@ const AboutSection = () => {
             />
           ) : (
             <>
-              <div
-                className="absolute inset-0"
-                style={{
-                  background: isDark
-                    ? "linear-gradient(135deg, #6CA6CF 0%, #58B3CF 42%, #4CCF9C 100%)"
-                    : "linear-gradient(135deg, #e8fff2 0%, #f0fff7 50%, #ffffff 100%)",
-                }}
-              />
-              
+          <div
+            className="absolute inset-0"
+            style={{
+              background: isDark
+                ? "linear-gradient(135deg, #6CA6CF 0%, #58B3CF 42%, #4CCF9C 100%)"
+                    : "linear-gradient(135deg, #d9f7e6 0%, #e8fff2 45%, #f4fff9 100%)",
+            }}
+          />
+
               {/* ===== MOVING GRADIENT ANIMATION (Desktop only) ===== */}
-              <motion.div
-                className="absolute inset-0"
-                style={{
+<motion.div
+  className="absolute inset-0"
+  style={{
                   background: isDark
                     ? "linear-gradient(120deg, #6CA6CF, #58B3CF, #4CCF9C, #58B3CF, #6CA6CF)"
-                    : "linear-gradient(120deg,rgb(228, 251, 231),rgb(148, 212, 175), #ffffff, #e8fff2, #c7f9cc)",
-                  backgroundSize: "300% 300%",
-                }}
-                animate={{
-                  backgroundPosition: [
-                    "0% 50%",
-                    "100% 50%",
-                    "0% 50%",
-                  ],
-                }}
-                transition={{
-                  duration: 14,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
+                    : "linear-gradient(120deg, #e4fcef, #a6e9c4, #dffced, #a6e9c4, #e4fcef)",
+    backgroundSize: "300% 300%",
+  }}
+  animate={{
+    backgroundPosition: [
+      "0% 50%",
+      "100% 50%",
+      "0% 50%",
+    ],
+  }}
+  transition={{
+    duration: 14,
+    repeat: Infinity,
+    ease: "linear",
+  }}
+/>
             </>
           )}
 
           {/* ===== CURVE MASK WRAPPER - Hide on mobile ===== */}
           {!isMobile && (
             <div className="absolute inset-0 overflow-hidden">
-              {/* TOP CURVE CUT */}
-              <div
-                className="absolute top-0 left-1/2 -translate-x-1/2"
-                style={{
-                  width: "160%",
-                  height: "260px",
+{/* TOP CURVE CUT */}
+<div
+  className="absolute top-0 left-1/2 -translate-x-1/2"
+  style={{
+    width: "160%",
+    height: "260px",
                   background: isDark ? "#1e293b" : "#ffffff",
-                  borderBottomLeftRadius: "60% 120%",
-                  borderBottomRightRadius: "60% 120%",
-                  zIndex: 2,
-                }}
-              />
+    borderBottomLeftRadius: "60% 120%",
+    borderBottomRightRadius: "60% 120%",
+    zIndex: 2,
+  }}
+/>
 
-              {/* BOTTOM CURVE CUT */}
-              <div
-                className="absolute bottom-0 left-1/2 -translate-x-1/2"
-                style={{
-                  width: "160%",
-                  height: "260px",
+{/* BOTTOM CURVE CUT */}
+<div
+  className="absolute bottom-0 left-1/2 -translate-x-1/2"
+  style={{
+    width: "160%",
+    height: "260px",
                   background: isDark ? "#1e293b" : "#ffffff",
-                  borderTopLeftRadius: "60% 120%",
-                  borderTopRightRadius: "60% 120%",
-                  zIndex: 2,
-                }}
-              />
-            </div>
+    borderTopLeftRadius: "60% 120%",
+    borderTopRightRadius: "60% 120%",
+    zIndex: 2,
+  }}
+/>
+</div>
           )}
 
           {/* ===== CONTENT LAYER ===== */}

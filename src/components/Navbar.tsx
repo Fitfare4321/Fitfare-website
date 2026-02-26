@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
-import { Menu, X, Zap, Moon, Lightbulb } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
+import { Menu, X, Zap, Moon, Sun, Lightbulb } from "lucide-react";
 import { useTheme } from "next-themes";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
@@ -60,40 +55,21 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleSmoothScroll = (href: string) => {
-    if (!href?.startsWith("#")) return;
-    const target = document.querySelector(href) as HTMLElement | null;
-    if (!target) return;
-
-    const navbarOffset = 96; // approx navbar height
-    const targetY =
-      target.getBoundingClientRect().top + window.scrollY - navbarOffset;
-
-    window.scrollTo({
-      top: targetY < 0 ? 0 : targetY,
-      behavior: "smooth",
-    });
-  };
-
   /* ---------------- NAV LINK COMPONENT ---------------- */
-  const NavItem = ({ link, onClick = () => {} }: any) => {
+  const NavItem = ({ link, onClick = () => { } }: any) => {
     const isActive = activeSection === link.href.slice(1);
 
     return (
       <motion.a
         href={link.href}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick();
-          handleSmoothScroll(link.href);
-        }}
+        onClick={onClick}
         className={`relative px-4 py-2 text-sm font-semibold rounded-xl perspective group transition-colors duration-300 ${
           isActive
             ? isDark
               ? "text-blue-400"
               : "text-blue-600"
             : isDark
-            ? "text-white hover:text-blue-400"
+            ? "text-gray-200 hover:text-white"
             : "text-gray-900 hover:text-blue-600"
         }`}
         whileHover="hover"
@@ -143,11 +119,11 @@ const Navbar = () => {
       className="fixed top-4 left-0 right-0 z-50 flex justify-center px-4"
     >
       <div
-        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 shadow-xl border
+        className={`w-full max-w-5xl rounded-2xl transition-all duration-500 border
         ${
           isDark
-            ? "bg-slate-900/85 text-white border-white/10"
-            : "bg-white/85 text-gray-900 border-gray-200/60"
+            ? "bg-slate-900/85 text-white border-white/10 shadow-[0_18px_50px_rgba(15,23,42,0.7)]"
+            : "bg-white/85 text-gray-900 border-gray-200/60 shadow-md md:shadow-[0_16px_40px_rgba(15,23,42,0.18)]"
         }`}
       >
         <div className="px-6 h-20 flex items-center justify-between">
@@ -158,7 +134,7 @@ const Navbar = () => {
             whileTap={{ scale: 0.95 }}
           >
             <motion.div
-              className="relative w-11 h-11 rounded-lg overflow-hidden"
+              className="relative w-11 h-11 rounded-full overflow-hidden"
               whileHover={{ scale: 1.08 }}
               onMouseEnter={() => setLogoHover(true)}
               onMouseLeave={() => setLogoHover(false)}
@@ -184,7 +160,11 @@ const Navbar = () => {
             </motion.div>
 
 
-            <span className={`text-xl font-bold tracking-tight ${isDark ? "text-white" : "text-gray-900"}`}>
+            <span
+              className={`text-xl font-bold tracking-tight ${
+                isDark ? "text-white" : "text-gray-900"
+              }`}
+            >
               FitFare
             </span>
           </motion.a>
@@ -197,13 +177,11 @@ const Navbar = () => {
 
             {mounted && (
               <button
-                onClick={() =>
-                  setTheme(theme === "dark" ? "light" : "dark")
-                }
-                className={`ml-3 w-10 h-10 flex items-center justify-center rounded-xl border transition-colors ${
-                  isDark 
-                    ? "bg-blue-500/20 border-blue-400/30 hover:bg-blue-500/30" 
-                    : "bg-blue-500/20 border-blue-400/30 hover:bg-blue-500/30"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                className={`ml-3 w-11 h-11 flex items-center justify-center rounded-xl border transition-all duration-300 ${
+                  isDark
+                    ? "bg-slate-900/80 border-white/15 hover:bg-slate-800/80"
+                    : "bg-slate-100/90 border-slate-200 hover:bg-white"
                 }`}
               >
                 <AnimatePresence mode="wait">
@@ -223,16 +201,6 @@ const Navbar = () => {
                 </AnimatePresence>
               </button>
             )}
-
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="ml-3 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold text-sm flex items-center gap-2 shadow-lg shadow-blue-600/20"
-            >
-              <Zap size={16} />
-              Join Now
-            </motion.a>
           </div>
 
           {/* MOBILE BUTTON */}
@@ -258,32 +226,26 @@ const Navbar = () => {
         <AnimatePresence>
           {mobileOpen && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -12 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="md:hidden transition-colors duration-300 flex justify-center items-start pt-4 bg-transparent"
+              exit={{ opacity: 0, y: -12 }}
+              className="md:hidden pt-2 pb-4 px-4 bg-transparent"
             >
-              {/* Compact list-only menu on mobile (no outer card) */}
-              <div
-                className="my-3 w-full max-w-xs px-3 flex flex-col items-stretch gap-2 max-h-[55vh] overflow-y-auto"
-              >
+              {/* Mobile: only inner list of buttons (no outer card) */}
+              <div className="mx-auto w-full max-w-xs flex flex-col items-stretch gap-2 max-h-[48vh] overflow-y-auto">
                 {navLinks.map((link) => (
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      setMobileOpen(false);
-                      handleSmoothScroll(link.href);
-                    }}
+                    onClick={() => setMobileOpen(false)}
                     className={`w-full text-center py-2 px-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeSection === link.href.slice(1)
                         ? isDark
                           ? "bg-blue-600 text-white"
                           : "bg-blue-600 text-white"
                         : isDark
-                        ? "text-white hover:bg-white/10"
-                        : "text-gray-900 hover:bg-gray-100"
+                          ? "text-white hover:bg-white/10"
+                          : "text-gray-900 hover:bg-gray-100"
                     }`}
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -308,27 +270,18 @@ const Navbar = () => {
                   >
                     {isDark ? (
                       <>
-                        <Lightbulb size={18} className="text-yellow-500" />
+                        <Lightbulb size={18} className="text-yellow-400" />
                         <span>Light Mode</span>
                       </>
                     ) : (
                       <>
-                        <Moon size={18} className="text-blue-400" />
+                        <Moon size={18} className="text-blue-500" />
                         <span>Dark Mode</span>
                       </>
                     )}
                   </motion.button>
                 )}
 
-                <motion.a
-                  href="#contact"
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => setMobileOpen(false)}
-                  className={`w-full flex items-center justify-center gap-2 py-2 rounded-xl font-semibold text-sm text-white bg-blue-600 hover:bg-blue-700 shadow-lg shadow-blue-600/30 transition-all duration-300`}
-                >
-                  <Zap size={16} />
-                  Join Now
-                </motion.a>
               </div>
             </motion.div>
           )}
