@@ -142,8 +142,8 @@ const ContactSection = () => {
               {
                 icon: Phone,
                 label: "Call Us",
-                value: "+91 9356859874",
-                href: "tel:+919356859874",
+                value: "+91 7666400518",
+                href: "tel:+917666400518",
               },
               {
                 icon: Mail,
@@ -257,7 +257,7 @@ const ContactSection = () => {
                   value={form.phone}
                   onChange={handleChange}
                   className={inputClasses}
-                  placeholder="+91 9876543210"
+                  placeholder="+91 9999999999"
                 />
                 {errors.phone && (
   <p className="text-red-500 text-sm mt-1">
