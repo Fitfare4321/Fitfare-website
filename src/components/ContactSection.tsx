@@ -142,8 +142,8 @@ const ContactSection = () => {
               {
                 icon: Phone,
                 label: "Call Us",
-                value: "+91 7666400518",
-                href: "tel:+917666400518",
+                value: "+91 9356859874",
+                href: "tel:+919356859874",
               },
               {
                 icon: Mail,
