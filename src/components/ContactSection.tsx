@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Phone, Mail, Send } from "lucide-react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
   const { theme } = useTheme();
@@ -57,27 +58,32 @@ const ContactSection = () => {
   if (!validateForm()) return;
 
   try {
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(form),
-    });
+    const { VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY } =
+      import.meta.env;
 
-    const data = await res.json();
+    if (VITE_EMAILJS_SERVICE_ID && VITE_EMAILJS_TEMPLATE_ID && VITE_EMAILJS_PUBLIC_KEY) {
+      await emailjs.send(
+        VITE_EMAILJS_SERVICE_ID,
+        VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          message: form.message,
+          to_email: "team.fitfare@gmail.com",
+        },
+        { publicKey: VITE_EMAILJS_PUBLIC_KEY }
+      );
 
-    if (data.success) {
       alert("Message sent successfully!");
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      setForm({ name: "", email: "", phone: "", message: "" });
       setErrors({ email: "", phone: "" });
     } else {
-      alert(data.error || "Error sending message");
+      const subject = encodeURIComponent("New Contact Form Submission - FitFare");
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\n\nMessage:\n${form.message}`
+      );
+      window.location.href = `mailto:team.fitfare@gmail.com?subject=${subject}&body=${body}`;
     }
   } catch (error) {
     console.error(error);

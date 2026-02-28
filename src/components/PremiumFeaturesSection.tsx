@@ -291,7 +291,7 @@ const PremiumFeaturesSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-28"
         >
-          <div className="flex flex-col md:flex-row gap-10 items-stretch">
+          <div className="flex flex-col md:flex-row gap-10 items-start md:items-center">
             {/* left: compact chart card */}
             <motion.div
               className="md:w-5/12 rounded-3xl p-6 md:p-7 relative overflow-hidden backdrop-blur-xl"
