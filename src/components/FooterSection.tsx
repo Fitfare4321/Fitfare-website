@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Instagram, Linkedin, X, ArrowRight } from "lucide-react";
 import { useTheme } from "next-themes";
+import { Link } from "react-router-dom";
 
 import logo from "@/assets/blue-background-logo.png";
 
@@ -131,24 +132,33 @@ const FooterSection = () => {
                 <h4 className={`font-bold mb-6 ${isMoon ? "text-white" : "text-gray-900"}`}>{col.title}</h4>
 
                 <ul className="space-y-3">
-                  {col.links.map((link, j) => (
-                    <li key={j}>
-                      <a
-                        href={link.href}
-                        className={`
-                          flex items-center gap-1 text-sm transition-all duration-300
-                          ${
-                            isMoon
-                              ? "text-gray-400 hover:text-white"
-                              : "text-gray-700 hover:text-gray-900"
-                          }
-                        `}
-                      >
-                        {link.label}
-                        <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition" />
-                      </a>
-                    </li>
-                  ))}
+                  {col.links.map((link, j) => {
+                    // Use React Router Link for internal routes, anchor for external/hash links
+                    const isInternalRoute = link.href.startsWith("/") && !link.href.startsWith("/#");
+                    const Component = isInternalRoute ? Link : "a";
+                    const linkProps = isInternalRoute 
+                      ? { to: link.href }
+                      : { href: link.href };
+                    
+                    return (
+                      <li key={j}>
+                        <Component
+                          {...linkProps}
+                          className={`
+                            flex items-center gap-1 text-sm transition-all duration-300
+                            ${
+                              isMoon
+                                ? "text-gray-400 hover:text-white"
+                                : "text-gray-700 hover:text-gray-900"
+                            }
+                          `}
+                        >
+                          {link.label}
+                          <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition" />
+                        </Component>
+                      </li>
+                    );
+                  })}
                 </ul>
               </motion.div>
             ))}
