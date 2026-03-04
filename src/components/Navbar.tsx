@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { Menu, X, Zap, Moon, Sun, Lightbulb } from "lucide-react";
 import { useTheme } from "next-themes";
+import { useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
 
@@ -25,6 +26,9 @@ const Navbar = () => {
   const { theme, resolvedTheme, setTheme } = useTheme();
   const effectiveTheme = resolvedTheme ?? theme;
   const isDark = effectiveTheme === "dark";
+  const location = useLocation();
+  const navigate = useNavigate();
+  const isBlogPage = location.pathname.startsWith("/blog");
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -55,6 +59,55 @@ const Navbar = () => {
     return () => observer.disconnect();
   }, []);
 
+  /* ---------------- SMOOTH NAVIGATION HANDLER ---------------- */
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault();
+    
+    if (isBlogPage) {
+      // If on blog page, navigate to home first, then scroll smoothly
+      navigate("/");
+      // Wait for navigation and DOM to be ready, then scroll
+      const scrollToSection = () => {
+        const element = document.querySelector(href);
+        if (element) {
+          const offset = 100; // Account for navbar height
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - offset;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth"
+          });
+          return true;
+        }
+        return false;
+      };
+      
+      // Try immediately, then retry if element not found
+      if (!scrollToSection()) {
+        setTimeout(() => {
+          if (!scrollToSection()) {
+            // Final retry after a bit more time
+            setTimeout(scrollToSection, 200);
+          }
+        }, 150);
+      }
+    } else {
+      // If already on home page, just scroll smoothly
+      const element = document.querySelector(href);
+      if (element) {
+        const offset = 100; // Account for navbar height
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - offset;
+        
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: "smooth"
+        });
+      }
+    }
+  };
+
   /* ---------------- NAV LINK COMPONENT ---------------- */
   const NavItem = ({ link, onClick = () => { } }: any) => {
     const isActive = activeSection === link.href.slice(1);
@@ -62,7 +115,10 @@ const Navbar = () => {
     return (
       <motion.a
         href={link.href}
-        onClick={onClick}
+        onClick={(e) => {
+          handleNavClick(e, link.href);
+          onClick();
+        }}
         className={`relative px-4 py-2 text-sm font-semibold rounded-xl perspective group transition-colors duration-300 ${
           isActive
             ? isDark
@@ -130,7 +186,25 @@ const Navbar = () => {
           {/* LOGO */}
           <motion.a
             href="#home"
-            className="flex items-center gap-3"
+            onClick={(e) => {
+              if (isBlogPage) {
+                e.preventDefault();
+                navigate("/");
+                setTimeout(() => {
+                  const element = document.querySelector("#home");
+                  if (element) {
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                  }
+                }, 100);
+              } else {
+                e.preventDefault();
+                const element = document.querySelector("#home");
+                if (element) {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }
+            }}
+            className="flex items-center gap-3 cursor-pointer"
             whileTap={{ scale: 0.95 }}
           >
             <motion.div
@@ -237,7 +311,10 @@ const Navbar = () => {
                   <motion.a
                     key={link.href}
                     href={link.href}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(e) => {
+                      handleNavClick(e, link.href);
+                      setMobileOpen(false);
+                    }}
                     className={`w-full text-center py-2 px-3 rounded-xl font-semibold text-sm transition-all duration-300 ${
                       activeSection === link.href.slice(1)
                         ? isDark

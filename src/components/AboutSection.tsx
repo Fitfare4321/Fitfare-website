@@ -511,16 +511,16 @@ const AboutSection = () => {
                       Why Gyms Partner With Us
                     </h3>
 
-                    <div className="max-w-3xl mx-auto space-y-5">
+                    <div className="w-fit mx-auto md:max-w-2xl space-y-3 md:translate-x-2 lg:translate-x-3">
                       {whyChoose.map((item, i) => (
                         <div
                           key={i}
-                          className="flex justify-center items-center gap-3 text-center"
+                          className="flex items-start gap-3 justify-start w-full"
                         >
-                          <CheckCircle
-                            size={20}
-                            style={{ color: isDark ? "#000000" : (isMobile ? "#10B981" : undefined) }}
-                            className={isMobile ? "shrink-0" : "text-primary shrink-0"}
+                          <span
+                            className={`mt-2 block w-2 h-2 rounded-full shrink-0 ${
+                              isDark ? "bg-white ring-2 ring-white/25" : "bg-white ring-2 ring-slate-300/70"
+                            }`}
                           />
                           <span 
                             className={`text-base leading-relaxed ${isDark ? 'text-gray-200' : 'text-slate-700'}`}
