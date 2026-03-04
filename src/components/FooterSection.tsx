@@ -133,8 +133,8 @@ const FooterSection = () => {
 
                 <ul className="space-y-3">
                   {col.links.map((link, j) => {
-                    // Use React Router Link for internal routes, anchor for external/hash links
-                    const isInternalRoute = link.href.startsWith("/") && !link.href.startsWith("/#");
+                    // Use React Router Link for internal routes (starting with / but not #), anchor for hash/external links
+                    const isInternalRoute = link.href.startsWith("/") && !link.href.startsWith("#");
                     const Component = isInternalRoute ? Link : "a";
                     const linkProps = isInternalRoute 
                       ? { to: link.href }
