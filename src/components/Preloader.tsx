@@ -34,14 +34,13 @@ const Preloader = () => {
   }, []);
 
   // Particles
-  const particles = Array.from({ length: 50 }, (_, i) => ({
-    id: i,
-    size: Math.random() * 4 + 2,
-    x: Math.random() * 100,
-    y: Math.random() * 100,
-    duration: Math.random() * 8 + 6,
-    delay: Math.random() * 4,
-  }));
+ const particles = Array.from({ length: 40 }, (_, i) => ({
+  id: i,
+  size: Math.random() * 4 + 2,
+  x: Math.random() * 100,
+  delay: Math.random() * 5,
+  duration: Math.random() * 8 + 6,
+}));
 
   return (
     <AnimatePresence>
@@ -84,28 +83,28 @@ const Preloader = () => {
 
           {/* Particles */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            {particles.map((particle) => (
-              <motion.div
-                key={particle.id}
-                className="absolute rounded-full bg-gradient-to-br from-emerald-400/60 via-cyan-400/40 to-purple-400/30"
-                style={{
-                  width: particle.size,
-                  height: particle.size,
-                  left: `${particle.x}%`,
-                  top: `${particle.y}%`,
-                }}
-                animate={{
-                  y: [-20, -100, -20],
-                  opacity: [0, 0.8, 0],
-                }}
-                transition={{
-                  duration: particle.duration,
-                  repeat: Infinity,
-                  delay: particle.delay,
-                }}
-              />
-            ))}
-          </div>
+  {particles.map((p) => (
+    <motion.div
+      key={p.id}
+      className="absolute rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400"
+      style={{
+        width: p.size,
+        height: p.size,
+        left: `${p.x}%`,
+        bottom: "-10%",
+      }}
+      animate={{
+        y: [-20, -800],
+        opacity: [0, 1, 0],
+      }}
+      transition={{
+        duration: p.duration,
+        delay: p.delay,
+        repeat: Infinity,
+      }}
+    />
+  ))}
+</div>
 
           {/* MAIN CONTENT */}
           <div className="relative z-10 text-center">
@@ -163,21 +162,21 @@ const Preloader = () => {
               {/* CENTER LOGO */}
               <div className="absolute inset-0 flex items-center justify-center">
                 <motion.div
-                  className="w-20 h-20 rounded-lg overflow-hidden shadow-2xl bg-white/5 backdrop-blur-xl border border-white/10 flex items-center justify-center"
+                 className="relative z-10 w-24 h-24 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 flex items-center justify-center"
                   animate={{ scale: [1, 1.04, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   <img
                     src={logo}
                     alt="FitFare Logo"
-                    className="w-14 h-14 object-contain rounded-lg"
+                    className="w-14 h-14 object-contain rounded-full"
                   />
                 </motion.div>
               </div>
             </div>
 
             {/* BRAND */}
-            <h1 className="mt-10 text-6xl font-bold tracking-tight bg-gradient-to-br from-white via-emerald-200 to-cyan-200 bg-clip-text text-transparent">
+            <h1 className="mt-10 text-6xl font-bold tracking-tight bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent ">
               FitFare
             </h1>
 

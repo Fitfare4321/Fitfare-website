@@ -744,7 +744,7 @@ const Blog = () => {
           >
             <div className="flex flex-col md:flex-row md:items-center gap-6">
               <div className="flex-1">
-                <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+                <h1 className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold text-7xl md:text-6xl ">
                   Our Blogs
                 </h1>
                 <p className={`mt-2 text-sm font-semibold ${isDark ? "text-slate-300" : "text-slate-700"}`}>

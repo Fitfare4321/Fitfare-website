@@ -716,7 +716,7 @@ const PremiumFeaturesSection = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-3 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {analysis.map((stat, i) => {
               const Icon = stat.icon;
               return (
@@ -732,7 +732,7 @@ const PremiumFeaturesSection = () => {
                     type: "spring",
                   }}
                   whileHover={{ scale: 1.06, y: -10 }}
-                  className={`relative group rounded-xl md:rounded-3xl p-2.5 md:p-6 backdrop-blur-xl overflow-hidden w-full`}
+                  className={`relative group rounded-2xl md:rounded-3xl p-3 md:p-6 backdrop-blur-xl overflow-hidden`}
                   style={{
                     background: sectionDark
                       ? "rgba(15, 23, 42, 0.4)"
@@ -744,7 +744,7 @@ const PremiumFeaturesSection = () => {
                   }}
                 >
                   <motion.div
-                    className="mb-2 md:mb-5 inline-flex items-center justify-center p-2 md:p-3 rounded-xl md:rounded-2xl backdrop-blur-md"
+                    className="mb-3 md:mb-5 inline-flex items-center justify-center p-2.5 md:p-3 rounded-2xl backdrop-blur-md"
                     style={{
                       background: sectionDark
                         ? "rgba(255, 255, 255, 0.05)"
@@ -759,11 +759,11 @@ const PremiumFeaturesSection = () => {
                     }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Icon size={24} className="md:w-[30px] md:h-[30px]" style={{ color: stat.color }} />
+                    <Icon size={30} style={{ color: stat.color }} />
                   </motion.div>
 
                   <motion.div
-                    className="text-xl md:text-4xl font-black mb-1.5 md:mb-3.5"
+                    className="text-2xl md:text-4xl font-black mb-2.5 md:mb-3.5"
                     style={{
                       color: stat.color,
                       textShadow: sectionDark
@@ -780,13 +780,13 @@ const PremiumFeaturesSection = () => {
                     />
                   </motion.div>
                   <h4
-                    className={`text-sm md:text-lg font-black mb-1 md:mb-2.5 ${sectionDark ? "text-white" : "text-slate-900"
+                    className={`text-base md:text-lg font-black mb-1.5 md:mb-2.5 ${sectionDark ? "text-white" : "text-slate-900"
                       }`}
                   >
                     {stat.title}
                   </h4>
                   <p
-                    className="text-[10px] md:text-sm leading-relaxed mb-0 md:mb-4"
+                    className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4"
                     style={{ color: sectionDark ? "#cbd5e1" : "#475569" }}
                   >
                     {stat.description}

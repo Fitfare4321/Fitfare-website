@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useTheme } from "next-themes";
 
 import heroVideo from "@/assets/allvideos-hero.mp4";
+import heroPoster from "@/assets/hero-bg.jpg";
 
 
 /* Floating Particles */
@@ -130,6 +131,7 @@ const HeroSection = () => {
           muted
           playsInline
           preload="auto"
+          poster={heroPoster}
           className="w-full h-full object-cover scale-110 opacity-100"
         >
           <source src={heroVideo} type="video/mp4" />
@@ -265,18 +267,19 @@ const HeroSection = () => {
               </span>
             </motion.a>
 
-            <motion.a
-              className={`group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border border-border 
-  ${isDark
-                  ?
-                  "backdrop-blur-sm text-white"
-                  : "backdrop-blur-none text-black"
-
-                }`}
+            <motion.button
+              onClick={() => {
+                const contactSection = document.getElementById("contact");
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className={`group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border 
+  ${isDark ? "backdrop-blur-sm text-white" : "backdrop-blur-none text-black"} cursor-pointer`}
             >
               <Play size={18} />
               Join as Gym
-            </motion.a>
+            </motion.button>
 
           </motion.div>
         </div>
