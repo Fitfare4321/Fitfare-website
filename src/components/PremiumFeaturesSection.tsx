@@ -378,13 +378,13 @@ const PremiumFeaturesSection = () => {
     },
   ];
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-32 overflow-hidden"
-      style={{
-        background: sectionDark ? "#0a0514" : "#ffffff", // Darker space-like background for contrast
-      }}
-    >
+   <section
+  ref={sectionRef}
+  className="relative pt-16 pb-24 md:py-32 overflow-hidden"
+  style={{
+    background: sectionDark ? "#0a0514" : "#ffffff",
+  }}
+>
       <Suspense fallback={null}>
         <NetworkBackground3D isDark={sectionDark} />
       </Suspense>

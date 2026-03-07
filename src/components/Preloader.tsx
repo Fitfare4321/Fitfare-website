@@ -169,38 +169,14 @@ const Preloader = () => {
                   <img
                     src={logo}
                     alt="FitFare Logo"
-                    className="w-14 h-14 object-contain rounded-full"
+                    className="w-17 h-17 object-contain rounded-full"
                   />
                 </motion.div>
               </div>
             </div>
 
-            {/* BRAND */}
-            <h1 className="mt-10 text-6xl font-bold tracking-tight bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent ">
-              FitFare
-            </h1>
 
-            {/* TAGLINE */}
-            <p className="text-emerald-400/80 text-sm tracking-widest uppercase font-medium mt-4">
-              Your Flexible Fitness Partner
-            </p>
-
-            {/* STATUS TEXT */}
-            <div className="flex items-center justify-center gap-3 text-gray-400 text-sm mt-3">
-              <motion.div
-                className="w-2 h-2 rounded-full bg-emerald-400"
-                animate={{
-                  scale: [1, 1.6, 1],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 1.4,
-                  repeat: Infinity,
-                }}
-              />
-
-              <span>{loadingText}</span>
-            </div>
+          
           </div>
         </motion.div>
       )}

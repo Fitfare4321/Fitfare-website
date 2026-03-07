@@ -98,7 +98,7 @@ const milestones = [
     title: "Establishing Core Systems",
     desc: "We built robust operating frameworks, internal workflows, and defined processes that ensure consistency, efficiency, and measurable results."
   },
-    {
+  {
     title: "Scaling a Remote Team",
     desc: "Assembled a fully remote team of strategists, creatives, technologists, and operators collaborating seamlessly across regions to deliver impactful results."
   },
@@ -235,7 +235,7 @@ export default function AboutFitfare() {
             className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12"
             style={{ color: isDark ? "#94a3b8" : "#64748b" }}
           >
-            Fitfare is a performance-first growth partner for modern fitness brands.
+            FitFare is a performance-first growth partner for modern fitness brands.
             We combine strategy, systems, and execution to transform ambition into
             scalable, compounding results.
           </motion.p>
@@ -383,7 +383,7 @@ export default function AboutFitfare() {
             className="text-4xl md:text-5xl font-extrabold text-center mb-20"
           >
             Shaping the Next {" "}
-            <span  className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
+            <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
               Era of Fitness Brands
             </span>
           </motion.h2>
@@ -454,7 +454,7 @@ export default function AboutFitfare() {
         <SectionWrapper className="max-w-7xl mx-auto">
           <motion.p
             variants={fadeUp}
-     className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold justify-center flex text-xl mb-5"
+            className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold justify-center flex text-xl mb-5"
           >
             How We Operate
           </motion.p>
@@ -537,7 +537,7 @@ export default function AboutFitfare() {
                 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6"
               >
                 A Team Built{" "}
-                <span  className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
+                <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
                   Differently
                 </span>
               </motion.h2>
@@ -546,7 +546,7 @@ export default function AboutFitfare() {
                 className="text-sm leading-relaxed"
                 style={{ color: isDark ? "#94a3b8" : "#64748b" }}
               >
-           FitFare is a fully remote team of innovators, thinkers, and doers — united by a passion for performance. We don’t just work together; we elevate each other and our outcomes.
+                FitFare is a fully remote team of innovators, thinkers, and doers — united by a passion for performance. We don’t just work together; we elevate each other and our outcomes.
               </motion.p>
             </div>
 

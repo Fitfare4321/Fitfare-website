@@ -13,6 +13,7 @@ import {
   Zap,
 } from "lucide-react";
 import { Download } from "lucide-react";
+import { Info } from "lucide-react";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
@@ -623,7 +624,47 @@ const CareerPage = () => {
   >
     Download Resume Template
     <Download size={16} />
+
   </a>
+ 
+</div>
+<div>
+ {/* Professional Note */}
+<motion.div
+  initial={{ opacity: 0, y: 10 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.2 }}
+  className={`mt-8 relative overflow-hidden rounded-xl border p-4 flex gap-3 items-start ${
+    isDark
+      ? "bg-slate-900/60 border-slate-800"
+      : "bg-blue-50/70 border-blue-100"
+  }`}
+>
+
+  {/* Icon */}
+  <div
+    className={`flex items-center justify-center w-9 h-9 rounded-lg ${
+      isDark
+        ? " text-blue-400"
+        : " text-blue-600"
+    }`}
+  >
+    <Info size={18} />
+  </div>
+
+  {/* Text */}
+  <p
+    className={`text-sm leading-relaxed ${
+      isDark ? "text-gray-300" : "text-gray-700"
+    }`}
+  >
+    <span className="font-semibold">Note:</span> Applicants should follow the
+    provided resume template and ensure all relevant links such as{" "}
+    <span className="font-medium">GitHub, portfolio, or project URLs</span>{" "}
+    are properly <span className="font-medium">hyperlinked</span> before
+    submitting the resume.
+  </p>
+</motion.div>
 </div>
 
       </div>

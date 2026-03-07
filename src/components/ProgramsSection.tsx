@@ -330,7 +330,9 @@ const ProgramsSection = () => {
     <section
       id="programs"
       ref={sectionRef}
-      className={`relative overflow-hidden pt-32 pb-24 transition-all duration-500
+      className={`relative overflow-hidden pt-16 pb-14 md:pt-32 md:pb-24
+        
+      transition-all duration-500
         ${isMoon ? "bg-slate-900 text-white" : "bg-slate-50 text-black"}
       `}
     >
@@ -343,7 +345,7 @@ const ProgramsSection = () => {
       </div>
 
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto px-6 mb-20">
+      <div className="text-center max-w-2xl mx-auto px-6 mb-10 md:mb-20">
         <span className="text-primary font-semibold text-sm uppercase tracking-[0.3em]">
           Our Programs
         </span>

@@ -3,7 +3,9 @@ import {
   motion,
   useScroll,
   useSpring,
+  useMotionValue,
   AnimatePresence,
+  animate,
 } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -432,94 +434,177 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
 );
 
 // Section 4 — Goals / Stats
-const Section4 = ({ isDark }: { isDark: boolean }) => (
-  <motion.div
-    key="s4"
-    initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
-    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-    viewport={{ once: true, margin: "-50px" }}
-    exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
-    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-    className="w-full max-w-6xl mx-auto text-center"
-  >
-    {/* Label */}
-    <p
-      className={`text-xs uppercase tracking-[0.35em] mb-5 ${isDark ? "text-white/70" : "text-gray-700"
-        }`}
+const Section4 = ({ isDark }: { isDark: boolean }) => {
+  // We'll use MotionValues for X, Y, and Rotation to create a premium "levitating" feel.
+  const x1 = useMotionValue(0); const y1 = useMotionValue(0); const r1 = useMotionValue(0);
+  const x2 = useMotionValue(0); const y2 = useMotionValue(0); const r2 = useMotionValue(0);
+  const x3 = useMotionValue(0); const y3 = useMotionValue(0); const r3 = useMotionValue(0);
+  const x4 = useMotionValue(0); const y4 = useMotionValue(0); const r4 = useMotionValue(0);
+
+  // Apply responsive spring physics
+  const springConfig = { stiffness: 120, damping: 12, mass: 0.8 };
+  const sx1 = useSpring(x1, springConfig); const sy1 = useSpring(y1, springConfig); const sr1 = useSpring(r1, springConfig);
+  const sx2 = useSpring(x2, springConfig); const sy2 = useSpring(y2, springConfig); const sr2 = useSpring(r2, springConfig);
+  const sx3 = useSpring(x3, springConfig); const sy3 = useSpring(y3, springConfig); const sr3 = useSpring(r3, springConfig);
+  const sx4 = useSpring(x4, springConfig); const sy4 = useSpring(y4, springConfig); const sr4 = useSpring(r4, springConfig);
+
+  const xValues = [x1, x2, x3, x4]; const yValues = [y1, y2, y3, y4]; const rValues = [r1, r2, r3, r4];
+  const sxValues = [sx1, sx2, sx3, sx4]; const syValues = [sy1, sy2, sy3, sy4]; const srValues = [sr1, sr2, sr3, sr4];
+
+  const controlsRef = useRef<any[]>([]);
+
+  const startIdle = () => {
+  // stop any animation
+  controlsRef.current.forEach(c => c.stop());
+  controlsRef.current = [];
+};
+
+
+  // Enhanced propagation: pushing affects X, Y (dip), and Rotation (tilt)
+  const handleDrag = (index: number, info: any) => {
+    const delta = info.delta.x;
+    if (Math.abs(delta) < 0.1) return;
+
+    if (delta > 0) { // Push Right
+      for (let i = index + 1; i < 4; i++) {
+        const dist = i - index;
+        const factor = Math.pow(0.5, dist);
+        xValues[i].set(xValues[i].get() + delta * factor);
+        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.3 * factor);
+        rValues[i].set(rValues[i].get() + delta * 0.5 * factor);
+      }
+    } else { // Push Left
+      for (let i = index - 1; i >= 0; i--) {
+        const dist = index - i;
+        const factor = Math.pow(0.5, dist);
+        xValues[i].set(xValues[i].get() + delta * factor);
+        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.3 * factor);
+        rValues[i].set(rValues[i].get() + delta * 0.5 * factor);
+      }
+    }
+  };
+
+
+  return (
+    <motion.div
+      key="s4"
+      initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
+      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      viewport={{ once: true, margin: "-50px" }}
+      exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="w-full max-w-6xl mx-auto text-center"
     >
-      Where We're Headed
-    </p>
+      {/* Label */}
+      <p
+        className={`text-xs uppercase tracking-[0.35em] mb-5 ${isDark ? "text-white/70" : "text-gray-700"
+          }`}
+      >
+        Where We're Headed
+      </p>
 
-    {/* Headline */}
-    <h2
-      className={`text-4xl md:text-6xl font-extrabold mb-4 ${isDark ? "text-white" : "text-gray-900"
-        }`}
-    >
-      Ambitious{" "}
-      <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
-        Goals.
-      </span>
-    </h2>
+      {/* Headline */}
+      <h2
+        className={`text-4xl md:text-6xl font-extrabold mb-4 ${isDark ? "text-white" : "text-gray-900"
+          }`}
+      >
+        Ambitious{" "}
+        <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
+          Goals.
+        </span>
+      </h2>
 
-    <p
-      className={`mb-16 max-w-xl mx-auto ${isDark ? "text-gray-400" : "text-gray-500"
-        }`}
-    >
-      These are the milestones we're racing toward as we scale FitFare across
-      India's fastest-growing cities.
-    </p>
+      <p
+        className={`mb-16 max-w-xl mx-auto ${isDark ? "text-gray-400" : "text-gray-500"
+          }`}
+      >
+        These are the milestones we're racing toward as we scale FitFare across
+        India's fastest-growing cities.
+      </p>
 
-    {/* Stats grid */}
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-      {trustStats.map((s, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, y: 30, scale: 0.95 }}
-          whileInView={{ opacity: 1, y: 0, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ y: -6 }}
-          className={`relative overflow-hidden rounded-3xl p-8 border group transition-all duration-500 ${isDark
-            ? "bg-white/[0.06] border-white/15 backdrop-blur-2xl"
-            : "bg-white/70 border-gray-200 backdrop-blur-xl"
-            }`}
-        >
-          {/* Glass Reflection Layer */}
-          <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/25 via-white/10 to-transparent opacity-40 pointer-events-none" />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+        {trustStats.map((s, i) => (
+          <motion.div
+            key={i}
+            drag="x"
+            dragConstraints={{ left: 0, right: 0 }}
+            dragElastic={0.4}
+            onDragStart={() => {
+              // Stop idle loops on all cards during interaction for maximum smoothness
+              controlsRef.current.forEach(c => c.stop());
+            }}
+            onDrag={(_, info) => handleDrag(i, info)}
+            onDragEnd={() => {
+              xValues.forEach(v => v.set(0));
+              yValues.forEach(v => v.set(0));
+              rValues.forEach(v => v.set(0));
+              // Restart idle loops after a short delay to let springs settle
+              setTimeout(startIdle, 500);
+            }}
+            initial={{ opacity: 0, y: 30, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            viewport={{ once: true }}
+            style={{
+              x: sxValues[i],
+              y: syValues[i],
+              rotate: srValues[i],
+              z: 50
+            }}
 
-          {/* Soft Teal Glow on Hover */}
-          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-            <div className="absolute -top-12 -right-12 w-40 h-40 rounded-full bg-[#2a9d8f]/20 blur-[80px]" />
-          </div>
+            whileHover={{
+              scale: 1.05,
+              z: 100,
+              transition: { duration: 0.3 }
+            }}
 
-          {/* Subtle Bottom Light */}
-          <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-black/10 to-transparent opacity-30 pointer-events-none" />
-
-          {/* Premium Gradient Stat Value */}
-          <div className="relative z-10 text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#1f6f8b] via-[#2a9d8f] to-[#3db4c7] bg-clip-text text-transparent">
-            {s.value}
-          </div>
-
-          {/* Label */}
-          <div
-            className={`relative z-10 text-sm font-semibold mb-1 ${isDark ? "text-white" : "text-gray-900"
+            className={`relative overflow-hidden rounded-[2rem] p-8 border group transition-shadow duration-500 ${isDark
+              ? "bg-white/[0.03] border-white/10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-emerald-500/10"
+              : "bg-white/60 border-gray-200 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-emerald-500/10"
               }`}
           >
-            {s.label}
-          </div>
+            {/* Dynamic Moving Highlight */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+              <div className="absolute inset-[-100%] bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.1),transparent_70%)] group-hover:animate-pulse" />
+            </div>
 
-          {/* Subtext */}
-          <div
-            className={`relative z-10 text-xs ${isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-          >
-            {s.sub}
-          </div>
-        </motion.div>
-      ))}
-    </div>
-  </motion.div>
-);
+            {/* Glass Reflection Layer */}
+            <div className="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-30 pointer-events-none" />
+
+            {/* Soft Teal Glow on Hover */}
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none">
+              <div className="absolute -top-24 -right-24 w-60 h-60 rounded-full bg-emerald-500/10 blur-[100px]" />
+            </div>
+
+            {/* Subtle Bottom Accent */}
+            <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+            {/* Premium Gradient Stat Value */}
+            <div className="relative z-10 text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#1f6f8b] via-[#2a9d8f] to-[#3db4c7] bg-clip-text text-transparent">
+              {s.value}
+            </div>
+
+            {/* Label */}
+            <div
+              className={`relative z-10 text-sm font-semibold mb-1 ${isDark ? "text-white" : "text-gray-900"
+                }`}
+            >
+              {s.label}
+            </div>
+
+            {/* Subtext */}
+            <div
+              className={`relative z-10 text-xs ${isDark ? "text-gray-400" : "text-gray-500"
+                }`}
+            >
+              {s.sub}
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
 /* ─────────────────────── MAIN COMPONENT ─────────────────────── */
 
 const AboutSection = () => {
@@ -541,20 +626,36 @@ const AboutSection = () => {
 
   const [activeSection, setActiveSection] = useState(0);
 
+  const isScrolling = useRef(false);
+
   useEffect(() => {
-    return smoothProgress.on("change", (v) => {
-      if (v < 0.25) setActiveSection(0);
-      else if (v < 0.5) setActiveSection(1);
-      else if (v < 0.75) setActiveSection(2);
-      else setActiveSection(3);
-    });
-  }, [smoothProgress]);
+    const handleWheel = (e: WheelEvent) => {
+      if (isScrolling.current) return;
 
+      isScrolling.current = true;
 
+      if (e.deltaY > 0) {
+        setActiveSection((prev) => Math.min(prev + 1, 3));
+      } else {
+        setActiveSection((prev) => Math.max(prev - 1, 0));
+      }
+
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 700); // matches your animation duration
+    };
+
+    const container = containerRef.current;
+
+    container?.addEventListener("wheel", handleWheel, { passive: true });
+
+    return () => {
+      container?.removeEventListener("wheel", handleWheel);
+    };
+  }, []);
 
   return (
     <section id="about" ref={containerRef} className="relative md:h-[400vh]">
-
       {/* ── Mobile View (Natural Smooth Scroll) ── */}
       <div className="md:hidden relative w-full overflow-hidden">
         {/* Base Gradient */}
@@ -588,7 +689,6 @@ const AboutSection = () => {
       </div>
       {/* ── Desktop View (Sticky Scroll) ── */}
       <div className="hidden md:flex sticky top-0 h-screen w-full items-center overflow-hidden">
-
         {/* Base Gradient */}
         <div
           className="absolute inset-0 transition-colors duration-700"
@@ -598,7 +698,6 @@ const AboutSection = () => {
               : "linear-gradient(160deg, #ffffff 0%, #f4f6fb 60%, #eef1f8 100%)",
           }}
         />
-
 
         {/* Ambient Orbs */}
         <div
@@ -613,7 +712,6 @@ const AboutSection = () => {
         {/* ── Floating Bubbles ── */}
         <PremiumBubbles />
 
-
         {/* ── Scroll progress bar ── */}
         <motion.div
           className="absolute top-0 left-0 h-[2px] bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 z-50"
@@ -625,7 +723,8 @@ const AboutSection = () => {
           {[0, 1, 2, 3].map((i) => (
             <div
               key={i}
-              className={`w-1.5 rounded-full transition-all duration-500 ${activeSection === i
+              onClick={() => setActiveSection(i)}
+              className={`cursor-pointer w-1.5 rounded-full transition-all duration-500 ${activeSection === i
                 ? "h-6 bg-blue-400"
                 : isDark
                   ? "h-1.5 bg-white/20"
@@ -634,7 +733,6 @@ const AboutSection = () => {
             />
           ))}
         </div>
-
 
         {/* ── Content ── */}
         <div className="relative z-10 w-full max-w-7xl mx-auto px-6 md:px-12">
