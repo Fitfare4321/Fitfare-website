@@ -7,6 +7,7 @@ import {
   AnimatePresence,
   animate,
 } from "framer-motion";
+import CountUp from "react-countup";
 import { useTheme } from "next-themes";
 import {
   Dumbbell,
@@ -76,7 +77,7 @@ const features = [
   {
     icon: Dumbbell,
     title: "Flexible Gym Access",
-    desc: "Train at any partner gym, anytime — with zero lock-in contracts or long-term commitments.",
+    desc: "Train at any partner gym, anytime with zero lock-in contracts or long-term commitments.",
     iconColor: "text-emerald-500",
   },
   {
@@ -103,32 +104,32 @@ const whyChoose = [
   {
     icon: TrendingUp,
     title: "Commission That Scales With You",
-    desc: "Our revenue model is designed to grow with your business — your commission shrinks as your volume grows, letting you keep more of what you earn.",
-    color: "from-blue-500 to-indigo-600",
+    desc: "Our revenue model is designed to grow with your business your commission shrinks as your volume grows, letting you keep more of what you earn.",
+   
   },
   {
     icon: BarChart3,
-    title: "Demand-Driven Dynamic Pricing",
-    desc: "AI-powered pricing adapts in real time to demand signals, weather patterns, and local trends — maximising your revenue per slot automatically.",
-    color: "from-violet-500 to-purple-600",
+    title: "Demand Driven Dynamic Pricing",
+    desc: "AI powered pricing adapts in real time to demand signals, weather patterns, and local trends maximising your revenue per slot automatically.",
+   
   },
   {
     icon: ShieldCheck,
     title: "Transparent Business Dashboard",
-    desc: "Real-time insights into bookings, revenue, and user behaviour — giving you the data you need to make smarter operational decisions every day.",
-    color: "from-emerald-500 to-teal-600",
+    desc: "Real time insights into bookings, revenue, and user behaviour giving you the data you need to make smarter operational decisions every day.",
+    
   },
   {
     icon: Megaphone,
-    title: "Zero-Risk Organic Marketing",
+    title: "Zero Risk Organic Marketing",
     desc: "FitFare promotes your gym to thousands of active users at no upfront cost. Pay only for the footfall we actually deliver.",
-    color: "from-rose-500 to-pink-600",
+   
   },
   {
     icon: ActivitySquare,
     title: "Higher Footfall, Happier Members",
-    desc: "Flexible access attracts a wider user base and maintains consistent gym utilisation, converting drop-in users into loyal, returning members.",
-    color: "from-amber-500 to-orange-600",
+    desc: "Flexible access attracts a wider user base and maintains consistent gym utilisation, converting drop in users into loyal, returning members.",
+    
   },
 ];
 
@@ -155,8 +156,8 @@ const Section1 = ({ isDark }: { isDark: boolean }) => (
     <div>
 
       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 mb-6">
-        <Sparkles size={14} className="text-emerald-500" />
-        <span className="text-[10px] uppercase tracking-widest font-bold text-emerald-500">Innovation First</span>
+        <Sparkles size={14} className="text-blue-500" />
+        <span className="text-[10px] uppercase tracking-widest font-bold text-blue-500">Innovation First</span>
       </div>
 
       <h2
@@ -174,7 +175,7 @@ const Section1 = ({ isDark }: { isDark: boolean }) => (
           }`}
       >
         FitFare combines flexible gym access, expert guidance, and intelligent
-        progress tracking — so every session counts and every goal is
+        progress tracking so every session counts and every goal is
         achievable.
       </p>
 
@@ -249,7 +250,7 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
     viewport={{ once: true, margin: "-50px" }}
     exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
     transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-    className="w-full max-w-6xl mx-auto"
+    className="w-full max-w-6xl mx-auto mt-10"
   >
     {/* Label */}
     <p className="text-xs uppercase tracking-[0.35em] text-blue-400 mb-5 text-center">
@@ -258,11 +259,11 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
 
     {/* Headline */}
     <h2
-      className={`text-4xl md:text-6xl font-extrabold leading-tight text-center mb-16 mt-10 ${isDark ? "text-white" : "text-gray-900"
+      className={`text-4xl md:text-6xl font-extrabold leading-tight text-center mb-14 mt-10 ${isDark ? "text-white" : "text-gray-900"
         }`}
     >
       Redefining Access to{" "}
-      <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-purple-400 bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
         Flexible Fitness
       </span>
     </h2>
@@ -288,7 +289,7 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
           Traditional gym memberships force users into rigid, long-term
           contracts that don't fit modern, dynamic lifestyles. People pay
           for full months even when they travel, work late, or simply want
-          variety — a fundamentally broken model.
+          variety a fundamentally broken model.
         </p>
       </div>
 
@@ -300,7 +301,7 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
           }`}
       >
         <div className="absolute -bottom-10 -left-10 w-40 h-40 rounded-full bg-indigo-500/10 blur-3xl pointer-events-none" />
-        <span className="text-xs uppercase tracking-widest text-indigo-400 font-semibold mb-4 block">
+        <span className="text-xs uppercase tracking-widest text-blue-500 font-semibold mb-4 block">
           Our Solution
         </span>
         <p
@@ -309,7 +310,7 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
         >
           FitFare is a fully integrated digital platform where gym discovery,
           bookings, and access management happen seamlessly in one ecosystem.
-          Pay per session. Train anywhere. No commitments — just results.
+          Pay per session. Train anywhere. No commitments just results.
         </p>
       </div>
     </div>
@@ -340,20 +341,20 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
     viewport={{ once: true, margin: "-50px" }}
     exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
     transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-    className="w-full max-w-6xl mx-auto"
+    className="w-full max-w-6xl mx-auto mt-16"
   >
     {/* Label */}
-    <p className="text-xs uppercase tracking-[0.35em] text-violet-400 mb-2 mt-14 text-center">
+    <p className="text-xs uppercase tracking-[0.35em] text-blue-500 mb-2 mt-14 md:mt-4 text-center">
       Partnership Opportunities
     </p>
 
     {/* Headline */}
     <h2
-      className={`text-2xl sm:text-3xl md:text-5xl font-extrabold text-center mb-5 mt-5 ${isDark ? "text-white" : "text-gray-900"
+      className={`text-2xl sm:text-3xl md:text-5xl font-extrabold text-center mb-5 mt-5 md:mt-2 md:mb-4 ${isDark ? "text-white" : "text-gray-900"
         }`}
     >
       Grow Your Gym With{" "}
-      <span className="bg-gradient-to-r from-blue-400 via-indigo-500 to-cyan-400 bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
         FitFare
       </span>
     </h2>
@@ -364,7 +365,7 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
       {/* Cards */}
       <div
         id="s3-carousel"
-        className="flex flex-nowrap md:flex-wrap md:justify-center gap-6 overflow-x-auto md:overflow-visible pb-6 md:pb-0 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+        className="flex flex-nowrap md:flex-wrap md:justify-center gap-6 overflow-x-auto md:overflow-visible pb-4 md:pb-0 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
       >
         {whyChoose.map((item, i) => (
           <motion.div
@@ -373,8 +374,8 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ delay: i * 0.05, duration: 0.5 }}
             viewport={{ once: true }}
-            className={`group relative overflow-hidden rounded-xl p-4 border transition-all duration-500
-            min-w-[85vw] md:min-w-0 md:w-[calc(50%-12px)] lg:w-[calc(33.333%-16px)] snap-center
+            className={`group relative overflow-hidden rounded-xl p-5 md:p-4 border transition-all duration-500
+            min-w-[85vw] md:min-w-0 md:w-[calc(50%-16px)] lg:w-[calc(33.333%-24px)] xl:w-[calc(33.333%-32px)] snap-center
             ${isDark
                 ? "bg-white/[0.04] border-white/10 hover:border-blue-500/40 backdrop-blur-2xl"
                 : "bg-white/80 border-gray-200 hover:shadow-2xl hover:border-blue-400"
@@ -382,22 +383,22 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
           >
             {/* Ambient hover glow */}
             <div
-              className={`absolute -top-12 -right-12 w-48 h-48 rounded-full bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-25 blur-3xl transition-opacity duration-700 pointer-events-none`}
+              className={`absolute -top-12 -right-12 w-48 h-48 rounded-full bg-gradient-to-br opacity-0 group-hover:opacity-25 blur-3xl transition-opacity duration-700 pointer-events-none`}
             />
 
-            <div className="inline-flex items-center justify-center w-14 h-14 mb-6 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 text-blue-500 dark:text-blue-400 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
-              <item.icon size={28} strokeWidth={1.5} />
+            <div className="inline-flex items-center justify-center w-14 h-14 md:w-12 md:h-12 mb-6 md:mb-3 rounded-2xl bg-white/10 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/10 text-blue-500 dark:text-blue-400 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+              <item.icon className="w-7 h-7 md:w-6 md:h-6" strokeWidth={1.5} />
             </div>
 
             <h4
-              className={`font-bold text-xl mb-4 ${isDark ? "text-white" : "text-gray-900"
+              className={`font-bold text-xl md:text-lg mb-4 md:mb-2 ${isDark ? "text-white" : "text-gray-900"
                 }`}
             >
               {item.title}
             </h4>
 
             <p
-              className={`text-sm leading-relaxed opacity-80 ${isDark ? "text-gray-400" : "text-gray-500"
+              className={`text-[15px] md:text-sm leading-relaxed opacity-80 ${isDark ? "text-gray-400" : "text-gray-500"
                 }`}
             >
               {item.desc}
@@ -454,10 +455,10 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
   const controlsRef = useRef<any[]>([]);
 
   const startIdle = () => {
-  // stop any animation
-  controlsRef.current.forEach(c => c.stop());
-  controlsRef.current = [];
-};
+    // stop any animation
+    controlsRef.current.forEach(c => c.stop());
+    controlsRef.current = [];
+  };
 
 
   // Enhanced propagation: pushing affects X, Y (dip), and Rotation (tilt)
@@ -519,7 +520,7 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
           }`}
       >
         These are the milestones we're racing toward as we scale FitFare across
-        India's fastest-growing cities.
+        India's fastest growing cities.
       </p>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -579,9 +580,16 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
             <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-transparent via-emerald-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             {/* Premium Gradient Stat Value */}
-            <div className="relative z-10 text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#1f6f8b] via-[#2a9d8f] to-[#3db4c7] bg-clip-text text-transparent">
-              {s.value}
-            </div>
+       <div className="relative z-10 text-4xl md:text-5xl font-extrabold mb-2 bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
+  <CountUp
+    end={parseFloat(s.value)}
+    duration={2.5}
+    decimals={s.value.includes(".") ? 1 : 0}
+    enableScrollSpy
+    scrollSpyOnce
+  />
+  {s.value.replace(/[0-9.]/g, "")}
+</div>
 
             {/* Label */}
             <div
@@ -630,7 +638,8 @@ const AboutSection = () => {
 
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (isScrolling.current) return;
+      // If already animating or the scroll is too tiny, skip
+      if (isScrolling.current || Math.abs(e.deltaY) < 20) return;
 
       isScrolling.current = true;
 
@@ -640,9 +649,10 @@ const AboutSection = () => {
         setActiveSection((prev) => Math.max(prev - 1, 0));
       }
 
+      // Increase timeout for a smoother, more deliberate transition
       setTimeout(() => {
         isScrolling.current = false;
-      }, 700); // matches your animation duration
+      }, 1000);
     };
 
     const container = containerRef.current;

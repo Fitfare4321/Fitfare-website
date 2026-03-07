@@ -29,7 +29,7 @@ const coreValues = [
   {
     title: "Client-Aligned Execution",
     description:
-      "We operate as strategic partners — aligning every initiative with measurable outcomes and long-term client success.",
+      "We operate as strategic partners aligning every initiative with measurable outcomes and long-term client success.",
     icon: Target,
     gradient: "from-blue-500/20 to-cyan-500/10",
     iconColor: "text-blue-400",
@@ -38,7 +38,7 @@ const coreValues = [
   {
     title: "Precision With Creative Freedom",
     description:
-      "We define the strategy with clarity and empower creative excellence in execution — where systems meet artistry.",
+      "We define the strategy with clarity and empower creative excellence in execution where systems meet artistry.",
     icon: Sparkles,
     gradient: "from-violet-500/20 to-purple-500/10",
     iconColor: "text-violet-400",
@@ -47,14 +47,14 @@ const coreValues = [
   {
     title: "Time & Energy Discipline",
     description:
-      "We prioritize ruthlessly. Efficiency is our operating system — eliminating waste, maximizing impact.",
+      "We prioritize ruthlessly. Efficiency is our operating system eliminating waste, maximizing impact.",
     icon: Clock,
     gradient: "from-amber-500/20 to-orange-500/10",
     iconColor: "text-amber-400",
     border: "border-amber-500/20",
   },
   {
-    title: "Relationship-Driven Growth",
+    title: "Relationship Driven Growth",
     description:
       "We optimize for long-term trust, not short-term transactions. Partnerships built on transparency compound exponentially.",
     icon: Handshake,
@@ -74,7 +74,7 @@ const coreValues = [
   {
     title: "Transparent Execution",
     description:
-      "Clarity in communication. Visibility in progress. Accountability in results — no surprises, ever.",
+      "Clarity in communication. Visibility in progress. Accountability in results no surprises, ever.",
     icon: Eye,
     gradient: "from-cyan-500/20 to-sky-500/10",
     iconColor: "text-cyan-400",
@@ -85,14 +85,14 @@ const coreValues = [
 const stats = [
   { number: "Niche-Focused", label: "Fitness Industry Only", icon: Users },
   { number: "System-Led", label: "Structured Growth Approach", icon: TrendingUp },
-  { number: "Performance-Driven", label: "Outcome-Oriented Execution", icon: ShieldCheck },
+  { number: "Performance-Driven", label: "Outcome Oriented Execution", icon: ShieldCheck },
   { number: "Pioneering", label: "Redefining Fitness Brand Growth", icon: Award },
 ];
 
 const milestones = [
   {
     title: "Vision & Foundation (2025)",
-    desc: "FitFare was born from our own experiences in gyms — we realized the challenges fitness brands and users face daily. Our purpose became clear: to empower brands to scale with structured strategy and performance-driven execution, while creating better experiences for fitness enthusiasts everywhere."
+    desc: "FitFare was born from our own experiences in gyms we realized the challenges fitness brands and users face daily. Our purpose became clear: to empower brands to scale with structured strategy and performance driven execution, while creating better experiences for fitness enthusiasts\u00A0everywhere."
   },
   {
     title: "Establishing Core Systems",
@@ -109,11 +109,11 @@ const milestones = [
 
   {
     title: "Operational Excellence",
-    desc: "Developed internal playbooks and repeatable workflows, allowing us to maintain high-quality outcomes across every project and partnership."
+    desc: "Developed internal playbooks and repeatable workflows, allowing us to maintain high quality outcomes across every project and partnership."
   },
   {
     title: "Future Growth & Impact",
-    desc: "Focused on long-term partnerships and continuous improvement, FitFare is committed to driving sustainable growth for fitness brands worldwide while enhancing experiences for users everywhere."
+    desc: "Focused on long term partnerships and continuous improvement, FitFare is committed to driving sustainable growth for fitness brands worldwide while enhancing experiences for users everywhere."
   },
 ];
 
@@ -180,7 +180,7 @@ export default function AboutFitfare() {
       }}
     >
       {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative min-h-[92vh] flex items-center justify-center px-6 py-32 overflow-hidden">
+      <section className="relative min-h-[92vh] flex items-center justify-center px-6 py-14 md:py-32 overflow-hidden">
         {/* Background orbs */}
         <div className="absolute inset-0 pointer-events-none">
           <div
@@ -235,7 +235,7 @@ export default function AboutFitfare() {
             className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12"
             style={{ color: isDark ? "#94a3b8" : "#64748b" }}
           >
-            FitFare is a performance-first growth partner for modern fitness brands.
+            FitFare is a performance first growth partner for modern fitness brands.
             We combine strategy, systems, and execution to transform ambition into
             scalable, compounding results.
           </motion.p>
@@ -246,8 +246,8 @@ export default function AboutFitfare() {
       </section>
 
       {/* ═══════════════ MISSION & VISION ═══════════════ */}
-      <section
-        className="py-28 px-6"
+     <section
+  className="py-14 md:py-28 px-6"
         style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
       >
         <SectionWrapper className="max-w-6xl mx-auto">
@@ -262,7 +262,7 @@ export default function AboutFitfare() {
             className="text-4xl md:text-5xl font-extrabold text-center mb-20 leading-tight"
           >
             Driven by{" "}
-            <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
               Mission & Vision
             </span>
           </motion.h2>
@@ -271,10 +271,10 @@ export default function AboutFitfare() {
             {[
               {
                 Icon: Target,
-                color: "text-teal-400",
-                glow: "rgba(45,212,191,0.08)",
+                color: "text-blue-400",
+                glow: "rgba(96,165,250,0.08)",
                 label: "Our Mission",
-                text: "To empower fitness businesses with structured growth systems, predictable revenue frameworks, and brand authority positioning — without compromising authenticity or long-term sustainability. We build engines, not campaigns.",
+                text: "To empower fitness businesses with structured growth systems, predictable revenue frameworks, and brand authority positioning  without compromising authenticity or long-term sustainability. We build engines, not campaigns.",
                 points: ["Structured growth systems", "Predictable revenue frameworks", "Brand authority positioning"],
               },
               {
@@ -282,7 +282,7 @@ export default function AboutFitfare() {
                 color: "text-blue-400",
                 glow: "rgba(96,165,250,0.08)",
                 label: "Our Vision",
-                text: "To become the strategic backbone behind high-performance fitness brands globally — redefining how digital infrastructure, marketing psychology, and operational excellence combine into a single unified growth system.",
+                text: "To become the strategic backbone behind high performance fitness brands globally  redefining how digital infrastructure, marketing psychology, and operational excellence combine into a single unified growth system.",
                 points: ["Global fitness growth leader", "Digital & operational excellence", "Scalable impact frameworks"],
               },
             ].map(({ Icon, color, glow, label, text, points }) => (
@@ -349,13 +349,13 @@ export default function AboutFitfare() {
                     className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
                     style={{ background: "radial-gradient(ellipse at top, rgba(42,157,143,0.12), transparent 60%)" }}
                   />
-                  <Icon size={20} className="mx-auto mb-3 text-teal-400" />
+                  <Icon size={20} className="mx-auto mb-3 text-blue-400" />
                   <div
-                    className="text-xl sm:text-2xl font-extrabold mb-1 bg-clip-text text-transparent leading-tight break-words"
-                    style={{ backgroundImage: "linear-gradient(135deg, #1f6f8b, #2a9d8f, #3db4c7)" }}
-                  >
-                    {item.number}
-                  </div>
+  className="text-xl sm:text-2xl font-extrabold mb-1 bg-clip-text text-transparent leading-tight break-words"
+  style={{ backgroundImage: "linear-gradient(to right,#60A5FA,#3B82F6,#06B6D4)" }}
+>
+  {item.number}
+</div>
                   <p className="text-sm" style={{ color: isDark ? "#64748b" : "#94a3b8" }}>
                     {item.label}
                   </p>
@@ -368,7 +368,7 @@ export default function AboutFitfare() {
 
       {/* ═══════════════ OUR STORY / TIMELINE ═══════════════ */}
       <section
-        className="py-28 px-6"
+        className="py-20 px-6"
         style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
       >
         <SectionWrapper className="max-w-6xl mx-auto">

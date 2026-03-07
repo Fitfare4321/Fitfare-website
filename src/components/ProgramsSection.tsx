@@ -352,9 +352,7 @@ const ProgramsSection = () => {
 
         <h2 className="text-5xl md:text-6xl font-semibold mt-4 mb-6 tracking-tight leading-[1.1]
                bg-gradient-to-r 
-               from-[#1e5f74] 
-               via-[#2a9d8f] 
-               to-[#3db4c7] 
+             from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] 
                bg-clip-text text-transparent">
           Choose Your Path
         </h2>

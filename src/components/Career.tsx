@@ -43,7 +43,7 @@ const jobs = [
     "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
 },
 
-{
+ {
   id: "02",
   title: "Android Developer Intern (6 Positions)",
   location: "Remote",
@@ -54,22 +54,23 @@ const jobs = [
   description:
     "Build the Android experience used by thousands of fitness enthusiasts across India.",
   skills: [
-    "Kotlin",
-    "Jetpack Compose",
-    "MVVM",
-    "Retrofit",
+    "Java / Kotlin",
     "Android SDK",
+    "Android Studio",
+    "Jetpack Compose",
+    "XML Layouts",
+    "MVVM Architecture",
+    "Retrofit",
     "REST API Integration",
     "Firebase",
-    "Git & GitHub",
+    "SQLite / Room Database",
     "Material Design",
-    "Room Database",
+    "Git & GitHub",
     "Debugging & Performance Optimization"
   ],
   applyLink:
     "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
 },
-
 {
   id: "03",
   title: "BDE Intern (5 Positions)",
@@ -88,7 +89,7 @@ const jobs = [
     "Lead Generation",
     "Market Research",
     "Negotiation Skills",
-    "Client Relationship Management",
+    
     "Sales Pitching",
     "Business Communication",
     "Deal Closing"
@@ -200,7 +201,7 @@ const CareerPage = () => {
   Accelerate Your
   <br />
   <span className="relative inline-block">
-    <span className="bg-gradient-to-r from-blue-500 via-indigo-500 to-violet-500 bg-clip-text text-transparent">
+    <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
       Career Growth
     </span>
     <span className="absolute -bottom-2 left-0 w-full h-[6px] bg-gradient-to-r from-blue-500/30 via-indigo-500/30 to-violet-500/30 blur-md" />

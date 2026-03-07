@@ -24,7 +24,7 @@ const testimonials = [
     name: "Rohit Mote",
     role: "Business Owner",
     rating: 5,
-    text: "Staying fit was hard with my travel-packed job, but FitFare made it seamless. I now explore different gyms without locking into long-term plans.",
+    text: "Staying fit was hard with my travel packed job, but FitFare made it seamless. I now explore different gyms without locking into long-term plans.",
     image: rohitMote,
   },
 ];

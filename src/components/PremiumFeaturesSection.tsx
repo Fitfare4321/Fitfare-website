@@ -105,17 +105,27 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
             : `0 10px 30px ${feature.accent}40, inset 0 0 10px ${feature.accent}20`,
         }}
       >
-        <div className="flex items-center gap-4 relative z-10">
-          <div className="flex-shrink-0 relative">
-            <Icon
-              className="w-7 h-7"
-              strokeWidth={1.5}
-              style={{
-                color: isDark ? '#ffffff' : feature.accent,
-                filter: isDark ? `drop-shadow(0 0 8px ${feature.accent})` : 'none'
-              }}
-            />
-          </div>
+       <div className="flex items-start gap-3 relative z-10">
+
+  {/* ICON CONTAINER */}
+  <div
+    className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0"
+    style={{
+      background: isDark
+        ? "rgba(255,255,255,0.05)"
+        : "rgba(255,255,255,0.6)",
+      border: `1px solid ${feature.accent}55`,
+      boxShadow: `0 0 12px ${feature.accent}30`,
+    }}
+  >
+    <Icon
+      className="w-5 h-5"
+      strokeWidth={1.7}
+      style={{
+        color: feature.accent,
+      }}
+    />
+  </div>
           <div className="flex-1 text-left">
             <h4
               className="text-[13px] font-bold leading-tight tracking-wide"
@@ -514,10 +524,10 @@ const PremiumFeaturesSection = () => {
                       : "1px solid rgba(148,163,184,0.3)",
                   }}
                 >
-                  <Shield className="w-6 h-6" style={{ color: sectionDark ? "#ffffff" : "#16a34a" }} />
+                  <Shield className="w-6 h-6" style={{ color: sectionDark ? "#ffffff" : "#60A5FA" }} />
                 </div>
                 <div className="text-left">
-                  <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/80">
+                  <p className="text-xs uppercase tracking-[0.25em] text-blue-500">
                     Problem Lens
                   </p>
                   <h3
