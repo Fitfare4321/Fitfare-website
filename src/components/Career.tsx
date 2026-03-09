@@ -25,7 +25,7 @@ const jobs = [
   type: "Internship",
   tag: "Engineering",
   tagColor: "from-blue-500 to-cyan-600",
-  duration: "3 – 6 Months",
+  duration: "3 Months",
   description:
     "Work closely with our engineering team to design, deploy, and manage scalable cloud infrastructure for FitFare’s platform.",
   skills: [
@@ -50,7 +50,7 @@ const jobs = [
   type: "Internship",
   tag: "Mobile",
   tagColor: "from-blue-500 to-cyan-500",
-  duration: "3 – 6 Months",
+  duration: "3 Months",
   description:
     "Build the Android experience used by thousands of fitness enthusiasts across India.",
   skills: [
@@ -78,7 +78,7 @@ const jobs = [
   type: "Internship",
   tag: "Business",
   tagColor: "from-emerald-500 to-teal-500",
-  duration: "3 – 6 Months",
+  duration: "3 Months",
   description:
     "Own the growth engine. You'll build FitFare's gym-partner network.",
   skills: [
