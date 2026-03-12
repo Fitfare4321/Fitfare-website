@@ -135,7 +135,7 @@ const whyChoose = [
 
 const trustStats = [
   { value: "2M+", label: "Active Members", sub: "and growing every month" },
-  { value: "150+", label: "Partner Gyms", sub: "across major Indian cities" },
+  { value: "20000", label: "Partner Gyms", sub: "across major Indian cities" },
   { value: "95%", label: "Retention Rate", sub: "users who stay month-on-month" },
   { value: "4.9★", label: "Average Rating", sub: "across all platform reviews" },
 ];

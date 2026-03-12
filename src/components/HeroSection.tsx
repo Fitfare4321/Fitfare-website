@@ -232,12 +232,14 @@ const HeroSection = () => {
           </div>
 
           {/* Heading */}
-          <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.02] mb-6">
-            Powering Your.{" "}
-            <motion.span className="text-gradient inline-block ">
-              Fitness Journey.
-            </motion.span>
-          </motion.h1>
+          <div className="overflow-visible mb-6" style={{ paddingBottom: '1rem' }}>
+            <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.25] overflow-visible">
+              Powering Your{" "}
+              <motion.span className="text-gradient inline-block overflow-visible" style={{ paddingBottom: '0.5rem', display: 'inline-block' }}>
+                Fitness Journey.
+              </motion.span>
+            </motion.h1>
+          </div>
 
           {/* Text */}
           <motion.p
@@ -252,7 +254,7 @@ const HeroSection = () => {
                 : "text-black"
                 } font-normal text-base sm:text-lg`}
             >
-              Experience on demand fitness with the top gyms and trainers, empowering users to stay active and helping partners grow through seamless collaboration.
+              Access any fitness activity, anywhere, anytime, and pay only for the days you train.
             </span>
           </motion.p>
 
