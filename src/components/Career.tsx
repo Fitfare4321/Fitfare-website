@@ -40,7 +40,7 @@ const jobs = [
     "Monitoring Tools (Prometheus / Grafana)"
   ],
   applyLink:
-    "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
+    "https://docs.google.com/forms/d/e/1FAIpQLSde748LI0NAo9XDkh-YuzlqnE0Wu3ipJTwaANTIRXU_i4dpsA/viewform?usp=publish-editor",
 },
 
  {
