@@ -20,7 +20,7 @@ import { Info } from "lucide-react";
 const jobs = [
  {
   id: "01",
-  title: "Cloud Engineering Intern (2 Positions)",
+  title: "Cloud Engineering Intern (4 Positions)",
   location: "Remote",
   type: "Internship",
   tag: "Engineering",
@@ -45,7 +45,7 @@ const jobs = [
 
  {
   id: "02",
-  title: "Android Developer Intern (6 Positions)",
+  title: "Android Developer Intern (8 Positions)",
   location: "Remote",
   type: "Internship",
   tag: "Mobile",
