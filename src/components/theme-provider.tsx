@@ -12,7 +12,8 @@ type ThemeProviderProps = {
 
 export function ThemeProvider({
     children,
-    defaultTheme = "system",
+    // Force dark as the global default theme
+    defaultTheme = "dark",
     storageKey = "vite-ui-theme",
     ...props
 }: ThemeProviderProps) {
@@ -20,7 +21,8 @@ export function ThemeProvider({
         <NextThemesProvider
             attribute="class"
             defaultTheme={defaultTheme}
-            enableSystem
+            // We still allow toggling, but we don't auto-switch based on OS theme
+            enableSystem={false}
             disableTransitionOnChange
             {...props}
         >

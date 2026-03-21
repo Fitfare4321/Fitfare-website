@@ -30,11 +30,11 @@ const faqs = [
   },
   {
     q: "Is FitFare suitable for beginners?",
-    a: "Definitely! FitFare is designed for all fitness levels. Our AI starts by assessing your current fitness level and creates beginner-friendly programs that gradually progress as you improve."
+    a: "Definitely! FitFare is designed for all fitness levels. Our AI starts by assessing your current fitness level and creates beginner friendly programs that gradually progress as you improve."
   },
   {
     q: "How does the community support work?",
-    a: "FitFare includes access to our supportive community where you can connect with other users, share progress, participate in challenges, and get motivation from like-minded individuals on similar fitness journeys."
+    a: "FitFare includes access to our supportive community where you can connect with other users, share progress, participate in challenges, and get motivation from like minded individuals on similar fitness journeys."
   }
 ];
 

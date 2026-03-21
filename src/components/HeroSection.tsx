@@ -6,6 +6,7 @@ import { useInView } from "react-intersection-observer";
 import { useTheme } from "next-themes";
 
 import heroVideo from "@/assets/allvideos-hero.mp4";
+import heroPoster from "@/assets/hero-bg.jpg";
 
 
 /* Floating Particles */
@@ -130,6 +131,7 @@ const HeroSection = () => {
           muted
           playsInline
           preload="auto"
+          poster={heroPoster}
           className="w-full h-full object-cover scale-110 opacity-100"
         >
           <source src={heroVideo} type="video/mp4" />
@@ -230,12 +232,14 @@ const HeroSection = () => {
           </div>
 
           {/* Heading */}
-          <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.02] mb-6">
-            Powering Your.{" "}
-            <motion.span className="text-gradient inline-block">
-              Fitness Journey.
-            </motion.span>
-          </motion.h1>
+          <div className="overflow-visible mb-6" style={{ paddingBottom: '1rem' }}>
+            <motion.h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-display font-bold leading-[1.25] overflow-visible">
+              Powering Your{" "}
+              <motion.span className="text-gradient inline-block overflow-visible" style={{ paddingBottom: '0.5rem', display: 'inline-block' }}>
+                Fitness Journey.
+              </motion.span>
+            </motion.h1>
+          </div>
 
           {/* Text */}
           <motion.p
@@ -250,7 +254,7 @@ const HeroSection = () => {
                 : "text-black"
                 } font-normal text-base sm:text-lg`}
             >
-              Experience on-demand fitness with the top gyms and trainers, empowering users to stay active and helping partners grow through seamless collaboration.
+              Access any fitness activity, anywhere, anytime, and pay only for the days you train.
             </span>
           </motion.p>
 
@@ -265,18 +269,19 @@ const HeroSection = () => {
               </span>
             </motion.a>
 
-            <motion.a
-              className={`group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border border-border 
-  ${isDark
-                  ?
-                  "backdrop-blur-sm text-white"
-                  : "backdrop-blur-none text-black"
-
-                }`}
+            <motion.button
+              onClick={() => {
+                const contactSection = document.getElementById("contact");
+                if (contactSection) {
+                  contactSection.scrollIntoView({ behavior: "smooth" });
+                }
+              }}
+              className={`group inline-flex items-center gap-2 px-8 py-4 rounded-xl font-semibold border 
+  ${isDark ? "backdrop-blur-sm text-white" : "backdrop-blur-none text-black"} cursor-pointer`}
             >
               <Play size={18} />
               Join as Gym
-            </motion.a>
+            </motion.button>
 
           </motion.div>
         </div>

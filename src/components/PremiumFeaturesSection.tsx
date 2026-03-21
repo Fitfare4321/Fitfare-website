@@ -10,6 +10,14 @@ import {
   Shield,
   Award,
 } from "lucide-react";
+import {
+  Sparkles,
+  Activity,
+  Globe,
+  Clock,
+  Wallet,
+  Zap,
+} from "lucide-react";
 
 const NetworkBackground3D = lazy(() => import("./NetworkBackground3D"));
 
@@ -55,6 +63,203 @@ const AnimatedCounter = ({
       {displayValue}
       {suffix}
     </span>
+  );
+};
+
+/* ---------------- FLOATING ANIMATION VARIANTS ---------------- */
+const floatingAnimation = {
+  initial: { y: 0 },
+  animate: (custom: number) => ({
+    y: [-8, 8, -8],
+    transition: {
+      duration: 6 + custom,
+      repeat: Infinity,
+      ease: "easeInOut",
+      delay: custom * 0.5,
+    },
+  }),
+};
+
+/* ---------------- CONNECTED NODE FEATURE COMPONENT ---------------- */
+
+const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
+  const Icon = feature.icon;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.6, delay: index * 0.1, type: "spring" }}
+      className={`relative z-10 w-full sm:w-[280px] md:w-[280px] lg:w-[280px] xl:w-[280px]`}
+    >
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        className="relative group w-full rounded-[16px] px-5 py-4 cursor-pointer"
+        style={{
+          background: isDark ? 'rgba(10, 5, 25, 0.65)' : 'rgba(255, 255, 255, 0.8)',
+          backdropFilter: 'blur(20px)',
+          border: `1.2px solid ${feature.accent}`,
+          boxShadow: isDark
+            ? `0 0 25px ${feature.accent}60, inset 0 0 15px ${feature.accent}30`
+            : `0 10px 30px ${feature.accent}40, inset 0 0 10px ${feature.accent}20`,
+        }}
+      >
+       <div className="flex items-start gap-3 relative z-10">
+
+  {/* ICON CONTAINER */}
+  <div
+    className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0"
+    style={{
+      background: isDark
+        ? "rgba(255,255,255,0.05)"
+        : "rgba(255,255,255,0.6)",
+      border: `1px solid ${feature.accent}55`,
+      boxShadow: `0 0 12px ${feature.accent}30`,
+    }}
+  >
+    <Icon
+      className="w-5 h-5"
+      strokeWidth={1.7}
+      style={{
+        color: feature.accent,
+      }}
+    />
+  </div>
+          <div className="flex-1 text-left">
+            <h4
+              className="text-[13px] font-bold leading-tight tracking-wide"
+              style={{
+                color: isDark ? '#ffffff' : '#0f172a',
+                textShadow: isDark ? `0 0 10px ${feature.accent}80` : 'none',
+              }}
+            >
+              {feature.title}
+            </h4>
+            <p
+              className="text-[11px] leading-snug mt-1.5 opacity-80"
+              style={{ color: isDark ? '#cbd5e1' : '#475569' }}
+            >
+              {feature.description}
+            </p>
+          </div>
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
+/* ---------------- SVG CONNECTING LINES (Desktop Only) ---------------- */
+// Renders the branching circuit-board-like lines from the center
+
+const ConnectionLines = ({ isDark }: { isDark: boolean }) => {
+  const lineColor = isDark ? "rgba(168,85,247,0.4)" : "rgba(168,85,247,0.6)";
+  const dotColor = isDark ? "#c084fc" : "#9333ea"; // Purple accent for dots
+  const pulseColor = isDark ? "#e879f9" : "#a855f7"; // Brighter pulse color
+  const strokeW = 1.5;
+
+  // Path data mapping perfectly to the 6 feature nodes
+  const paths = [
+    { id: "tl", d: "M 450 360 L 450 240 L 380 240", length: 180, delay: 0 },
+    { id: "tc", d: "M 600 360 L 600 250", length: 110, delay: 0.5 },
+    { id: "tr", d: "M 750 360 L 750 240 L 820 240", length: 180, delay: 1 },
+
+    { id: "bl", d: "M 450 440 L 450 560 L 380 560", length: 180, delay: 1.5 },
+    { id: "bc", d: "M 600 440 L 600 550", length: 110, delay: 2 },
+    { id: "br", d: "M 750 440 L 750 560 L 820 560", length: 180, delay: 2.5 },
+  ];
+  return (
+    <div className="absolute inset-0 w-full h-full pointer-events-none z-0 flex justify-center items-center">
+      <svg className="w-full h-full max-w-[1200px]" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="glowDark" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="3" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+
+          <filter id="intenseGlow" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+
+        <g filter={isDark ? "url(#glowDark)" : ""} stroke={lineColor} strokeLinejoin="round" strokeWidth={strokeW} fill="none">
+          {/* Base Static Paths */}
+          {paths.map((p) => (
+            <path key={p.id} d={p.d} />
+          ))}
+
+          {/* Animated Pulsing Lines overlay */}
+          {paths.map((p) => (
+            <motion.path
+              key={`pulse-${p.id}`}
+              d={p.d}
+              stroke={pulseColor}
+              strokeWidth={strokeW * 1.5}
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              filter="url(#intenseGlow)"
+              initial={{ strokeDasharray: `0 ${p.length}`, strokeDashoffset: 0, opacity: 0 }}
+              animate={{
+                strokeDasharray: [`0 ${p.length}`, `${p.length * 0.4} ${p.length}`, `0 ${p.length}`],
+                strokeDashoffset: [0, -p.length * 0.6, -p.length],
+                opacity: [0, 1, 0]
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                delay: p.delay,
+                ease: "easeInOut"
+              }}
+            />
+          ))}
+
+          {/* Nodes/Dots at Connections */}
+          <circle cx="380" cy="240" r="4" fill={dotColor} stroke="none" />
+          <circle cx="600" cy="250" r="4" fill={dotColor} stroke="none" />
+          <circle cx="820" cy="240" r="4" fill={dotColor} stroke="none" />
+          <circle cx="380" cy="560" r="4" fill={dotColor} stroke="none" />
+          <circle cx="600" cy="550" r="4" fill={dotColor} stroke="none" />
+          <circle cx="820" cy="560" r="4" fill={dotColor} stroke="none" />
+        </g>
+      </svg>
+    </div>
+  );
+};
+const MobileConnectionLines = ({ isDark }: { isDark: boolean }) => {
+  const lineColor = isDark
+    ? "rgba(168,85,247,0.3)"
+    : "rgba(168,85,247,0.5)";
+  const pulseColor = isDark ? "#e879f9" : "#a855f7";
+
+  return (
+    <div className="absolute top-[80px] bottom-[50px] left-[50%] w-[2px] -translate-x-1/2 pointer-events-none" style={{ background: lineColor }}>
+      {/* Container for the pulsing light, hidden overflow so it clips gracefully at top and bottom */}
+      <div className="absolute inset-0 overflow-hidden w-full h-full">
+        <motion.div
+          className="absolute left-1/2 -translate-x-1/2 w-[3px] h-[200px] rounded-full"
+          style={{
+            background: pulseColor,
+            boxShadow: `0 0 15px 3px ${pulseColor}`,
+            top: 0
+          }}
+          animate={{
+            top: ["-200px", "100%"]
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+        />
+      </div>
+    </div>
   );
 };
 
@@ -143,51 +348,53 @@ const PremiumFeaturesSection = () => {
       icon: DollarSign,
       title: "Dynamic Price Allocation",
       description:
-        " AI-powered pricing adapting to demand, weather, and peak hours",
-      gradient: sectionDark
-        ? "from-emerald-600 via-teal-600 to-cyan-600"
-        : "from-emerald-400 via-teal-500 to-cyan-500",
-      iconBg: sectionDark
-        ? "bg-gradient-to-br from-emerald-600 to-teal-700"
-        : "bg-gradient-to-br from-emerald-500 to-teal-600",
-      particles: 8,
+        "AI-powered pricing that adapts to demand, time slots, and peak gym hours.",
+      accent: "#a855f7",
     },
     {
       icon: Heart,
       title: "Period Tracking for Women",
       description:
-        "Personalized workout recommendations for every menstrual phase",
-      gradient: sectionDark
-        ? "from-pink-600 via-rose-600 to-red-600"
-        : "from-pink-400 via-rose-500 to-red-500",
-      iconBg: sectionDark
-        ? "bg-gradient-to-br from-pink-600 to-rose-700"
-        : "bg-gradient-to-br from-pink-500 to-rose-600",
-      particles: 10,
+        "Personalized workout and recovery plans aligned with each menstrual phase.",
+      accent: "#3b82f6",
     },
     {
       icon: BarChart3,
-      title: "Professional Dashboard",
+      title: "Professional Dashboard for Club Owners",
       description:
-        "Real-time analytics, revenue tracking & member management",
-      gradient: sectionDark
-        ? "from-blue-600 via-indigo-600 to-purple-600"
-        : "from-blue-400 via-indigo-500 to-purple-500",
-      iconBg: sectionDark
-        ? "bg-gradient-to-br from-blue-600 to-indigo-700"
-        : "bg-gradient-to-br from-blue-500 to-indigo-600",
-      particles: 12,
+        "Advanced analytics, revenue insights, attendance trends, and member management tools.",
+      accent: "#ec4899",
+    },
+    {
+      icon: Globe,
+      title: "Access to Multiple Clubs Across Cities",
+      description:
+        "Train anywhere with seamless check-ins across partnered gyms nationwide.",
+      accent: "#06b6d4",
+    },
+    {
+      icon: Clock,
+      title: "No Long-Term Contracts",
+      description:
+        "Complete flexibility with zero lock-ins, cancellation fees, or commitments.",
+      accent: "#10b981",
+    },
+    {
+      icon: Wallet,
+      title: "Pay-As-You-Go Pricing",
+      description:
+        "Pay only for sessions you attend — transparent billing with no hidden charges.",
+      accent: "#eab308",
     },
   ];
-
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-32 overflow-hidden"
-      style={{
-        background: sectionDark ? "#0f172a" : "#ffffff",
-      }}
-    >
+   <section
+  ref={sectionRef}
+  className="relative pt-16 pb-24 md:py-32 overflow-hidden"
+  style={{
+    background: sectionDark ? "#0a0514" : "#ffffff",
+  }}
+>
       <Suspense fallback={null}>
         <NetworkBackground3D isDark={sectionDark} />
       </Suspense>
@@ -249,7 +456,7 @@ const PremiumFeaturesSection = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-4xl md:text-6xl mb-6"
+            className="text-4xl md:text-6xl mb-5"
             style={{
               fontWeight: 800,
               letterSpacing: "-0.04em",
@@ -291,10 +498,11 @@ const PremiumFeaturesSection = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
           className="mb-28"
         >
-          <div className="flex flex-col md:flex-row gap-10 items-stretch">
+          <div className="flex flex-col md:flex-row gap-10 items-stretch ">
             {/* left: compact chart card */}
             <motion.div
-              className="md:w-5/12 rounded-3xl p-6 md:p-7 relative overflow-hidden backdrop-blur-xl"
+
+              className="md:w-5/12 -mt-14 md:-mt-16 rounded-3xl p-6 md:p-7 relative overflow-hidden backdrop-blur-xl"
               style={{
                 background: sectionDark ? "rgba(15,23,42,0.4)" : "rgba(255,255,255,0.6)",
                 border: sectionDark
@@ -305,7 +513,7 @@ const PremiumFeaturesSection = () => {
                   : "0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)",
               }}
             >
-              <div className="flex items-center gap-3 mb-4">
+              <div className="flex items-center gap-3 mb-4 mt-3">
                 <div
                   className="w-11 h-11 rounded-full flex items-center justify-center"
                   style={{
@@ -316,10 +524,10 @@ const PremiumFeaturesSection = () => {
                       : "1px solid rgba(148,163,184,0.3)",
                   }}
                 >
-                  <Shield className="w-6 h-6" style={{ color: sectionDark ? "#ffffff" : "#16a34a" }} />
+                  <Shield className="w-6 h-6" style={{ color: sectionDark ? "#ffffff" : "#60A5FA" }} />
                 </div>
                 <div className="text-left">
-                  <p className="text-xs uppercase tracking-[0.25em] text-emerald-300/80">
+                  <p className="text-xs uppercase tracking-[0.25em] text-blue-500">
                     Problem Lens
                   </p>
                   <h3
@@ -428,14 +636,12 @@ const PremiumFeaturesSection = () => {
                     >
                       <AnimatedCounter value={c.percentage} suffix="%" />
                     </span>
-                    <p className={`text-xs font-semibold uppercase tracking-wide ${
-                      sectionDark ? "text-slate-200/90" : "text-slate-700"
-                    }`}>
+                    <p className={`text-xs font-semibold uppercase tracking-wide ${sectionDark ? "text-slate-200/90" : "text-slate-700"
+                      }`}>
                       {c.title}
                     </p>
-                    <p className={`text-[11px] leading-snug ${
-                      sectionDark ? "text-slate-400" : "text-slate-600"
-                    }`}>
+                    <p className={`text-[11px] leading-snug ${sectionDark ? "text-slate-400" : "text-slate-600"
+                      }`}>
                       {c.description}
                     </p>
                   </motion.div>
@@ -444,36 +650,23 @@ const PremiumFeaturesSection = () => {
             </motion.div>
 
             {/* right: friendly story list */}
-            <div className="hidden md:block md:w-7/12 space-y-5">
+            <div className="hidden md:block md:w-7/12 space-y-5 md-4">
               {challenges.map((challenge, i) => (
                 <motion.div
                   key={challenge.title}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.45, delay: 0.4 + i * 0.12 }}
-                  whileHover={{
-                    x: 6,
-                    scale: 1.02,
-                  }}
-                  className="flex gap-4 items-start rounded-2xl px-4 py-3 transition-colors cursor-default backdrop-blur-md"
-                  style={{
-                    background: sectionDark
-                      ? "rgba(15,23,42,0.4)"
-                      : "rgba(255,255,255,0.6)",
-                    border: `1px solid ${sectionDark ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.3)"}`,
-                    boxShadow: sectionDark
-                      ? "0 4px 16px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.05)"
-                      : "0 4px 16px rgba(0,0,0,0.05), inset 0 1px 0 rgba(255,255,255,0.4)",
-                  }}
+                  className="flex items-center gap-5"
                 >
                   <div
-                    className="mt-1 rounded-full px-3 py-1 text-xs font-semibold text-emerald-900 bg-emerald-100/90 shadow-sm shrink-0"
+                    className="rounded-full px-3 py-1 text-xs font-semibold text-emerald-900 bg-emerald-100/90 shadow-sm shrink-0"
                   >
                     Pain #{i + 1}
                   </div>
-                  <div>
+                  <div className="space-y-1">
                     <h4
-                      className="text-base md:text-lg font-semibold mb-1"
+                      className="text-base md:text-lg font-semibold"
                       style={{
                         color: sectionDark ? "#e2e8f0" : "#0f172a",
                       }}
@@ -533,7 +726,7 @@ const PremiumFeaturesSection = () => {
             </div>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-3 md:gap-8">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-8">
             {analysis.map((stat, i) => {
               const Icon = stat.icon;
               return (
@@ -548,20 +741,12 @@ const PremiumFeaturesSection = () => {
                     delay: 0.6 + i * 0.15,
                     type: "spring",
                   }}
-                  whileHover={{ scale: 1.08, y: -15 }}
-                  className={`relative group rounded-xl md:rounded-3xl p-3 md:p-8 backdrop-blur-xl overflow-hidden`}
+                  whileHover={{ scale: 1.06, y: -10 }}
+                  className={`relative group rounded-2xl md:rounded-3xl p-3 md:p-6 backdrop-blur-xl overflow-hidden`}
                   style={{
-                    background: i === 0
-                      ? sectionDark
-                        ? "linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.08), rgba(255, 255, 255, 0.6))"
-                      : i === 1
-                      ? sectionDark
-                        ? "linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(217, 119, 6, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(245, 158, 11, 0.15), rgba(217, 119, 6, 0.08), rgba(255, 255, 255, 0.6))"
-                      : sectionDark
-                        ? "linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.1), rgba(15, 23, 42, 0.4))"
-                        : "linear-gradient(135deg, rgba(236, 72, 153, 0.15), rgba(219, 39, 119, 0.08), rgba(255, 255, 255, 0.6))",
+                    background: sectionDark
+                      ? "rgba(15, 23, 42, 0.4)"
+                      : "rgba(255, 255, 255, 0.6)",
                     border: `1px solid ${sectionDark ? "rgba(255,255,255,0.1)" : "rgba(255,255,255,0.3)"}`,
                     boxShadow: sectionDark
                       ? "0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1)"
@@ -569,7 +754,7 @@ const PremiumFeaturesSection = () => {
                   }}
                 >
                   <motion.div
-                    className="mb-3 md:mb-6 inline-flex items-center justify-center p-2 md:p-4 rounded-xl md:rounded-2xl backdrop-blur-md"
+                    className="mb-3 md:mb-5 inline-flex items-center justify-center p-2.5 md:p-3 rounded-2xl backdrop-blur-md"
                     style={{
                       background: sectionDark
                         ? "rgba(255, 255, 255, 0.05)"
@@ -584,11 +769,11 @@ const PremiumFeaturesSection = () => {
                     }}
                     whileHover={{ scale: 1.05 }}
                   >
-                    <Icon size={24} className="md:w-[30px] md:h-[30px]" style={{ color: stat.color }} />
+                    <Icon size={30} style={{ color: stat.color }} />
                   </motion.div>
 
                   <motion.div
-                    className="text-2xl md:text-5xl font-black mb-2 md:mb-4"
+                    className="text-2xl md:text-4xl font-black mb-2.5 md:mb-3.5"
                     style={{
                       color: stat.color,
                       textShadow: sectionDark
@@ -605,13 +790,13 @@ const PremiumFeaturesSection = () => {
                     />
                   </motion.div>
                   <h4
-                    className={`text-sm md:text-xl font-black mb-1 md:mb-3 ${sectionDark ? "text-white" : "text-slate-900"
+                    className={`text-base md:text-lg font-black mb-1.5 md:mb-2.5 ${sectionDark ? "text-white" : "text-slate-900"
                       }`}
                   >
                     {stat.title}
                   </h4>
                   <p
-                    className="text-[10px] md:text-sm leading-relaxed mb-2 md:mb-4"
+                    className="text-xs md:text-sm leading-relaxed mb-3 md:mb-4"
                     style={{ color: sectionDark ? "#cbd5e1" : "#475569" }}
                   >
                     {stat.description}
@@ -623,313 +808,138 @@ const PremiumFeaturesSection = () => {
           </div>
         </motion.div>
 
-        {/* Premium Features – lighter, process-style presentation */}
+        {/* Premium Features – Connected Nodes Circuit Layout */}
         <motion.div
           initial={{ opacity: 0, y: 60 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="relative"
+          className="relative mt-20 md:mt-32 mb-16 w-full"
         >
-          <div className="text-center mb-12">
-            <motion.div
-              initial={{ scale: 0 }}
-              animate={isInView ? { scale: 1 } : {}}
-              transition={{ duration: 0.6, type: "spring", bounce: 0.6 }}
-              className="inline-block mb-6"
-            >
-              <div className="relative">
+          <div className="relative w-full max-w-7xl mx-auto flex flex-col items-center">
 
-                <h3
-                  className="relative text-3xl md:text-6xl px-8"
+            {/* --- DESKTOP VIEW (Connected Nodes Layout) --- */}
+            <div className="hidden lg:flex relative w-full h-[800px] items-center justify-center">
+
+              <ConnectionLines isDark={sectionDark} />
+
+              {/* Center Title Card (Absolute Center) */}
+              <div
+                className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[440px] rounded-[24px]"
+                style={{
+                  background: sectionDark ? 'rgba(20, 10, 40, 0.7)' : 'rgba(255, 255, 255, 0.9)',
+                  backdropFilter: 'blur(24px)',
+                  border: `1.5px solid #a855f7`,
+                  boxShadow: sectionDark
+                    ? '0 0 40px rgba(168,85,247,0.3), inset 0 0 20px rgba(168,85,247,0.2)'
+                    : '0 15px 40px rgba(168,85,247,0.2)',
+                }}
+              >
+                <div className="w-full h-auto p-4 text-center flex flex-col items-center justify-center">
+                  <h3
+                    className="text-3xl xl:text-4xl font-black mb-2 tracking-tight"
+                    style={{
+                      color: sectionDark ? '#ffffff' : '#0f172a',
+                      textShadow: sectionDark ? '0 0 20px rgba(255,255,255,0.4)' : 'none',
+                    }}
+                  >
+                    OUR INNOVATION
+                    <br />
+                    ARSENAL
+                  </h3>
+                  <p
+                    className="text-sm font-medium mt-2"
+                    style={{ color: sectionDark ? '#e2e8f0' : '#475569' }}
+                  >
+                    The Future of Modern Fitness Ecosystems
+                  </p>
+                </div>
+              </div>
+
+              {/* Positioned Feature Cards */}
+
+              {/* TOP ROW */}
+              <div className="absolute top-[200px] left-[50%] -translate-x-[500px]">
+                <ConnectedNodeFeature feature={features[0]} index={0} isDark={sectionDark} />
+              </div>
+              <div className="absolute top-[145px] left-[50%] -translate-x-[140px]">
+                <ConnectedNodeFeature feature={features[1]} index={1} isDark={sectionDark} />
+              </div>
+              <div className="absolute top-[200px] left-[50%] translate-x-[220px]">
+                <ConnectedNodeFeature feature={features[2]} index={2} isDark={sectionDark} />
+              </div>
+
+              {/* BOTTOM ROW */}
+              <div className="absolute top-[500px] left-[50%] -translate-x-[500px]">
+                <ConnectedNodeFeature feature={features[3]} index={3} isDark={sectionDark} />
+              </div>
+              <div className="absolute top-[550px] left-[50%] -translate-x-[140px]">
+                <ConnectedNodeFeature feature={features[4]} index={4} isDark={sectionDark} />
+              </div>
+              <div className="absolute top-[500px] left-[50%] translate-x-[220px]">
+                <ConnectedNodeFeature feature={features[5]} index={5} isDark={sectionDark} />
+              </div>
+
+            </div>
+
+            <div className="relative flex lg:hidden flex-col items-center w-full px-4 py-12">
+
+              <MobileConnectionLines isDark={sectionDark} />
+
+              {/* Content Wrapper */}
+              <div className="relative z-10 flex flex-col items-center w-full gap-14">
+
+                {/* Title Card */}
+                <div
+                  className="w-full max-w-[400px] rounded-[24px] p-8 text-center"
                   style={{
-                    fontWeight: 800,
-                    letterSpacing: "-0.04em",
-                    lineHeight: "1.05",
-                    color: sectionDark ? "#e2e8f0" : "#0f172a",
+                    background: sectionDark
+                      ? "rgba(20, 10, 40, 0.7)"
+                      : "rgba(255, 255, 255, 0.9)",
+                    backdropFilter: "blur(20px)",
+                    border: `1.5px solid #a855f7`,
+                    boxShadow: sectionDark
+                      ? "0 0 30px rgba(168,85,247,0.2)"
+                      : "0 10px 30px rgba(168,85,247,0.1)",
                   }}
                 >
-                  Our Innovation Arsenal
-                </h3>
-              </div>
-            </motion.div>
-            <p className="text-base md:text-lg max-w-2xl mx-auto" style={{ color: sectionDark ? "#9fb3c8" : "#64748b" }}>
-              Three product bets that turn unused memberships into a flexible, data-driven
-              fitness ecosystem.
-            </p>
-          </div>
-
-          <div className="relative max-w-5xl mx-auto">
-            {/* mobile vertical timeline */}
-            <div
-              className="absolute inset-y-4 left-1/2 w-px md:hidden"
-              style={{
-                background:
-                  "linear-gradient(to bottom, rgba(56,189,248,0), rgba(56,189,248,0.7), rgba(244,63,94,0.7), rgba(129,140,248,0.8), rgba(15,23,42,0))",
-              }}
-            />
-
-            {/* desktop connector line */}
-            <div
-              className="hidden md:block absolute top-10 left-4 right-4 h-px"
-              style={{
-                background: sectionDark
-                  ? "linear-gradient(to right, transparent, rgba(148,163,184,0.7), transparent)"
-                  : "linear-gradient(to right, transparent, rgba(148,163,184,0.9), transparent)",
-              }}
-            />
-
-            {/* mobile: alternating vertical timeline, no containers */}
-            <div className="flex flex-col gap-10 md:hidden">
-              {features.map((feature, i) => {
-                const Icon = feature.icon;
-                const isLeft = i === 1;
-                return (
-                  <motion.div
-                    key={feature.title}
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 0.7,
-                      delay: 0.8 + i * 0.2,
-                    }}
-                    className={`relative flex w-full ${isLeft ? "justify-start" : "justify-end"}`}
+                  <h3
+                    className="text-3xl font-black tracking-tight leading-[1.1] mb-2"
+                    style={{ color: sectionDark ? "#ffffff" : "#0f172a" }}
                   >
-                    {/* timeline node */}
-                    <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center">
-                      <div
-                        className="w-3.5 h-3.5 rounded-full border-2"
-                        style={{
-                          borderColor: sectionDark ? "#38bdf8" : "#0ea5e9",
-                          background:
-                            i === 0
-                              ? "radial-gradient(circle at 30% 30%, rgba(45,212,191,0.95), rgba(15,23,42,1))"
-                              : i === 1
-                              ? "radial-gradient(circle at 30% 30%, rgba(244,63,94,0.95), rgba(15,23,42,1))"
-                              : "radial-gradient(circle at 30% 30%, rgba(59,130,246,0.95), rgba(15,23,42,1))",
-                          boxShadow:
-                            i === 0
-                              ? "0 0 16px rgba(45,212,191,0.8)"
-                              : i === 1
-                              ? "0 0 16px rgba(244,63,94,0.8)"
-                              : "0 0 16px rgba(59,130,246,0.85)",
-                        }}
-                      />
-                    </div>
+                    OUR INNOVATION
+                    <br />
+                    ARSENAL
+                  </h3>
+                  <p
+                    className="text-sm font-medium opacity-80"
+                    style={{ color: sectionDark ? "#cbd5e1" : "#475569" }}
+                  >
+                    The Future of Modern Fitness Ecosystems
+                  </p>
+                </div>
 
-                    {/* content */}
+                {/* Connected Features */}
+                {features.map((feature, i) => (
+                  <div key={feature.title} className="relative flex flex-col items-center">
+
                     <div
-                      className={`max-w-[240px] space-y-2 ${
-                        isLeft ? "pr-16 text-left" : "pl-16 text-right"
-                      }`}
-                    >
-                      <div
-                        className={`inline-flex items-center ${
-                          isLeft ? "justify-start" : "justify-end"
-                        } gap-2`}
-                      >
-                        <div
-                          className="flex items-center justify-center rounded-full w-9 h-9 border"
-                          style={{
-                            borderColor: sectionDark
-                              ? "rgba(148,163,184,0.7)"
-                              : "rgba(30,64,175,0.45)",
-                            background: "rgba(15,23,42,0.6)",
-                            boxShadow: "0 10px 26px rgba(15,23,42,0.9)",
-                          }}
-                        >
-                          <Icon
-                            className="w-4 h-4"
-                            style={{ color: sectionDark ? "#e5e7eb" : "#0f172a" }}
-                          />
-                        </div>
-                      </div>
-
-                      <h4
-                        className={`text-lg font-semibold bg-gradient-to-r ${feature.gradient} bg-clip-text`}
-                        style={{
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          wordSpacing: "0.15em",
-                        }}
-                      >
-                        {feature.title}
-                      </h4>
-                      <p
-                        className="text-xs leading-relaxed"
-                        style={{
-                          color: sectionDark ? "#ffffff" : "#000000",
-                        }}
-                      >
-                        {feature.description}
-                      </p>
-                    </div>
-                  </motion.div>
-                );
-              })}
-            </div>
-
-            {/* desktop: original three-column layout */}
-            <div className="hidden md:grid md:grid-cols-3 gap-10">
-              {features.map((feature, i) => {
-                const Icon = feature.icon;
-                return (
-                  <motion.div
-                    key={i}
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={isInView ? { opacity: 1, y: 0 } : {}}
-                    transition={{
-                      duration: 0.9,
-                      delay: 0.8 + i * 0.2,
-                      type: "spring",
-                      bounce: 0.4,
-                    }}
-                    whileHover={{
-                      y: -20,
-                      scale: 1.1,
-                      rotateZ: i === 1 ? 2 : i === 2 ? -2 : 0,
-                      boxShadow: sectionDark
-                        ? "0 32px 80px rgba(15,23,42,0.9)"
-                        : "0 40px 100px rgba(15,23,42,0.95)",
-                    }}
-                    className={`relative group flex flex-col items-center md:items-start text-center md:text-left gap-3 cursor-pointer transition-all duration-300 rounded-3xl overflow-hidden ${
-                      i > 0 ? "md:pl-8 md:border-l" : ""
-                    }`}
-                    style={{
-                      borderColor: sectionDark
-                        ? "rgba(15,23,42,0.1)"
-                        : "rgba(226,232,240,0.16)",
-                    }}
-                  >
-                    <motion.div
-                      className="pointer-events-none absolute inset-x-[-18px] inset-y-[-12px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"
+                      className="w-3 h-3 rounded-full mb-3 translate-y-2"
                       style={{
-                        background:
-                          i === 0
-                            ? "radial-gradient(circle at 0% 0%, rgba(45,212,191,0.6), transparent 60%)"
-                            : i === 1
-                            ? "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.6), transparent 60%)"
-                            : "radial-gradient(circle at 0% 0%, rgba(59,130,246,0.65), transparent 60%)",
-                        maskImage: "radial-gradient(120% 120% at 20% 20%, black 60%, transparent 70%)",
-                        WebkitMaskImage: "radial-gradient(120% 120% at 20% 20%, black 60%, transparent 70%)",
-                      }}
-                      animate={{
-                        scale: [1, 1.2, 1],
-                        opacity: [0, 0.8, 0],
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut",
+                        background: feature.accent,
+                        boxShadow: `0 0 15px ${feature.accent}`,
                       }}
                     />
-                    <motion.div
-                      className="pointer-events-none absolute inset-x-[-18px] inset-y-[-12px] rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 blur-2xl"
-                      style={{
-                        background:
-                          i === 0
-                            ? "radial-gradient(circle at 0% 0%, rgba(45,212,191,0.8), transparent 70%)"
-                            : i === 1
-                            ? "radial-gradient(circle at 0% 0%, rgba(244,63,94,0.8), transparent 70%)"
-                            : "radial-gradient(circle at 0% 0%, rgba(59,130,246,0.85), transparent 70%)",
-                        maskImage: "radial-gradient(130% 130% at 20% 20%, black 65%, transparent 75%)",
-                        WebkitMaskImage: "radial-gradient(130% 130% at 20% 20%, black 65%, transparent 75%)",
-                      }}
+
+                    <ConnectedNodeFeature
+                      feature={feature}
+                      index={i}
+                      isDark={sectionDark}
                     />
-                    <motion.div
-                      className="relative flex items-center justify-center rounded-full w-12 h-12 md:w-14 md:h-14 group-hover:bg-gradient-to-br transition-all duration-300"
-                      style={{
-                        background: "transparent",
-                        boxShadow: "none",
-                        border: sectionDark
-                          ? "1px solid rgba(255,255,255,0.12)"
-                          : "1px solid rgba(15,23,42,0.12)",
-                      }}
-                      whileHover={{
-                        scale: 1.2,
-                        rotate: 360,
-                        boxShadow:
-                          i === 0
-                            ? "0 0 30px rgba(45,212,191,0.8), 0 0 60px rgba(45,212,191,0.4)"
-                            : i === 1
-                            ? "0 0 30px rgba(244,63,94,0.8), 0 0 60px rgba(244,63,94,0.4)"
-                            : "0 0 30px rgba(59,130,246,0.8), 0 0 60px rgba(59,130,246,0.4)",
-                        borderColor:
-                          i === 0
-                            ? "rgba(45,212,191,0.6)"
-                            : i === 1
-                            ? "rgba(244,63,94,0.6)"
-                            : "rgba(59,130,246,0.6)",
-                      }}
-                      transition={{ type: "spring", stiffness: 300, damping: 15 }}
-                    >
-                      <Icon
-                        className="w-6 h-6 group-hover:scale-125 transition-transform duration-300"
-                        style={{
-                          color:
-                            i === 0
-                              ? sectionDark ? "#2dd4bf" : "#14b8a6"
-                              : i === 1
-                              ? sectionDark ? "#f43f5e" : "#e11d48"
-                              : sectionDark ? "#3b82f6" : "#2563eb",
-                        }}
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="space-y-2"
-                      whileHover={{
-                        x: i === 1 ? -5 : i === 2 ? 5 : 0,
-                      }}
-                    >
-                      <motion.h4
-                        className={`text-lg md:text-xl font-semibold bg-gradient-to-r ${feature.gradient} bg-clip-text`}
-                        style={{
-                          WebkitBackgroundClip: "text",
-                          WebkitTextFillColor: "transparent",
-                          wordSpacing: "0.15em",
-                        }}
-                        whileHover={{
-                          scale: 1.05,
-                        }}
-                      >
-                        {feature.title}
-                      </motion.h4>
-                      <motion.p
-                        className="text-sm leading-relaxed"
-                        style={{
-                          color: sectionDark ? "#ffffff" : "#000000",
-                        }}
-                        whileHover={{
-                          color:
-                            i === 0
-                              ? sectionDark ? "#2dd4bf" : "#14b8a6"
-                              : i === 1
-                              ? sectionDark ? "#f43f5e" : "#e11d48"
-                              : sectionDark ? "#3b82f6" : "#2563eb",
-                        }}
-                      >
-                        {feature.description}
-                      </motion.p>
-                      <div
-                        className="hidden md:block h-px mt-3"
-                        style={{
-                          background: sectionDark
-                            ? "linear-gradient(to right, transparent, rgba(15,23,42,0.1), transparent)"
-                            : "linear-gradient(to right, transparent, rgba(15,23,42,0.12), transparent)",
-                        }}
-                      />
-                    </motion.div>
-                  </motion.div>
-                );
-              })}
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={isInView ? { opacity: 1, scale: 1 } : {}}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="mt-16 text-center"
-          />
         </motion.div>
       </div>
     </section>
@@ -937,4 +947,3 @@ const PremiumFeaturesSection = () => {
 };
 
 export default PremiumFeaturesSection;
-export { PremiumFeaturesSection };

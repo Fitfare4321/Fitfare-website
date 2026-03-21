@@ -4,7 +4,7 @@ import {
   motion,
   useMotionValue
 } from "framer-motion";
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { useTheme } from "next-themes";
 
 import programStrength from "@/assets/cardio.jpg";
@@ -21,6 +21,8 @@ import cardio from "@/assets/cardio.mp4";
 import kick_boxing from "@/assets/kick_boxing.mp4";
 import calisthenics from "@/assets/calisthenics.mp4";
 import etc from "@/assets/etc.mp4"
+
+const NetworkBackground3D = lazy(() => import("./NetworkBackground3D"));
 
 /* ---------------- DATA ---------------- */
 
@@ -108,12 +110,10 @@ const ProgramCard = ({ program, index, isMoon }) => {
       }}
       onClick={() => setIsClicked(!isClicked)}
       className={`group relative rounded-3xl overflow-hidden h-[360px] sm:h-[480px] lg:h-[460px]
-
-
-        transition-all duration-500 border cursor-pointer
+        transition-all duration-500 cursor-pointer
         ${isMoon
-          ? "bg-white border-gray-200 shadow-[0_10px_30px_rgba(0,0,0,0.06)]"
-          : "bg-slate-900/70 border-slate-700 shadow-[0_25px_80px_rgba(0,0,0,0.25)]"
+          ? "bg-transparent border border-transparent shadow-[0_25px_80px_rgba(0,0,0,0.65)]"
+          : "bg-transparent border border-transparent shadow-[0_10px_30px_rgba(15,23,42,0.15)]"
         }
       `}
     >
@@ -145,11 +145,11 @@ const ProgramCard = ({ program, index, isMoon }) => {
 
       {/* Overlay */}
       <div
-        className={`absolute inset-0 ${isMoon
-          ? "bg-gradient-to-t from-white/30 via-white/10 to-transparent"
-          : "bg-gradient-to-t from-black/25 via-black/10 to-transparent"
-        
-          }`}
+        className={`absolute inset-0 ${
+          isMoon
+            ? "bg-gradient-to-t from-white/30 via-white/10 to-transparent"
+            : "bg-gradient-to-t from-black/25 via-black/10 to-transparent"
+        }`}
       />
 
       {/* Shine */}
@@ -157,10 +157,11 @@ const ProgramCard = ({ program, index, isMoon }) => {
         initial={{ x: "-100%" }}
         animate={isActive ? { x: "120%" } : { x: "-100%" }}
         transition={{ duration: 1.6 }}
-        className={`absolute inset-0 skew-x-12 ${isMoon
-          ? "bg-gradient-to-r from-transparent via-white/10 to-transparent"
-          : "bg-gradient-to-r from-transparent via-white/15 to-transparent"
-          }`}
+        className={`absolute inset-0 skew-x-12 pointer-events-none ${
+          isMoon
+            ? "bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-80 mix-blend-screen"
+            : "bg-gradient-to-r from-transparent via-white/15 to-transparent opacity-70"
+        }`}
       />
 
       {/* PREMIUM REVEAL CONTENT */}
@@ -178,10 +179,10 @@ const ProgramCard = ({ program, index, isMoon }) => {
       >
         <div
           className={`
-            rounded-2xl p-5  border
+            rounded-2xl p-5 border
             ${isMoon
-              ? " border-white/60 shadow-lg"
-              : " border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.18)]"
+              ? "border-white/60 shadow-lg"
+              : "border-white/10 shadow-[0_10px_40px_rgba(0,0,0,0.18)]"
             }
           `}
         >
@@ -190,19 +191,23 @@ const ProgramCard = ({ program, index, isMoon }) => {
           <h3
             className={`
               text-xl font-semibold mb-2 tracking-tight
-              ${isMoon
-                ? "text-slate-900"
-                : "bg-gradient-to-r from-white via-white to-gray-400 bg-clip-text text-transparent"
-              }
+              text-white
             `}
           >
             {program.title}
           </h3>
-
+          
+              
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-sm text-white/80">
+                {program.tag}
+              </span>
+            </div>
+          </div>
           {/* Description */}
           <p
-            className={`text-sm leading-relaxed ${isMoon ? "text-slate-700" : "text-gray-300"
-              }`}
+            className="text-sm leading-relaxed text-white/90"
           >
             {program.description}
           </p>
@@ -229,30 +234,125 @@ const ProgramCard = ({ program, index, isMoon }) => {
 const ProgramsSection = () => {
 
   const sectionRef = useRef(null);
+  const scrollRef = useRef<HTMLDivElement | null>(null);
   const { theme } = useTheme();
 
   const isMoon = theme === "dark";
+
+  /* ================= MOBILE AUTO SCROLL (HORIZONTAL SLIDER) ================= */
+  useEffect(() => {
+    const container = scrollRef.current;
+    const section = sectionRef.current;
+
+    if (!container || !section) return;
+    if (window.innerWidth >= 640) return; // Only mobile
+
+    let interval: NodeJS.Timeout | null = null;
+    let isUserInteracting = false;
+
+    const getCardWidth = () => {
+      const firstCard = container.querySelector<HTMLElement>("[data-program-slide]");
+      if (!firstCard) return 0;
+      // 24px ≈ gap-6 between items
+      return firstCard.offsetWidth + 24;
+    };
+
+    const startAutoScroll = () => {
+      if (interval) return; // Prevent duplicate intervals
+
+      interval = setInterval(() => {
+        if (isUserInteracting) return;
+
+        const cardWidth = getCardWidth();
+        if (!cardWidth) return;
+
+        const maxScroll = container.scrollWidth - container.clientWidth;
+
+        if (container.scrollLeft + cardWidth >= maxScroll) {
+          container.scrollTo({ left: 0, behavior: "smooth" });
+        } else {
+          container.scrollBy({
+            left: cardWidth,
+            behavior: "smooth",
+          });
+        }
+      }, 3000);
+    };
+
+    const stopAutoScroll = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+
+    // Observe section visibility – start auto scroll only when in view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          startAutoScroll();
+        } else {
+          stopAutoScroll();
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(section);
+
+    // Pause on interaction
+    const handleUserStart = () => {
+      isUserInteracting = true;
+    };
+
+    const handleUserEnd = () => {
+      setTimeout(() => {
+        isUserInteracting = false;
+      }, 2000);
+    };
+
+    container.addEventListener("touchstart", handleUserStart);
+    container.addEventListener("mousedown", handleUserStart);
+    container.addEventListener("touchend", handleUserEnd);
+    container.addEventListener("mouseup", handleUserEnd);
+
+    return () => {
+      stopAutoScroll();
+      observer.disconnect();
+      container.removeEventListener("touchstart", handleUserStart);
+      container.removeEventListener("mousedown", handleUserStart);
+      container.removeEventListener("touchend", handleUserEnd);
+      container.removeEventListener("mouseup", handleUserEnd);
+    };
+  }, []);
 
   return (
     <section
       id="programs"
       ref={sectionRef}
-      className={`relative overflow-hidden pt-32 pb-24 transition-all duration-500
-        ${isMoon ? "bg-slate-900 text-white" : "bg-white text-black"}
+      className={`relative overflow-hidden pt-16 pb-14 md:pt-32 md:pb-24
+        
+      transition-all duration-500
+        ${isMoon ? "bg-slate-900 text-white" : "bg-slate-50 text-black"}
       `}
     >
 
+      {/* 3D dotted background (Antigravity-style) */}
+      <div className="absolute inset-0 -z-10 pointer-events-none">
+        <Suspense fallback={null}>
+          <NetworkBackground3D isDark={isMoon} />
+        </Suspense>
+      </div>
+
       {/* Header */}
-      <div className="text-center max-w-2xl mx-auto px-6 mb-20">
+      <div className="text-center max-w-2xl mx-auto px-6 mb-10 md:mb-20">
         <span className="text-primary font-semibold text-sm uppercase tracking-[0.3em]">
           Our Programs
         </span>
 
         <h2 className="text-5xl md:text-6xl font-semibold mt-4 mb-6 tracking-tight leading-[1.1]
                bg-gradient-to-r 
-               from-[#1e5f74] 
-               via-[#2a9d8f] 
-               to-[#3db4c7] 
+             from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] 
                bg-clip-text text-transparent">
           Choose Your Path
         </h2>
@@ -268,15 +368,34 @@ const ProgramsSection = () => {
 
       {/* Cards */}
       <div className="relative max-w-7xl mx-auto px-6">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-12 items-stretch">
-
+        <div
+          ref={scrollRef}
+          className="
+            flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8 px-2
+            sm:grid sm:grid-cols-2 lg:grid-cols-3
+            sm:overflow-visible sm:px-0 sm:gap-12
+            items-stretch
+            [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]
+          "
+        >
           {programs.map((program, i) => (
-            <ProgramCard
+            <div
               key={i}
-              program={program}
-              index={i}
-              isMoon={isMoon}
-            />
+              data-program-slide
+              className="
+                min-w-[75%] snap-center sm:min-w-0
+                flex-shrink-0
+              "
+            >
+              <motion.div
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ amount: 0.6 }}
+                initial={{ scale: 0.9, opacity: 0.6 }}
+                transition={{ duration: 0.4 }}
+              >
+                <ProgramCard program={program} index={i} isMoon={isMoon} />
+              </motion.div>
+            </div>
           ))}
         </div>
       </div>
