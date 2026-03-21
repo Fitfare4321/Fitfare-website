@@ -34,7 +34,9 @@ const WebappDemo = () => {
     const monthly = Math.max(0, Number(monthlyFee) || 0);
 
     // 🔥 LIMIT
-    const MAX_ALLOWED = monthly > 0 ? monthly - 500 : Infinity;
+    // const MAX_ALLOWED = monthly > 0 ? monthly - 500 : Infinity;
+    const buffer = monthly * 0.1;
+    const MAX_ALLOWED = monthly > 0 ? Math.max(0, monthly - buffer) : Infinity;
 
     // 🔥 MAX DAYS (LIMIT 25)
     let maxAllowedDays = 0;
