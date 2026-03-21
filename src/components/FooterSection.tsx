@@ -23,7 +23,7 @@ const footerLinks = [
       // { label: "Services", href: "/services" },
 
       { label: "Events", href: "/event" },
-
+      { label: "See Demo", href: "/webapp-demo" },
     ],
   },
   {
