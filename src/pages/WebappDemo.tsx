@@ -28,6 +28,7 @@ const WebappDemo = () => {
     const [selectedPlan, setSelectedPlan] = useState("150");
     const [showAllDays, setShowAllDays] = useState(false);
     const captureRef = useRef(null);
+    const [customPrice, setCustomPrice] = useState("");
 
     const price = Math.max(0, Number(pricePerDay) || 0);
     const monthly = Math.max(0, Number(monthlyFee) || 0);
@@ -161,7 +162,8 @@ const WebappDemo = () => {
 
                 {/* PLAN */}
                 <div className="grid grid-cols-3 gap-3">
-                    {[100, 200, 300, 400, 500, 600].map((p) => (
+
+                    {[100, 200, 300, 400, 500].map((p) => (
                         <div
                             key={p}
                             onClick={() => {
@@ -176,7 +178,35 @@ const WebappDemo = () => {
                             ₹{p}
                         </div>
                     ))}
+
+                    {/* 🔥 OTHER BUTTON */}
+                    <div
+                        onClick={() => {
+                            setSelectedPlan("other");
+                            setPricePerDay("");
+                        }}
+                        className={`p-3 rounded-xl text-center cursor-pointer border ${selectedPlan === "other"
+                            ? "bg-orange-500 text-white"
+                            : ""
+                            }`}
+                    >
+                        Other
+                    </div>
+
                 </div>
+                {selectedPlan === "other" && (
+                    <input
+                        type="number"
+                        placeholder="Enter custom price"
+                        value={customPrice}
+                        onChange={(e) => {
+                            const val = Math.max(0, Number(e.target.value));
+                            setCustomPrice(val.toString());
+                            setPricePerDay(val.toString());
+                        }}
+                        className="w-full p-3 rounded-xl border border-orange-400 bg-transparent"
+                    />
+                )}
 
                 <input
                     type="number"
