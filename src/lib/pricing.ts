@@ -1,9 +1,16 @@
 // utils/pricing.ts
 
-const BASE = Number(import.meta.env.VITE_BASE_COMMISSION);
-const DEC = Number(import.meta.env.VITE_DAILY_DECREASE);
-const FITFARE = Number(import.meta.env.VITE_FITFARE_PERCENT);
-const OWNER = Number(import.meta.env.VITE_OWNER_PERCENT);
+const BASE =
+  Number(import.meta.env.VITE_BASE_COMMISSION) || 41.25;
+
+const DEC =
+  Number(import.meta.env.VITE_DAILY_DECREASE) || 1.25;
+
+const FITFARE =
+  Number(import.meta.env.VITE_FITFARE_PERCENT) || 0.6;
+
+const OWNER =
+  Number(import.meta.env.VITE_OWNER_PERCENT) || 0.4;
 
 export const calculatePricing = (price: number, days: number) => {
   if (price <= 0 || days <= 0) {
