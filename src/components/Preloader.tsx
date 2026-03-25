@@ -4,13 +4,24 @@ import { useTheme } from "next-themes";
 import logo from "@/assets/blue-background-logo.png";
 
 const Preloader = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !window.location.hash;
+    }
+    return true;
+  });
   const [progress, setProgress] = useState(0);
   const [loadingText, setLoadingText] = useState("Initializing");
   const { resolvedTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
 
   useEffect(() => {
+    // Check if there is a hash in the URL. If so, skip the preloader.
+    if (window.location.hash) {
+      setIsLoading(false);
+      return;
+    }
+
     const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {

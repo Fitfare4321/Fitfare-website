@@ -11,6 +11,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
 import { Link } from "react-router-dom";
+import { Label } from "recharts";
 
 /* ---------------- NAV LINKS ---------------- */
 
@@ -18,6 +19,7 @@ const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Programs", href: "#programs" },
   { label: "About", href: "#about" },
+  { label: "Features", href: "#features" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];

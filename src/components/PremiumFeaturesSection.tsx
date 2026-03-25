@@ -1,4 +1,5 @@
 import { useRef, useState, useEffect, lazy, Suspense } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
@@ -84,6 +85,7 @@ const floatingAnimation = {
 
 const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
   const Icon = feature.icon;
+  const navigate = useNavigate();
 
   return (
     <motion.div
@@ -94,8 +96,12 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
       className={`relative z-10 w-full sm:w-[280px] md:w-[280px] lg:w-[280px] xl:w-[280px]`}
     >
       <motion.div
-        whileHover={{ scale: 1.05 }}
-        className="relative group w-full rounded-[16px] px-5 py-4 cursor-pointer"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.6, delay: index * 0.1, type: "spring" }}
+        onClick={() => navigate(`/features/${feature.slug}`)}
+        className="relative group w-full rounded-[16px] px-5 py-4 cursor-pointer overflow-hidden"
         style={{
           background: isDark ? 'rgba(10, 5, 25, 0.65)' : 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(20px)',
@@ -105,27 +111,34 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
             : `0 10px 30px ${feature.accent}40, inset 0 0 10px ${feature.accent}20`,
         }}
       >
-       <div className="flex items-start gap-3 relative z-10">
+        {/* 🔥 HOVER OVERLAY */}
+        {/* <div
+          className="absolute inset-0 rounded-[16px] opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"
+          style={{
+            background: "linear-gradient(120deg, transparent, rgba(255,255,255,0.08), transparent)"
+          }}
+        /> */}
+        <div className="flex items-start gap-3 relative z-10">
 
-  {/* ICON CONTAINER */}
-  <div
-    className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0"
-    style={{
-      background: isDark
-        ? "rgba(255,255,255,0.05)"
-        : "rgba(255,255,255,0.6)",
-      border: `1px solid ${feature.accent}55`,
-      boxShadow: `0 0 12px ${feature.accent}30`,
-    }}
-  >
-    <Icon
-      className="w-5 h-5"
-      strokeWidth={1.7}
-      style={{
-        color: feature.accent,
-      }}
-    />
-  </div>
+          {/* ICON CONTAINER */}
+          <div
+            className="flex items-center justify-center w-10 h-10 rounded-xl flex-shrink-0"
+            style={{
+              background: isDark
+                ? "rgba(255,255,255,0.05)"
+                : "rgba(255,255,255,0.6)",
+              border: `1px solid ${feature.accent}55`,
+              boxShadow: `0 0 12px ${feature.accent}30`,
+            }}
+          >
+            <Icon
+              className="w-5 h-5"
+              strokeWidth={1.7}
+              style={{
+                color: feature.accent,
+              }}
+            />
+          </div>
           <div className="flex-1 text-left">
             <h4
               className="text-[13px] font-bold leading-tight tracking-wide"
@@ -142,6 +155,16 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
             >
               {feature.description}
             </p>
+            <div className="flex items-center gap-1 mt-3 text-[10px] font-semibold opacity-70 group-hover:opacity-100 transition">
+              <span>View Details</span>
+              <motion.span
+                initial={{ x: 0 }}
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+              >
+                →
+              </motion.span>
+            </div>
           </div>
         </div>
       </motion.div>
@@ -158,7 +181,6 @@ const ConnectionLines = ({ isDark }: { isDark: boolean }) => {
   const pulseColor = isDark ? "#e879f9" : "#a855f7"; // Brighter pulse color
   const strokeW = 1.5;
 
-  // Path data mapping perfectly to the 6 feature nodes
   const paths = [
     { id: "tl", d: "M 450 360 L 450 240 L 380 240", length: 180, delay: 0 },
     { id: "tc", d: "M 600 360 L 600 250", length: 110, delay: 0.5 },
@@ -345,6 +367,8 @@ const PremiumFeaturesSection = () => {
 
   const features = [
     {
+      id: "dynamic-price",
+      slug: "dynamic-price-allocation",
       icon: DollarSign,
       title: "Dynamic Price Allocation",
       description:
@@ -352,27 +376,35 @@ const PremiumFeaturesSection = () => {
       accent: "#a855f7",
     },
     {
+      id: "period-tracking",
+      slug: "period-tracking-for-women",
       icon: Heart,
       title: "Period Tracking for Women",
       description:
         "Personalized workout and recovery plans aligned with each menstrual phase.",
-      accent: "#3b82f6",
-    },
-    {
-      icon: BarChart3,
-      title: "Professional Dashboard for Club Owners",
-      description:
-        "Advanced analytics, revenue insights, attendance trends, and member management tools.",
       accent: "#ec4899",
     },
     {
+      id: "professional-dashboard",
+      slug: "professional-dashboard-for-club-owners",
+      icon: BarChart3,
+      title: "Professional Dashboard for Fitness Center Owners",
+      description:
+        "Advanced analytics, revenue insights, attendance trends, and member management tools.",
+      accent: "#3b82f6",
+    },
+    {
+      id: "multiple-clubs",
+      slug: "access-to-multiple-clubs-across-cities",
       icon: Globe,
-      title: "Access to Multiple Clubs Across Cities",
+      title: "Access to Multiple Fitness Centers Across Cities",
       description:
         "Train anywhere with seamless check-ins across partnered gyms nationwide.",
       accent: "#06b6d4",
     },
     {
+      id: "no-contracts",
+      slug: "no-long-term-contracts",
       icon: Clock,
       title: "No Long-Term Contracts",
       description:
@@ -380,6 +412,8 @@ const PremiumFeaturesSection = () => {
       accent: "#10b981",
     },
     {
+      id: "pay-as-you-go",
+      slug: "pay-as-you-go-pricing",
       icon: Wallet,
       title: "Pay-As-You-Go Pricing",
       description:
@@ -388,13 +422,14 @@ const PremiumFeaturesSection = () => {
     },
   ];
   return (
-   <section
-  ref={sectionRef}
-  className="relative pt-16 pb-24 md:py-32 overflow-hidden"
-  style={{
-    background: sectionDark ? "#0a0514" : "#ffffff",
-  }}
->
+    <section
+      id="features"
+      ref={sectionRef}
+      className="relative pt-16 pb-24 md:py-32 overflow-hidden"
+      style={{
+        background: sectionDark ? "#0a0514" : "#ffffff",
+      }}
+    >
       <Suspense fallback={null}>
         <NetworkBackground3D isDark={sectionDark} />
       </Suspense>
@@ -546,7 +581,6 @@ const PremiumFeaturesSection = () => {
                 Three numbers that instantly show why a fixed monthly membership
                 doesn&apos;t fit modern lives.
               </p>
-
               <div className="mt-1 space-y-4 md:hidden">
                 {challenges.map((c, idx) => (
                   <motion.div
@@ -585,7 +619,7 @@ const PremiumFeaturesSection = () => {
                           <AnimatedCounter value={c.percentage} suffix="%" />
                         </span>
                         <span className="text-[11px] uppercase tracking-[0.18em] text-slate-400">
-                          Pain {idx + 1}
+                           Key Insight  {idx + 1}
                         </span>
                       </div>
                       <p
@@ -662,7 +696,7 @@ const PremiumFeaturesSection = () => {
                   <div
                     className="rounded-full px-3 py-1 text-xs font-semibold text-emerald-900 bg-emerald-100/90 shadow-sm shrink-0"
                   >
-                    Pain #{i + 1}
+                    Key Insight #{i + 1}
                   </div>
                   <div className="space-y-1">
                     <h4

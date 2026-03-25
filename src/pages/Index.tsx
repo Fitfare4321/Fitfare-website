@@ -21,8 +21,8 @@ const Index = () => {
     // Small delay lets React finish rendering all sections
     const timer = setTimeout(() => {
       const el = document.getElementById(hash.slice(1));
-      if (el) el.scrollIntoView({ behavior: "smooth" });
-    }, 300);
+      if (el) el.scrollIntoView({ behavior: "auto" });
+    }, 100);
     return () => clearTimeout(timer);
   }, []);
 
