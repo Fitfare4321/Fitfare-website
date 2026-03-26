@@ -29,7 +29,7 @@ const BENEFITS = [
 ];
 
 const STEPS = [
-    { num: "01", title: "Select Gym & Slot",desc: "Explore fitness centers and choose your session", icon: Clock },
+    { num: "01", title: "Choose Fitness Center & Time Slot",desc: "Explore fitness centers and choose your session", icon: Clock },
     { num: "02", title: "See Exact Price", desc: "Full cost shown upfront, always", icon: ReceiptText },
     { num: "03", title: "Pay in One Tap", desc: "UPI / card, done in 3 seconds", icon: Zap },
     { num: "04", title: "Workout Confirmed", desc: "QR ready, just walk in", icon: CheckCircle2 },
@@ -414,7 +414,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
   </p>
   <ul className="space-y-3">
     {[
-      "Monthly plans for regular gym-goers",
+      "Monthly plans for regular fitness center users",
       "Structured memberships with added benefits",
       "Commitment-based access",
       "Best suited for consistent routines",

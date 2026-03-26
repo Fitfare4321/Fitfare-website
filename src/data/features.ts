@@ -93,7 +93,7 @@ export const features: Feature[] = [
     id: "multiple-clubs",
     slug: "access-to-multiple-clubs-across-cities",
     icon: Globe,
-    title: "Access to Multiple Clubs Across Cities",
+    title: "Access to Multiple Fitness Centers Across Cities",
     description: "Train anywhere with seamless check-ins across partnered gyms nationwide.",
     accent: "#06b6d4",
     detailedDescription: "Break free from the limitations of a single-gym membership. With FitFare, you gain access to a vast network of partner clubs across multiple cities. Whether you're traveling for work or on vacation, your fitness routine goes with you.",

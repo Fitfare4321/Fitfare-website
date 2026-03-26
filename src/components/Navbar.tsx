@@ -18,8 +18,9 @@ import { Label } from "recharts";
 const navLinks = [
   { label: "Home", href: "#home" },
   { label: "Programs", href: "#programs" },
+  { label: "Features", href: "#innovation-arsenal" },
   { label: "About", href: "#about" },
-  { label: "Features", href: "#features" },
+  
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -99,51 +100,42 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname !== "/") return;
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { threshold: 0.3, rootMargin: "-80px 0px 0px 0px" }
-    );
+    const sectionIds = navLinks.map((link) => link.href.slice(1));
 
-    navLinks.forEach(({ href }) => {
-      const id = href.slice(1);
+    const updateActiveSection = () => {
+      const middle = window.innerHeight * 0.5;
+      let newActive = "";
 
-      if (id === "about") return;
+      sectionIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (!el) return;
 
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= middle && rect.bottom >= middle) {
+          newActive = id;
+        }
+      });
 
-    const handleScroll = () => {
-      const aboutEl = document.getElementById("about");
-
-      if (!aboutEl) return;
-
-      const { top, bottom } = aboutEl.getBoundingClientRect();
-      const windowH = window.innerHeight;
-
-      if (top <= windowH * 0.5 && bottom >= windowH * 0.5) {
-        setActiveSection("about");
-      }
+      setActiveSection(newActive);
     };
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
+    updateActiveSection();
+    window.addEventListener("scroll", updateActiveSection, { passive: true });
+    window.addEventListener("resize", updateActiveSection);
 
     return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", updateActiveSection);
+      window.removeEventListener("resize", updateActiveSection);
     };
   }, [location.pathname]);
 
   /* ---------------- NAV LINK COMPONENT ---------------- */
 
   const NavItem = ({ link, onClick = () => {} }: any) => {
-    const isActive = activeSection === link.href.slice(1);
+   const isActive =
+  activeSection === link.href.slice(1) || 
+  (link.href === "#features" && location.pathname.startsWith("/features"));
+  
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();

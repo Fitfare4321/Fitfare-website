@@ -63,13 +63,13 @@ const gyms = [
 
 const benefits = [
   { icon: Zap, label: "Instant Booking", desc: "Reserve your spot in seconds" },
-  { icon: Navigation, label: "GPS Locate Gyms", desc: "Find clubs near you" },
+  { icon: Navigation, label: "GPS Locate Gyms", desc: "Find Fitness centers near you" },
   { icon: Wifi, label: "Live Availability", desc: "Real-time slot tracking" },
 { icon: Users, label: "Active Members", desc: "Growing fitness community" },
 ];
 
 const steps = [
-  { num: "01", text: "Search gyms near you" },
+  { num: "01", text: "Search Fitness centers near you" },
   { num: "02", text: "Explore facilities & ratings" },
   { num: "03", text: "Book instantly" },
   { num: "04", text: "Check-in via QR code" },
@@ -207,7 +207,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
             No Limits. No Boundaries.
           </h2>
           <p className={`text-lg ${mutedColor} max-w-2xl mx-auto leading-relaxed`}>
-            Access a vast network of premium gyms across every major city.
+            Access a vast network of premium Fitness centers across every major city.
             Seamless check-ins, real-time availability, and zero downtime on
             your fitness journey.
           </p>
@@ -311,7 +311,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                   <span className={`text-xs font-semibold ${isDark ? "text-white/60" : "text-slate-500"}`}>
-                    Live Club Locator
+                    Live Fitness Center Locator
                   </span>
                 </div>
                 <span className={`text-xs ${isDark ? "text-white/30" : "text-slate-400"}`}>

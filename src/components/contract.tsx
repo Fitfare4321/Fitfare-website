@@ -34,12 +34,12 @@ const PERKS = [
 ];
 
 const TRADITIONAL = [
-  "Fixed-duration membership plans",
-  "Joining fees vary by gym",
-  "Standard cancellation policies",
-  "Pricing defined by individual gyms",
-  "Periodic membership renewals",
-  "Access limited to selected locations",
+  "Fixed-duration membership plans (monthly/annual)",
+  "Upfront joining or registration fees may apply",
+  "Limited flexibility in cancellation or refunds",
+  "Pricing varies across different fitness centers",
+  "Requires manual renewal after plan expiry",
+  "Access restricted to a single location or branch",
 ];
 const STEPS = [
   { num: "01", text: "Sign up for free", detail: "No card needed to start" },
@@ -84,7 +84,7 @@ function CountUp({ to, suffix = "" }: { to: number; suffix?: string }) {
 
 // ─── Comparison toggle ────────────────────────────────────────────────────────
 function ComparePanel({ isDark }: { isDark: boolean }) {
-  const [mode, setMode] = useState<"traditional" | "fitfare">("traditional");
+ const [mode, setMode] = useState<"traditional" | "fitfare">("fitfare");
 
   const fitfareItems = [
     "Access multiple partner gyms with flexibility",
@@ -126,7 +126,7 @@ function ComparePanel({ isDark }: { isDark: boolean }) {
                 mode === m && !isDark ? "0 2px 10px rgba(0,0,0,0.1)" : "none",
             }}
           >
-            {m === "traditional" ? " Gym Membership" : "FitFare Access"}
+            {m === "traditional" ? "Fitness Center Membership": "FitFare Access"}
           </button>
         ))}
       </div>
