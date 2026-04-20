@@ -16,7 +16,7 @@ import { MapPin } from "lucide-react";
 
 const cities = [
   { name: "Bengaluru", image: begluru, id: "blr", label: "Silicon Valley of India" },
-  { name: "Delhi", image: delhi, id: "del", label: "The Capital City" },
+  { name: "Delhi NCR ", image: delhi, id: "del", label: "The Capital City" },
   { name: "Hyderabad", image: hydrabad, id: "hyd", label: "City of Pearls" },
   { name: "Mumbai", image: mumbai, id: "mum", label: "The City of Dreams" },
   { name: "Pune", image: pune, id: "pun", label: "Oxford of the East" },
