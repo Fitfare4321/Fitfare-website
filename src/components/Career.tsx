@@ -30,70 +30,70 @@ import { jobsData } from "@/data/jobsData";
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
 const internshipJobs = [
- {
-  id: "01",
-  title: "Cloud Engineering Intern (4 Positions)",
-  location: "Remote",
-  type: "Internship",
-  tag: "Engineering",
-  tagColor: "from-blue-500 to-cyan-600",
-  duration: "3 Months",
-  description:
-    "Work closely with our engineering team to design, deploy, and manage scalable cloud infrastructure for FitFare’s platform.",
-  skills: [
-    "AWS / Azure / GCP",
-    "Docker",
-    "Kubernetes",
-    "Linux",
-    "CI/CD Pipelines",
-    "Git & GitHub",
-    "Infrastructure as Code (Terraform)",
-  ],
-  applyLink:
-    "https://docs.google.com/forms/d/e/1FAIpQLSde748LI0NAo9XDkh-YuzlqnE0Wu3ipJTwaANTIRXU_i4dpsA/viewform?usp=publish-editor",
-},
+  {
+    id: "01",
+    title: "Cloud Engineering Intern (4 Positions)",
+    location: "Remote",
+    type: "Internship",
+    tag: "Engineering",
+    tagColor: "from-blue-500 to-cyan-600",
+    duration: "3 Months",
+    description:
+      "Work closely with our engineering team to design, deploy, and manage scalable cloud infrastructure for FitFare’s platform.",
+    skills: [
+      "AWS / Azure / GCP",
+      "Docker",
+      "Kubernetes",
+      "Linux",
+      "CI/CD Pipelines",
+      "Git & GitHub",
+      "Infrastructure as Code (Terraform)",
+    ],
+    applyLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSde748LI0NAo9XDkh-YuzlqnE0Wu3ipJTwaANTIRXU_i4dpsA/viewform?usp=publish-editor",
+  },
 
- {
-  id: "02",
-  title: "Android Developer Intern (8 Positions)",
-  location: "Remote",
-  type: "Internship",
-  tag: "Mobile",
-  tagColor: "from-blue-500 to-cyan-500",
-  duration: "3 Months",
-  description:
-    "Build the Android experience used by thousands of fitness enthusiasts across India.",
-  skills: [
-    "Java / Kotlin",
-    "Android SDK",
-    "Jetpack Compose",
-    "MVVM Architecture",
-    "Firebase",
-    "Git & GitHub",
-  ],
-  applyLink:
-    "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
-},
-{
-  id: "03",
-  title: "BDE Intern (5 Positions)",
-  location: "Remote",
-  type: "Internship",
-  tag: "Business",
-  tagColor: "from-emerald-500 to-teal-500",
-  duration: "3 Months",
-  description:
-    "Own the growth engine. You'll build FitFare's gym-partner network.",
-  skills: [
-    "B2B Sales",
-    "Partnership Strategy",
-    "Lead Generation",
-    "Negotiation Skills",
-    "Business Communication",
-  ],
-  applyLink:
-    "https://docs.google.com/forms/d/e/1FAIpQLSeVteDh5UV9YHpjIsIGUXKuP-d30X8JeOURlI4yA_ZT50ePEA/viewform?usp=dialog",
-},
+  {
+    id: "02",
+    title: "Android Developer Intern (8 Positions)",
+    location: "Remote",
+    type: "Internship",
+    tag: "Mobile",
+    tagColor: "from-blue-500 to-cyan-500",
+    duration: "3 Months",
+    description:
+      "Build the Android experience used by thousands of fitness enthusiasts across India.",
+    skills: [
+      "Java / Kotlin",
+      "Android SDK",
+      "Jetpack Compose",
+      "MVVM Architecture",
+      "Firebase",
+      "Git & GitHub",
+    ],
+    applyLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
+  },
+  {
+    id: "03",
+    title: "BDE Intern (5 Positions)",
+    location: "Remote",
+    type: "Internship",
+    tag: "Business",
+    tagColor: "from-emerald-500 to-teal-500",
+    duration: "3 Months",
+    description:
+      "Own the growth engine. You'll build FitFare's gym-partner network.",
+    skills: [
+      "B2B Sales",
+      "Partnership Strategy",
+      "Lead Generation",
+      "Negotiation Skills",
+      "Business Communication",
+    ],
+    applyLink:
+      "https://docs.google.com/forms/d/e/1FAIpQLSeVteDh5UV9YHpjIsIGUXKuP-d30X8JeOURlI4yA_ZT50ePEA/viewform?usp=dialog",
+  },
 ];
 
 const fullTimeJobs = jobsData.map(j => ({
@@ -180,7 +180,7 @@ const CareerPage = () => {
 
   return (
     <section className={`relative min-h-screen overflow-hidden transition-colors duration-700 ${isDark ? "bg-[#05070a] text-white" : "bg-slate-50 text-slate-900"}`}>
-      
+
       {/* ── Dynamic Background ── */}
       <div className="absolute inset-0 pointer-events-none">
         <div className={`absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[160px] opacity-20 ${isDark ? "bg-blue-600/10" : "bg-blue-400/20"}`} />
@@ -189,7 +189,7 @@ const CareerPage = () => {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 py-28 lg:py-40">
-        
+
         {/* ════════════════════════════════════════
             HERO SECTION
         ════════════════════════════════════════ */}
@@ -202,14 +202,14 @@ const CareerPage = () => {
             <Sparkles size={12} />
             We are hiring builders
           </motion.div>
-          
+
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] mb-10"
           >
-            Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600">Fitness</span>
+            Join the <span className="text-blue-500">Fitness</span>
             <br />
             Revolution.
           </motion.h1>
@@ -224,7 +224,7 @@ const CareerPage = () => {
           </motion.p>
 
           {/* Quick Stats */}
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
@@ -253,7 +253,7 @@ const CareerPage = () => {
         <div id="open-positions" className="mb-40">
           <div className="flex flex-col items-center mb-20">
             <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-8">Current Openings</h2>
-            
+
             {/* Custom Tab Switcher */}
             <div className={`p-1.5 rounded-2xl flex gap-2 border ${isDark ? "bg-slate-900/50 border-slate-800" : "bg-white border-slate-200 shadow-lg"}`}>
               <button
@@ -308,11 +308,11 @@ const CareerPage = () => {
                             <Clock size={12} /> {job.duration}
                           </span>
                         </div>
-                        
+
                         <h3 className="text-2xl md:text-4xl font-black tracking-tight mb-6 group-hover:text-blue-500 transition-colors">
                           {job.title}
                         </h3>
-                        
+
                         <p className={`text-base md:text-lg mb-8 leading-relaxed line-clamp-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                           {job.description}
                         </p>
@@ -368,7 +368,7 @@ const CareerPage = () => {
             <p className={`text-lg leading-relaxed mb-12 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               We're not just offering a desk; we're offering a launchpad. Join a culture that celebrates initiative, ownership, and obsession with quality.
             </p>
-            
+
             <div className="grid gap-8">
               {perks.map((p, i) => (
                 <div key={i} className="flex gap-5 items-start">
@@ -410,7 +410,7 @@ const CareerPage = () => {
             <div className="grid md:grid-cols-4 gap-12 relative">
               {/* Connector */}
               <div className="absolute top-[52px] left-0 w-full h-[2px] bg-blue-500/10 hidden md:block" />
-              
+
               {steps.map((s, i) => (
                 <div key={i} className="relative z-10 text-center group">
                   <div className={`mx-auto w-24 h-24 rounded-3xl flex items-center justify-center mb-8 border-4 transition-all duration-300 ${isDark ? "bg-slate-900 border-[#05070a] group-hover:border-blue-500/50 group-hover:scale-110" : "bg-white border-slate-100 group-hover:border-blue-100 group-hover:scale-110 shadow-lg"}`}>
@@ -423,7 +423,7 @@ const CareerPage = () => {
               ))}
             </div>
           </div>
-          
+
           {/* Decorative Blur */}
           <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none" />
         </div>
@@ -438,7 +438,7 @@ const CareerPage = () => {
                 <h3 className="text-3xl font-black tracking-tight text-blue-500 mb-2">Alex Johnson</h3>
                 <p className="text-xs font-bold tracking-widest uppercase opacity-40">Software Developer • alex@email.com</p>
               </div>
-              
+
               <div className="space-y-6">
                 <div className="space-y-1">
                   <p className="text-[10px] font-black uppercase tracking-widest text-blue-500/60">Education</p>
@@ -479,7 +479,7 @@ const CareerPage = () => {
             <p className={`text-lg ${isDark ? "text-slate-400" : "text-slate-600"}`}>
               We review every application manually. A clean, structured resume helps us understand your impact faster.
             </p>
-            
+
             <div className="grid gap-4">
               {[
                 { t: "Measurable Impact", d: "Use numbers (e.g., 'Optimized performance by 40%')." },
