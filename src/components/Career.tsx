@@ -138,7 +138,11 @@ const benefits = [
 ];
 
 const perks = [
-  { icon: Coffee, title: "Work From Anywhere", desc: "Remote-first culture for most roles." },
+  {
+    icon: Coffee,
+    title: "Hybrid Work Model",
+    desc: "Work from both office and home with flexible arrangements."
+  },
   { icon: Heart, title: "Health & Fitness", desc: "Access to partner gyms and health perks." },
   { icon: GraduationCap, title: "Learning Credits", desc: "We invest in your upskilling journey." },
   { icon: Globe, title: "Diverse Team", desc: "Collaborate with talent across the country." },

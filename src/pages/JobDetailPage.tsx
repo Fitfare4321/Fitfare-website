@@ -331,10 +331,13 @@ const JobDetailPage = () => {
               <p className={`text-sm mb-6 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
                 Have questions about the application process or the role?
               </p>
-              <a href="mailto:team.fitfare@gmail.com" className="text-sm font-black text-indigo-500 hover:underline flex items-center gap-2">
-                Contact Recruiting Team
-                <ChevronRight size={14} />
-              </a>
+            <a 
+  href="mailto:team.fitfare@gmail.com" 
+  className="text-sm font-black text-indigo-500 hover:underline flex items-center gap-2"
+>
+  Contact Recruiting Team (team.fitfare@gmail.com)
+  <ChevronRight size={14} />
+</a>
             </motion.div>
 
           </aside>
