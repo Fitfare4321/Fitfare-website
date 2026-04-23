@@ -1,5 +1,6 @@
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
+import { useState } from "react";
 import {
   MapPin,
   Sparkles,
@@ -11,13 +12,24 @@ import {
   CheckCircle,
   ChevronRight,
   Zap,
+  Download,
+  Info,
+  Globe,
+  Briefcase,
+  GraduationCap,
+  Trophy,
+  Coffee,
+  Heart,
+  TrendingUp,
+  ShieldCheck,
+  Star
 } from "lucide-react";
-import { Download } from "lucide-react";
-import { Info } from "lucide-react";
+import { Link } from "react-router-dom";
+import { jobsData } from "@/data/jobsData";
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
-const jobs = [
+const internshipJobs = [
  {
   id: "01",
   title: "Cloud Engineering Intern (4 Positions)",
@@ -36,8 +48,6 @@ const jobs = [
     "CI/CD Pipelines",
     "Git & GitHub",
     "Infrastructure as Code (Terraform)",
-    "Cloud Security Basics",
-    "Monitoring Tools (Prometheus / Grafana)"
   ],
   applyLink:
     "https://docs.google.com/forms/d/e/1FAIpQLSde748LI0NAo9XDkh-YuzlqnE0Wu3ipJTwaANTIRXU_i4dpsA/viewform?usp=publish-editor",
@@ -56,17 +66,10 @@ const jobs = [
   skills: [
     "Java / Kotlin",
     "Android SDK",
-    "Android Studio",
     "Jetpack Compose",
-    "XML Layouts",
     "MVVM Architecture",
-    "Retrofit",
-    "REST API Integration",
     "Firebase",
-    "SQLite / Room Database",
-    "Material Design",
     "Git & GitHub",
-    "Debugging & Performance Optimization"
   ],
   applyLink:
     "https://docs.google.com/forms/d/e/1FAIpQLSfa7KacK2QGmVITfGNxJtItnFjd7QyPzdNVkJAb_40b3a1kuA/viewform?usp=dialog",
@@ -84,328 +87,312 @@ const jobs = [
   skills: [
     "B2B Sales",
     "Partnership Strategy",
-    "CRM Tools",
-    "Go-to-Market Strategy",
     "Lead Generation",
-    "Market Research",
     "Negotiation Skills",
-    
-    "Sales Pitching",
     "Business Communication",
-    "Deal Closing"
   ],
   applyLink:
     "https://docs.google.com/forms/d/e/1FAIpQLSeVteDh5UV9YHpjIsIGUXKuP-d30X8JeOURlI4yA_ZT50ePEA/viewform?usp=dialog",
 },
 ];
+
+const fullTimeJobs = jobsData.map(j => ({
+  id: j.slug,
+  title: j.title,
+  location: j.location,
+  type: "Full-time",
+  tag: j.role,
+  tagColor: "from-indigo-500 to-purple-600",
+  duration: j.salary,
+  description: j.overview,
+  skills: j.mandatoryRequirements.slice(0, 4),
+  isExternal: false,
+  applyLink: `/careers/${j.slug}`
+}));
+
 const benefits = [
   {
     icon: Rocket,
     title: "Accelerated Growth",
-    desc: "Work shoulder-to-shoulder with founders and senior engineers. Skip the corporate ladder and grow 10× faster in a startup environment that moves at speed.",
-    gradient: "from-orange-500 to-rose-500",
-    glow: "group-hover:shadow-orange-500/20",
+    desc: "Work shoulder-to-shoulder with founders. Skip the corporate ladder and grow 10× faster in a high-speed startup environment.",
+    gradient: "from-blue-500 to-indigo-600",
   },
   {
     icon: Sparkles,
     title: "Real-World Impact",
-    desc: "Every line of code and every partnership deal directly shapes a product used by real users. Your contributions ship to production — no toy projects.",
-    gradient: "from-violet-500 to-purple-600",
-    glow: "group-hover:shadow-violet-500/20",
+    desc: "Every line of code and partnership shapes a product used by thousands. Your work isn't just a task; it's a legacy.",
+    gradient: "from-purple-500 to-pink-600",
   },
   {
     icon: Users,
-    title: "Elite Team Culture",
-    desc: "Collaborate with a tight-knit team of engineers, designers, and business builders who are genuinely invested in each other's growth and the mission.",
-    gradient: "from-blue-500 to-cyan-500",
-    glow: "group-hover:shadow-blue-500/20",
+    title: "Elite Culture",
+    desc: "Join a tight-knit team of high-performers who are genuinely invested in your personal and professional evolution.",
+    gradient: "from-emerald-500 to-teal-600",
   },
   {
     icon: Target,
-    title: "Ownership From Day One",
-    desc: "No busywork. From your first week you'll own features, drive decisions, and see the outcomes of your work directly reflected in user metrics.",
-    gradient: "from-emerald-500 to-teal-500",
-    glow: "group-hover:shadow-emerald-500/20",
+    title: "Pure Ownership",
+    desc: "No busywork. You own features, drive decisions, and see your impact directly reflected in user metrics from day one.",
+    gradient: "from-orange-500 to-red-600",
   },
+];
+
+const perks = [
+  { icon: Coffee, title: "Work From Anywhere", desc: "Remote-first culture for most roles." },
+  { icon: Heart, title: "Health & Fitness", desc: "Access to partner gyms and health perks." },
+  { icon: GraduationCap, title: "Learning Credits", desc: "We invest in your upskilling journey." },
+  { icon: Globe, title: "Diverse Team", desc: "Collaborate with talent across the country." },
 ];
 
 const steps = [
   {
     num: "01",
-    title: "Intro Call & Screening Round",
-    desc: "A short introductory call with our team to understand your background, career interests, and alignment with FitFare’s mission and culture.",
+    title: "Initial Screening",
+    desc: "A quick sync to align on mission, values, and expectations.",
     icon: CheckCircle,
   },
   {
     num: "02",
-    title: "Assignment Review Round",
-    desc: "You'll complete a short assignment related to the role. Our team will review your approach, problem-solving ability, and technical or business skills.",
+    title: "Skill Assessment",
+    desc: "Showcase your expertise through a real-world project or task.",
     icon: Zap,
   },
   {
     num: "03",
-    title: "Founder / Final Interview",
-    desc: "A final conversation with the founder or leadership team to discuss your work, ideas, and how you can contribute to FitFare’s growth.",
+    title: "Deep Dive",
+    desc: "Technical or strategic discussion with the core leadership team.",
     icon: Users,
   },
   {
     num: "04",
-    title: "Offer & Onboarding",
-    desc: "If selected, we move forward with the offer and guide you through a smooth onboarding process to get you started quickly.",
+    title: "The Offer",
+    desc: "Welcome to the mission! Time to build the future of fitness.",
     icon: Rocket,
   },
 ];
+
 // ─── COMPONENT ───────────────────────────────────────────────────────────────
 
 const CareerPage = () => {
   const { theme } = useTheme();
   const isDark = theme === "dark";
+  const [activeTab, setActiveTab] = useState<"jobs" | "internships">("jobs");
 
   return (
-    <section
-      className={`relative min-h-screen overflow-hidden transition-colors duration-500 ${isDark ? "bg-[#080c14] text-white" : "bg-[#f7f8fc] text-gray-900"
-        }`}
-    >
-      {/* ── Ambient Blobs ── */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div
-          className={`absolute -top-48 right-[-10%] w-[700px] h-[700px] rounded-full blur-[120px] ${isDark ? "bg-blue-600/10" : "bg-blue-400/15"
-            }`}
-        />
-        <div
-          className={`absolute -bottom-48 left-[-10%] w-[600px] h-[600px] rounded-full blur-[120px] ${isDark ? "bg-purple-600/10" : "bg-purple-400/10"
-            }`}
-        />
-        <div
-          className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] rounded-full blur-[150px] ${isDark ? "bg-indigo-500/5" : "bg-indigo-300/8"
-            }`}
-        />
+    <section className={`relative min-h-screen overflow-hidden transition-colors duration-700 ${isDark ? "bg-[#05070a] text-white" : "bg-slate-50 text-slate-900"}`}>
+      
+      {/* ── Dynamic Background ── */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className={`absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[160px] opacity-20 ${isDark ? "bg-blue-600/10" : "bg-blue-400/20"}`} />
+        <div className={`absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-[140px] opacity-10 ${isDark ? "bg-purple-600/10" : "bg-purple-400/15"}`} />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.03)_0%,transparent_70%)]" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 py-28 space-y-36">
+      <div className="relative max-w-7xl mx-auto px-6 py-28 lg:py-40">
+        
         {/* ════════════════════════════════════════
-            HERO
+            HERO SECTION
         ════════════════════════════════════════ */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-          className="text-center max-w-4xl mx-auto"
-        >
-          
-<h1
-  className={`text-4xl md:text-6xl lg:text-7xl font-semibold leading-[1.08] tracking-tight mb-8 mt-10 ${
-    isDark ? "text-white" : "text-gray-900"
-  }`}
->
-  Accelerate Your
-  <br />
-  <span className="relative inline-block">
-    <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
-      Career Growth
-    </span>
-    <span className="absolute -bottom-2 left-0 w-full h-[6px] bg-gradient-to-r from-blue-500/30 via-indigo-500/30 to-violet-500/30 blur-md" />
-  </span>
-</h1>
-
-          <p
-            className={`text-lg md:text-xl leading-relaxed max-w-2xl mx-auto ${isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-          >
-            FitFare is reimagining how people discover, book, and access gyms
-            across India. Join a small, ambitious team where your work ships
-            fast and your impact is real.
-          </p>
-        </motion.div>
-
-        {/* ════════════════════════════════════════
-            WHY JOIN US
-        ════════════════════════════════════════ */}
-        <div>
-          {/* Section label */}
+        <div className="text-center max-w-5xl mx-auto mb-32">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            animate={{ opacity: 1, y: 0 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-[10px] font-black tracking-[0.2em] uppercase border border-blue-500/20 bg-blue-500/5 text-blue-400"
           >
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4">
-              Why FitFare
-            </p>
-            <h2
-              className={`text-3xl md:text-5xl font-bold ${isDark ? "text-white" : "text-gray-900"
-                }`}
-            >
-              More than just an internship
-            </h2>
+            <Sparkles size={12} />
+            We are hiring builders
           </motion.div>
+          
+          <motion.h1
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="text-5xl md:text-8xl font-black tracking-tighter leading-[0.95] mb-10"
+          >
+            Join the <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-600">Fitness</span>
+            <br />
+            Revolution.
+          </motion.h1>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {benefits.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.55, delay: i * 0.1 }}
-                className="group relative"
-              >
-                {/* Hover glow layer */}
-                <div
-                  className={`absolute -inset-px rounded-2xl bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-[2px]`}
-                />
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className={`text-xl md:text-2xl font-medium max-w-3xl mx-auto leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"}`}
+          >
+            FitFare is reimagining fitness accessibility. We're looking for ambitious minds to build the core infrastructure of the future.
+          </motion.p>
 
-                <div
-                  className={`relative h-full rounded-2xl p-6 border transition-all duration-400 ${isDark
-                    ? "bg-slate-900/80 border-slate-800 group-hover:border-transparent"
-                    : "bg-white border-gray-200 group-hover:border-transparent shadow-sm group-hover:shadow-lg"
-                    }`}
-                >
-                  {/* Icon */}
-                 <div className="mb-5">
-  <item.icon
-    size={28}
-    className={`transition-colors duration-300 ${
-      isDark
-        ? "text-blue-400 group-hover:text-blue-300"
-        : "text-blue-600 group-hover:text-blue-500"
-    }`}
-  />
-</div>
-
-                  <h3
-                    className={`font-semibold text-base mb-2 ${isDark ? "text-white" : "text-gray-900"
-                      }`}
-                  >
-                    {item.title}
-                  </h3>
-                  <p
-                    className={`text-sm leading-relaxed ${isDark ? "text-gray-400" : "text-gray-500"
-                      }`}
-                  >
-                    {item.desc}
-                  </p>
+          {/* Quick Stats */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.4 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 max-w-4xl mx-auto"
+          >
+            {[
+              { label: "Open Roles", val: "15+", icon: Briefcase },
+              { label: "Cities", val: "5+", icon: MapPin },
+              { label: "Team Size", val: "25+", icon: Users },
+              { label: "Growth", val: "10x", icon: TrendingUp },
+            ].map((s, i) => (
+              <div key={i} className="text-center group">
+                <div className={`mb-3 inline-flex w-12 h-12 items-center justify-center rounded-2xl transition-all duration-300 ${isDark ? "bg-slate-900 group-hover:bg-blue-600/20 text-slate-400 group-hover:text-blue-400" : "bg-white group-hover:bg-blue-50 text-slate-400 group-hover:text-blue-600 shadow-sm"}`}>
+                  <s.icon size={20} />
                 </div>
-              </motion.div>
+                <div className="text-2xl font-black tracking-tight">{s.val}</div>
+                <div className="text-[10px] uppercase font-bold tracking-widest opacity-50">{s.label}</div>
+              </div>
             ))}
+          </motion.div>
+        </div>
+
+        {/* ════════════════════════════════════════
+            JOB LISTINGS WITH TABS
+        ════════════════════════════════════════ */}
+        <div id="open-positions" className="mb-40">
+          <div className="flex flex-col items-center mb-20">
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight mb-8">Current Openings</h2>
+            
+            {/* Custom Tab Switcher */}
+            <div className={`p-1.5 rounded-2xl flex gap-2 border ${isDark ? "bg-slate-900/50 border-slate-800" : "bg-white border-slate-200 shadow-lg"}`}>
+              <button
+                onClick={() => setActiveTab("jobs")}
+                className={`relative px-8 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "jobs" ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"}`}
+              >
+                {activeTab === "jobs" && (
+                  <motion.div layoutId="tab-bg" className="absolute inset-0 bg-blue-600 rounded-xl -z-10 shadow-lg shadow-blue-600/20" />
+                )}
+                Full-Time Roles
+              </button>
+              <button
+                onClick={() => setActiveTab("internships")}
+                className={`relative px-8 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "internships" ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"}`}
+              >
+                {activeTab === "internships" && (
+                  <motion.div layoutId="tab-bg" className="absolute inset-0 bg-blue-600 rounded-xl -z-10 shadow-lg shadow-blue-600/20" />
+                )}
+                Internships
+              </button>
+            </div>
+          </div>
+
+          <div className="grid gap-6 max-w-6xl mx-auto">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.4 }}
+                className="grid gap-6"
+              >
+                {(activeTab === "jobs" ? fullTimeJobs : internshipJobs).map((job, index) => (
+                  <motion.div
+                    key={job.id}
+                    initial={{ opacity: 0, y: 30 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`group relative p-8 md:p-12 rounded-[2rem] border transition-all duration-500 ${isDark ? "bg-slate-900/40 border-slate-800 hover:border-blue-500/30" : "bg-white border-slate-100 hover:border-blue-200 shadow-sm hover:shadow-xl hover:-translate-y-1"}`}
+                  >
+                    <div className="flex flex-col lg:flex-row gap-10 items-start">
+                      <div className="flex-1">
+                        <div className="flex flex-wrap items-center gap-4 mb-6">
+                          <span className={`px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest ${isDark ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" : "bg-blue-50 text-blue-600 border border-blue-100"}`}>
+                            {job.tag}
+                          </span>
+                          <span className="flex items-center gap-1.5 text-xs font-bold opacity-50 uppercase tracking-widest">
+                            <MapPin size={12} /> {job.location}
+                          </span>
+                          <span className="flex items-center gap-1.5 text-xs font-bold opacity-50 uppercase tracking-widest">
+                            <Clock size={12} /> {job.duration}
+                          </span>
+                        </div>
+                        
+                        <h3 className="text-2xl md:text-4xl font-black tracking-tight mb-6 group-hover:text-blue-500 transition-colors">
+                          {job.title}
+                        </h3>
+                        
+                        <p className={`text-base md:text-lg mb-8 leading-relaxed line-clamp-2 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+                          {job.description}
+                        </p>
+
+                        <div className="flex flex-wrap gap-2">
+                          {job.skills.map(s => (
+                            <span key={s} className={`px-3 py-1 rounded-lg text-[11px] font-bold border ${isDark ? "border-slate-800 text-slate-500" : "border-slate-200 text-slate-500"}`}>
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col gap-4 w-full lg:w-auto shrink-0">
+                        {activeTab === "jobs" ? (
+                          <Link
+                            to={job.applyLink}
+                            className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl bg-blue-600 text-white font-black text-lg transition-all shadow-lg shadow-blue-600/20 hover:scale-[1.03] active:scale-95 group-hover:bg-blue-700"
+                          >
+                            View Details
+                            <ArrowRight size={20} />
+                          </Link>
+                        ) : (
+                          <a
+                            href={job.applyLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl border-2 border-blue-600 text-blue-600 font-black text-lg transition-all hover:bg-blue-600 hover:text-white"
+                          >
+                            Apply Now
+                            <ArrowRight size={20} />
+                          </a>
+                        )}
+                        <p className="text-center text-[10px] uppercase font-black tracking-widest opacity-40">
+                          {activeTab === "jobs" ? "Full-Time Role" : "Limited Seats"}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
 
         {/* ════════════════════════════════════════
-            OPEN ROLES
+            PERKS & BENEFITS
         ════════════════════════════════════════ */}
-        <div>
-          {/* Section label */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4">
-              Open Positions
+        <div className="mb-40 grid lg:grid-cols-[1fr,1.5fr] gap-20 items-center">
+          <div>
+            <p className="text-xs uppercase font-black tracking-[0.4em] text-blue-500 mb-6">Built for builders</p>
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">Why you'll love building here.</h2>
+            <p className={`text-lg leading-relaxed mb-12 ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              We're not just offering a desk; we're offering a launchpad. Join a culture that celebrates initiative, ownership, and obsession with quality.
             </p>
-            <h2
-              className={`text-3xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"
-                }`}
-            >
-              Find your role
-            </h2>
-            <p className={`${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              All positions are fully remote. We evaluate on ability, not
-              credentials.
-            </p>
-          </motion.div>
+            
+            <div className="grid gap-8">
+              {perks.map((p, i) => (
+                <div key={i} className="flex gap-5 items-start">
+                  <div className={`shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${isDark ? "bg-slate-900 text-blue-400" : "bg-blue-50 text-blue-600"}`}>
+                    <p.icon size={22} />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-lg mb-1">{p.title}</h4>
+                    <p className={`text-sm ${isDark ? "text-slate-500" : "text-slate-500"}`}>{p.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
 
-          <div className="space-y-6 max-w-5xl mx-auto">
-            {jobs.map((job, index) => (
-           <motion.div
-  key={index}
-  initial={{ opacity: 0, y: 40 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  viewport={{ once: true }}
-  transition={{ duration: 0.5, delay: index * 0.08 }}
-  className={`group rounded-2xl p-8 md:p-10 transition-all duration-300
-    ${isDark
-      ? "border border-slate-800 hover:border-slate-700"
-      : "border border-gray-200 hover:border-gray-300"
-    } hover:-translate-y-1`}
->
-  <div className="flex flex-col lg:flex-row lg:items-start gap-8">
-    
-    {/* Left Column */}
-    <div className="flex-1">
-      
-      {/* Meta Row */}
-      <div className="flex flex-wrap items-center gap-4 mb-4 text-xs tracking-wide uppercase">
-        <span className={isDark ? "text-gray-400" : "text-gray-500"}>
-          {job.tag}
-        </span>
-        <span className={isDark ? "text-gray-500" : "text-gray-400"}>•</span>
-        <span className={isDark ? "text-gray-400" : "text-gray-500"}>
-          {job.location}
-        </span>
-        <span className={isDark ? "text-gray-500" : "text-gray-400"}>•</span>
-        <span className={isDark ? "text-gray-400" : "text-gray-500"}>
-          {job.duration}
-        </span>
-      </div>
-
-      {/* Title */}
-      <h3
-        className={`text-xl md:text-2xl font-semibold mb-4 ${
-          isDark ? "text-white" : "text-gray-900"
-        }`}
-      >
-        {job.title}
-      </h3>
-
-      {/* Description */}
-      <p
-        className={`text-sm md:text-base leading-relaxed mb-6 ${
-          isDark ? "text-gray-400" : "text-gray-500"
-        }`}
-      >
-        {job.description}
-      </p>
-
-      {/* Skills */}
-      <div className="flex flex-wrap gap-3">
-        {job.skills.map((skill) => (
-          <span
-            key={skill}
-            className={`text-xs px-3 py-1 rounded-md border ${
-              isDark
-                ? "border-slate-700 text-gray-400"
-                : "border-gray-200 text-gray-600"
-            }`}
-          >
-            {skill}
-          </span>
-        ))}
-      </div>
-    </div>
-
-   {/* Apply Button */}
-<div className="mt-8">
-  <a
-    href={job.applyLink}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
-    bg-gradient-to-r from-blue-500 to-indigo-500
-    text-white text-sm font-medium
-    hover:from-blue-600 hover:to-indigo-600
-    transition-all duration-300"
-  >
-    Apply Now
-    <ArrowRight size={16} />
-  </a>
-</div>
-  </div>
-</motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {benefits.map((b, i) => (
+              <div key={i} className={`group p-10 rounded-[2.5rem] border transition-all ${isDark ? "bg-slate-900/40 border-slate-800 hover:border-slate-700" : "bg-white border-slate-100 shadow-sm hover:shadow-xl"}`}>
+                <div className={`mb-8 w-14 h-14 rounded-2xl flex items-center justify-center bg-gradient-to-br ${b.gradient} text-white shadow-lg`}>
+                  <b.icon size={28} />
+                </div>
+                <h3 className="text-2xl font-black tracking-tight mb-4">{b.title}</h3>
+                <p className={`text-base leading-relaxed ${isDark ? "text-slate-400" : "text-slate-500"}`}>{b.desc}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -413,328 +400,105 @@ const CareerPage = () => {
         {/* ════════════════════════════════════════
             HIRING PROCESS
         ════════════════════════════════════════ */}
-        <div>
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-16"
-          >
-            <p className="text-xs uppercase tracking-[0.3em] text-blue-400 mb-4">
-              How it Works
-            </p>
-            <h2
-              className={`text-3xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-gray-900"
-                }`}
-            >
-              Our hiring process
-            </h2>
-            <p className={`${isDark ? "text-gray-400" : "text-gray-500"}`}>
-              Simple, transparent, and respectful of your time.
-            </p>
-          </motion.div>
+        <div className={`rounded-[3rem] p-12 md:p-24 overflow-hidden relative ${isDark ? "bg-slate-900/50 border border-slate-800" : "bg-white border border-slate-100 shadow-2xl"}`}>
+          <div className="relative z-10">
+            <div className="text-center max-w-3xl mx-auto mb-20">
+              <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8">Our Hiring Journey</h2>
+              <p className={`text-lg ${isDark ? "text-slate-400" : "text-slate-500"}`}>A transparent, human-centric process designed to respect your time and expertise.</p>
+            </div>
 
-          <div className="relative">
-            {/* Connector line — desktop only */}
-            <div
-              className={`absolute top-12 left-[12.5%] right-[12.5%] h-px hidden md:block ${isDark
-                ? "bg-gradient-to-r from-transparent via-slate-700 to-transparent"
-                : "bg-gradient-to-r from-transparent via-gray-300 to-transparent"
-                }`}
-            />
-
-            <div className="grid md:grid-cols-4 gap-6">
-              {steps.map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.55, delay: i * 0.12 }}
-                  className="group relative text-center"
-                >
-                  {/* Step circle */}
-                  <div className="relative inline-flex items-center justify-center w-24 h-24 mb-6">
-                    {/* Background ring */}
-                    <div
-                      className={`absolute inset-0 rounded-full border-2 transition-colors duration-400 ${isDark
-                        ? "border-slate-800 group-hover:border-blue-500/40"
-                        : "border-gray-200 group-hover:border-blue-300"
-                        }`}
-                    />
-                    {/* Glow on hover */}
-                    <div className="absolute inset-0 rounded-full bg-blue-500/10 opacity-0 group-hover:opacity-100 blur-md transition-opacity duration-400" />
-                    {/* Inner circle */}
-                    <div
-                      className={`relative w-16 h-16 rounded-full flex items-center justify-center transition-all duration-400 ${isDark
-                        ? "bg-slate-800 group-hover:bg-blue-500/20"
-                        : "bg-gray-100 group-hover:bg-blue-50"
-                        }`}
-                    >
-                      <step.icon
-                        size={24}
-                        className={`transition-colors duration-400 ${isDark
-                          ? "text-gray-400 group-hover:text-blue-400"
-                          : "text-gray-500 group-hover:text-blue-500"
-                          }`}
-                      />
-                    </div>
-                   
+            <div className="grid md:grid-cols-4 gap-12 relative">
+              {/* Connector */}
+              <div className="absolute top-[52px] left-0 w-full h-[2px] bg-blue-500/10 hidden md:block" />
+              
+              {steps.map((s, i) => (
+                <div key={i} className="relative z-10 text-center group">
+                  <div className={`mx-auto w-24 h-24 rounded-3xl flex items-center justify-center mb-8 border-4 transition-all duration-300 ${isDark ? "bg-slate-900 border-[#05070a] group-hover:border-blue-500/50 group-hover:scale-110" : "bg-white border-slate-100 group-hover:border-blue-100 group-hover:scale-110 shadow-lg"}`}>
+                    <s.icon size={32} className="text-blue-500" />
+                    <span className="absolute -top-3 -right-3 w-8 h-8 rounded-full bg-blue-600 text-white text-[10px] font-black flex items-center justify-center shadow-lg">{s.num}</span>
                   </div>
+                  <h4 className="text-xl font-black tracking-tight mb-4">{s.title}</h4>
+                  <p className={`text-sm leading-relaxed px-4 ${isDark ? "text-slate-500" : "text-slate-500"}`}>{s.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          
+          {/* Decorative Blur */}
+          <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-blue-600/10 rounded-full blur-[80px] pointer-events-none" />
+        </div>
 
-                  <h3
-                    className={`font-semibold text-sm mb-2 transition-colors duration-300 group-hover:text-blue-400 ${isDark ? "text-white" : "text-gray-900"
-                      }`}
-                  >
-                    {step.title}
-                  </h3>
-                  <p
-                    className={`text-xs leading-relaxed ${isDark ? "text-gray-500" : "text-gray-500"
-                      }`}
-                  >
-                    {step.desc}
+        {/* ════════════════════════════════════════
+            RESUME GUIDELINES
+        ════════════════════════════════════════ */}
+        <div className="mt-40 grid lg:grid-cols-2 gap-20 items-center">
+          <div className={`p-10 md:p-16 rounded-[3rem] border relative overflow-hidden ${isDark ? "bg-gradient-to-br from-slate-900 to-slate-800 border-slate-700" : "bg-white border-slate-200 shadow-2xl"}`}>
+            <div className="relative z-10 space-y-8">
+              <div>
+                <h3 className="text-3xl font-black tracking-tight text-blue-500 mb-2">Alex Johnson</h3>
+                <p className="text-xs font-bold tracking-widest uppercase opacity-40">Software Developer • alex@email.com</p>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="space-y-1">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-500/60">Education</p>
+                  <p className="font-bold">B.Tech in Computer Science — XYZ University</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-[10px] font-black uppercase tracking-widest text-blue-500/60">Experience</p>
+                  <p className="font-bold">Frontend Intern — Built React dashboards used by 2k+ users.</p>
+                </div>
+                <div className="flex flex-wrap gap-2 pt-4">
+                  {["React", "TypeScript", "Tailwind", "Node.js"].map(skill => (
+                    <span key={skill} className="px-3 py-1 rounded-lg bg-blue-500/10 text-blue-400 text-[10px] font-black border border-blue-500/20">{skill}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="pt-10 flex flex-col items-center gap-6">
+                <a
+                  href="/FitFare.docx"
+                  download
+                  className="w-full flex items-center justify-center gap-3 px-8 py-4 rounded-2xl bg-blue-600 text-white font-black hover:scale-[1.02] transition-all shadow-xl shadow-blue-600/30"
+                >
+                  Download Template
+                  <Download size={18} />
+                </a>
+                <div className="flex gap-3 items-start p-6 rounded-2xl bg-blue-500/5 border border-blue-500/10">
+                  <Info size={18} className="text-blue-500 shrink-0" />
+                  <p className="text-xs leading-relaxed opacity-60">
+                    <span className="font-black text-blue-500">Pro Tip:</span> Hyperlink your GitHub and Portfolio URLs so we can see your amazing work instantly.
                   </p>
-                </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-10">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter leading-[1.1]">Make your profile stand out.</h2>
+            <p className={`text-lg ${isDark ? "text-slate-400" : "text-slate-600"}`}>
+              We review every application manually. A clean, structured resume helps us understand your impact faster.
+            </p>
+            
+            <div className="grid gap-4">
+              {[
+                { t: "Measurable Impact", d: "Use numbers (e.g., 'Optimized performance by 40%')." },
+                { t: "Clean Layout", d: "One page is usually plenty. Keep it scannable." },
+                { t: "Relevant Skills", d: "Highlight the tech we actually use." },
+                { t: "Your Passion", d: "Show us why you care about the fitness industry." },
+              ].map((item, i) => (
+                <div key={i} className={`p-6 rounded-2xl border transition-all ${isDark ? "bg-slate-900/30 border-slate-800 hover:border-slate-700" : "bg-white border-slate-100 hover:border-slate-200 shadow-sm"}`}>
+                  <div className="flex items-center gap-3 mb-1">
+                    <CheckCircle size={18} className="text-emerald-500" />
+                    <h4 className="font-bold">{item.t}</h4>
+                  </div>
+                  <p className="text-sm opacity-50 pl-7">{item.d}</p>
+                </div>
               ))}
             </div>
           </div>
         </div>
-{/* ════════════════════════════════════════
-    RESUME SHORTLISTING PREVIEW
-════════════════════════════════════════ */}
-<div className="max-w-6xl mx-auto">
 
-  {/* Header */}
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ duration: 0.6 }}
-    className="text-center mb-20"
-  >
-    <p className="text-xs uppercase tracking-[0.35em] text-blue-400 mb-4">
-      Resume Guidelines
-    </p>
-
-    <h2
-      className={`text-3xl md:text-5xl font-bold mb-6 ${
-        isDark ? "text-white" : "text-gray-900"
-      }`}
-    >
-      Create a resume we can evaluate quickly
-    </h2>
-
-    <p
-      className={`${
-        isDark ? "text-gray-400" : "text-gray-500"
-      } max-w-2xl mx-auto`}
-    >
-      Our team reviews hundreds of applications. A clear and structured
-      resume helps us understand your capabilities faster and ensures
-      your profile receives proper evaluation.
-    </p>
-  </motion.div>
-
-  <div className="grid lg:grid-cols-2 gap-20 items-center">
-
-    {/* Resume Preview */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.96 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className={`relative rounded-2xl p-10 border ${
-        isDark
-          ? "border-slate-800 bg-gradient-to-br from-slate-900 to-slate-800"
-          : "border-gray-200 bg-white shadow-xl"
-      }`}
-    >
-
-      <div className="space-y-6">
-
-        {/* Name */}
-        <div>
-          <h3 className="text-lg font-semibold text-blue-500">
-            Alex Johnson
-          </h3>
-         <p className={`text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>
-  Software Developer • alex@email.com • github.com/alex
-</p>
-        </div>
-
-        {/* Education */}
-        <div>
-          <p className="text-xs font-semibold uppercase text-gray-400 mb-1">
-            Education
-          </p>
-         <p className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-  B.Tech in Computer Science — XYZ University
-</p>
-        </div>
-
-        {/* Experience */}
-        <div>
-          <p className="text-xs font-semibold uppercase text-gray-400 mb-1">
-            Experience
-          </p>
-       <p className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-  Frontend Intern — Built React dashboards used by 2k+ users.
-</p>
-        </div>
-
-        {/* Projects */}
-        <div>
-          <p className="text-xs font-semibold uppercase text-gray-400 mb-1">
-            Projects
-          </p>
-         <p className={`text-sm ${isDark ? "text-gray-300" : "text-gray-700"}`}>
-  Fitness Analytics App — React + Node.js
-</p>
-        </div>
-
-        {/* Skills */}
-        <div>
-          <p className="text-xs font-semibold uppercase text-gray-400 mb-2">
-            Skills
-          </p>
-
-          <div className="flex flex-wrap gap-2">
-            <span className="px-2 py-1 text-xs bg-blue-500/10 text-blue-400 rounded">
-              React
-            </span>
-            <span className="px-2 py-1 text-xs bg-blue-500/10 text-blue-400 rounded">
-              Node.js
-            </span>
-            <span className="px-2 py-1 text-xs bg-blue-500/10 text-blue-400 rounded">
-              TypeScript
-            </span>
-          </div>
-        </div>
-
-        {/* Download Button */}
-       <div className="flex justify-center pt-6">
-  <a
-    href="/FitFare.docx"
-    download
-    className="inline-flex items-center gap-2 px-6 py-3 rounded-lg
-    bg-gradient-to-r from-blue-500 to-indigo-500
-    text-white text-sm font-medium
-    hover:scale-105 hover:shadow-lg
-    transition-all duration-300"
-  >
-    Download Resume Template
-    <Download size={16} />
-
-  </a>
- 
-</div>
-<div>
- {/* Professional Note */}
-<motion.div
-  initial={{ opacity: 0, y: 10 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.2 }}
-  className={`mt-8 relative overflow-hidden rounded-xl border p-4 flex gap-3 items-start ${
-    isDark
-      ? "bg-slate-900/60 border-slate-800"
-      : "bg-blue-50/70 border-blue-100"
-  }`}
->
-
-  {/* Icon */}
-  <div
-    className={`flex items-center justify-center w-9 h-9 rounded-lg ${
-      isDark
-        ? " text-blue-400"
-        : " text-blue-600"
-    }`}
-  >
-    <Info size={18} />
-  </div>
-
-  {/* Text */}
-  <p
-    className={`text-sm leading-relaxed ${
-      isDark ? "text-gray-300" : "text-gray-700"
-    }`}
-  >
-    <span className="font-semibold">Note:</span> Applicants should follow the
-    provided resume template and ensure all relevant links such as{" "}
-    <span className="font-medium">GitHub, portfolio, or project URLs</span>{" "}
-    are properly <span className="font-medium">hyperlinked</span> before
-    submitting the resume.
-  </p>
-</motion.div>
-</div>
-
-      </div>
-    </motion.div>
-
-    {/* Resume Sections */}
-    <div className="grid gap-6">
-
-      {[
-        {
-          title: "Education",
-          desc: "Clearly mention your degree, university, and relevant coursework that builds your foundation.",
-        },
-        {
-          title: "Experience",
-          desc: "Include internships, work roles, or leadership positions where you delivered measurable impact.",
-        },
-        {
-          title: "Projects",
-          desc: "Showcase projects that demonstrate problem-solving ability and technical implementation.",
-        },
-        {
-          title: "Skills",
-          desc: "Highlight programming languages, frameworks, tools, and professional capabilities.",
-        },
-        {
-          title: "Certifications",
-          desc: "Add certifications or courses that strengthen your credibility and learning initiative.",
-        },
-      ].map((item, i) => (
-        <motion.div
-          key={i}
-          initial={{ opacity: 0, x: 20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: i * 0.07 }}
-          className={`flex items-start gap-4 p-5 rounded-xl border transition ${
-            isDark
-              ? "border-slate-800 bg-slate-900/60"
-              : "border-gray-200 bg-white"
-          }`}
-        >
-          <div className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-500/10 text-blue-500">
-            <CheckCircle size={18} />
-          </div>
-
-          <div>
-            <h3
-              className={`font-semibold ${
-                isDark ? "text-white" : "text-gray-900"
-              }`}
-            >
-              {item.title}
-            </h3>
-
-            <p
-              className={`text-sm ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              }`}
-            >
-              {item.desc}
-            </p>
-          </div>
-        </motion.div>
-      ))}
-    </div>
-
-  </div>
-</div>
       </div>
     </section>
   );

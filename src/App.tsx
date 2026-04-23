@@ -16,6 +16,8 @@ import ServicesPage from "./pages/ServicePage";
 import Blog from "./pages/Blog";
 import WebappDemo from "./pages/WebappDemo";
 import FeatureDetailPage from "./pages/FeatureDetailPage";
+import JobDetailPage from "./pages/JobDetailPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -31,6 +33,7 @@ const App = () => (
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
           <Route path="/careers" element={<CareerPage />} />
+          <Route path="/careers/:jobId" element={<JobDetailPage />} />
           <Route path="/about-FitFare" element={<AboutPage />} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/services" element={<ServicesPage />} />
