@@ -11,6 +11,8 @@ const EventPage = () => {
         <Event />
       </main>
 
+
+
       <FooterSection />
     </div>
   );
