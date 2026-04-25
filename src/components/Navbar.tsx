@@ -20,7 +20,7 @@ const navLinks = [
   { label: "Programs", href: "#programs" },
   { label: "Features", href: "#innovation-arsenal" },
   { label: "About", href: "#about" },
-  
+  { label: "Career", href: "/careers" },
   { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
@@ -132,23 +132,28 @@ const Navbar = () => {
   /* ---------------- NAV LINK COMPONENT ---------------- */
 
   const NavItem = ({ link, onClick = () => {} }: any) => {
-   const isActive =
-  activeSection === link.href.slice(1) || 
-  (link.href === "#features" && location.pathname.startsWith("/features"));
-  
+    const isSectionLink = link.href.startsWith("#");
+    const isActive = isSectionLink
+      ? activeSection === link.href.slice(1) || 
+        (link.href === "#features" && location.pathname.startsWith("/features"))
+      : location.pathname === link.href;
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
 
-      if (location.pathname === "/") {
-        const targetId = link.href.slice(1);
-        const element = document.getElementById(targetId);
+      if (isSectionLink) {
+        if (location.pathname === "/") {
+          const targetId = link.href.slice(1);
+          const element = document.getElementById(targetId);
 
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
+          if (element) {
+            element.scrollIntoView({ behavior: "smooth" });
+          }
+        } else {
+          navigate(`/${link.href}`);
         }
       } else {
-        navigate(`/${link.href}`);
+        navigate(link.href);
       }
 
       onClick();
