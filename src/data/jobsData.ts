@@ -13,7 +13,8 @@ import {
   Rocket,
   Users,
   Target,
-  Globe
+  Globe,
+  Smartphone 
 } from "lucide-react";
 
 export interface Job {
@@ -36,6 +37,56 @@ export interface Job {
 }
 
 export const jobsData: Job[] = [
+  {
+    id: "android-developer",
+    slug: "android-developer",
+    title: "Android Developer",
+    role: "Android Developer",
+    overview: "We are looking for an Android Developer to join FitFare Pvt. Ltd. You will work closely with the founding team to build the core mobile application from scratch, transforming our WhatsApp-based MVP into a scalable Android product for gym users and owners.",
+    responsibilities: [
+      "Design, develop, and maintain the FitFare Android application using Java and XML.",
+      "Build responsive Android screens and user flows using XML-based UI components.",
+      "Integrate backend APIs and cloud services.",
+      "Work with Firebase (Authentication, Database, Notifications, Storage).",
+      "Integrate payment gateways like Razorpay or PayU.",
+      "Collaborate with the founding team to scale the MVP into a full product.",
+      "Develop dashboards for users and gym owners.",
+      "Ensure app performance, stability, and responsiveness.",
+      "Debug issues and optimize performance.",
+      "Write clean, maintainable, and reusable code with Git workflows."
+    ],
+    mandatoryRequirements: [
+      "2+ years of Android development experience using Java.",
+      "Strong experience with XML-based UI development.",
+      "Good understanding of REST APIs and JSON.",
+      "Experience with Firebase services.",
+      "Experience integrating payment gateways.",
+      "Strong knowledge of Android UI/UX and Material Design.",
+      "Experience in debugging and performance optimization.",
+      "Proficiency with Git and version control."
+    ],
+    preferredRequirements: [
+      "Experience working in startups or 0-to-1 product builds.",
+      "Basic understanding of AI/ML (TensorFlow Lite preferred).",
+      "Familiarity with AWS or GCP.",
+      "Knowledge of analytics tools like Firebase Analytics.",
+      "Experience with automation tools like Zapier or Google Sheets."
+    ],
+    salary: "5 LPA",
+    type: "Full-Time",
+    location: "Gurgaon",
+    positions: 2,
+    icon: Smartphone, // import from lucide-react
+    accent: "#22c55e",
+    whyJoin: [
+      "Opportunity to build a product from scratch.",
+      "Work directly with founders.",
+      "High ownership and impact role.",
+      "Startup exposure and fast learning.",
+      "Be part of building a nationwide fitness platform."
+    ],
+    applyLink: "https://docs.google.com/forms/d/16ZZobEaz4PDXX-GZcqcPn9kTXOfejxJ1F92dKHiqpGc/edit"
+  },
   {
     id: "data-analyst",
     slug: "data-analyst",
