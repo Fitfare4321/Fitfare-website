@@ -66,7 +66,7 @@ Any disputes arising under these Terms shall be subject to the exclusive jurisdi
         title: "11. Contact Information",
         content: `For legal inquiries regarding these Terms, please contact:
 
-team.fitfare@gmail.com`,
+comms@fitfare.in`,
     },
 ];
 

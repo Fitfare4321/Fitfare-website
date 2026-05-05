@@ -47,7 +47,7 @@ const sections = [
     icon: Mail,
     title: "Contact & Support",
     content:
-      "If you have any questions about this Privacy Policy or your data, please contact our support team at team.fitfare@gmail.com We’re here to help.",
+      "If you have any questions about this Privacy Policy or your data, please contact our support team at comms@fitfare.in.com We’re here to help.",
   },
 ];
 
