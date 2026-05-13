@@ -838,7 +838,7 @@ const ThrivethonPage = () => {
                                 <a href="mailto:thriveathon@fitfare.in" className="block group">
                                     <p className="text-white/40 text-xs uppercase tracking-wider mb-1">Drop a mail</p>
                                     <p className="text-white group-hover:text-[#a3e635] transition-colors text-lg font-medium">
-                                    comms@fitfare.in
+                                    info@fitfare.in
                                     </p>
                                 </a>
                                 <div className="group">

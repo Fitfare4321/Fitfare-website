@@ -332,10 +332,10 @@ const JobDetailPage = () => {
                 Have questions about the application process or the role?
               </p>
             <a 
-  href="mailto:comms@fitfare.in" 
+  href="mailto:info@fitfare.in" 
   className="text-sm font-black text-indigo-500 hover:underline flex items-center gap-2"
 >
-  Contact Recruiting Team (comms@fitfare.in)
+  Contact Recruiting Team (info@fitfare.in)
   <ChevronRight size={14} />
 </a>
             </motion.div>

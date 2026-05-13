@@ -70,7 +70,7 @@ const ContactSection = () => {
           email: form.email,
           phone: form.phone,
           message: form.message,
-          to_email: "comms@fitfare.in",
+          to_email: "info@fitfare.in",
         },
         { publicKey: VITE_EMAILJS_PUBLIC_KEY }
       );
@@ -83,7 +83,7 @@ const ContactSection = () => {
       const body = encodeURIComponent(
         `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\n\nMessage:\n${form.message}`
       );
-      window.location.href = `mailto:comms@fitfare.in?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:info@fitfare.in?subject=${subject}&body=${body}`;
     }
   } catch (error) {
     console.error(error);
@@ -154,8 +154,8 @@ const ContactSection = () => {
               {
                 icon: Mail,
                 label: "Email Us",
-                value: "comms@fitfare.in",
-                href: "mailto:comms@fitfare.in",
+                value: "info@fitfare.in",
+                href: "mailto:info@fitfare.in",
               },
             ].map((item, i) => (
               <motion.a

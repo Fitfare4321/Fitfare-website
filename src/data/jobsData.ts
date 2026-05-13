@@ -72,7 +72,7 @@ export const jobsData: Job[] = [
       "Knowledge of analytics tools like Firebase Analytics.",
       "Experience with automation tools like Zapier or Google Sheets."
     ],
-    salary: "5 LPA",
+    salary: "7 LPA",
     type: "Full-Time",
     location: "Gurgaon",
     positions: 2,
@@ -115,7 +115,7 @@ export const jobsData: Job[] = [
       "Passion for startups and the fitness industry.",
       "Basic understanding of databases (SQL)."
     ],
-    salary: "3.5 LPA",
+    salary: "5 LPA",
     type: "Work From Office",
     location: "Gurgaon",
     positions: 1,
@@ -159,7 +159,7 @@ export const jobsData: Job[] = [
       "Passion for startups and the fitness industry.",
       "Basic understanding of SQL for data extraction and querying."
     ],
-    salary: "3.5 LPA",
+    salary: "5 LPA",
     type: "Work From Office",
     location: "Gurgaon",
     positions: 1,
