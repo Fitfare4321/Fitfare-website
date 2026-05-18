@@ -110,7 +110,17 @@ const FooterSection = () => {
               Empowering your fitness journey with flexible access to top gyms and trainers.
               Join the revolution today.
             </p>
-
+{/* ADDRESS */}
+<div className={`space-y-1 text-sm ${isMoon ? "text-gray-400" : "text-gray-700"}`}>
+  <p className="font-semibold text-base">Address</p>
+  <p>FitFare Technologies Pvt. Ltd.</p>
+  <p>WeWork Atrium Place</p>
+  <p>
+    6th Floor, Tower 3, Vanijya Nikunj,
+    Phase V, Udyog Vihar,
+  </p>
+  <p>Sector 19, Gurugram, Haryana 122006</p>
+</div>
             {/* SOCIAL ICONS */}
             <div className="flex gap-4">
               {socials.map((s, i) => (
