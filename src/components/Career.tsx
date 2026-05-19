@@ -34,7 +34,7 @@ const internshipJobs = [
   {
     id: "01",
     title: "Cloud Engineering Intern (4 Positions)",
-    location: "Remote",
+    location: "Gurgaon",
     type: "Internship",
     tag: "Engineering",
     tagColor: "from-blue-500 to-cyan-600",
@@ -57,7 +57,7 @@ const internshipJobs = [
   {
     id: "02",
     title: "Android Developer Intern (8 Positions)",
-    location: "Remote",
+    location: "Gurgaon",
     type: "Internship",
     tag: "Mobile",
     tagColor: "from-blue-500 to-cyan-500",
@@ -78,7 +78,7 @@ const internshipJobs = [
   {
     id: "03",
     title: "BDE Intern (15 Positions)",
-    location: "Remote",
+    location:"Gurgaon",
     type: "Internship",
     tag: "Business",
     tagColor: "from-emerald-500 to-teal-500",
