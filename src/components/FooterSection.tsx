@@ -113,7 +113,7 @@ const FooterSection = () => {
 {/* ADDRESS */}
 <div className={`space-y-1 text-sm ${isMoon ? "text-gray-400" : "text-gray-700"}`}>
   <p className="font-semibold text-base">Address</p>
-  <p>FitFare Technologies Pvt. Ltd.</p>
+  <p>FitFare</p>
   <p>WeWork Atrium Place</p>
   <p>
     6th Floor, Tower 3, Vanijya Nikunj,
