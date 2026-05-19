@@ -76,7 +76,7 @@ const internshipJobs = [
   },
   {
     id: "03",
-    title: "BDE Intern (5 Positions)",
+    title: "BDE Intern (15 Positions)",
     location: "Remote",
     type: "Internship",
     tag: "Business",

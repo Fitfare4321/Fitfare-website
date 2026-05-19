@@ -32,7 +32,8 @@ const PremiumBubbles = () => {
   const [particles, setParticles] = useState<{ id: number; size: number; x: number; y: number; duration: number; delay: number }[]>([]);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: 50 }, (_, i) => ({
+    // Reduced from 50 to 8 particles for better performance
+    const newParticles = Array.from({ length: 8 }, (_, i) => ({
       id: i,
       size: Math.random() * 4 + 2,
       x: Math.random() * 100,
@@ -48,7 +49,7 @@ const PremiumBubbles = () => {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-gradient-to-br from-emerald-400/60 via-cyan-400/40 to-purple-400/30"
+          className="absolute rounded-full bg-gradient-to-br from-emerald-400/60 via-cyan-400/40 to-purple-400/30 will-change-transform"
           style={{
             width: particle.size,
             height: particle.size,
@@ -145,11 +146,11 @@ const trustStats = [
 const Section1 = ({ isDark }: { isDark: boolean }) => (
   <motion.div
     key="s1"
-    initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
-    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
-    exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
-    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+    exit={{ opacity: 0, y: -60 }}
+    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className="grid md:grid-cols-2 gap-16 items-center w-full"
   >
     {/* LEFT */}
@@ -190,8 +191,8 @@ const Section1 = ({ isDark }: { isDark: boolean }) => (
           initial={{ opacity: 0, x: 40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
-          transition={{ delay: 0.1 + i * 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="group flex items-start gap-4"
+          transition={{ delay: 0.05 + i * 0.05, ease: [0.22, 1, 0.36, 1], duration: 0.4 }}
+          className="group flex items-start gap-4 will-change-transform"
         >
           <div
             className={`
@@ -245,11 +246,11 @@ const Section1 = ({ isDark }: { isDark: boolean }) => (
 const Section2 = ({ isDark }: { isDark: boolean }) => (
   <motion.div
     key="s2"
-    initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
-    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
-    exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
-    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+    exit={{ opacity: 0, y: -60 }}
+    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className="w-full max-w-6xl mx-auto mt-10"
   >
     {/* Label */}
@@ -336,11 +337,11 @@ const Section2 = ({ isDark }: { isDark: boolean }) => (
 const Section3 = ({ isDark }: { isDark: boolean }) => (
   <motion.div
     key="s3"
-    initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
-    whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+    initial={{ opacity: 0, y: 60 }}
+    whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "-50px" }}
-    exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
-    transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+    exit={{ opacity: 0, y: -60 }}
+    transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     className="w-full max-w-6xl mx-auto mt-16"
   >
     {/* Label */}
@@ -370,11 +371,11 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
         {whyChoose.map((item, i) => (
           <motion.div
             key={i}
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
+            transition={{ delay: i * 0.03, duration: 0.3 }}
             viewport={{ once: true }}
-            className={`group relative overflow-hidden rounded-xl p-5 md:p-4 border transition-all duration-500
+            className={`group relative overflow-hidden rounded-xl p-5 md:p-4 border transition-all duration-300 will-change-transform
             min-w-[85vw] md:min-w-0 md:w-[calc(50%-16px)] lg:w-[calc(33.333%-24px)] xl:w-[calc(33.333%-32px)] snap-center
             ${isDark
                 ? "bg-white/[0.04] border-white/10 hover:border-blue-500/40 backdrop-blur-2xl"
@@ -436,51 +437,31 @@ const Section3 = ({ isDark }: { isDark: boolean }) => (
 
 // Section 4 — Goals / Stats
 const Section4 = ({ isDark }: { isDark: boolean }) => {
-  // We'll use MotionValues for X, Y, and Rotation to create a premium "levitating" feel.
-  const x1 = useMotionValue(0); const y1 = useMotionValue(0); const r1 = useMotionValue(0);
-  const x2 = useMotionValue(0); const y2 = useMotionValue(0); const r2 = useMotionValue(0);
-  const x3 = useMotionValue(0); const y3 = useMotionValue(0); const r3 = useMotionValue(0);
-  const x4 = useMotionValue(0); const y4 = useMotionValue(0); const r4 = useMotionValue(0);
+  // Simplified: Remove excessive spring physics for draggable cards
+  const xValues = [useMotionValue(0), useMotionValue(0), useMotionValue(0), useMotionValue(0)];
+  const yValues = [useMotionValue(0), useMotionValue(0), useMotionValue(0), useMotionValue(0)];
 
-  // Apply responsive spring physics
-  const springConfig = { stiffness: 120, damping: 12, mass: 0.8 };
-  const sx1 = useSpring(x1, springConfig); const sy1 = useSpring(y1, springConfig); const sr1 = useSpring(r1, springConfig);
-  const sx2 = useSpring(x2, springConfig); const sy2 = useSpring(y2, springConfig); const sr2 = useSpring(r2, springConfig);
-  const sx3 = useSpring(x3, springConfig); const sy3 = useSpring(y3, springConfig); const sr3 = useSpring(r3, springConfig);
-  const sx4 = useSpring(x4, springConfig); const sy4 = useSpring(y4, springConfig); const sr4 = useSpring(r4, springConfig);
+  const springConfig = { stiffness: 150, damping: 15, mass: 0.5 };
+  const sxValues = xValues.map(x => useSpring(x, springConfig));
+  const syValues = yValues.map(y => useSpring(y, springConfig));
 
-  const xValues = [x1, x2, x3, x4]; const yValues = [y1, y2, y3, y4]; const rValues = [r1, r2, r3, r4];
-  const sxValues = [sx1, sx2, sx3, sx4]; const syValues = [sy1, sy2, sy3, sy4]; const srValues = [sr1, sr2, sr3, sr4];
-
-  const controlsRef = useRef<any[]>([]);
-
-  const startIdle = () => {
-    // stop any animation
-    controlsRef.current.forEach(c => c.stop());
-    controlsRef.current = [];
-  };
-
-
-  // Enhanced propagation: pushing affects X, Y (dip), and Rotation (tilt)
   const handleDrag = (index: number, info: any) => {
     const delta = info.delta.x;
-    if (Math.abs(delta) < 0.1) return;
+    if (Math.abs(delta) < 0.5) return;
 
-    if (delta > 0) { // Push Right
+    if (delta > 0) {
       for (let i = index + 1; i < 4; i++) {
         const dist = i - index;
-        const factor = Math.pow(0.5, dist);
-        xValues[i].set(xValues[i].get() + delta * factor);
-        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.3 * factor);
-        rValues[i].set(rValues[i].get() + delta * 0.5 * factor);
+        const factor = Math.pow(0.6, dist);
+        xValues[i].set(xValues[i].get() + delta * factor * 0.3);
+        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.15 * factor);
       }
-    } else { // Push Left
+    } else {
       for (let i = index - 1; i >= 0; i--) {
         const dist = index - i;
-        const factor = Math.pow(0.5, dist);
-        xValues[i].set(xValues[i].get() + delta * factor);
-        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.3 * factor);
-        rValues[i].set(rValues[i].get() + delta * 0.5 * factor);
+        const factor = Math.pow(0.6, dist);
+        xValues[i].set(xValues[i].get() + delta * factor * 0.3);
+        yValues[i].set(yValues[i].get() + Math.abs(delta) * 0.15 * factor);
       }
     }
   };
@@ -489,11 +470,11 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
   return (
     <motion.div
       key="s4"
-      initial={{ opacity: 0, y: 60, filter: "blur(8px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      initial={{ opacity: 0, y: 60 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      exit={{ opacity: 0, y: -60, filter: "blur(8px)" }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      exit={{ opacity: 0, y: -60 }}
+      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className="w-full max-w-6xl mx-auto text-center"
     >
       {/* Label */}
@@ -529,18 +510,11 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
             key={i}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
-            dragElastic={0.4}
-            onDragStart={() => {
-              // Stop idle loops on all cards during interaction for maximum smoothness
-              controlsRef.current.forEach(c => c.stop());
-            }}
+            dragElastic={0.3}
             onDrag={(_, info) => handleDrag(i, info)}
             onDragEnd={() => {
               xValues.forEach(v => v.set(0));
               yValues.forEach(v => v.set(0));
-              rValues.forEach(v => v.set(0));
-              // Restart idle loops after a short delay to let springs settle
-              setTimeout(startIdle, 500);
             }}
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
@@ -548,17 +522,14 @@ const Section4 = ({ isDark }: { isDark: boolean }) => {
             style={{
               x: sxValues[i],
               y: syValues[i],
-              rotate: srValues[i],
               z: 50
             }}
-
             whileHover={{
               scale: 1.05,
               z: 100,
-              transition: { duration: 0.3 }
+              transition: { duration: 0.2 }
             }}
-
-            className={`relative overflow-hidden rounded-[2rem] p-8 border group transition-shadow duration-500 ${isDark
+            className={`relative overflow-hidden rounded-[2rem] p-8 border group transition-shadow duration-300 will-change-transform ${isDark
               ? "bg-white/[0.03] border-white/10 backdrop-blur-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] hover:shadow-emerald-500/10"
               : "bg-white/60 border-gray-200 backdrop-blur-2xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] hover:shadow-emerald-500/10"
               }`}
@@ -627,9 +598,11 @@ const AboutSection = () => {
     offset: ["start start", "end end"],
   });
 
+  // Simplified spring config for better performance
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 20,
+    stiffness: 100,
+    damping: 30,
+    mass: 0.5,
   });
 
   const [activeSection, setActiveSection] = useState(0);
