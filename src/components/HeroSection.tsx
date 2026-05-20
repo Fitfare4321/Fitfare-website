@@ -123,7 +123,8 @@ const HeroSection = () => {
       className="relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Background Video */}
-      <motion.div className="absolute inset-0" style={{ y: bgY }}>
+      {/* Background Video */}
+      <motion.div className="absolute inset-0 overflow-hidden" style={{ y: bgY }}>
         <video
           key={heroVideo}
           autoPlay
@@ -132,24 +133,33 @@ const HeroSection = () => {
           playsInline
           preload="auto"
           poster={heroPoster}
-          className="w-full h-full object-cover scale-110 opacity-100"
+          className="
+      absolute
+      w-full
+      h-full
+      object-cover
+      scale-[1.45]
+      object-center
+      translate-x-[-8%]
+      translate-y-[-8%]
+    "
         >
           <source src={heroVideo} type="video/mp4" />
         </video>
 
-        {/* Overlays */}
+        {/* Dark Overlay */}
         <div
-          className={`absolute inset-0 ${isDark ? "bg-black/20" : "bg-white/10"
+          className={`absolute inset-0 ${isDark ? "bg-black/35" : "bg-white/10"
             }`}
         />
 
+        {/* Gradient Overlay */}
         <div
           className={`absolute inset-0 ${isDark
-            ? "bg-gradient-to-b from-black/40 via-transparent to-black/60"
-            : "bg-gradient-to-b from-white/10 via-transparent to-white"
+              ? "bg-gradient-to-b from-black/50 via-black/10 to-black/70"
+              : "bg-gradient-to-b from-white/10 via-transparent to-white"
             }`}
         />
-
       </motion.div>
 
       {/* Mouse Glow */}
