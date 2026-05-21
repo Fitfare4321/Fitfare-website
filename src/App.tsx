@@ -17,6 +17,17 @@ import Blog from "./pages/Blog";
 import WebappDemo from "./pages/WebappDemo";
 import FeatureDetailPage from "./pages/FeatureDetailPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import OwnerDashboard from "./pages/ownerpages/OwnerDashboard";
+import OwnerServices from "./pages/ownerpages/OwnerServices";
+import OwnerInbox from "./pages/ownerpages/OwnerInbox";
+import OwnerOrders from "./pages/ownerpages/OwnerOrders";
+import OwnerOrderDetail from "./pages/ownerpages/OwnerOrderDetail";
+import OwnerBillings from "./pages/ownerpages/OwnerBillings";
+import OwnerPricing from "./pages/ownerpages/OwnerPricing";
+import OwnerTeam from "./pages/ownerpages/OwnerTeam";
+import OwnerReviews from "./pages/ownerpages/OwnerReviews";
+import OwnerProfile from "./pages/ownerpages/OwnerProfile";
+import OwnerGallery from "./pages/ownerpages/OwnerGallery";
 
 const queryClient = new QueryClient();
 
@@ -41,6 +52,18 @@ const App = () => (
           <Route path="/webapp-demo" element={<WebappDemo />} />
           <Route path="/features/:slug" element={<FeatureDetailPage />} />
           <Route path="/blog/:slug" element={<Blog />} />
+          {/* Owner Dashboard Routes */}
+          <Route path="/owner-access" element={<OwnerDashboard />} />
+          <Route path="/owner-access/services" element={<OwnerServices />} />
+          <Route path="/owner-access/inbox" element={<OwnerInbox />} />
+          <Route path="/owner-access/orders" element={<OwnerOrders />} />
+          <Route path="/owner-access/orders/:id" element={<OwnerOrderDetail />} />
+          <Route path="/owner-access/billings" element={<OwnerBillings />} />
+          <Route path="/owner-access/pricing" element={<OwnerPricing />} />
+          <Route path="/owner-access/team" element={<OwnerTeam />} />
+          <Route path="/owner-access/reviews" element={<OwnerReviews />} />
+          <Route path="/owner-access/profile" element={<OwnerProfile />} />
+          <Route path="/owner-access/gallery" element={<OwnerGallery />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

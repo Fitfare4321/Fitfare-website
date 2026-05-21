@@ -19,11 +19,9 @@ const footerLinks = [
     title: "Resources",
     links: [
       { label: "Blog", href: "/blog" },
-      // { label: "News", href: "#" },
-      // { label: "Services", href: "/services" },
-
       { label: "Events", href: "/event" },
       { label: "See Demo", href: "/webapp-demo" },
+      { label: "Owner Access", href: "/owner-access" },
     ],
   },
   {
