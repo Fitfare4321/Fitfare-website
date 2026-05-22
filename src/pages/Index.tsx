@@ -33,8 +33,8 @@ const Index = () => {
       <ScrollProgress />
       <Navbar />
       <HeroSection />
-      <CitiesSection />
       <ProgramsSection />
+      <CitiesSection />
       <InnovationArsenalSection />
       <AboutSection />
       <PremiumFeaturesSection />
