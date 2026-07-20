@@ -4,7 +4,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ['new-web']
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -39,6 +39,20 @@ jobs:
         run: npm ci
       - name: Build
         run: npm run build
+      - name: Prepare SPA fallback for GitHub Pages
+        run: |
+          # Copy index.html to 404.html for SPA routing
+          cp dist/index.html dist/404.html
+          # Create .nojekyll to disable Jekyll processing
+          touch dist/.nojekyll
+          # Ensure CNAME file exists for custom domain
+          echo "fitfare.in" > dist/CNAME
+          # Verify 404.html was created
+          if [ ! -f dist/404.html ]; then
+            echo "Error: 404.html was not created"
+            exit 1
+          fi
+          echo "✅ SPA fallback (404.html) created successfully"
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact

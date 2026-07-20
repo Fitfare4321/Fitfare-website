@@ -1,0 +1,198 @@
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import logo from "@/assets/blue-background-logo.png";
+
+const Preloader = () => {
+  const [isLoading, setIsLoading] = useState(() => {
+    if (typeof window !== "undefined") {
+      return !window.location.hash;
+    }
+    return true;
+  });
+  const [progress, setProgress] = useState(0);
+  const [loadingText, setLoadingText] = useState("Initializing");
+  const { resolvedTheme } = useTheme();
+  const isDark = resolvedTheme === "dark";
+
+  useEffect(() => {
+    // Check if there is a hash in the URL. If so, skip the preloader.
+    if (window.location.hash) {
+      setIsLoading(false);
+      return;
+    }
+
+    const timer = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(timer);
+          setTimeout(() => setIsLoading(false), 800);
+          return 100;
+        }
+
+        const newProgress = Math.min(prev + Math.random() * 15, 100);
+
+        if (newProgress < 30) setLoadingText("Initializing");
+        else if (newProgress < 60) setLoadingText("Loading Resources");
+        else if (newProgress < 90) setLoadingText("Almost Ready");
+        else setLoadingText("Welcome");
+
+        return newProgress;
+      });
+    }, 100);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  // Particles
+ const particles = Array.from({ length: 40 }, (_, i) => ({
+  id: i,
+  size: Math.random() * 4 + 2,
+  x: Math.random() * 100,
+  delay: Math.random() * 5,
+  duration: Math.random() * 8 + 6,
+}));
+
+  return (
+    <AnimatePresence>
+      {isLoading && (
+        <motion.div
+          exit={{
+            opacity: 0,
+            scale: 1.1,
+            filter: "blur(20px)",
+          }}
+          transition={{ duration: 0.8 }}
+          className={`fixed inset-0 z-[200] flex items-center justify-center overflow-hidden ${
+            isDark
+              ? "bg-gradient-to-br from-[#050505] via-[#0a0a0f] to-[#0f0f12]"
+              : "bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a]"
+          }`}
+        >
+          {/* Background Mesh */}
+          <div className="absolute inset-0 opacity-40">
+            <motion.div
+              className="absolute top-0 left-0 w-[600px] h-[600px] rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(16,185,129,0.3) 0%, transparent 70%)",
+              }}
+              animate={{ x: [0, 100, 0], y: [0, -100, 0] }}
+              transition={{ duration: 10, repeat: Infinity }}
+            />
+
+            <motion.div
+              className="absolute bottom-0 right-0 w-[500px] h-[500px] rounded-full"
+              style={{
+                background:
+                  "radial-gradient(circle, rgba(6,182,212,0.3) 0%, transparent 70%)",
+              }}
+              animate={{ x: [0, -120, 0], y: [0, 100, 0] }}
+              transition={{ duration: 12, repeat: Infinity }}
+            />
+          </div>
+
+          {/* Particles */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+  {particles.map((p) => (
+    <motion.div
+      key={p.id}
+      className="absolute rounded-full bg-gradient-to-r from-emerald-400 to-cyan-400"
+      style={{
+        width: p.size,
+        height: p.size,
+        left: `${p.x}%`,
+        bottom: "-10%",
+      }}
+      animate={{
+        y: [-20, -800],
+        opacity: [0, 1, 0],
+      }}
+      transition={{
+        duration: p.duration,
+        delay: p.delay,
+        repeat: Infinity,
+      }}
+    />
+  ))}
+</div>
+
+          {/* MAIN CONTENT */}
+          <div className="relative z-10 text-center">
+            {/* ICON + RING */}
+            <div className="relative w-40 h-40 mx-auto">
+              {/* Glow */}
+              <motion.div
+                className="absolute inset-0 rounded-full blur-2xl"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(16,185,129,0.25) 0%, transparent 70%)",
+                }}
+                animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                transition={{ duration: 2.5, repeat: Infinity }}
+              />
+
+              {/* Ring */}
+              <svg
+                className="absolute inset-0 -rotate-90"
+                viewBox="0 0 100 100"
+              >
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="44"
+                  fill="none"
+                  stroke="rgba(255,255,255,0.12)"
+                  strokeWidth="3"
+                />
+
+                <motion.circle
+                  cx="50"
+                  cy="50"
+                  r="44"
+                  fill="none"
+                  stroke="url(#gradient)"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  strokeDasharray={2 * Math.PI * 44}
+                  animate={{
+                    strokeDashoffset: 2 * Math.PI * 44 * (1 - progress / 100),
+                  }}
+                  transition={{ duration: 0.3 }}
+                />
+
+                <defs>
+                  <linearGradient id="gradient">
+                    <stop offset="0%" stopColor="#10b981" />
+                    <stop offset="50%" stopColor="#06b6d4" />
+                    <stop offset="100%" stopColor="#8b5cf6" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              {/* CENTER LOGO */}
+              <div className="absolute inset-0 flex items-center justify-center">
+                <motion.div
+                 className="relative z-10 w-24 h-24 rounded-full backdrop-blur-xl bg-white/5 border border-white/10 flex items-center justify-center"
+                  animate={{ scale: [1, 1.04, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <img
+                    src={logo}
+                    alt="FitFare Logo"
+                    className="w-17 h-17 object-contain rounded-full"
+                  />
+                </motion.div>
+              </div>
+            </div>
+
+
+          
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+};
+
+export default Preloader;
