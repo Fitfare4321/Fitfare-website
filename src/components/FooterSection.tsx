@@ -27,9 +27,9 @@ const footerLinks = [
   {
     title: "Legal",
     links: [
-      { label: "Privacy Policy", href: "https://backend-mobile-app.onrender.com/legal/privacy-policy.html" },
-      { label: "Terms of Service", href: "https://backend-mobile-app.onrender.com/legal/terms-of-service.html" },
-      { label: "Contact", href: "https://backend-mobile-app.onrender.com/legal/contact.html" },
+      { label: "Privacy Policy", href: "/legal/privacy-policy.html" },
+      { label: "Terms of Service", href: "/legal/terms-of-service.html" },
+      { label: "Contact", href: "/legal/contact.html" },
     ],
   },
 ];
@@ -168,8 +168,7 @@ const FooterSection = () => {
                 <ul className="space-y-3">
                   {col.links.map((link, j) => (
                     <li key={j}>
-                      {link.href.startsWith("/") ? (
-                        // Internal route → React Router Link
+                      {link.href.startsWith("/") && !link.href.endsWith(".html") ? (
                         <Link
                           to={link.href}
                           className={`
@@ -183,6 +182,20 @@ const FooterSection = () => {
                           {link.label}
                           <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition" />
                         </Link>
+                      ) : link.href.startsWith("/") && link.href.endsWith(".html") ? (
+                        <a
+                          href={link.href}
+                          className={`
+                            flex items-center gap-1 text-sm transition-all duration-300
+                            ${isMoon
+                              ? "text-gray-400 hover:text-white"
+                              : "text-gray-700 hover:text-gray-900"
+                            }
+                          `}
+                        >
+                          {link.label}
+                          <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition" />
+                        </a>
                       ) : link.href.startsWith("#") && link.href !== "#" ? (
                         // Hash section link → smart navigation via handleHashLink
                         <a
@@ -233,27 +246,21 @@ const FooterSection = () => {
 
           <div className={`flex flex-wrap justify-center items-center gap-x-2 text-sm ${isMoon ? "text-gray-400" : "text-gray-700"}`}>
             <a
-              href="https://backend-mobile-app.onrender.com/legal/privacy-policy.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/legal/privacy-policy.html"
               className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
               Privacy Policy
             </a>
             <span aria-hidden="true">&middot;</span>
             <a
-              href="https://backend-mobile-app.onrender.com/legal/terms-of-service.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/legal/terms-of-service.html"
               className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
               Terms of Service
             </a>
             <span aria-hidden="true">&middot;</span>
             <a
-              href="https://backend-mobile-app.onrender.com/legal/contact.html"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/legal/contact.html"
               className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
               Contact
