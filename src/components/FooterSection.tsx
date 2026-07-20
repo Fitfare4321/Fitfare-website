@@ -27,10 +27,9 @@ const footerLinks = [
   {
     title: "Legal",
     links: [
-      { label: "Terms ", href: "/terms-and-conditions" },
-      { label: "Privacy Policy", href: "/privacy-policy" },
-      // { label: "Cookies", href: "#" },
-      //   { label: "Licenses", href: "#" },
+      { label: "Privacy Policy", href: "https://backend-mobile-app.onrender.com/legal/privacy-policy.html" },
+      { label: "Terms of Service", href: "https://backend-mobile-app.onrender.com/legal/terms-of-service.html" },
+      { label: "Contact", href: "https://backend-mobile-app.onrender.com/legal/contact.html" },
     ],
   },
 ];
@@ -201,9 +200,10 @@ const FooterSection = () => {
                           <ArrowRight size={12} className="opacity-0 group-hover:opacity-100 transition" />
                         </a>
                       ) : (
-                        // Placeholder '#' or external
                         <a
                           href={link.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
                           className={`
                             flex items-center gap-1 text-sm transition-all duration-300
                             ${isMoon
@@ -228,31 +228,36 @@ const FooterSection = () => {
         <div className={`pt-8 border-t flex flex-col md:flex-row justify-between items-center gap-4 ${isMoon ? "border-gray-700" : "border-gray-300"
           }`}>
           <p className={isMoon ? "text-gray-400 text-sm" : "text-gray-700 text-sm"}>
-            © 2025 FitFare. All rights reserved.
+            &copy; 2025 FitFare
           </p>
 
-          <div className="flex gap-6">
-            {/* <Link
-              to="/privacy-policy"
-              className={`text-sm transition ${isMoon ? "text-gray-400 hover:text-white" : "text-gray-700 hover:text-gray-900"
-                }`}
+          <div className={`flex flex-wrap justify-center items-center gap-x-2 text-sm ${isMoon ? "text-gray-400" : "text-gray-700"}`}>
+            <a
+              href="https://backend-mobile-app.onrender.com/legal/privacy-policy.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
               Privacy Policy
-            </Link>
-            <Link
-              to="/terms-and-conditions"
-              className={`text-sm transition ${isMoon ? "text-gray-400 hover:text-white" : "text-gray-700 hover:text-gray-900"
-                }`}
+            </a>
+            <span aria-hidden="true">&middot;</span>
+            <a
+              href="https://backend-mobile-app.onrender.com/legal/terms-of-service.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
-              Terms & Conditions
-            </Link> */}
-            {/* <a
-              href="#"
-              className={`text-sm transition ${isMoon ? "text-gray-400 hover:text-white" : "text-gray-700 hover:text-gray-900"
-                }`}
+              Terms of Service
+            </a>
+            <span aria-hidden="true">&middot;</span>
+            <a
+              href="https://backend-mobile-app.onrender.com/legal/contact.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`transition ${isMoon ? "hover:text-white" : "hover:text-gray-900"}`}
             >
-              Cookies
-            </a> */}
+              Contact
+            </a>
           </div>
         </div>
 
