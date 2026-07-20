@@ -432,12 +432,35 @@ const Index = () => {
               </p>
             </div>
           </div>
-          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-gray-400 mb-4 md:mb-0">&copy; 2025 FitFare. All rights reserved.</p>
-            <div className="flex space-x-6 text-sm text-gray-400">
-              <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+          <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-400 text-sm">&copy; 2025 FitFare</p>
+            <div className="flex flex-wrap justify-center items-center gap-x-2 text-sm text-gray-400">
+              <a
+                href="https://backend-mobile-app.onrender.com/legal/privacy-policy.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Privacy Policy
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href="https://backend-mobile-app.onrender.com/legal/terms-of-service.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Terms of Service
+              </a>
+              <span aria-hidden="true">·</span>
+              <a
+                href="https://backend-mobile-app.onrender.com/legal/contact.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Contact
+              </a>
             </div>
           </div>
         </div>
