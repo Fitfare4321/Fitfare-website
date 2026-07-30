@@ -18,14 +18,12 @@
     .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; }
     a { color: var(--brand); }
     hr { border: 0; border-top: 1px solid var(--line); margin: 24px 0; }
-    .note { background: var(--soft); border: 1px solid var(--line); border-left: 4px solid var(--brand); border-radius: 10px; padding: 14px 16px; font-size: 0.94rem; margin: 18px 0; }
     table { width: 100%; border-collapse: collapse; margin: 14px 0 6px; font-size: 0.92rem; }
     th, td { border: 1px solid var(--line); padding: 9px 10px; text-align: left; vertical-align: top; }
     th { background: var(--soft); font-weight: 600; }
     nav.toc { background: var(--soft); border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin: 24px 0 8px; }
     nav.toc ol { margin: 8px 0 0; padding-left: 20px; }
     nav.toc li { margin: 4px 0; }
-    code { background: var(--soft); padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
     .pill { display: inline-block; background: #EFF6FF; color: var(--brand); border: 1px solid #BFDBFE; border-radius: 999px; padding: 2px 10px; font-size: 0.78rem; font-weight: 600; margin-right: 6px; }
   </style>
 </head>
@@ -44,18 +42,18 @@
     <span class="pill">Part C</span> <strong>fitfare.in</strong> website
   </p>
 
-  <p>It explains what personal data we collect, why, who we share it with, how long we keep it, and the rights and controls you have. It is written to meet <strong>Google Play</strong> user-data disclosure requirements and applicable Indian law, including the <strong>Digital Personal Data Protection Act, 2023 (DPDP)</strong>.</p>
+  <p>It explains what personal data we collect, why we collect it, who we share it with, how long we keep it, and your rights. It supports <strong>Google Play</strong> data disclosures and applicable Indian law, including the <strong>Digital Personal Data Protection Act, 2023 (DPDP)</strong>.</p>
   <p>By creating an account or using FitFare, you agree to this Policy. If you do not agree, please stop using the products.</p>
 
   <nav class="toc">
     <strong>Contents</strong>
     <ol>
       <li><a href="#who">Who we are &amp; contact</a></li>
-      <li><a href="#overview">At-a-glance: what each product collects</a></li>
+      <li><a href="#overview">At-a-glance</a></li>
       <li><a href="#user">Part A — FitFare user app</a></li>
       <li><a href="#partner">Part B — FitFare Partner app</a></li>
       <li><a href="#website">Part C — fitfare.in website</a></li>
-      <li><a href="#purposes">Part D — How we use data (purposes &amp; legal bases)</a></li>
+      <li><a href="#purposes">How we use data</a></li>
       <li><a href="#sharing">Sharing &amp; service providers</a></li>
       <li><a href="#retention">Retention</a></li>
       <li><a href="#deletion">Account deletion</a></li>
@@ -64,7 +62,7 @@
       <li><a href="#children">Children</a></li>
       <li><a href="#transfers">International transfers</a></li>
       <li><a href="#datasafety">Play “Data safety” mapping</a></li>
-      <li><a href="#changes">Changes to this Policy</a></li>
+      <li><a href="#changes">Changes</a></li>
       <li><a href="#contact">Contact</a></li>
     </ol>
   </nav>
@@ -91,152 +89,143 @@
     <tr><td>Profile / centre photos</td><td>Yes (optional)</td><td>Yes (centre &amp; KYC images)</td><td>No</td></tr>
     <tr><td>Location</td><td>Yes (with permission)</td><td>Centre address only</td><td>No</td></tr>
     <tr><td>Government ID / PAN / business docs</td><td><strong>No</strong></td><td>Yes (KYC)</td><td>No</td></tr>
-    <tr><td>Bank account details</td><td><strong>No</strong></td><td>Yes (payouts, encrypted)</td><td>No</td></tr>
+    <tr><td>Bank account details</td><td><strong>No</strong></td><td>Yes (payouts)</td><td>No</td></tr>
     <tr><td>Payment card / UPI credentials</td><td>No — handled by Razorpay</td><td>No</td><td>No</td></tr>
-    <tr><td>Push notification tokens</td><td>Yes</td><td>Yes</td><td>No</td></tr>
-    <tr><td>Crash / diagnostics</td><td>Basic platform logs</td><td>Yes (Firebase Crashlytics)</td><td>Standard hosting logs</td></tr>
+    <tr><td>Push notification device ID</td><td>Yes</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Crash / diagnostics</td><td>Basic app logs</td><td>Yes</td><td>Standard website logs</td></tr>
   </table>
   <p><strong>We do not sell personal data</strong> and we do not use your data for third-party advertising.</p>
 
   <!-- ============================ PART A ============================ -->
   <h2 id="user">3. Part A — FitFare user app</h2>
-  <p>Applies to the FitFare Android app (package <code>com.example.fitfare</code>) and any future iOS build of the same user app.</p>
+  <p>Applies to the FitFare user app on Android and any future iOS version of the same app.</p>
 
   <h3>A1. Account &amp; profile</h3>
   <ul>
-    <li><strong>Name, phone number, email address</strong> — to create your account, confirm bookings, and contact you about a booking.</li>
-    <li><strong>Gender</strong> — collected once during onboarding and editable later; used to personalise recommendations and to filter centres with gender-specific access rules.</li>
-    <li><strong>Date of birth</strong> — optional; used for age eligibility (18+) and personalisation.</li>
-    <li><strong>Profile photo</strong> — optional; you choose it from your gallery. It is stored in our cloud storage and shown only in your app profile.</li>
-    <li><strong>City and preferred activities</strong> (for example gym, yoga, boxing, pilates) — used to personalise discovery.</li>
+    <li><strong>Name, phone number, email</strong> — to create your account, confirm bookings, and contact you about a booking.</li>
+    <li><strong>Gender</strong> — collected during onboarding and editable later; used to personalise recommendations and filter centres with gender-specific access.</li>
+    <li><strong>Date of birth</strong> — optional; for age eligibility (18+) and personalisation.</li>
+    <li><strong>Profile photo</strong> — optional; stored and shown in your profile.</li>
+    <li><strong>City and preferred activities</strong> — to personalise discovery.</li>
   </ul>
 
-  <h3>A2. Authentication</h3>
+  <h3>A2. Sign-in</h3>
   <ul>
-    <li><strong>Firebase Phone Authentication</strong> — we send an OTP to your phone number and store the resulting session/ID token state. Google may perform an in-app device integrity or reCAPTCHA check to prevent OTP abuse.</li>
-    <li><strong>Google Sign-In</strong> (if you choose it) — we receive your basic Google profile (name, email, photo).</li>
-    <li>We never see or store your Google password.</li>
+    <li>You can sign in with a one-time code sent to your phone, or with Google Sign-In if you choose it.</li>
+    <li>Sign-in is provided by <strong>Google (Firebase)</strong>.</li>
+    <li>If you use Google Sign-In, we receive your name, email, and profile photo. <strong>We never receive or store your Google password.</strong></li>
   </ul>
 
   <h3>A3. Location</h3>
   <ul>
-    <li><strong>Approximate and precise location</strong> — used to show gyms near you, sort results by distance, and display travel distance.</li>
-    <li><strong>Background location</strong> — the permission may be requested for continued nearby-centre discovery. It is optional; core booking works without it.</li>
-    <li><strong>Reverse geocoding</strong> — coordinates may be converted into a readable area/city name for display.</li>
-    <li>Location is collected only after you grant permission and can be revoked anytime in Android settings. We do not sell or share your location with advertisers.</li>
+    <li>With your permission, we use your location to show nearby gyms and distance.</li>
+    <li>Background location may be requested for continued nearby discovery. It is optional; booking works without it.</li>
+    <li>You can turn location off anytime in device settings. We do not sell or share your location with advertisers.</li>
   </ul>
 
-  <h3>A4. Bookings, slots &amp; QR check-in</h3>
+  <h3>A4. Bookings &amp; check-in</h3>
   <ul>
-    <li>Centre booked, service and slot, booking date and time, quantity, selected activities, amount, payment method, and booking status.</li>
-    <li>QR check-in events and attendance timestamps at the Partner centre.</li>
-    <li>These details are visible to the Partner gym you booked (see <a href="#sharing">Sharing</a>).</li>
+    <li>Centre, service, date and time, quantity, amount, payment method, and booking status.</li>
+    <li>Check-in / attendance records when you visit.</li>
+    <li>The Partner gym you booked receives only the details needed to honour your visit (see <a href="#sharing">Sharing</a>).</li>
   </ul>
 
   <h3>A5. Fit Credits</h3>
   <ul>
-    <li>Prepaid Fit Credit balance, credit lots and their expiry, amounts held in escrow against a booking, and transaction history.</li>
-    <li><strong>Credit transfers:</strong> when you send Fit Credits, we look up the recipient by the phone number you enter and confirm only whether a FitFare account exists and its display name. Both sender and recipient receive a transaction record and may receive a notification.</li>
+    <li>Your Fit Credit balance, expiry dates, amounts held for a booking, and transaction history.</li>
+    <li>If you transfer credits, we use the phone number you enter to find the recipient’s FitFare account and show their display name. Both sides get a transaction record and may get a notification.</li>
   </ul>
 
-  <h3>A6. Favourites, reviews &amp; in-app activity</h3>
+  <h3>A6. Favourites, reviews &amp; activity</h3>
   <ul>
-    <li>Saved / favourite centres.</li>
-    <li>Ratings and written reviews you post for a centre. Reviews are shown publicly in the app with your display name.</li>
-    <li>Search terms and browsing inside the app, used to operate and improve discovery.</li>
+    <li>Saved centres, ratings and reviews (shown publicly with your display name), and search/browse activity used to run and improve discovery.</li>
   </ul>
 
   <h3>A7. Payments</h3>
   <ul>
     <li>Payments and Fit Credit top-ups are processed by <strong>Razorpay</strong>.</li>
-    <li>FitFare stores only payment metadata: amount, order id, payment id, verification signature, status, and the related booking or credit lot.</li>
-    <li><strong>Card numbers, CVV, UPI PIN and net-banking credentials are never stored on FitFare servers.</strong></li>
+    <li>FitFare keeps payment confirmation details such as amount, order/payment id, and status.</li>
+    <li><strong>Card numbers, CVV, UPI PIN, and net-banking passwords are never stored by FitFare.</strong></li>
   </ul>
 
   <h3>A8. Notifications</h3>
   <ul>
-    <li>We store a <strong>Firebase Cloud Messaging (FCM) device token</strong> linked to your account so we can send transactional alerts — for example booking confirmed, or Fit Credits received.</li>
-    <li>Tokens are removed when you log out, unregister the device, or schedule account deletion.</li>
-    <li>You can disable notifications in Android settings at any time; bookings still work.</li>
+    <li>We store a push notification device ID linked to your account for transactional alerts (for example booking confirmed or Fit Credits received).</li>
+    <li>It is removed when you log out or delete your account.</li>
+    <li>You can turn notifications off in device settings; bookings still work.</li>
   </ul>
 
   <h3>A9. Camera &amp; photos</h3>
   <ul>
-    <li><strong>Camera</strong> — used only when you open the QR scanner to check in at a centre. Camera frames are processed on-device to read the QR code; we do not record video.</li>
-    <li><strong>Photos / media</strong> — used only when you pick a profile picture.</li>
+    <li><strong>Camera</strong> — only to scan a check-in QR code. We do not record video.</li>
+    <li><strong>Photos</strong> — only if you choose a profile picture.</li>
   </ul>
 
-  <h3>A10. Device, diagnostics &amp; on-device storage</h3>
+  <h3>A10. Device &amp; support</h3>
   <ul>
-    <li>Device model, OS version, app version, and basic error/performance logs needed for reliability and security.</li>
-    <li>On your device we cache non-sensitive data (for example recent searches, onboarding state, cached images and a cached credits/profile snapshot) so the app opens quickly. Clearing app data removes this cache.</li>
-    <li>Remote configuration flags are fetched to enable or disable features; these contain no personal data.</li>
+    <li>Basic device and app information (for example device type, OS, app version) and error logs for reliability and security.</li>
+    <li>Some non-sensitive data may be stored on your device to make the app open faster. Clearing app data removes it.</li>
+    <li>Support messages and screenshots you send us.</li>
   </ul>
 
-  <h3>A11. Communications you send us</h3>
-  <ul>
-    <li>Support emails and messages you choose to send, including any screenshots you attach.</li>
-    <li>If in-app assistant features are enabled, the prompts you submit are processed to generate a response.</li>
-  </ul>
-
-  <h3 id="user-permissions">A12. Android permissions — user app</h3>
+  <h3>A11. Permissions — user app</h3>
   <table>
     <tr><th>Permission</th><th>Why</th><th>Required?</th></tr>
-    <tr><td><code>INTERNET</code></td><td>Connect to FitFare services</td><td>Required</td></tr>
-    <tr><td><code>ACCESS_COARSE_LOCATION</code> / <code>ACCESS_FINE_LOCATION</code></td><td>Show nearby gyms and distance</td><td>Optional</td></tr>
-    <tr><td><code>ACCESS_BACKGROUND_LOCATION</code></td><td>Continued nearby discovery</td><td>Optional</td></tr>
-    <tr><td><code>CAMERA</code></td><td>QR check-in scanning</td><td>Optional</td></tr>
-    <tr><td>Photos / media access</td><td>Choose a profile photo</td><td>Optional</td></tr>
-    <tr><td><code>POST_NOTIFICATIONS</code></td><td>Booking and Fit Credit alerts</td><td>Optional</td></tr>
+    <tr><td>Internet</td><td>Connect to FitFare</td><td>Required</td></tr>
+    <tr><td>Location</td><td>Show nearby gyms and distance</td><td>Optional</td></tr>
+    <tr><td>Background location</td><td>Continued nearby discovery</td><td>Optional</td></tr>
+    <tr><td>Camera</td><td>QR check-in</td><td>Optional</td></tr>
+    <tr><td>Photos / media</td><td>Profile photo</td><td>Optional</td></tr>
+    <tr><td>Notifications</td><td>Booking and Fit Credit alerts</td><td>Optional</td></tr>
   </table>
   <p>We do <strong>not</strong> request SMS inbox, call logs, contacts, or microphone access in the user app.</p>
 
   <!-- ============================ PART B ============================ -->
   <h2 id="partner">4. Part B — FitFare Partner app</h2>
-  <p>Applies to the FitFare Partner app used by gym and studio owners/operators. Partner users must be 18+ and represent a legitimate business.</p>
+  <p>Applies to the FitFare Partner app used by gym and studio owners/operators. Partners must be 18+ and represent a legitimate business.</p>
 
   <h3>B1. Account</h3>
   <ul>
-    <li>Owner/business email, phone, and Firebase authentication state (OTP / sign-in).</li>
+    <li>Owner/business email, phone, and sign-in details.</li>
   </ul>
 
   <h3>B2. Identity &amp; KYC documents</h3>
   <ul>
-    <li>Owner name; government identity document type and images — <strong>Aadhaar, Passport, or Driving Licence</strong>.</li>
-    <li><strong>PAN</strong> and PAN type.</li>
+    <li>Owner name; government identity documents — <strong>Aadhaar, Passport, or Driving Licence</strong>.</li>
+    <li><strong>PAN</strong>.</li>
     <li>Business registration documents as applicable — GST certificate, Shops &amp; Establishment licence, Udyam registration, certificate of incorporation, LLP or partnership deed.</li>
     <li>Optional cancelled cheque or bank passbook image.</li>
   </ul>
-  <p>These are used strictly for identity verification, fraud prevention, payout eligibility, and legal/tax compliance. Access is restricted to authorised FitFare reviewers and systems.</p>
+  <p>Used for identity verification, fraud prevention, payout eligibility, and legal/tax compliance. Access is limited to authorised FitFare reviewers and systems.</p>
 
   <h3>B3. Bank &amp; payout data</h3>
   <ul>
-    <li>Account holder name, bank account number, and IFSC. <strong>Account numbers are encrypted at rest.</strong></li>
-    <li>Bank verification status. We may initiate a ₹1 micro-deposit (“penny drop”) through <strong>RazorpayX</strong> to validate that the account is valid and belongs to you.</li>
+    <li>Account holder name, bank account number, and IFSC. Account numbers are stored securely.</li>
+    <li>Bank verification status. We may verify the account through our payment partner (<strong>RazorpayX</strong>), including a small test deposit.</li>
     <li>Payout statements, settlement amounts, commission, and adjustments.</li>
   </ul>
 
   <h3>B4. Business &amp; operations data</h3>
   <ul>
-    <li>Centre profile: name, address and geo-coordinates, photos, amenities, operating hours, services, slots, trainers, and pricing you publish.</li>
-    <li>Bookings received, QR check-in and attendance records, no-shows, and support messages.</li>
+    <li>Centre profile: name, address, photos, amenities, hours, services, slots, trainers, and pricing.</li>
+    <li>Bookings received, check-in / attendance records, no-shows, and support messages.</li>
   </ul>
 
   <h3>B5. Notifications, media &amp; diagnostics</h3>
   <ul>
-    <li><strong>FCM device tokens</strong> for operational alerts such as a new booking or a KYC status update.</li>
-    <li><strong>Camera and photo library</strong> — to capture or upload KYC and centre images, and to save your centre QR image to Photos if you choose.</li>
-    <li><strong>Firebase Crashlytics</strong> — crash and stability diagnostics, plus app version info used for in-app update prompts.</li>
+    <li>Push notification device ID for alerts such as a new booking or KYC status update.</li>
+    <li>Camera and photos — to capture or upload KYC and centre images, and to save your centre QR if you choose.</li>
+    <li>Crash and stability reports, and app version information.</li>
   </ul>
 
   <h3>B6. What Partners see about users</h3>
-  <p>Partners receive only what is needed to honour a visit: booking reference, display name, booking date/time, service booked, quantity, and check-in status. Partners do <strong>not</strong> receive your payment credentials, Fit Credit balance, or full account profile. Partners must not reuse or sell user data.</p>
+  <p>Partners receive only what is needed to honour a visit: booking reference, display name, booking date/time, service, quantity, and check-in status. Partners do <strong>not</strong> receive payment credentials, Fit Credit balance, or full account profile. Partners must not reuse or sell user data.</p>
 
-  <h3>B7. Android / iOS permissions — Partner app</h3>
+  <h3>B7. Permissions — Partner app</h3>
   <table>
     <tr><th>Permission</th><th>Why</th><th>Required?</th></tr>
-    <tr><td>Internet</td><td>Connect to FitFare services</td><td>Required</td></tr>
-    <tr><td>Camera / Photos</td><td>KYC and centre document capture, save QR</td><td>Optional</td></tr>
+    <tr><td>Internet</td><td>Connect to FitFare</td><td>Required</td></tr>
+    <tr><td>Camera / Photos</td><td>KYC and centre documents, save QR</td><td>Optional</td></tr>
     <tr><td>Notifications</td><td>Booking and KYC/payout alerts</td><td>Optional</td></tr>
   </table>
   <p>The Partner app does not request location, SMS, contacts, or microphone access.</p>
@@ -244,112 +233,110 @@
   <!-- ============================ PART C ============================ -->
   <h2 id="website">5. Part C — fitfare.in website</h2>
   <ul>
-    <li><strong>Contact and enquiry forms</strong> — name, email, phone and your message, delivered to our team by email so we can reply.</li>
-    <li><strong>Careers / job applications</strong> — the details you send us by email for a role.</li>
-    <li><strong>Standard hosting logs</strong> — IP address, browser/user-agent, and requested page, kept for security and abuse prevention.</li>
+    <li><strong>Contact and enquiry forms</strong> — name, email, phone, and message.</li>
+    <li><strong>Careers applications</strong> — details you send us by email.</li>
+    <li><strong>Standard website logs</strong> — for security and abuse prevention.</li>
     <li>We do not run advertising trackers or sell website visitor data.</li>
   </ul>
 
-  <!-- ============================ PART D ============================ -->
-  <h2 id="purposes">6. Part D — How we use data, and our legal bases</h2>
+  <h2 id="purposes">6. How we use data</h2>
   <table>
-    <tr><th>Purpose</th><th>Typical data</th><th>Legal basis</th></tr>
-    <tr><td>Create and secure your account</td><td>Name, phone, email, auth tokens</td><td>Contract</td></tr>
-    <tr><td>Show nearby centres and availability</td><td>Location, search activity</td><td>Consent (location) / legitimate interest</td></tr>
-    <tr><td>Process bookings, check-in and Fit Credits</td><td>Booking, slot, credits, QR events</td><td>Contract</td></tr>
-    <tr><td>Take payments and issue refunds</td><td>Payment metadata via Razorpay</td><td>Contract / legal obligation</td></tr>
-    <tr><td>Send transactional notifications</td><td>FCM token, booking events</td><td>Consent / contract</td></tr>
-    <tr><td>Verify Partner identity and pay out</td><td>KYC, PAN, bank details</td><td>Legal obligation / contract</td></tr>
-    <tr><td>Prevent fraud, abuse and unauthorised access</td><td>Device, auth, transaction signals</td><td>Legitimate interest / legal obligation</td></tr>
-    <tr><td>Provide support and resolve disputes</td><td>Messages, booking history</td><td>Contract / legitimate interest</td></tr>
-    <tr><td>Fix bugs and improve the product</td><td>Diagnostics, aggregate usage</td><td>Legitimate interest</td></tr>
-    <tr><td>Comply with law and lawful requests</td><td>As required</td><td>Legal obligation</td></tr>
+    <tr><th>Purpose</th><th>Typical data</th></tr>
+    <tr><td>Create and secure your account</td><td>Name, phone, email, sign-in</td></tr>
+    <tr><td>Show nearby centres</td><td>Location, search activity</td></tr>
+    <tr><td>Process bookings, check-in, and Fit Credits</td><td>Booking and credit records</td></tr>
+    <tr><td>Take payments and issue refunds</td><td>Payment confirmation details via Razorpay</td></tr>
+    <tr><td>Send transactional notifications</td><td>Push device ID, booking events</td></tr>
+    <tr><td>Verify Partner identity and pay out</td><td>KYC, PAN, bank details</td></tr>
+    <tr><td>Prevent fraud and misuse</td><td>Device, sign-in, and transaction signals</td></tr>
+    <tr><td>Provide support</td><td>Messages, booking history</td></tr>
+    <tr><td>Improve reliability</td><td>Diagnostics</td></tr>
+    <tr><td>Comply with law</td><td>As required</td></tr>
   </table>
 
   <h2 id="sharing">7. Sharing &amp; service providers</h2>
   <p>We share personal data only as needed to run FitFare:</p>
   <table>
     <tr><th>Recipient</th><th>What for</th><th>Applies to</th></tr>
-    <tr><td><strong>Firebase / Google</strong></td><td>Authentication, Cloud Messaging (push), remote configuration, Crashlytics (Partner)</td><td>User, Partner</td></tr>
-    <tr><td><strong>Supabase</strong></td><td>Database and file/document storage under our instructions</td><td>User, Partner</td></tr>
-    <tr><td><strong>Cloud API hosting (Render)</strong></td><td>Application servers processing FitFare API traffic</td><td>User, Partner</td></tr>
+    <tr><td><strong>Google / Firebase</strong></td><td>Sign-in, push notifications, remote settings, crash reports (Partner)</td><td>User, Partner</td></tr>
+    <tr><td><strong>Supabase</strong></td><td>Database and file storage under our instructions</td><td>User, Partner</td></tr>
+    <tr><td><strong>Cloud hosting (Render)</strong></td><td>Running the FitFare API</td><td>User, Partner</td></tr>
     <tr><td><strong>Razorpay / RazorpayX</strong></td><td>Payments, refunds, bank verification, partner payouts</td><td>User, Partner</td></tr>
-    <tr><td><strong>Maps / navigation providers</strong></td><td>Only when you open directions to a centre</td><td>User</td></tr>
-    <tr><td><strong>Partner gyms</strong></td><td>Limited booking details needed to honour your visit</td><td>User</td></tr>
-    <tr><td><strong>Email delivery provider</strong></td><td>Website contact form and support email</td><td>Website</td></tr>
-    <tr><td><strong>FitFare staff / reviewers</strong></td><td>KYC review, support, fraud checks — role-restricted</td><td>User, Partner</td></tr>
-    <tr><td><strong>Authorities</strong></td><td>When legally required or to protect rights and safety</td><td>All</td></tr>
+    <tr><td><strong>Maps / navigation</strong></td><td>Only when you open directions to a centre</td><td>User</td></tr>
+    <tr><td><strong>Partner gyms</strong></td><td>Limited booking details to honour your visit</td><td>User</td></tr>
+    <tr><td><strong>Email provider</strong></td><td>Website contact form and support email</td><td>Website</td></tr>
+    <tr><td><strong>FitFare staff</strong></td><td>KYC review, support, fraud checks</td><td>User, Partner</td></tr>
+    <tr><td><strong>Authorities</strong></td><td>When legally required</td><td>All</td></tr>
   </table>
-  <p>Service providers process data on our behalf under contractual obligations and are not permitted to use it for their own purposes.</p>
+  <p>Service providers process data on our behalf and are not allowed to use it for their own purposes.</p>
 
   <h2 id="retention">8. Retention</h2>
   <ul>
-    <li><strong>Account and booking records</strong> — kept while your account is active and for a reasonable period afterwards for disputes, accounting, and fraud prevention.</li>
-    <li><strong>Payment and payout records</strong> — kept as long as tax, audit, and chargeback rules require.</li>
-    <li><strong>Partner KYC and bank documents</strong> — kept while the partnership is active; after offboarding they are deleted or anonymised subject to legal retention periods.</li>
-    <li><strong>Push tokens</strong> — removed on logout, device unregister, or deletion request.</li>
-    <li><strong>Support messages</strong> — kept for a reasonable period to maintain service history.</li>
+    <li><strong>Account and booking records</strong> — while your account is active and for a reasonable period afterwards for disputes, accounting, and fraud prevention.</li>
+    <li><strong>Payment and payout records</strong> — as long as tax, audit, and chargeback rules require.</li>
+    <li><strong>Partner KYC and bank documents</strong> — while the partnership is active; after offboarding, deleted or anonymised subject to legal retention.</li>
+    <li><strong>Push device IDs</strong> — removed on logout or deletion.</li>
+    <li><strong>Support messages</strong> — for a reasonable period.</li>
   </ul>
 
   <h2 id="deletion">9. Account deletion</h2>
   <h4>User app</h4>
-  <p>In the app go to <strong>Profile → Edit Profile → Delete my account</strong>.</p>
+  <p>Go to <strong>Profile → Edit Profile → Delete my account</strong>.</p>
   <ul>
-    <li>Your deletion is <strong>scheduled with a 30-day hold</strong> and you are signed out.</li>
-    <li>If you sign in again within 30 days, the deletion is automatically cancelled and your account continues as normal.</li>
-    <li>After 30 days, an automated job permanently deletes or anonymises your account identifiers (name, email, phone, photo, gender, date of birth, preferences), removes your push tokens, and deletes your authentication record.</li>
-    <li>Transaction, payout, and tax records that we must legally retain may be kept in de-identified or minimal form.</li>
+    <li>Deletion is <strong>scheduled with a 30-day hold</strong> and you are signed out.</li>
+    <li>If you sign in again within 30 days, deletion is cancelled.</li>
+    <li>After 30 days, we permanently delete or anonymise your account identifiers (name, email, phone, photo, gender, date of birth, preferences), remove your push device ID, and remove your sign-in account.</li>
+    <li>Records we must keep for law or tax may remain in limited or de-identified form.</li>
   </ul>
   <h4>Partner app</h4>
-  <p>Request deletion from the Partner app profile screen, or email <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a> from your registered address. Pending settlements are reconciled first, and KYC/financial records are retained where law requires.</p>
+  <p>Request deletion from the Partner app profile screen, or email <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a> from your registered address. Pending settlements are reconciled first; KYC/financial records are retained where law requires.</p>
   <h4>Either app</h4>
-  <p>You can always email <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a> and we will action a verified deletion request.</p>
+  <p>You can always email <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a> for a verified deletion request.</p>
 
   <h2 id="security">10. Security</h2>
   <ul>
-    <li>HTTPS/TLS for all data in transit.</li>
-    <li>Token-based authentication; server-side authorisation on every account-scoped API.</li>
-    <li>Encryption at rest for sensitive Partner bank fields; restricted storage buckets for KYC documents.</li>
-    <li>Role-based access for admin review tools and audit logging of sensitive actions.</li>
-    <li>Payment credentials are handled by Razorpay under PCI-compliant processes and never touch our servers.</li>
+    <li>Encrypted connections (HTTPS) for data in transit.</li>
+    <li>Secure sign-in and access controls on account data.</li>
+    <li>Partner bank details and KYC documents are stored with restricted access.</li>
+    <li>Payment card and UPI credentials are handled by Razorpay and never stored by FitFare.</li>
   </ul>
-  <p>No method of transmission or storage is completely secure. Keep your device, email, and OTP access protected.</p>
+  <p>No system is completely secure. Keep your device and sign-in access protected.</p>
 
   <h2 id="rights">11. Your rights (including DPDP) &amp; grievance</h2>
   <p>Subject to applicable law, you may:</p>
   <ul>
-    <li>Access the personal data we hold about you and request a summary of processing;</li>
-    <li>Correct or update your profile — most fields are editable in-app;</li>
-    <li>Request erasure of your personal data (see <a href="#deletion">Account deletion</a>);</li>
-    <li>Withdraw consent where processing is consent-based — for example revoke location, camera, photos, or notification permissions in device settings;</li>
-    <li>Nominate another person to exercise your rights in the event of death or incapacity, as provided under DPDP;</li>
+    <li>Access the personal data we hold about you;</li>
+    <li>Correct or update your profile in-app where available;</li>
+    <li>Request deletion (see <a href="#deletion">Account deletion</a>);</li>
+    <li>Withdraw consent by turning off location, camera, photos, or notifications in device settings;</li>
+    <li>Nominate another person to exercise your rights in case of death or incapacity, as provided under DPDP;</li>
     <li>Raise a grievance about how your data is handled.</li>
   </ul>
-  <p>Send requests to <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a>. We may verify your identity before acting, and we respond within the period required by applicable law. If you are not satisfied, you may escalate to the relevant data protection authority.</p>
+  <p>Email <a href="mailto:collaborations@fitfare.in">collaborations@fitfare.in</a>. We may verify your identity before acting and will respond within the period required by law.</p>
 
   <h2 id="children">12. Children</h2>
-  <p>FitFare is intended for people aged <strong>18 or older</strong> (or the age of majority in your jurisdiction). We do not knowingly collect personal data from children. If you believe a child has used FitFare, contact us and we will delete the data.</p>
+  <p>FitFare is for people aged <strong>18 or older</strong>. We do not knowingly collect personal data from children. Contact us if you believe a child has used FitFare and we will delete the data.</p>
 
   <h2 id="transfers">13. International transfers</h2>
-  <p>Your data may be processed on servers in India or in other countries where our infrastructure providers operate. Where data is transferred across borders, we take steps reasonably designed to protect it in line with applicable law.</p>
+  <p>Your data may be processed in India or in other countries where our service providers operate. We take steps reasonably designed to protect it under applicable law.</p>
 
   <h2 id="datasafety">14. Google Play “Data safety” mapping — user app</h2>
   <table>
     <tr><th>Play category</th><th>Collected</th><th>Shared</th><th>Purpose</th></tr>
-    <tr><td>Personal info (name, email, phone, gender, DOB)</td><td>Yes</td><td>Limited to Partner for your booking</td><td>Account management, app functionality</td></tr>
-    <tr><td>Photos</td><td>Yes (optional profile photo)</td><td>No</td><td>Account personalisation</td></tr>
-    <tr><td>Location (approximate &amp; precise)</td><td>Yes (optional)</td><td>No</td><td>App functionality</td></tr>
-    <tr><td>Financial info (purchase history)</td><td>Yes (order/payment metadata)</td><td>With payment processor</td><td>Payments, fraud prevention</td></tr>
+    <tr><td>Personal info (name, email, phone, gender, DOB)</td><td>Yes</td><td>Limited to Partner for your booking</td><td>Account, app functionality</td></tr>
+    <tr><td>Photos</td><td>Yes (optional profile photo)</td><td>No</td><td>Profile</td></tr>
+    <tr><td>Location</td><td>Yes (optional)</td><td>No</td><td>Nearby gyms</td></tr>
+    <tr><td>Financial info (purchase history)</td><td>Yes (payment confirmation)</td><td>With payment processor</td><td>Payments</td></tr>
     <tr><td>Payment card / UPI credentials</td><td><strong>No</strong> — handled by Razorpay</td><td>—</td><td>—</td></tr>
-    <tr><td>App activity (bookings, favourites, searches, reviews)</td><td>Yes</td><td>No</td><td>App functionality, analytics of our own service</td></tr>
-    <tr><td>Messages (support)</td><td>Yes, if you send them</td><td>No</td><td>Customer support</td></tr>
-    <tr><td>Device or other IDs (FCM token)</td><td>Yes</td><td>With Firebase to deliver push</td><td>Transactional notifications</td></tr>
-    <tr><td>Crash logs / diagnostics</td><td>Yes (basic)</td><td>No</td><td>Reliability and security</td></tr>
+    <tr><td>App activity</td><td>Yes</td><td>No</td><td>App functionality</td></tr>
+    <tr><td>Messages (support)</td><td>Yes, if you send them</td><td>No</td><td>Support</td></tr>
+    <tr><td>Device or other IDs</td><td>Yes (push device ID)</td><td>With Google/Firebase for push</td><td>Notifications</td></tr>
+    <tr><td>Crash logs / diagnostics</td><td>Yes (basic)</td><td>No</td><td>Reliability</td></tr>
   </table>
   <p>Data is encrypted in transit. You can request deletion in-app or by email. We do not sell data and do not use it for third-party advertising.</p>
 
   <h2 id="changes">15. Changes to this Policy</h2>
-  <p>We may update this Policy. Material changes are shown by updating the “Last updated” date above and, where appropriate, by in-app notice. Continuing to use FitFare after an update means you accept the revised Policy.</p>
+  <p>We may update this Policy. Material changes are shown by updating the “Last updated” date and, where appropriate, by in-app notice. Continued use after an update means you accept the revised Policy.</p>
 
   <h2 id="contact">16. Contact</h2>
   <p>

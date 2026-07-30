@@ -23,13 +23,13 @@ const sections = [
     icon: Database,
     title: "2. Data we collect — user app (Part A)",
     content:
-      "Account details (name, phone, email, gender, date of birth, profile photo, city, preferred activities); Firebase phone OTP or Google Sign-In; location when permitted, to show nearby gyms and distance; bookings, slots, QR check-ins, Fit Credit lots, escrow and transfers, favourites, reviews and searches; payment metadata via Razorpay (card, UPI and net-banking credentials are never stored by FitFare); FCM device tokens for transactional push; camera for QR scanning and photo access for your profile picture; basic device and error diagnostics; support messages you send.",
+      "Account details (name, phone, email, gender, date of birth, profile photo, city, preferred activities); phone OTP or Google Sign-In via Google/Firebase (we never receive your Google password); location when permitted; bookings, check-ins, Fit Credits, favourites and reviews; payment confirmation via Razorpay (card/UPI secrets are never stored by FitFare); push notification device ID; camera for QR check-in and photos for profile picture; basic device logs; support messages.",
   },
   {
     icon: Lock,
     title: "3. Data we collect — Partner app (Part B)",
     content:
-      "Business contact details; KYC documents (Aadhaar, Passport or Driving Licence, PAN, and business registration such as GST, Shops & Establishment, Udyam or incorporation papers); bank account holder, account number (encrypted at rest) and IFSC, verified through a RazorpayX penny-drop; centre listings, photos, pricing, slots, bookings received, attendance records and payout statements; FCM tokens; camera and photo access for document capture; Firebase Crashlytics diagnostics. Partners receive only the limited booking details needed to honour a visit and may not reuse user data.",
+      "Business contact details; KYC documents (Aadhaar, Passport or Driving Licence, PAN, and business registration); bank account details for payouts (verified via our payment partner); centre listings, bookings, attendance and payouts; push notification device ID; camera and photos for documents; crash reports. Partners receive only limited booking details needed to honour a visit and may not reuse user data.",
   },
   {
     icon: Settings,
