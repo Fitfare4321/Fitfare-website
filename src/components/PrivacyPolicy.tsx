@@ -14,40 +14,52 @@ import {
 
 const sections = [
   {
-    icon: Database,
-    title: "Information We Collect",
+    icon: Shield,
+    title: "1. What this policy covers",
     content:
-      "When you create an account or use FitFare, we may collect your name, email address, contact number, fitness preferences, booking history, and transaction details. We also gather limited technical data such as device type and usage behavior to enhance performance and security.",
+      "One policy covers all FitFare products: Part A — the FitFare user app (booking gyms and Fit Credits); Part B — the FitFare Partner app (gym and studio owners); Part C — this website. The full sectioned policy, including the Google Play data-safety mapping, is at /legal/privacy-policy.html.",
   },
   {
-    icon: Settings,
-    title: "How We Use Your Data",
+    icon: Database,
+    title: "2. Data we collect — user app (Part A)",
     content:
-      "Your information enables us to manage gym access, process memberships, personalize recommendations, send essential service updates, and continuously improve the FitFare experience. We use data responsibly and only for legitimate business purposes.",
+      "Account details (name, phone, email, gender, date of birth, profile photo, city, preferred activities); Firebase phone OTP or Google Sign-In; location when permitted, to show nearby gyms and distance; bookings, slots, QR check-ins, Fit Credit lots, escrow and transfers, favourites, reviews and searches; payment metadata via Razorpay (card, UPI and net-banking credentials are never stored by FitFare); FCM device tokens for transactional push; camera for QR scanning and photo access for your profile picture; basic device and error diagnostics; support messages you send.",
   },
   {
     icon: Lock,
-    title: "Security & Protection",
+    title: "3. Data we collect — Partner app (Part B)",
     content:
-      "We implement advanced encryption, secure HTTPS communication, controlled access systems, and routine monitoring to safeguard your information. Protecting your data is central to our platform’s integrity.",
+      "Business contact details; KYC documents (Aadhaar, Passport or Driving Licence, PAN, and business registration such as GST, Shops & Establishment, Udyam or incorporation papers); bank account holder, account number (encrypted at rest) and IFSC, verified through a RazorpayX penny-drop; centre listings, photos, pricing, slots, bookings received, attendance records and payout statements; FCM tokens; camera and photo access for document capture; Firebase Crashlytics diagnostics. Partners receive only the limited booking details needed to honour a visit and may not reuse user data.",
+  },
+  {
+    icon: Settings,
+    title: "4. How we use your data",
+    content:
+      "To create and secure your account, show nearby centres, process bookings and Fit Credits, take payments and issue refunds, verify Partner identity and pay out earnings, send transactional alerts you allow, prevent fraud, provide support, fix bugs, and comply with law. We do not sell personal data and do not use it for third-party advertising.",
   },
   {
     icon: Eye,
-    title: "Data Sharing & Transparency",
+    title: "5. Sharing & processors",
     content:
-      "We do not sell or rent your personal data. Information may be shared only with trusted partner gyms or verified service providers strictly to operate and deliver our services effectively.",
+      "Firebase and Google (auth, push, remote config, Crashlytics), Supabase (database and document storage), our cloud API hosting, Razorpay and RazorpayX (payments, refunds, bank verification and payouts), maps when you open directions, Partner gyms (limited booking details only), our email provider for website enquiries, and authorities when legally required. Providers act on our instructions and cannot use your data for their own purposes.",
+  },
+  {
+    icon: Lock,
+    title: "6. Security, retention & deletion",
+    content:
+      "HTTPS in transit, token-based authentication, encryption at rest for Partner bank fields, restricted KYC storage and role-based admin access. Users can delete an account in the app (Profile → Edit Profile → Delete my account) with a 30-day hold — sign in again within 30 days to keep it, otherwise identifiers are permanently deleted or anonymised. Partners can request deletion in-app or by email; financial and KYC records are retained where law requires.",
   },
   {
     icon: Shield,
-    title: "Your Rights & Control",
+    title: "7. Your rights (including DPDP)",
     content:
-      "You retain full control over your personal data. You may request access, updates, corrections, or deletion at any time. We are committed to honoring your privacy rights promptly and transparently.",
+      "Subject to law, you may access or correct your data, request erasure, withdraw consent by revoking location, camera, photo or notification permissions in device settings, nominate someone to exercise your rights, and raise a grievance. FitFare is for people aged 18 and over.",
   },
   {
     icon: Mail,
-    title: "Contact & Support",
+    title: "8. Contact",
     content:
-      "If you have any questions about this Privacy Policy or your data, please contact our support team at info@fitfare.in We’re here to help.",
+      "Privacy, deletion and grievance: collaborations@fitfare.in · Phone: +91 7666400518. Full policy (authoritative HTML, used for Google Play): https://fitfare.in/legal/privacy-policy.html",
   },
 ];
 
@@ -83,7 +95,7 @@ export default function PrivacyPolicy() {
             className={`text-sm ${isDark ? "text-slate-400" : "text-slate-500"
               }`}
           >
-            Last Updated • January 2026
+            Last Updated • 30 July 2026
           </p>
 
           <div
@@ -99,9 +111,10 @@ export default function PrivacyPolicy() {
               </span>
             </div>
             <p className="text-sm leading-relaxed">
-              At <strong>FitFare</strong>, we believe trust is earned. This policy
-              explains how we collect, use, and protect your information while
-              delivering a seamless fitness experience.
+              At <strong>FitFare</strong>, we believe trust is earned. One policy
+              covers the FitFare user app, the FitFare Partner app, and this
+              website. For the complete sectioned disclosure used for Google
+              Play, see our full policy at /legal/privacy-policy.html.
             </p>
           </div>
         </motion.div>
