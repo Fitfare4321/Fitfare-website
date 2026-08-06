@@ -12,6 +12,12 @@ import ContactSection from "@/components/ContactSection";
 import FooterSection from "@/components/FooterSection";
 import ScrollProgress from "@/components/ScrollProgress";
 import Preloader from "@/components/Preloader";
+import PageSEO from "@/components/PageSEO";
+
+const HOMEPAGE_TITLE = "Gym and Fitness Centre with Flexible Membership | FitFare";
+const HOMEPAGE_DESCRIPTION =
+  "Find gyms and fitness centres with pay-per-session, pay-per-use, and flexible memberships. Book instantly and work out on your schedule.";
+const HOMEPAGE_CANONICAL = "https://fitfare.in/";
 
 const Index = () => {
   // When arriving from another page with a hash (e.g. /#about),
@@ -29,6 +35,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0f172a', color: '#f1f5f9', minHeight: '100vh' }}>
+      <PageSEO
+        title={HOMEPAGE_TITLE}
+        description={HOMEPAGE_DESCRIPTION}
+        canonical={HOMEPAGE_CANONICAL}
+      />
       <Preloader />
       <ScrollProgress />
       <Navbar />
