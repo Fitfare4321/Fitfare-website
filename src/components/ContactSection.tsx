@@ -52,44 +52,71 @@ const ContactSection = () => {
 };
 
 
- const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault();
+  const openMailFallback = () => {
+    const subject = encodeURIComponent("New Contact Form Submission - FitFare");
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\n\nMessage:\n${form.message}`
+    );
 
-  if (!validateForm()) return;
+    window.location.href = `mailto:info@fitfare.in?subject=${subject}&body=${body}`;
+  };
 
-  try {
-    const { VITE_EMAILJS_SERVICE_ID, VITE_EMAILJS_TEMPLATE_ID, VITE_EMAILJS_PUBLIC_KEY } =
-      import.meta.env;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
 
-    if (VITE_EMAILJS_SERVICE_ID && VITE_EMAILJS_TEMPLATE_ID && VITE_EMAILJS_PUBLIC_KEY) {
-      await emailjs.send(
+    if (!validateForm()) return;
+
+    try {
+      const {
         VITE_EMAILJS_SERVICE_ID,
         VITE_EMAILJS_TEMPLATE_ID,
-        {
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          message: form.message,
-          to_email: "info@fitfare.in",
-        },
-        { publicKey: VITE_EMAILJS_PUBLIC_KEY }
-      );
+        VITE_EMAILJS_PUBLIC_KEY,
+      } = import.meta.env;
 
-      alert("Message sent successfully!");
-      setForm({ name: "", email: "", phone: "", message: "" });
-      setErrors({ email: "", phone: "" });
-    } else {
-      const subject = encodeURIComponent("New Contact Form Submission - FitFare");
-      const body = encodeURIComponent(
-        `Name: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone || "N/A"}\n\nMessage:\n${form.message}`
-      );
-      window.location.href = `mailto:info@fitfare.in?subject=${subject}&body=${body}`;
+      if (
+        VITE_EMAILJS_SERVICE_ID &&
+        VITE_EMAILJS_TEMPLATE_ID &&
+        VITE_EMAILJS_PUBLIC_KEY
+      ) {
+        await emailjs.send(
+          VITE_EMAILJS_SERVICE_ID,
+          VITE_EMAILJS_TEMPLATE_ID,
+          {
+            name: form.name,
+            email: form.email,
+            phone: form.phone,
+            message: form.message,
+            to_email: "info@fitfare.in",
+          },
+          { publicKey: VITE_EMAILJS_PUBLIC_KEY }
+        );
+
+        alert("Message sent successfully!");
+        setForm({ name: "", email: "", phone: "", message: "" });
+        setErrors({ email: "", phone: "" });
+      } else {
+        openMailFallback();
+      }
+    } catch (error) {
+      const err = error as { status?: number; text?: string };
+      const isGmailGrantError =
+        err?.status === 412 ||
+        (typeof err?.text === "string" &&
+          (err.text.includes("Gmail_API") || err.text.includes("Invalid grant")));
+
+      console.error("Contact form send error:", error);
+
+      if (isGmailGrantError) {
+        alert(
+          "The Gmail connection for the contact form has expired. Your email app will open so you can send the message manually."
+        );
+        openMailFallback();
+        return;
+      }
+
+      alert("Error sending message. Please try again or email us directly.");
     }
-  } catch (error) {
-    console.error(error);
-    alert("Error sending message");
-  }
-};
+  };
 
 
   const inputClasses = `
