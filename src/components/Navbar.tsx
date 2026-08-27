@@ -16,13 +16,13 @@ import { Label } from "recharts";
 /* ---------------- NAV LINKS ---------------- */
 
 const navLinks = [
-  { label: "Home", href: "#home" },
-  { label: "Programs", href: "#programs" },
-  { label: "Features", href: "#innovation-arsenal" },
-  { label: "About", href: "#about" },
+  { label: "Home", href: "/#home" },
+  { label: "Programs", href: "/#programs" },
+  { label: "Features", href: "/#innovation-arsenal" },
+  { label: "About", href: "/#about" },
   { label: "Career", href: "/careers" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { label: "Testimonials", href: "/#testimonials" },
+  { label: "Contact", href: "/#contact" },
 ];
 
 const Navbar = () => {
@@ -100,7 +100,9 @@ const Navbar = () => {
   useEffect(() => {
     if (location.pathname !== "/") return;
 
-    const sectionIds = navLinks.map((link) => link.href.slice(1));
+    const sectionIds = navLinks
+      .filter((link) => link.href.includes("#"))
+      .map((link) => link.href.split("#")[1]);
 
     const updateActiveSection = () => {
       const middle = window.innerHeight * 0.5;
@@ -132,26 +134,30 @@ const Navbar = () => {
   /* ---------------- NAV LINK COMPONENT ---------------- */
 
   const NavItem = ({ link, onClick = () => {} }: any) => {
-    const isSectionLink = link.href.startsWith("#");
+    const isSectionLink = link.href.includes("#");
+    const sectionId = isSectionLink ? link.href.split("#")[1] : "";
     const isActive = isSectionLink
-      ? activeSection === link.href.slice(1) || 
-        (link.href === "#features" && location.pathname.startsWith("/features"))
+      ? activeSection === sectionId ||
+        (link.href === "/#features" && location.pathname.startsWith("/features"))
       : location.pathname === link.href;
 
     const handleNavigation = (e: React.MouseEvent<HTMLAnchorElement>) => {
       e.preventDefault();
 
       if (isSectionLink) {
-        if (location.pathname === "/") {
-          const targetId = link.href.slice(1);
+        const targetPath = "/";
+        const targetId = sectionId;
+
+        if (location.pathname === targetPath) {
           const element = document.getElementById(targetId);
 
           if (element) {
-            element.scrollIntoView({ behavior: "smooth" });
+            element.scrollIntoView({ behavior: "smooth", block: "start" });
+            return;
           }
-        } else {
-          navigate(`/${link.href}`);
         }
+
+        navigate(`${targetPath}#${targetId}`);
       } else {
         navigate(link.href);
       }
