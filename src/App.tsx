@@ -17,6 +17,7 @@ import Blog from "./pages/Blog";
 import WebappDemo from "./pages/WebappDemo";
 import FeatureDetailPage from "./pages/FeatureDetailPage";
 import JobDetailPage from "./pages/JobDetailPage";
+import GurgaonPage from "./pages/GurgaonPage";
 import OwnerDashboard from "./pages/ownerpages/OwnerDashboard";
 import OwnerServices from "./pages/ownerpages/OwnerServices";
 import OwnerInbox from "./pages/ownerpages/OwnerInbox";
@@ -48,6 +49,7 @@ const App = () => (
           <Route path="/about-FitFare" element={<AboutPage />} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/services" element={<ServicesPage />} />
+          <Route path="/gurgaon" element={<GurgaonPage />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/webapp-demo" element={<WebappDemo />} />
           <Route path="/features/:slug" element={<FeatureDetailPage />} />
