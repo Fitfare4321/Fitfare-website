@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import ThrivethonPage from "./pages/Thrivethon";
 import PrivacyPolicyPage from "./pages/PrivacyPolicyPage";
 import TermsAndConditionsPage from "./pages/TermsAndConditionsPage";
+import ContactPage from "./pages/ContactPage";
+import CancellationRefundsPage from "./pages/CancellationRefundsPage";
 import ScrollToTop from "./components/ScrollToTop";
 import CareerPage from "./pages/CareerPage";
 import AboutPage from "./pages/AboutPage";
@@ -18,6 +20,9 @@ import WebappDemo from "./pages/WebappDemo";
 import FeatureDetailPage from "./pages/FeatureDetailPage";
 import JobDetailPage from "./pages/JobDetailPage";
 import GurgaonPage from "./pages/GurgaonPage";
+import NoidaPage from "./pages/NoidaPage";
+import SouthDelhiPage from "./pages/SouthDelhiPage";
+import DelhiNCRPage from "./pages/DelhiNCRPage";
 import OwnerDashboard from "./pages/ownerpages/OwnerDashboard";
 import OwnerServices from "./pages/ownerpages/OwnerServices";
 import OwnerInbox from "./pages/ownerpages/OwnerInbox";
@@ -44,12 +49,21 @@ const App = () => (
           <Route path="/thrivethon" element={<ThrivethonPage />} />
           <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
           <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/cancellation-refunds" element={<CancellationRefundsPage />} />
+          <Route path="/legal/privacy-policy.html" element={<PrivacyPolicyPage />} />
+          <Route path="/legal/terms-of-service.html" element={<TermsAndConditionsPage />} />
+          <Route path="/legal/contact.html" element={<ContactPage />} />
+          <Route path="/legal/cancellation-refunds.html" element={<CancellationRefundsPage />} />
           <Route path="/careers" element={<CareerPage />} />
           <Route path="/careers/:jobId" element={<JobDetailPage />} />
           <Route path="/about-FitFare" element={<AboutPage />} />
           <Route path="/event" element={<EventPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/gurgaon" element={<GurgaonPage />} />
+          <Route path="/noida" element={<NoidaPage />} />
+          <Route path="/south-delhi" element={<SouthDelhiPage />} />
+          <Route path="/delhi-ncr" element={<DelhiNCRPage />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/webapp-demo" element={<WebappDemo />} />
           <Route path="/features/:slug" element={<FeatureDetailPage />} />
