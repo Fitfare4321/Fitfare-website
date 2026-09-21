@@ -20,6 +20,7 @@ const navLinks = [
   { label: "Programs", href: "/#programs" },
   { label: "Features", href: "/#innovation-arsenal" },
   { label: "About", href: "/#about" },
+  { label: "Blog", href: "/blog" },
   { label: "Career", href: "/careers" },
   { label: "Testimonials", href: "/#testimonials" },
   { label: "Contact", href: "/#contact" },

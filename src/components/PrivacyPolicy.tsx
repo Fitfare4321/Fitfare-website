@@ -10,7 +10,14 @@ import {
   Settings,
   Mail,
   Sparkles,
+  CheckCircle2,
 } from "lucide-react";
+
+const highlights = [
+  "Zero data selling",
+  "Secure account handling",
+  "Transparent processing",
+];
 
 const sections = [
   {
@@ -69,109 +76,97 @@ export default function PrivacyPolicy() {
 
   return (
     <div
-      className={`min-h-screen transition-all duration-500 ${isDark
-        ? "bg-gradient-to-br from-[#0f172a] via-[#0b1220] to-[#020617] text-white"
-        : "bg-gradient-to-br from-[#f8fafc] via-[#eef2ff] to-[#ffffff] text-slate-900"
-        }`}
+      className={`min-h-screen transition-all duration-500 ${
+        isDark
+          ? "bg-[radial-gradient(circle_at_top,_rgba(37,99,235,0.18),transparent_35%),linear-gradient(180deg,#020817_0%,#0f172a_100%)] text-white"
+          : "bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.12),transparent_30%),linear-gradient(180deg,#f8fafc_0%,#eff6ff_100%)] text-slate-900"
+      }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-24">
-        {/* HEADER */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
+      <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
+        <motion.header
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="mb-14 text-center"
         >
-          <div className="flex items-center justify-center gap-3 mb-5 mt-10">
-            <div className="p-3 rounded-xl bg-blue-600/10 backdrop-blur-sm border border-blue-500/20">
-              <Shield className="w-6 h-6 text-blue-500" />
-            </div>
-            <h1 className="text-4xl font-semibold tracking-tight">
-              Privacy Policy
-            </h1>
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-blue-400">
+            <Shield className="h-4 w-4" />
+            Privacy commitment
           </div>
 
-          <p
-            className={`text-sm ${isDark ? "text-slate-400" : "text-slate-500"
-              }`}
-          >
+          <h1 className="text-4xl font-black tracking-tight sm:text-5xl lg:text-6xl">
+            Privacy Policy
+          </h1>
+
+          <p className={`mt-4 text-sm ${isDark ? "text-slate-400" : "text-slate-500"}`}>
             Last Updated • 30 July 2026
           </p>
 
           <div
-            className={`mt-8 max-w-3xl mx-auto p-6 rounded-2xl backdrop-blur-xl border ${isDark
-              ? "bg-white/5 border-white/10 text-slate-300"
-              : "bg-white/70 border-slate-200 text-slate-600"
-              }`}
+            className={`mx-auto mt-8 max-w-3xl rounded-[28px] border p-6 shadow-2xl shadow-blue-950/10 backdrop-blur-xl ${
+              isDark
+                ? "border-white/10 bg-white/5 text-slate-300"
+                : "border-slate-200 bg-white/70 text-slate-600"
+            }`}
           >
-            <div className="flex items-center justify-center gap-2 mb-3 text-blue-500">
+            <div className="mb-3 flex items-center justify-center gap-2 text-blue-500">
               <Sparkles size={16} />
-              <span className="text-sm font-medium">
-                Your Privacy is Our Commitment
-              </span>
+              <span className="text-sm font-semibold">Your privacy is our priority</span>
             </div>
-            <p className="text-sm leading-relaxed">
-              At <strong>FitFare</strong>, we believe trust is earned. One policy
-              covers the FitFare user app, the FitFare Partner app, and this
-              website. For the complete sectioned disclosure used for Google
-              Play, see our full policy at /legal/privacy-policy.html.
+            <p className="text-sm leading-7 sm:text-base">
+              At <strong>FitFare</strong>, trust is earned. This policy covers the FitFare user app,
+              partner app, and website, and explains how we collect, process, and protect your data.
             </p>
           </div>
-        </motion.div>
+        </motion.header>
 
-        {/* TRUST STRIP */}
-        <div className="mb-16">
-          <div className="rounded-2xl bg-blue-600 text-white py-4 px-8 flex flex-col md:flex-row justify-center gap-10 text-sm font-medium shadow-lg">
-            <div className="flex items-center gap-2 justify-center">
-              <Shield size={16} /> Zero Data Selling
+        <div className="mb-14 grid gap-4 md:grid-cols-3">
+          {highlights.map((item) => (
+            <div
+              key={item}
+              className={`rounded-2xl border p-4 text-center text-sm font-medium ${
+                isDark
+                  ? "border-slate-800 bg-slate-900/70 text-slate-200"
+                  : "border-slate-200 bg-white/80 text-slate-700"
+              }`}
+            >
+              <div className="mb-2 flex justify-center">
+                <CheckCircle2 className="h-4 w-4 text-blue-400" />
+              </div>
+              {item}
             </div>
-            <div className="flex items-center gap-2 justify-center">
-              <Lock size={16} /> End-to-End Security
-            </div>
-            <div className="flex items-center gap-2 justify-center">
-              <Eye size={16} /> Full Transparency
-            </div>
-          </div>
+          ))}
         </div>
 
-        {/* CONTENT */}
-        <div className="max-w-5xl mx-auto relative">
-
-          {/* Vertical guide line */}
-          <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-blue-500/40 to-transparent" />
-
-          <div className="space-y-12 pl-10">
+        <div className="mx-auto max-w-5xl">
+          <div className="space-y-6">
             {sections.map((section, index) => {
               const Icon = section.icon;
+
               return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                <motion.article
+                  key={section.title}
+                  initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ duration: 0.5 }}
+                  transition={{ duration: 0.4, delay: index * 0.04 }}
+                  className={`rounded-[26px] border p-6 shadow-xl backdrop-blur-sm sm:p-8 ${
+                    isDark
+                      ? "border-slate-800 bg-slate-900/80"
+                      : "border-slate-200 bg-white/80"
+                  }`}
                 >
-
-
-                  {/* Title */}
-                  <div className="flex items-center gap-3 mb-6">
-                    <Icon
-                      className={`w-5 h-5 ${isDark ? "text-blue-400/80" : "text-blue-600/80"
-                        }`}
-                    />
-                    <h2 className="text-[18px] font-semibold tracking-tight">
-                      {section.title}
-                    </h2>
+                  <div className="mb-5 flex items-center gap-3">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/10 text-blue-400">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <h2 className="text-lg font-bold tracking-tight sm:text-xl">{section.title}</h2>
                   </div>
 
-                  {/* Content */}
-                  <p
-                    className={`text-[15px] leading-relaxed ${isDark ? "text-slate-400" : "text-slate-600"
-                      }`}
-                  >
+                  <p className={`text-sm leading-8 sm:text-[15px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                     {section.content}
                   </p>
-                </motion.div>
+                </motion.article>
               );
             })}
           </div>

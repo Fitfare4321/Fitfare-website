@@ -726,6 +726,51 @@ const Blog = () => {
     "And FitFare is building exactly that. 🚀",
   ];
 
+  const recentPosts = [
+    {
+      slug: "top-10-beginner",
+      title: "Top 10 Beginner Workouts to Start Your Fitness Journey",
+      image: top10,
+    },
+    {
+      slug: "post-workout-recipes",
+      title: "Healthy Post-Workout Recipes to Speed Recovery",
+      image: postWorkoutImg,
+    },
+    {
+      slug: post3Id,
+      title: post3Title,
+      image: overthinkImg,
+    },
+    {
+      slug: post4Id,
+      title: post4Title,
+      image: aiTransform,
+    },
+    {
+      slug: post5Id,
+      title: post5Title,
+      image: periodImg,
+    },
+    {
+      slug: post6Id,
+      title: post6Title,
+      image: weightGainImg,
+    },
+    {
+      slug: post7Id,
+      title: post7Title,
+      image: weightLossImg,
+    },
+    {
+      slug: post8Id,
+      title: post8Title,
+      image: "/blue-background-logo.png",
+    },
+  ];
+
+  const relatedPosts = active ? recentPosts.filter((post) => post.slug !== active).slice(0, 4) : [];
+
   return (
     <div className={isDark ? "bg-slate-950 text-white" : "bg-white text-slate-900"}>
       <ScrollProgress />
@@ -1653,6 +1698,50 @@ const Blog = () => {
               ))}
             </div>
           </motion.article>
+          )}
+
+          {active && relatedPosts.length > 0 && (
+            <div className={`mt-10 rounded-3xl border backdrop-blur-xl p-5 md:p-8 shadow-[0_18px_45px_rgba(15,23,42,0.2)] ${
+              isDark ? "bg-slate-900/40 border-white/10" : "bg-slate-50/80 border-slate-200"
+            }`}>
+              <div className="mb-6">
+                <p className={`text-xs font-semibold uppercase tracking-[0.2em] ${isDark ? "text-blue-300" : "text-blue-600"}`}>
+                  More reads
+                </p>
+                <h3 className="mt-2 text-2xl md:text-3xl font-black tracking-tight">Recent blog posts</h3>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {relatedPosts.map((post) => (
+                  <motion.a
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate(`/blog/${post.slug}`);
+                    }}
+                    whileHover={{ y: -6, scale: 1.01 }}
+                    className="group block overflow-hidden rounded-2xl border bg-white/5"
+                  >
+                    <div className="overflow-hidden border-b border-white/10">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="h-40 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <p className={`text-xs font-semibold uppercase tracking-[0.16em] ${isDark ? "text-slate-400" : "text-slate-500"}`}>
+                        Blog
+                      </p>
+                      <h4 className={`mt-2 text-base font-bold leading-snug ${isDark ? "text-white" : "text-slate-900"}`}>
+                        {post.title}
+                      </h4>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
           )}
         </div>
       </section>
