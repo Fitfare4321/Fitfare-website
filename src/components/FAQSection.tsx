@@ -5,36 +5,44 @@ import { useTheme } from "next-themes";
 
 const faqs = [
   {
-    q: "How does the AI-powered workout system work?",
-    a: "Our AI analyzes your fitness level, goals, available equipment, time constraints, and progress to create personalized workout plans. It continuously adapts based on your performance, feedback, and changing needs."
+    q: "What is FitFare?",
+    a: "FitFare is a flexible fitness platform that lets you discover and access partnered gyms and fitness centres without committing to a traditional long-term membership. Find a centre that suits you, book your workout, and pay based on the fitness services you actually use."
   },
   {
-    q: "Can I use FitFare without any equipment?",
-    a: "Absolutely! FitFare offers extensive bodyweight workout programs that require no equipment. You can also specify what equipment you have available, and the AI will customize workouts accordingly."
+    q: "How does FitFare work?",
+    a: "Simply create your FitFare account, explore available fitness centres near you, choose the service or session you want, complete your booking, and check in at the centre using FitFare. Your bookings and visits can all be managed through the app."
   },
   {
-    q: "Is there a free trial available?",
-    a: "Yes! All plans come with a 7-day free trial. You can explore all features and see if FitFare is right for you. No credit card required to start your trial."
+    q: "Do I need to buy a monthly or yearly gym membership?",
+    a: "No. FitFare is built around flexibility rather than long-term commitments. You can access participating fitness centres without locking yourself into a conventional monthly or annual gym membership."
   },
   {
-    q: "How accurate is the progress tracking?",
-    a: "Our tracking system uses advanced algorithms to monitor your progress across multiple metrics including strength gains, endurance improvements, body composition changes, and consistency patterns. Data is analyzed in real-time for maximum accuracy."
+    q: "Can I use different gyms with FitFare?",
+    a: "Yes. FitFare is designed to give you access to multiple partnered fitness centres instead of restricting you to one location. This makes it especially useful when your routine, workplace, home location, or travel schedule changes."
   },
   {
-    q: "Can I cancel my subscription anytime?",
-    a: "Yes, you can cancel your subscription at any time with no penalties or fees. Your access will continue until the end of your current billing period."
+    q: "What are Fit Credits?",
+    a: "Fit Credits are prepaid credits that can be used to book eligible physical fitness services at FitFare partner gyms and studios. Your available balance and transactions can be managed directly through your FitFare account."
   },
   {
-    q: "Do you offer nutrition guidance?",
-    a: "Yes! Pro and Elite plans include personalized nutrition recommendations, meal planning assistance, and macro tracking to complement your fitness routine."
+    q: "How do I check in at a fitness centre?",
+    a: "Once you arrive at the centre for your booking, you can use the FitFare app to complete the QR-based check-in process. Your visit is then recorded digitally, making the experience simple for both you and the fitness centre."
   },
   {
-    q: "Is FitFare suitable for beginners?",
-    a: "Definitely! FitFare is designed for all fitness levels. Our AI starts by assessing your current fitness level and creates beginner friendly programs that gradually progress as you improve."
+    q: "What types of fitness activities can I find on FitFare?",
+    a: "Depending on availability in your location, FitFare can help you discover different fitness experiences, including gyms, strength training, cardio, yoga, meditation, calisthenics, kickboxing, Zumba and other activities offered by participating centres."
   },
   {
-    q: "How does the community support work?",
-    a: "FitFare includes access to our supportive community where you can connect with other users, share progress, participate in challenges, and get motivation from like minded individuals on similar fitness journeys."
+    q: "Can I find fitness centres near my location?",
+    a: "Yes. With your permission, FitFare can use your location while you’re using the app to show nearby fitness centres and their distance from you. Location access is optional, so you can still make bookings without enabling it."
+  },
+  {
+    q: "Is FitFare suitable for people with irregular schedules or frequent travel?",
+    a: "Yes. FitFare is designed for people whose fitness routine doesn’t always fit a fixed membership—whether because of work, travel, college, changing schedules, or simply wanting the freedom to train at different locations."
+  },
+  {
+    q: "Why should I use FitFare instead of a traditional gym membership?",
+    a: "A traditional membership usually ties you to one centre and a fixed membership period. FitFare is built around choice and actual usage: discover different fitness centres, book according to your schedule, access multiple locations, and avoid being locked into a long-term membership you may not fully use."
   }
 ];
 

@@ -20,34 +20,54 @@ import PageSEO from "@/components/PageSEO";
 
 const faqItems = [
   {
-    question: "Can I use a gym in South Delhi without buying a membership?",
+    question: "What is FitFare?",
     answer:
-      "Yes. FitFare lets you book a single session at a partner gym and pay for that session. There is no joining fee, no contract and no notice period attached to the booking.",
+      "FitFare is a flexible fitness platform that lets you discover and access partnered gyms and fitness centres without committing to a traditional long-term membership. Find a centre that suits you, book your workout, and pay based on the fitness services you actually use.",
   },
   {
-    question: "Which are the best gyms in South Delhi for weight training?",
+    question: "How does FitFare work?",
     answer:
-      "Larger formats around Saket, Vasant Kunj and Greater Kailash carry the widest free weight ranges. Check the rack and bench count on each listing, since that decides waiting time more than the machine count does.",
+      "Simply create your FitFare account, explore available fitness centres near you, choose the service or session you want, complete your booking, and check in at the centre using FitFare. Your bookings and visits can all be managed through the app.",
   },
   {
-    question: "How much does a single gym session cost in South Delhi?",
+    question: "Do I need to buy a monthly or yearly gym membership?",
     answer:
-      "Prices vary by location and time slot. Off-peak sessions cost less than evening peaks. The full amount appears before you confirm the booking.",
+      "No. FitFare is built around flexibility rather than long-term commitments. You can access participating fitness centres without locking yourself into a conventional monthly or annual gym membership.",
   },
   {
-    question: "Are there partner gyms near Saket or Hauz Khas metro stations?",
+    question: "Can I use different gyms with FitFare?",
     answer:
-      "Both clusters carry a mix of chain gyms and independent studios within walking distance of the station. Search the station name to see current availability and opening hours.",
+      "Yes. FitFare is designed to give you access to multiple partnered fitness centres instead of restricting you to one location. This makes it especially useful when your routine, workplace, home location, or travel schedule changes.",
   },
   {
-    question: "Can I book a gym for a single day?",
+    question: "What are Fit Credits?",
     answer:
-      "Yes. Every FitFare booking covers one session. You can book one day this month or twelve, with no minimum and no commitment beyond the slot you choose.",
+      "Fit Credits are prepaid credits that can be used to book eligible physical fitness services at FitFare partner gyms and studios. Your available balance and transactions can be managed directly through your FitFare account.",
   },
   {
-    question: "Do I need to book in advance or can I walk in?",
+    question: "How do I check in at a fitness centre?",
     answer:
-      "Booking online is required, as the gym needs your session confirmed at the front desk. You can book minutes before arriving, though evening slots in Saket and Hauz Khas have limited availability.",
+      "Once you arrive at the centre for your booking, you can use the FitFare app to complete the QR-based check-in process. Your visit is then recorded digitally, making the experience simple for both you and the fitness centre.",
+  },
+  {
+    question: "What types of fitness activities can I find on FitFare?",
+    answer:
+      "Depending on availability in your location, FitFare can help you discover different fitness experiences, including gyms, strength training, cardio, yoga, meditation, calisthenics, kickboxing, Zumba and other activities offered by participating centres.",
+  },
+  {
+    question: "Can I find fitness centres near my location?",
+    answer:
+      "Yes. With your permission, FitFare can use your location while you’re using the app to show nearby fitness centres and their distance from you. Location access is optional, so you can still make bookings without enabling it.",
+  },
+  {
+    question: "Is FitFare suitable for people with irregular schedules or frequent travel?",
+    answer:
+      "Yes. FitFare is designed for people whose fitness routine doesn’t always fit a fixed membership—whether because of work, travel, college, changing schedules, or simply wanting the freedom to train at different locations.",
+  },
+  {
+    question: "Why should I use FitFare instead of a traditional gym membership?",
+    answer:
+      "A traditional membership usually ties you to one centre and a fixed membership period. FitFare is built around choice and actual usage: discover different fitness centres, book according to your schedule, access multiple locations, and avoid being locked into a long-term membership you may not fully use.",
   },
 ];
 
