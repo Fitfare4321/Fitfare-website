@@ -1,0 +1,469 @@
+import { useMemo, useState } from "react";
+import { motion } from "framer-motion";
+import {
+  ArrowRight,
+  Check,
+  ChevronDown,
+  Clock3,
+  Dumbbell,
+  MapPin,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  TimerReset,
+  Users,
+} from "lucide-react";
+import { Link } from "react-router-dom";
+import Navbar from "@/components/Navbar";
+import FooterSection from "@/components/FooterSection";
+import PageSEO from "@/components/PageSEO";
+
+const faqItems = [
+  {
+    question: "Where can I find a gym in Delhi NCR?",
+    answer:
+      "FitFare partner gyms operate across Delhi, Gurgaon, Noida, Ghaziabad and Faridabad. Enter your location on FitFare to see the ones nearest you, with opening hours and the price of each available slot.",
+  },
+  {
+    question: "How can I find a gym near me in Delhi NCR?",
+    answer:
+      "Search by metro station, sector number or office address on the FitFare website. Results appear in order of distance, with facilities and session prices listed. You can compare two or three options before booking.",
+  },
+  {
+    question: "What are the best gyms in Delhi NCR?",
+    answer:
+      "The best gym in Delhi NCR depends on your location and your training style. Judge a gym on distance, equipment, crowding at your usual hour and cleanliness. One session tells you more than a guided tour or an online review.",
+  },
+  {
+    question: "Can I book a gym without a long-term membership?",
+    answer:
+      "Yes. A FitFare booking covers one gym session at a time. There is no joining fee, no contract and no notice period. You book the days you plan to train.",
+  },
+  {
+    question: "Are there pay-per-use gyms in Delhi NCR?",
+    answer:
+      "Yes. FitFare runs on a pay-per-use model across the region. You pay for each session at partner gyms rather than buying access by the month or by the year.",
+  },
+];
+
+const quickBenefits = [
+  {
+    title: "Book by the session",
+    description:
+      "Pay for the days you train and nothing more. One account, one region, one booking flow across multiple cities.",
+    icon: TimerReset,
+  },
+  {
+    title: "Five cities, one account",
+    description:
+      "Train in Delhi, Gurgaon, Noida, Ghaziabad or Faridabad without juggling multiple memberships or home branches.",
+    icon: MapPin,
+  },
+  {
+    title: "No long-term membership",
+    description:
+      "There is no joining fee, no contract and no notice period. You only pay for the time you actually train.",
+    icon: ShieldCheck,
+  },
+  {
+    title: "Prices shown upfront",
+    description:
+      "The full session price appears before you confirm, so you know exactly what you are paying when you book.",
+    icon: Clock3,
+  },
+];
+
+const cityPatterns = [
+  {
+    title: "Delhi",
+    description:
+      "South Delhi holds the highest concentration of established gyms through Saket, Green Park, Hauz Khas and Vasant Kunj, while West and North Delhi carry more neighbourhood options at lower rates.",
+  },
+  {
+    title: "Gurgaon",
+    description:
+      "Corporate demand shapes the market. Gyms along Cyber City, Golf Course Road and Sohna Road peak before 9 am and after 7 pm, with high equipment standards and high annual rates.",
+  },
+  {
+    title: "Noida and Greater Noida",
+    description:
+      "Sector 18, Sector 62 and the Expressway belt hold most of the larger gyms. Greater Noida West has added capacity as new societies filled and rates remain below Gurgaon averages.",
+  },
+  {
+    title: "Ghaziabad",
+    description:
+      "Indirapuram, Vaishali and Raj Nagar Extension carry the bulk of gym facilities. The market favours value over premium fit-out, with evening group fitness classes filling up quickly.",
+  },
+  {
+    title: "Faridabad",
+    description:
+      "The Mathura Road corridor and the Greater Faridabad sectors have the widest coverage, and the market has expanded across recent years.",
+  },
+];
+
+const workoutFormats = [
+  {
+    title: "Weights and resistance work",
+    description:
+      "Partner gyms stock barbells, dumbbells, racks and plate-loaded machines. Book these sessions when you have time to rest between sets.",
+  },
+  {
+    title: "Cardio and conditioning",
+    description:
+      "Treadmills, cycles, rowers and cross trainers cover most needs, with interval formats compressing effort into less time.",
+  },
+  {
+    title: "One-to-one coaching",
+    description:
+      "Personal training helps when your form needs correction or your progress has stalled. Availability and rates vary by gym and trainer.",
+  },
+  {
+    title: "Classes and group sessions",
+    description:
+      "Yoga, HIIT, dance and combat formats are the most common and remove the decision of what to do that day.",
+  },
+  {
+    title: "Flexible training across cities",
+    description:
+      "Book near the office on Wednesday and near home on Saturday without being tied to a single location or home branch.",
+  },
+];
+
+const processSteps = [
+  {
+    title: "Search by location",
+    description:
+      "Enter a metro station, sector number or office address. Results show partner gyms in order of distance, with opening hours and prices.",
+  },
+  {
+    title: "Compare the right details",
+    description:
+      "Review gym facilities, class timetables and busy periods before you decide which slot fits your routine.",
+  },
+  {
+    title: "Choose a slot",
+    description:
+      "Select the date and time that works best, then book the session that matches your training day.",
+  },
+  {
+    title: "Train without commitment",
+    description:
+      "Arrive at the gym, show your booking, train, and pay only for the session you used.",
+  },
+];
+
+const DelhiNCRPage = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+  const seoJsonLd = useMemo(
+    () => [
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        mainEntity: faqItems.map((faq) => ({
+          "@type": "Question",
+          name: faq.question,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: faq.answer,
+          },
+        })),
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "Place",
+        name: "FitFare Delhi NCR",
+        description:
+          "FitFare helps users book gym sessions across Delhi, Gurgaon, Noida, Ghaziabad and Faridabad without long-term memberships.",
+        address: {
+          "@type": "PostalAddress",
+          addressRegion: "Delhi NCR",
+          addressCountry: "IN",
+        },
+      },
+    ],
+    []
+  );
+
+  return (
+    <div className="min-h-screen bg-slate-950 text-slate-100">
+      <PageSEO
+        title="Best Gym in Delhi NCR | FitFare"
+        description="Book a gym session across Delhi NCR without annual membership. Find the best workout centre near your office, home, or metro and pay only for the session you train."
+        canonical="https://fitfare.in/delhi-ncr"
+        jsonLd={seoJsonLd}
+      />
+
+      <Navbar />
+
+      <main>
+        <section className="relative overflow-hidden pt-28 pb-20 px-4 sm:px-6 lg:px-8">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),transparent_45%),linear-gradient(180deg,#020817_0%,#0f172a_100%)]" />
+          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+
+          <div className="relative mx-auto max-w-7xl">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]"
+            >
+              <div>
+                <span className="inline-flex items-center gap-2 rounded-full border border-blue-400/30 bg-blue-500/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.25em] text-blue-300">
+                  <Sparkles size={14} /> Best Gym in Delhi NCR
+                </span>
+
+                <h1 className="mt-6 max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-7xl">
+                  Find Your Ideal Workout Centre Across Delhi NCR
+                </h1>
+
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+                  Delhi NCR spreads across five cities. Your home, office and weekend plans sit in different ones. FitFare lets you book a session at any partner gym across the region with one account and no membership.
+                </p>
+
+                <div className="mt-8 flex flex-wrap gap-4">
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 font-semibold text-white transition hover:bg-blue-400"
+                  >
+                    Find a Gym Near You <ArrowRight size={18} />
+                  </Link>
+                  <Link
+                    to="/"
+                    className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-6 py-3 font-semibold text-slate-100 transition hover:border-slate-500"
+                  >
+                    Join as Gym
+                  </Link>
+                </div>
+
+                <div className="mt-10 flex flex-wrap gap-6 text-sm text-slate-300">
+                  <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-400" /> One account, many cities</div>
+                  <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-400" /> No joining fee</div>
+                  <div className="flex items-center gap-2"><Check className="h-4 w-4 text-emerald-400" /> Pay only for the days you train</div>
+                </div>
+              </div>
+
+              <div className="relative">
+                <div className="rounded-[28px] border border-slate-700 bg-slate-900/70 p-6 shadow-2xl shadow-blue-950/40 backdrop-blur-sm">
+                  <div className="rounded-2xl border border-slate-700 bg-gradient-to-br from-slate-800 to-slate-900 p-5">
+                    <div className="mb-6 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Regional Access</p>
+                        <p className="mt-1 text-xl font-bold text-white">Delhi NCR Network</p>
+                      </div>
+                      <div className="rounded-full bg-emerald-500/15 px-3 py-1 text-xs font-semibold text-emerald-300">Flexible</div>
+                    </div>
+
+                    <div className="space-y-4">
+                      {[
+                        "One account across all cities",
+                        "No long-term membership",
+                        "Clear session pricing",
+                        "Off-peak rates available",
+                      ].map((item) => (
+                        <div key={item} className="flex items-center gap-3 rounded-xl border border-slate-700 bg-slate-800/80 p-3">
+                          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500/15 text-blue-300">
+                            <Check size={16} />
+                          </div>
+                          <span className="text-sm text-slate-200">{item}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="mt-6 grid grid-cols-2 gap-3 text-center">
+                      <div className="rounded-xl border border-slate-700 bg-slate-800/70 p-3">
+                        <p className="text-2xl font-bold text-white">5</p>
+                        <p className="mt-1 text-xs uppercase tracking-[0.15em] text-slate-400">Cities</p>
+                      </div>
+                      <div className="rounded-xl border border-slate-700 bg-slate-800/70 p-3">
+                        <p className="text-2xl font-bold text-white">1</p>
+                        <p className="mt-1 text-xs uppercase tracking-[0.15em] text-slate-400">Account</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">Why it works</p>
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Fitness centres in Delhi NCR across five cities</h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {quickBenefits.map(({ title, description, icon: Icon }) => (
+              <motion.div
+                key={title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4 }}
+                className="rounded-2xl border border-slate-800 bg-slate-900/80 p-6"
+              >
+                <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
+                  <Icon size={22} />
+                </div>
+                <h3 className="text-xl font-semibold text-white">{title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-300">{description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-slate-900/80 py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">How it works</p>
+              <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">How to find fitness centres near me in Delhi NCR</h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+              {processSteps.map((step, index) => (
+                <div key={step.title} className="rounded-2xl border border-slate-800 bg-slate-950/70 p-6">
+                  <div className="mb-5 flex h-10 w-10 items-center justify-center rounded-full bg-blue-500/15 text-sm font-bold text-blue-300">
+                    0{index + 1}
+                  </div>
+                  <h3 className="text-xl font-semibold text-white">{step.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">{step.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="mb-12 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">By city</p>
+            <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Best gyms in Delhi NCR by city</h2>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+            {cityPatterns.map((city) => (
+              <div key={city.title} className="rounded-2xl border border-slate-800 bg-slate-900/80 p-5">
+                <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
+                  <MapPin size={20} />
+                </div>
+                <h3 className="text-lg font-semibold text-white">{city.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-slate-300">{city.description}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="bg-slate-900/80 py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">Formats</p>
+              <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Training formats across the best gyms in Delhi NCR</h2>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-5">
+              {workoutFormats.map((item) => (
+                <div key={item.title} className="rounded-2xl border border-slate-800 bg-slate-950/70 p-5">
+                  <div className="mb-4 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
+                    <Dumbbell size={20} />
+                  </div>
+                  <h3 className="text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-300">{item.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr]">
+            <div>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">Commute logic</p>
+              <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Why flexible gym access matters in Delhi NCR</h2>
+              <p className="mt-5 max-w-xl text-base leading-8 text-slate-300">
+                The region’s commute shapes fitness habits. A person living in Noida and working in Gurgaon crosses large distances each day, and a single-location membership forces a compromise. Session booking removes that choice by letting you train near either end of the journey, on the days that suit you.
+              </p>
+            </div>
+
+            <div className="rounded-[28px] border border-slate-800 bg-gradient-to-br from-slate-900 to-slate-950 p-6 shadow-2xl shadow-slate-950/40">
+              <div className="mb-5 flex items-center gap-3">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-500/15 text-blue-300">
+                  <Users size={22} />
+                </div>
+                <div>
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">Why people choose it</p>
+                  <h3 className="text-xl font-bold text-white">Flexible workouts, real life</h3>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  "Train near the office on weekdays",
+                  "Train near home on weekends",
+                  "Avoid paying for months you do not use",
+                  "Switch between cities without a new membership",
+                ].map((item) => (
+                  <div key={item} className="flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-3">
+                    <Star className="h-4 w-4 text-blue-300" />
+                    <span className="text-slate-200">{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-950 py-20">
+          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+            <div className="mb-12 text-center">
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">FAQs</p>
+              <h2 className="mt-4 text-3xl font-bold text-white sm:text-4xl">Frequently asked questions before you book</h2>
+            </div>
+
+            <div className="space-y-4">
+              {faqItems.map((faq, index) => (
+                <div key={faq.question} className="overflow-hidden rounded-2xl border border-slate-800 bg-slate-900/80">
+                  <button
+                    type="button"
+                    onClick={() => setOpenFaq(openFaq === index ? null : index)}
+                    className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                  >
+                    <span className="text-base font-medium text-white">{faq.question}</span>
+                    <ChevronDown className={`h-5 w-5 text-slate-300 transition ${openFaq === index ? "rotate-180" : ""}`} />
+                  </button>
+
+                  {openFaq === index && (
+                    <div className="border-t border-slate-800 px-5 py-4 text-sm leading-7 text-slate-300">
+                      {faq.answer}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div className="rounded-[32px] border border-blue-500/20 bg-gradient-to-r from-blue-600/20 via-slate-900 to-slate-900 p-8 text-center shadow-2xl shadow-blue-950/30 sm:p-12">
+            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-blue-300">Start today</p>
+            <h2 className="mt-4 text-3xl font-black text-white sm:text-5xl">Find a partner gym in Delhi NCR and book your slot today</h2>
+            <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-slate-300">
+              The same account works across all five cities, so you can train where the day takes you without paying for a membership you do not need.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Link to="/" className="inline-flex items-center gap-2 rounded-full bg-blue-500 px-6 py-3 font-semibold text-white transition hover:bg-blue-400">
+                Find a Gym Near You <ArrowRight size={18} />
+              </Link>
+              <Link to="/" className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/70 px-6 py-3 font-semibold text-slate-100 transition hover:border-slate-500">
+                Book Your First Session
+              </Link>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <FooterSection />
+    </div>
+  );
+};
+
+export default DelhiNCRPage;
