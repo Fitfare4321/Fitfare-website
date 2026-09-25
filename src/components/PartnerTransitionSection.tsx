@@ -3,8 +3,12 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
-import mImg from "@/assets/m3.jpg"; // User imagery
-import gymOwnerImg from "@/assets/strength.jpg"; // Centre imagery
+import ShapeBlur from "./ui/ShapeBlur";
+
+import img1 from "@/assets/bento_get_discovered.png";
+import img2 from "@/assets/bento_manage_bookings.png";
+import img3 from "@/assets/bento_qr_attendance.png";
+import img4 from "@/assets/bento_no_commission.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,27 +19,21 @@ const PartnerTransitionSection = () => {
     const el = sectionRef.current;
     if (!el) return;
 
-    gsap.from(".transition-header", {
-      scrollTrigger: { trigger: ".transition-header", start: "top 85%" },
+    gsap.from(".bento-header", {
+      scrollTrigger: { trigger: ".bento-header", start: "top 85%" },
       opacity: 0,
       y: 40,
       duration: 0.9,
       ease: "power3.out",
     });
 
-    gsap.from(".split-user", {
-      scrollTrigger: { trigger: ".transition-split", start: "top 80%" },
+    gsap.from(".bento-card", {
+      scrollTrigger: { trigger: ".bento-grid", start: "top 80%" },
       opacity: 0,
-      x: -50,
-      duration: 1,
-      ease: "power3.out",
-    });
-
-    gsap.from(".split-partner", {
-      scrollTrigger: { trigger: ".transition-split", start: "top 80%" },
-      opacity: 0,
-      x: 50,
-      duration: 1,
+      y: 50,
+      scale: 0.95,
+      duration: 0.8,
+      stagger: 0.15,
       ease: "power3.out",
     });
   }, { scope: sectionRef });
@@ -47,59 +45,84 @@ const PartnerTransitionSection = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        {/* Header */}
-        <div className="transition-header text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            Built for People Who Train. <br />
-            <span className="text-[#305CDE]">And Places That Make It Possible.</span>
-          </h2>
-        </div>
+        {/* Partner Proposition Section (Merged) */}
+        <div>
+          <div className="bento-header text-center mb-20">
+            <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-6 max-w-4xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+              Put Your Fitness Centre In Front of More Flexible Demand.
+            </h3>
+            <p className="text-gray-400 font-medium max-w-2xl mx-auto text-lg leading-relaxed">
+              FitFare helps participating fitness centres become discoverable to users looking for flexible ways to train.
+            </p>
+          </div>
 
-        {/* Dramatic Split */}
-        <div className="transition-split grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-[2.5rem] overflow-hidden shadow-[0_0_40px_rgba(48,92,222,0.15)] h-auto lg:h-[600px] border border-gray-800">
-          
-          {/* User Side */}
-          <div className="split-user group relative min-h-[400px] lg:min-h-full cursor-pointer overflow-hidden">
-            <img src={mImg} alt="Fitness User" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-500" />
-            
-            <div className="absolute inset-0 p-10 md:p-16 flex flex-col justify-end">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-white/70 mb-4 block">For Users</span>
-              
-              <ul className="space-y-4 mb-8">
-                <li className="text-xl md:text-2xl font-bold text-white tracking-tight">Discover fitness.</li>
-                <li className="text-xl md:text-2xl font-bold text-white tracking-tight">Book flexibly.</li>
-                <li className="text-xl md:text-2xl font-bold text-white tracking-tight">Check in simply.</li>
-              </ul>
+          {/* Bento Grid Layout */}
+          <div className="w-full max-w-[1200px] mx-auto mb-24 mt-8 px-4 md:px-8">
+            <div className="bento-grid grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 md:h-[650px]">
+              {[
+                { 
+                  title: "Get Discovered", 
+                  desc: "Appear in the FitFare app when users are looking for a place to train.", 
+                  img: img1,
+                  className: "md:col-span-2 md:row-span-2"
+                },
+                { 
+                  title: "Manage Bookings", 
+                  desc: "Easily track and manage all flexible bookings.", 
+                  img: img2,
+                  className: "md:col-span-2 md:row-span-1"
+                },
+                { 
+                  title: "QR Attendance", 
+                  desc: "Verify check-ins instantly with integrated QR codes.", 
+                  img: img3,
+                  className: "md:col-span-1 md:row-span-1"
+                },
+                { 
+                  title: "No Commission", 
+                  desc: "Keep 100% of what you earn on every flexible session.", 
+                  img: img4,
+                  className: "md:col-span-1 md:row-span-1"
+                }
+              ].map((prop, i) => (
+                <div 
+                  key={i} 
+                  className={`bento-card group relative rounded-[2rem] border border-white/10 hover:border-white/30 overflow-hidden flex flex-col justify-end p-6 md:p-8 min-h-[350px] md:min-h-0 transition-[border-color,box-shadow] duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] ${prop.className}`}
+                >
+                  <img src={prop.img} alt={prop.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 -z-20" />
+                  
+                  <ShapeBlur 
+                    variation={0} 
+                    pixelRatioProp={window.devicePixelRatio || 1}
+                    shapeSize={0.99}
+                    roundness={0.1}
+                    borderSize={0.02}
+                    circleSize={0.8}
+                    circleEdge={1}
+                    className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none mix-blend-screen"
+                  />
 
-              <button className="inline-flex items-center gap-3 text-white font-bold group-hover:text-[#305CDE] transition-colors">
-                Explore FitFare <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
-              </button>
+                  {/* Smooth Full-Card Gradient Overlay for Text Readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/10 transition-opacity duration-500 group-hover:opacity-90 pointer-events-none -z-10"></div>
+                  
+                  <div className="z-10 mt-auto relative transform transition-all duration-500 group-hover:-translate-y-2">
+                    <h4 className="text-2xl md:text-3xl font-extrabold text-white mb-2 leading-tight drop-shadow-md">{prop.title}</h4>
+                    <p className="text-white/70 group-hover:text-white/100 transition-colors duration-500 font-medium leading-snug text-sm md:text-base max-w-sm drop-shadow-md">{prop.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
-          {/* Partner Side */}
-          <div className="split-partner group relative min-h-[400px] lg:min-h-full cursor-pointer overflow-hidden">
-            <img src={gymOwnerImg} alt="Fitness Centre" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-            <div className="absolute inset-0 bg-gray-900/80 mix-blend-multiply transition-colors duration-500" />
-            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors duration-500" />
-            
-            <div className="absolute inset-0 p-10 md:p-16 flex flex-col justify-end">
-              <span className="text-[10px] font-bold uppercase tracking-widest text-[#60a5fa] mb-4 block">For Fitness Centres</span>
-              
-              <ul className="space-y-4 mb-8">
-                <li className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug">Get discovered by FitFare users.</li>
-                <li className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug">Manage FitFare bookings and attendance.</li>
-                <li className="text-lg md:text-xl font-bold text-white tracking-tight leading-snug">Use the partner experience to stay organized.</li>
-              </ul>
-
-              <button className="inline-flex items-center gap-3 text-white font-bold group-hover:text-[#60a5fa] transition-colors">
-                Partner With FitFare <ArrowRight size={18} className="transition-transform group-hover:translate-x-2" />
-              </button>
-            </div>
+          {/* CTA */}
+          <div className="text-center">
+            <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+              <span className="relative z-10 text-black transition-colors duration-300">Become a FitFare Partner</span>
+              <ArrowRight size={16} className="relative z-10 text-black group-hover:translate-x-1 transition-all duration-300" />
+            </button>
           </div>
-
         </div>
+
       </div>
     </section>
   );

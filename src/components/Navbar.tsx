@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { useTheme } from "@/components/ThemeProvider";
+import { Menu, X } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import logo from "@/assets/blue-background-logo.png";
@@ -14,7 +13,6 @@ const navLinks = [
 ];
 
 const Navbar = () => {
-  const { theme, setTheme } = useTheme();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -179,10 +177,6 @@ const Navbar = () => {
             <a href="/#partners" onClick={(e) => { e.preventDefault(); handleNavClick("/#partners"); }} className="hidden lg:flex items-center px-4 py-2 text-sm font-bold text-gray-500 dark:text-gray-400 hover:text-[#305CDE] dark:hover:text-[#5c85ff] transition-colors">
               Partner With FitFare
             </a>
-
-            <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")} className="p-2.5 rounded-full text-gray-600 dark:text-gray-400 hover:bg-black/5 dark:hover:bg-white/10 transition-all duration-300 hover:scale-110 active:scale-95" aria-label="Toggle Theme">
-              {theme === "dark" ? <Sun size={20} strokeWidth={2.5} /> : <Moon size={20} strokeWidth={2.5} />}
-            </button>
 
             {/* GET THE APP (GLOW CTA) */}
             <button className="hidden md:flex relative group ml-1 rounded-full overflow-hidden p-[2px]">

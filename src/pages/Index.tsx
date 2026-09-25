@@ -5,13 +5,10 @@ import ActivitiesSection from "@/components/ActivitiesSection";
 import WhyFitFareSection from "@/components/WhyFitFareSection";
 import FindFitUseSection from "@/components/FindFitUseSection";
 import FindBookTrainSection from "@/components/FindBookTrainSection";
-import PayAsYouGoSection from "@/components/PayAsYouGoSection";
 import PersonalizationSection from "@/components/PersonalizationSection";
 import PartnerTransitionSection from "@/components/PartnerTransitionSection";
-import PartnerPropositionSection from "@/components/PartnerPropositionSection";
 import FAQSection from "@/components/FAQSection";
-import FinalCTASection from "@/components/FinalCTASection";
-import Footer from "@/components/Footer";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 import Preloader from "@/components/Preloader";
 import PageSEO from "@/components/PageSEO";
 
@@ -76,7 +73,7 @@ const Index = () => {
       {/* 01. Navbar */}
       <Navbar />
       
-      <main>
+      <main className="relative z-10 w-full bg-white dark:bg-[#0a0f1c] shadow-2xl rounded-b-[40px] border-b border-black/10 dark:border-white/10">
         <div className="relative z-0">
           {/* 02. Hero */}
           <HeroSection />
@@ -91,30 +88,20 @@ const Index = () => {
         {/* 05. FindFitUse (Nearby Discovery, App Experience) */}
         <FindFitUseSection />
 
-        {/* 05. FindBookTrain (4-Step Pin, Credits, Old Way vs FitFare) */}
-        <FindBookTrainSection />
 
-        {/* 06. Pay As You Go */}
-        <PayAsYouGoSection />
 
         {/* 07. Personalization (Coming Soon) */}
         <PersonalizationSection />
 
-        {/* 08. Partner Transition */}
+        {/* 08. Partner Section (Transition + Proposition Merged) */}
         <PartnerTransitionSection />
 
-        {/* 09. Partner Proposition */}
-        <PartnerPropositionSection />
-
-        {/* 10. FAQ */}
+        {/* 09. FAQ */}
         <FAQSection />
-
-        {/* 11. Final CTA */}
-        <FinalCTASection />
       </main>
 
-      {/* 12. Footer */}
-      <Footer />
+      {/* 12. Cinematic Footer */}
+      <CinematicFooter />
     </div>
   );
 };
