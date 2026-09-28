@@ -29,7 +29,7 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
         
         {/* Left Side: Particle Text Title and Description */}
         <div className="w-full lg:w-[45%] flex flex-col justify-center px-4 lg:pl-4 lg:pr-12 z-50">
-          <div className="relative h-[400px] md:h-[500px] w-[140%] -ml-[25%] -my-[100px] md:-my-[150px] z-10">
+          <div className="relative h-[150px] md:h-[500px] w-full md:w-[140%] ml-0 md:-ml-[25%] my-0 md:-my-[150px] z-10">
             <ParticleText
               text={steps[activeIndex].title}
               particleSize={3}
@@ -47,7 +47,7 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
               repelRadius={200}
             />
           </div>
-          <div className="relative h-[120px] w-[110%] -ml-[5%] mt-8 md:mt-12 z-20">
+          <div className="relative h-[80px] md:h-[120px] w-full md:w-[110%] ml-0 md:-ml-[5%] mt-4 md:mt-12 z-20 text-center md:text-left px-4 md:px-0">
             {steps.map((step, idx) => (
               <p
                 key={idx}
@@ -63,7 +63,7 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
         </div>
 
         {/* Right Side: Stacked Phone Carousel */}
-        <div className="w-full lg:w-[60%] relative h-[550px] md:h-[700px] flex items-center justify-center lg:justify-start perspective-[2000px] pl-0 lg:pl-12 mt-12 lg:mt-0">
+        <div className="w-full lg:w-[60%] relative h-[500px] md:h-[700px] flex items-center justify-center lg:justify-start perspective-[2000px] pl-0 lg:pl-12 mt-4 lg:mt-0">
           {steps.map((step, index) => {
             let offset = index - activeIndex;
             if (offset < 0) offset += steps.length;

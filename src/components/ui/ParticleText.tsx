@@ -66,6 +66,7 @@ interface ParticleTextProps {
   glow?: boolean;
   className?: string;
   style?: React.CSSProperties;
+  textAlign?: 'left' | 'center' | 'right';
 }
 
 const ParticleText = ({
@@ -86,7 +87,8 @@ const ParticleText = ({
   fontFamily = 'inherit',
   glow = true,
   className = '',
-  style
+  style,
+  textAlign = 'center'
 }: ParticleTextProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -287,12 +289,18 @@ const ParticleText = ({
       const targets = [];
       const step = Math.max(2, Math.floor(density));
 
+      const offsetX = textAlign === 'left'
+        ? -padding
+        : textAlign === 'right'
+        ? width - offscreen.width + padding
+        : width / 2 - offscreen.width / 2;
+
       for (let y = 0; y < offscreen.height; y += step) {
         for (let x = 0; x < offscreen.width; x += step) {
           const alpha = imageData.data[(y * offscreen.width + x) * 4 + 3];
           if (alpha > 40) {
             targets.push({
-              x: width / 2 - offscreen.width / 2 + x,
+              x: offsetX + x,
               y: height / 2 - offscreen.height / 2 + y,
               alpha: alpha / 255
             });
@@ -421,7 +429,8 @@ const ParticleText = ({
     fontSize,
     fontWeight,
     fontFamily,
-    glow
+    glow,
+    textAlign
   ]);
 
   return (

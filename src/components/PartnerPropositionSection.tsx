@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Eye, Users, Settings, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -86,10 +87,10 @@ const PartnerPropositionSection = () => {
         </div>
 
         <div className="text-center">
-          <button className="bg-white text-black px-8 py-4 rounded-full text-sm font-bold inline-flex items-center gap-3 hover:bg-[#305CDE] hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl group">
+          <Link to="/partner-form" className="bg-white text-black px-8 py-4 rounded-full text-sm font-bold inline-flex items-center gap-3 hover:bg-[#305CDE] hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 shadow-xl group">
             Become a Partner Centre
             <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-          </button>
+          </Link>
         </div>
 
       </div>

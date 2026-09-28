@@ -10,14 +10,14 @@ const timelineData = [
   {
     title: "Nutrition",
     description:
-      "Tools designed to make nutrition understanding and tracking easier.",
+      "Tools designed to make nutrition planning and understanding easier.",
     date: "Coming Soon",
     image: imgNutrition,
   },
   {
     title: "Posture & Form",
     description:
-      "Technology designed to help users better understand exercise movement and form.",
+      "Tools designed to help you understand movement and form.",
     date: "Coming Soon",
     image: imgPosture,
   },
@@ -31,7 +31,7 @@ const timelineData = [
   {
     title: "Personalized Fitness",
     description:
-      "Recommendations intended to become more relevant to your goals and activity.",
+      "Recommendations designed to become more relevant to your goals and activity.",
     date: "Coming Soon",
     image: imgPersonalized,
   },
@@ -41,7 +41,7 @@ const PersonalizationSection = () => {
   return (
     <section className="overflow-hidden bg-[#0A0A0A] text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
-        <div className="border-b border-white/10 px-6 py-10 md:px-10 md:py-16 lg:px-16 lg:py-20">
+        <div className="px-6 py-10 md:px-10 md:py-16 lg:px-16 lg:py-20">
           <div className="max-w-2xl space-y-4">
             <Badge
               variant="outline"
@@ -54,7 +54,7 @@ const PersonalizationSection = () => {
                 Access Is Just the Beginning.
               </h2>
               <p className="md:text-lg text-base text-gray-400 leading-relaxed max-w-xl">
-                FitFare is being built to make your fitness journey more connected and personal — beyond simply finding somewhere to train.
+                FitFare is building toward a more connected, personal fitness experience, beyond finding a place to train.
               </p>
             </div>
           </div>
@@ -62,7 +62,7 @@ const PersonalizationSection = () => {
         <div>
           <Timeline items={timelineData} />
         </div>
-        <div className="border-t border-white/10 h-18 md:h-28" />
+        <div className="h-18 md:h-28" />
       </div>
     </section>
   );

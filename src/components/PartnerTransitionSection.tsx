@@ -3,6 +3,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import ShapeBlur from "./ui/ShapeBlur";
 
 import img1 from "@/assets/bento_get_discovered.png";
@@ -49,45 +50,53 @@ const PartnerTransitionSection = () => {
         <div>
           <div className="bento-header text-center mb-20">
             <h3 className="text-4xl md:text-5xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400 mb-6 max-w-4xl mx-auto" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-              Put Your Fitness Centre In Front of More Flexible Demand.
+              Put your fitness centre in front of more people ready to train.
             </h3>
             <p className="text-gray-400 font-medium max-w-2xl mx-auto text-lg leading-relaxed">
-              FitFare helps participating fitness centres become discoverable to users looking for flexible ways to train.
+              FitFare helps participating fitness centres become discoverable to people looking for flexible ways to train.
             </p>
           </div>
 
           {/* Bento Grid Layout */}
           <div className="w-full max-w-[1200px] mx-auto mb-24 mt-8 px-4 md:px-8">
-            <div className="bento-grid grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 md:gap-6 md:h-[650px]">
+            <div className="bento-grid grid grid-cols-2 md:grid-cols-4 md:grid-rows-2 gap-3 md:gap-6 md:h-[650px]">
               {[
                 { 
                   title: "Get Discovered", 
-                  desc: "Appear in the FitFare app when users are looking for a place to train.", 
+                  desc: "Appear in FitFare when people are looking for a place to train.", 
                   img: img1,
-                  className: "md:col-span-2 md:row-span-2"
+                  className: "col-span-2 md:col-span-2 md:row-span-2 min-h-[320px] md:min-h-0",
+                  titleClass: "text-2xl md:text-3xl",
+                  descClass: "text-sm md:text-base"
                 },
                 { 
                   title: "Manage Bookings", 
-                  desc: "Easily track and manage all flexible bookings.", 
+                  desc: "View and manage FitFare bookings in one place.", 
                   img: img2,
-                  className: "md:col-span-2 md:row-span-1"
+                  className: "col-span-2 md:col-span-2 md:row-span-1 min-h-[220px] md:min-h-0",
+                  titleClass: "text-2xl md:text-3xl",
+                  descClass: "text-sm md:text-base"
                 },
                 { 
                   title: "QR Attendance", 
                   desc: "Verify check-ins instantly with integrated QR codes.", 
                   img: img3,
-                  className: "md:col-span-1 md:row-span-1"
+                  className: "col-span-1 md:col-span-1 md:row-span-1 min-h-[220px] md:min-h-0",
+                  titleClass: "text-lg md:text-3xl",
+                  descClass: "text-xs md:text-base"
                 },
                 { 
                   title: "No Commission", 
-                  desc: "Keep 100% of what you earn on every flexible session.", 
+                  desc: "Keep 100% of what you earn on every FitFare session.", 
                   img: img4,
-                  className: "md:col-span-1 md:row-span-1"
+                  className: "col-span-1 md:col-span-1 md:row-span-1 min-h-[220px] md:min-h-0",
+                  titleClass: "text-lg md:text-3xl",
+                  descClass: "text-xs md:text-base"
                 }
               ].map((prop, i) => (
                 <div 
                   key={i} 
-                  className={`bento-card group relative rounded-[2rem] border border-white/10 hover:border-white/30 overflow-hidden flex flex-col justify-end p-6 md:p-8 min-h-[350px] md:min-h-0 transition-[border-color,box-shadow] duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] ${prop.className}`}
+                  className={`bento-card group relative rounded-[1.5rem] md:rounded-[2rem] border border-white/10 hover:border-white/30 overflow-hidden flex flex-col justify-end p-5 md:p-8 transition-[border-color,box-shadow] duration-500 hover:shadow-[0_0_30px_rgba(255,255,255,0.1)] ${prop.className}`}
                 >
                   <img src={prop.img} alt={prop.title} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 -z-20" />
                   
@@ -103,11 +112,11 @@ const PartnerTransitionSection = () => {
                   />
 
                   {/* Smooth Full-Card Gradient Overlay for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/50 to-black/10 transition-opacity duration-500 group-hover:opacity-90 pointer-events-none -z-10"></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-transparent transition-opacity duration-500 group-hover:opacity-90 pointer-events-none -z-10"></div>
                   
                   <div className="z-10 mt-auto relative transform transition-all duration-500 group-hover:-translate-y-2">
-                    <h4 className="text-2xl md:text-3xl font-extrabold text-white mb-2 leading-tight drop-shadow-md">{prop.title}</h4>
-                    <p className="text-white/70 group-hover:text-white/100 transition-colors duration-500 font-medium leading-snug text-sm md:text-base max-w-sm drop-shadow-md">{prop.desc}</p>
+                    <h4 className={`${prop.titleClass} font-extrabold text-white mb-1 md:mb-2 leading-tight drop-shadow-md`}>{prop.title}</h4>
+                    <p className={`text-white/70 group-hover:text-white/100 transition-colors duration-500 font-medium leading-snug max-w-sm drop-shadow-md ${prop.descClass}`}>{prop.desc}</p>
                   </div>
                 </div>
               ))}
@@ -116,10 +125,10 @@ const PartnerTransitionSection = () => {
 
           {/* CTA */}
           <div className="text-center">
-            <button className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
+            <Link to="/partner-form" className="group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
               <span className="relative z-10 text-black transition-colors duration-300">Become a FitFare Partner</span>
               <ArrowRight size={16} className="relative z-10 text-black group-hover:translate-x-1 transition-all duration-300" />
-            </button>
+            </Link>
           </div>
         </div>
 

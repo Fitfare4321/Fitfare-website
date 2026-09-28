@@ -23,11 +23,11 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
   return (
     <div className="relative pt-20 pb-40" ref={containerRef}>
       {/* Background Line (Faint) */}
-      <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-white/10 md:-translate-x-1/2" />
+      <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-white/10 -translate-x-1/2" />
       
       {/* Animated Line (Draws down on scroll) */}
       <motion.div 
-        className="absolute left-0 md:left-1/2 top-0 w-px bg-gradient-to-b from-white via-white to-transparent md:-translate-x-1/2 origin-top"
+        className="absolute left-0 md:left-1/2 top-0 w-px bg-gradient-to-b from-white via-white to-transparent -translate-x-1/2 origin-top"
         style={{ height: lineHeight }}
       />
 
@@ -43,13 +43,15 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
               }`}
             >
               {/* Timeline Dot with Pulse Effect */}
-              <motion.div 
-                initial={{ scale: 0, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: false, amount: 0.8 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                className="absolute left-0 md:left-1/2 w-[8px] h-[8px] rounded-full bg-white md:-translate-x-1/2 -translate-x-[4px] z-20 ring-4 ring-black shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
-              />
+              <div className="absolute left-0 md:left-1/2 -translate-x-1/2 z-20 flex items-center justify-center">
+                <motion.div 
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  viewport={{ once: false, amount: 0.8 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="w-[8px] h-[8px] rounded-full bg-white ring-4 ring-black shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
+                />
+              </div>
               
               {/* Text Side */}
               <div className={`w-full md:w-1/2 pl-8 md:pl-0 flex flex-col justify-center ${isEven ? "md:pr-12 lg:pr-24 md:items-end md:text-right" : "md:pl-12 lg:pl-24 md:items-start md:text-left"}`}>

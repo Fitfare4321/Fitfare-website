@@ -9,7 +9,6 @@ import PersonalizationSection from "@/components/PersonalizationSection";
 import PartnerTransitionSection from "@/components/PartnerTransitionSection";
 import FAQSection from "@/components/FAQSection";
 import { CinematicFooter } from "@/components/ui/motion-footer";
-import Preloader from "@/components/Preloader";
 import PageSEO from "@/components/PageSEO";
 
 const HOMEPAGE_TITLE = "FitFare | Wellbeing, Rebuilt for Fitness";
@@ -68,7 +67,6 @@ const Index = () => {
         canonical={HOMEPAGE_CANONICAL}
         jsonLd={[organizationSchema]}
       />
-      <Preloader />
       
       {/* 01. Navbar */}
       <Navbar />

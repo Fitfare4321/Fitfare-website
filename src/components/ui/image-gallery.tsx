@@ -2,37 +2,37 @@ import { cn } from "@/lib/utils";
 
 const features = [
   {
-    title: "No Long-Term Lock-In",
-    desc: "Pay only for what you use without being tied down.",
+    title: "NO LONG-TERM LOCK-IN",
+    desc: "Book the sessions that work for you without committing to a traditional long-term membership.",
     image: "https://images.unsplash.com/photo-1540497077202-7c8a3999166f?q=80&w=2070&auto=format&fit=crop", // Empty gym showing flexibility
   },
   {
-    title: "Pay for What You Use",
-    desc: "Only pay for the minutes you work out, right down to the second.",
+    title: "PAY FOR WHAT YOU USE",
+    desc: "See the session price before you book and pay for the fitness services you choose.",
     image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?q=80&w=2070&auto=format&fit=crop", // Weights/gym setup
   },
   {
-    title: "More Choice",
-    desc: "Access to a wide variety of gyms and activities near you.",
+    title: "MORE CHOICE",
+    desc: "Explore participating gyms, classes, and activities near you.",
     image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2070&auto=format&fit=crop", // Activity/Yoga variety
   },
   {
-    title: "One Experience",
-    desc: "A seamless, unified experience across all partner locations.",
+    title: "ONE EXPERIENCE",
+    desc: "Discover, book, and check in with one connected FitFare experience.",
     image: "https://images.unsplash.com/photo-1576678927484-cc907957088c?q=80&w=2070&auto=format&fit=crop", // Working out smoothly
   }
 ];
 
 export function FeatureGallery() {
   return (
-    <div className="flex items-stretch gap-4 h-[500px] md:h-[600px] w-full max-w-6xl mt-12 px-4 mx-auto">
+    <div className="flex flex-col md:flex-row items-stretch gap-4 h-[600px] md:h-[600px] w-full max-w-6xl mt-12 px-4 mx-auto">
       {features.map((feature, idx) => (
         <div
           key={idx}
           className={cn(
-            "relative group flex flex-col justify-end overflow-hidden rounded-[2rem]",
+            "relative group flex flex-col justify-end overflow-hidden rounded-[1.5rem] md:rounded-[2rem]",
             "transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]",
-            "w-1/4 hover:w-[200%] cursor-pointer shadow-xl",
+            "flex-1 hover:flex-[3] cursor-pointer shadow-xl",
             "border border-white/10 hover:border-white/20"
           )}
         >
@@ -52,10 +52,15 @@ export function FeatureGallery() {
             0{idx + 1}
           </div>
 
-          {/* Collapsed State Content (Vertical Title) */}
-          <div className="absolute bottom-10 left-6 md:left-8 flex items-center justify-center transition-all duration-500 ease-out group-hover:opacity-0 group-hover:translate-y-8">
+          {/* Collapsed State Content */}
+          <div className="absolute inset-0 md:bottom-10 md:left-8 md:top-auto md:right-auto flex items-center justify-center transition-all duration-500 ease-out group-hover:opacity-0 md:group-hover:translate-y-8">
             <h3 
-              className="text-xl md:text-2xl font-bold text-white whitespace-nowrap tracking-wider uppercase opacity-80 group-hover:opacity-0"
+              className="text-lg md:hidden font-bold text-white tracking-wider uppercase opacity-90 drop-shadow-md text-center px-4"
+            >
+              {feature.title}
+            </h3>
+            <h3 
+              className="hidden md:block text-2xl font-bold text-white whitespace-nowrap tracking-wider uppercase opacity-80"
               style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
             >
               {feature.title}
@@ -74,11 +79,11 @@ export function FeatureGallery() {
           </div>
 
           {/* Mobile Expanded State Content (simpler for small screens) */}
-          <div className="relative p-6 opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0 w-full md:hidden flex flex-col justify-end h-full">
-            <h3 className="text-2xl font-bold text-white leading-tight mb-2">
+          <div className="relative p-6 opacity-0 translate-y-4 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-y-0 w-full md:hidden flex flex-col justify-end h-full pointer-events-none">
+            <h3 className="text-xl sm:text-2xl font-bold text-white leading-tight mb-2 drop-shadow-md">
               {feature.title}
             </h3>
-            <p className="text-gray-300 text-sm">
+            <p className="text-gray-200 text-xs sm:text-sm drop-shadow-md">
               {feature.desc}
             </p>
           </div>
