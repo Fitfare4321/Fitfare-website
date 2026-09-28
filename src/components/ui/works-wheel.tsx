@@ -70,7 +70,7 @@ const DRAG_UNITS = 420;
 /** Quiet time after the last wheel event before the wheel settles on an item. */
 const SETTLE = 140;
 /** Fraction of the remaining distance closed each frame. 1 = no smoothing. */
-const EASE = 1;
+const EASE = 0.08;
 
 const clamp = (v: number, lo: number, hi: number) =>
   Math.min(hi, Math.max(lo, v));
@@ -151,7 +151,9 @@ export function WorksWheel({
 
   const metrics = React.useMemo(() => {
     const { w, h } = stage;
-    const cardW = Math.min(h * CARD_H * CARD_RATIO, w * CARD_MAX_W);
+    const isMobile = w < 768;
+    const currentMaxW = isMobile ? 0.5 : CARD_MAX_W;
+    const cardW = Math.min(h * CARD_H * CARD_RATIO, w * currentMaxW);
     const cardH = cardW / CARD_RATIO;
     const drumR = cardH * DRUM;
     const ringR = cardH * RING_R;
@@ -161,6 +163,7 @@ export function WorksWheel({
       ? clamp((((2 * Math.PI * ringR) / count) * 0.82) / (cardW || 1), 0.16, 1)
       : 1;
     return {
+      isMobile,
       cardW,
       cardH,
       ringR,
@@ -168,7 +171,7 @@ export function WorksWheel({
       drumR,
       bow: cardH * BOW,
       depth: cardH * LENS,
-      title: cardH * TITLE,
+      title: cardH * TITLE * (isMobile ? 1.5 : 1), // slightly larger relative to card on mobile
       index: cardH * INDEX,
     };
   }, [stage, count]);
@@ -194,6 +197,7 @@ export function WorksWheel({
       // far side of the perspective and render at half its size.
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translateZ(${-m * drumR}px)`;
+        wheelRef.current.style.left = metrics.isMobile ? `${lerp(50, 35, m)}%` : '50%';
       }
 
       for (let i = 0; i < count; i++) {
@@ -284,21 +288,21 @@ export function WorksWheel({
         role="listbox"
         aria-label={label}
         aria-activedescendant={`works-wheel-${active}`}
-        className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-x outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing"
+        className="focus-visible:outline-foreground absolute inset-0 cursor-grab touch-pan-y outline-none focus-visible:outline-2 focus-visible:-outline-offset-4 active:cursor-grabbing"
         style={{ perspective: `${metrics.depth}px` }}
         onPointerDown={(event) => {
-          drag.current = event.clientY;
+          drag.current = event.clientX;
           event.currentTarget.setPointerCapture(event.pointerId);
         }}
         onPointerMove={(event) => {
           if (drag.current === null) return;
-          to(target.current + (drag.current - event.clientY) / DRAG_UNITS);
-          drag.current = event.clientY;
+          to(target.current + (drag.current - event.clientX) / DRAG_UNITS);
+          drag.current = event.clientX;
         }}
         onPointerUp={() => {
           // Land on an item rather than between two.
           drag.current = null;
-          if (target.current > 1) to(Math.round(target.current));
+          to(Math.round(target.current));
         }}
         onKeyDown={(event) => {
           if (event.key === "ArrowDown") to(Math.round(target.current) + 1);
@@ -309,7 +313,7 @@ export function WorksWheel({
       >
         <div
           ref={wheelRef}
-          className="absolute top-1/2 left-1/2 [transform-style:preserve-3d]"
+          className="absolute top-1/2 [transform-style:preserve-3d]"
         >
           {items.map((item, i) => {
             const Tag = (item.href ? "a" : "div") as "a";
@@ -371,21 +375,31 @@ export function WorksWheel({
           proportions inside a card as well as at full bleed. */}
       <div
         ref={labelRef}
-        className="pointer-events-none absolute inset-0 grid place-items-center tracking-tight"
+        className="pointer-events-none absolute inset-0 hidden md:grid place-items-center tracking-tight"
         style={{ fontSize: metrics.title }}
       >
         {label}
       </div>
       <div
         ref={titleRef}
-        className="pointer-events-none absolute top-1/2 left-[8%] -translate-y-1/2 tracking-tight opacity-0"
-        style={{ fontSize: metrics.title }}
+        className="pointer-events-none absolute top-1/2 right-4 md:right-auto md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 text-right md:text-left w-[40%] md:w-auto z-50 drop-shadow-[0_2px_10px_rgba(0,0,0,1)] font-bold md:font-normal text-white leading-[1.1]"
+        style={{ fontSize: metrics.title, wordBreak: 'break-word' }}
       >
-        {items[active]?.title}
+        {items[active]?.title.split(' ').map((word, i, arr) => (
+          <React.Fragment key={i}>
+            {word}
+            {i !== arr.length - 1 && (
+              <>
+                <br className="md:hidden" />
+                <span className="hidden md:inline"> </span>
+              </>
+            )}
+          </React.Fragment>
+        ))}
       </div>
 
       <ol
-        className="text-muted-foreground absolute top-[7.5%] right-[2.5%] text-right leading-[1.75]"
+        className="text-muted-foreground absolute top-1/2 -translate-y-1/2 right-[2.5%] md:right-[5%] text-right leading-[1.75] z-50 hidden md:block"
         style={{ fontSize: metrics.index }}
       >
         {items.map((item, i) => (

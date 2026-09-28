@@ -28,7 +28,7 @@ const ActivitiesSection = () => {
       {/* Background ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#305CDE]/10 blur-[120px] rounded-full pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-20 mt-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-0 md:mb-20 mt-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -47,7 +47,7 @@ const ActivitiesSection = () => {
           transition={{ delay: 0.2 }}
           className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto"
         >
-          Whatever movement looks like for you today, start with FitFare.
+          Find the kind of movement that feels right today, all in one place.
         </motion.p>
       </div>
 

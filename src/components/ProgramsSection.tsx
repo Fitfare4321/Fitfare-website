@@ -25,7 +25,7 @@ const ProgramsSection = () => {
             One App. More Ways to Move.
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl font-medium">
-            Whatever movement looks like for you today, start with FitFare.
+            Find the kind of movement that feels right today, all in one place.
           </p>
         </div>
       </div>

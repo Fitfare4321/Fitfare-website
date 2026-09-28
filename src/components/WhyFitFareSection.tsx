@@ -49,7 +49,7 @@ const WhyFitFareSection = () => {
             Fitness Should Fit Your Life.
           </h2>
           <p className="text-gray-400 text-sm md:text-base font-medium">
-            Your schedule changes. Your location changes. Your workout might change too. FitFare gives you a more flexible way to keep moving.
+            Your schedule changes. Your location changes. Your workout can change too. FitFare gives you a flexible way to keep moving.
           </p>
         </div>
 
