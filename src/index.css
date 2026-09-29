@@ -46,8 +46,10 @@
     --surface-white: #ffffff;
     --surface-light: #f8fafb;
     --surface-card: #ffffff;
-    --border-light: rgba(0, 0, 0, 0.06);
+    --border-light: rgba(0, 0, 0, 0.1);
     --border-card: rgba(0, 0, 0, 0.08);
+    --dots-color: rgba(0, 0, 0, 0.1);
+    --dots-glow-color: rgba(0, 0, 0, 0.4);
     --text-primary: #111827;
     --text-secondary: #6b7280;
     --text-tertiary: #9ca3af;
@@ -90,8 +92,10 @@
     --surface-white: #0a0f1c; /* Almost black */
     --surface-light: #111827; /* Very dark gray */
     --surface-card: #1f2937;  /* Dark gray */
-    --border-light: rgba(255, 255, 255, 0.1);
+    --border-light: rgba(255, 255, 255, 0.15);
     --border-card: rgba(255, 255, 255, 0.15);
+    --dots-color: rgba(255, 255, 255, 0.1);
+    --dots-glow-color: rgba(255, 255, 255, 0.6);
     --text-primary: #f9fafb;
     --text-secondary: #9ca3af;
     --text-tertiary: #6b7280;
@@ -147,6 +151,24 @@
 
   .backface-hidden {
     backface-visibility: hidden;
+  }
+
+  .global-bg-grid {
+    position: relative;
+    background-size: 30px 30px;
+    background-image: radial-gradient(circle, var(--dots-color) 1.5px, transparent 1.5px);
+  }
+
+  .global-bg-grid::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-size: 30px 30px;
+    background-image: radial-gradient(circle, var(--dots-glow-color) 1.5px, transparent 1.5px);
+    mask-image: radial-gradient(350px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, transparent 100%);
+    -webkit-mask-image: radial-gradient(350px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, transparent 100%);
+    z-index: 0;
   }
 }
 

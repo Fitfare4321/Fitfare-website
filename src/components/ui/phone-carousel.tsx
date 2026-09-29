@@ -10,7 +10,7 @@ export type AppStep = {
   alt: string;
 };
 
-export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
+export function PhoneCarousel({ steps, children }: { steps: AppStep[], children?: React.ReactNode }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const next = useCallback(() => {
@@ -18,9 +18,18 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
   }, [steps.length]);
 
   useEffect(() => {
-    const interval = setInterval(next, 7000);
-    return () => clearInterval(interval);
-  }, [next]);
+    window.dispatchEvent(new CustomEvent("phone-carousel-step", { detail: activeIndex }));
+  }, [activeIndex]);
+
+  useEffect(() => {
+    const handleSet = (e: any) => {
+      if (e.detail !== undefined) {
+        setActiveIndex(e.detail);
+      }
+    };
+    window.addEventListener("phone-carousel-set", handleSet);
+    return () => window.removeEventListener("phone-carousel-set", handleSet);
+  }, []);
 
   return (
     <div className="w-full flex flex-col items-center">
@@ -60,6 +69,11 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
               </p>
             ))}
           </div>
+          {children && (
+            <div className="mt-2 md:mt-8 ml-0 md:-ml-[5%] text-center md:text-left z-20 hidden lg:block">
+              {children}
+            </div>
+          )}
         </div>
 
         {/* Right Side: Stacked Phone Carousel */}
@@ -78,11 +92,11 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
                 key={index}
                 onClick={() => setActiveIndex(index)}
                 className={cn(
-                  "absolute w-[260px] md:w-[320px] h-[540px] md:h-[660px] rounded-[3rem] p-[2px] transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] cursor-pointer origin-center",
+                  "absolute w-[260px] md:w-[320px] h-[540px] md:h-[660px] rounded-[3rem] p-[2px] transition-all duration-[1000ms] ease-[cubic-bezier(0.25,1,0.5,1)] cursor-pointer origin-center",
                   isCenter ? "z-40 scale-100 translate-x-[-15%] lg:translate-x-[15%] opacity-100 shadow-[0_0_60px_rgba(255,255,255,0.05),-30px_0_80px_rgba(0,0,0,0.6)] bg-gradient-to-b from-white/40 via-white/5 to-black/50" : "",
-                  isStack1 ? "z-30 scale-[0.9] translate-x-[25%] lg:translate-x-[60%] opacity-90 brightness-[0.8] shadow-[-30px_0_60px_rgba(0,0,0,0.8)] bg-gradient-to-b from-white/10 to-black/50 hover:translate-x-[65%]" : "",
-                  isStack2 ? "z-20 scale-[0.8] translate-x-[55%] lg:translate-x-[100%] opacity-70 brightness-[0.6] shadow-[-30px_0_60px_rgba(0,0,0,0.8)] bg-gradient-to-b from-white/5 to-black/50 hover:translate-x-[105%]" : "",
-                  isStack3 ? "z-10 scale-[0.7] translate-x-[85%] lg:translate-x-[135%] opacity-40 brightness-[0.4] shadow-[-30px_0_60px_rgba(0,0,0,0.8)] bg-gradient-to-b from-white/5 to-black/50 hover:translate-x-[140%]" : ""
+                  isStack1 ? "z-30 scale-[0.95] translate-x-[15%] lg:translate-x-[50%] opacity-80 brightness-[0.8] shadow-[-20px_0_40px_rgba(0,0,0,0.6)] bg-gradient-to-b from-white/10 to-black/50 hover:translate-x-[20%] lg:hover:translate-x-[55%]" : "",
+                  isStack2 ? "z-20 scale-[0.9] translate-x-[45%] lg:translate-x-[85%] opacity-60 brightness-[0.6] shadow-[-20px_0_40px_rgba(0,0,0,0.6)] bg-gradient-to-b from-white/5 to-black/50 hover:translate-x-[50%] lg:hover:translate-x-[90%]" : "",
+                  isStack3 ? "z-10 scale-[0.85] translate-x-[75%] lg:translate-x-[120%] opacity-30 brightness-[0.4] shadow-[-20px_0_40px_rgba(0,0,0,0.6)] bg-gradient-to-b from-white/5 to-black/50 hover:translate-x-[80%] lg:hover:translate-x-[125%]" : ""
                 )}
                 style={{
                    pointerEvents: 'auto'
@@ -116,6 +130,12 @@ export function PhoneCarousel({ steps }: { steps: AppStep[] }) {
             );
           })}
         </div>
+
+        {children && (
+          <div className="w-full mt-8 md:mt-12 text-center lg:hidden z-20 relative">
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );

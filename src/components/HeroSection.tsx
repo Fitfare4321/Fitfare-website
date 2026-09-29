@@ -158,7 +158,6 @@ const HeroSection = () => {
     >
       {/* ── BACKGROUND ── */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <div className="absolute inset-0 bg-[radial-gradient(circle,#00000006_1px,transparent_1px)] dark:bg-[radial-gradient(circle,#ffffff04_1px,transparent_1px)] [background-size:26px_26px]" />
 
         <motion.div
           animate={{ scale: [1, 1.15, 1], x: [0, 25, 0], y: [0, -15, 0] }}

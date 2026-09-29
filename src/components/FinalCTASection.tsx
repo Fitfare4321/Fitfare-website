@@ -4,6 +4,7 @@ import { useGSAP } from "@gsap/react";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import CIcon from '@coreui/icons-react';
 import { cibGooglePlay, cibApple } from '@coreui/icons';
+import { GlassButton } from "@/components/ui/glass-button";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -39,21 +40,25 @@ const FinalCTASection = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <button className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-xl flex items-center justify-center gap-3 hover:scale-105 transition-transform duration-300 shadow-xl shadow-white/5">
-            <CIcon icon={cibApple} className="w-7 h-7" />
-            <div className="text-left">
-              <div className="text-[10px] uppercase tracking-wider text-black/70 font-bold leading-none mb-1">Download on the</div>
-              <div className="text-lg font-bold leading-none">App Store</div>
-            </div>
-          </button>
+          <div className="w-full sm:w-auto scale-90 sm:scale-100 hover:scale-[1.03] active:scale-[0.97] transition-transform duration-300">
+            <GlassButton size="lg" contentClassName="flex items-center gap-3">
+              <CIcon icon={cibApple} className="w-7 h-7" />
+              <div className="text-left">
+                <div className="text-[10px] uppercase tracking-wider font-bold leading-none mb-1 opacity-70">Download on the</div>
+                <div className="text-lg font-bold leading-none">App Store</div>
+              </div>
+            </GlassButton>
+          </div>
           
-          <button className="w-full sm:w-auto bg-white text-black px-8 py-4 rounded-xl flex items-center justify-center gap-3 hover:scale-105 transition-transform duration-300 shadow-xl shadow-white/5">
-            <CIcon icon={cibGooglePlay} className="w-7 h-7" />
-            <div className="text-left">
-              <div className="text-[10px] uppercase tracking-wider text-black/70 font-bold leading-none mb-1">Get it on</div>
-              <div className="text-lg font-bold leading-none">Google Play</div>
-            </div>
-          </button>
+          <div className="w-full sm:w-auto scale-90 sm:scale-100 hover:scale-[1.03] active:scale-[0.97] transition-transform duration-300">
+            <GlassButton size="lg" contentClassName="flex items-center gap-3">
+              <CIcon icon={cibGooglePlay} className="w-7 h-7" />
+              <div className="text-left">
+                <div className="text-[10px] uppercase tracking-wider font-bold leading-none mb-1 opacity-70">Get it on</div>
+                <div className="text-lg font-bold leading-none">Google Play</div>
+              </div>
+            </GlassButton>
+          </div>
         </div>
       </div>
     </section>

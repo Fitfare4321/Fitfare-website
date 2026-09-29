@@ -14,8 +14,9 @@
 import * as React from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 import { cn } from "@/lib/utils";
 
@@ -152,7 +153,7 @@ export function WorksWheel({
   const metrics = React.useMemo(() => {
     const { w, h } = stage;
     const isMobile = w < 768;
-    const currentMaxW = isMobile ? 0.5 : CARD_MAX_W;
+    const currentMaxW = isMobile ? 0.75 : CARD_MAX_W;
     const cardW = Math.min(h * CARD_H * CARD_RATIO, w * currentMaxW);
     const cardH = cardW / CARD_RATIO;
     const drumR = cardH * DRUM;
@@ -197,7 +198,7 @@ export function WorksWheel({
       // far side of the perspective and render at half its size.
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translateZ(${-m * drumR}px)`;
-        wheelRef.current.style.left = metrics.isMobile ? `${lerp(50, 35, m)}%` : '50%';
+        wheelRef.current.style.left = metrics.isMobile ? `${lerp(50, 40, m)}%` : '50%';
       }
 
       for (let i = 0; i < count; i++) {
@@ -236,6 +237,32 @@ export function WorksWheel({
     frame = requestAnimationFrame(draw);
     return () => cancelAnimationFrame(frame);
   }, [metrics, stage.h, count, last, reduced]);
+
+  React.useEffect(() => {
+    window.dispatchEvent(new CustomEvent("works-wheel-step", { detail: active }));
+  }, [active]);
+
+  React.useEffect(() => {
+    const handleSet = (e: any) => {
+      const index = e.detail;
+      if (index !== undefined) {
+        const track = document.getElementById("wheel-scroll-track");
+        if (track) {
+          const rect = track.getBoundingClientRect();
+          const startScroll = window.scrollY + rect.top;
+          const scrollDistance = track.scrollHeight - window.innerHeight;
+          // Progress is mapped from 0 to last + 1, so index / (last + 1) gives the normalized progress.
+          const progress = index / (last + 1);
+          window.scrollTo({
+            top: startScroll + progress * scrollDistance,
+            behavior: "smooth"
+          });
+        }
+      }
+    };
+    window.addEventListener("works-wheel-set", handleSet);
+    return () => window.removeEventListener("works-wheel-set", handleSet);
+  }, [last]);
 
   const to = React.useCallback(
     (next: number) => {
@@ -343,25 +370,7 @@ export function WorksWheel({
                       decoding="async"
                       className="size-full object-cover"
                     />
-                    {action && item.href ? (
-                      <span className="bg-background/80 text-foreground pointer-events-none absolute right-3 bottom-3 flex translate-y-1 items-center gap-1 rounded-full px-2.5 py-1 text-[0.7rem] opacity-0 backdrop-blur-sm transition group-hover:translate-y-0 group-hover:opacity-100">
-                        <svg
-                          viewBox="0 0 12 12"
-                          className="size-2.5"
-                          aria-hidden="true"
-                        >
-                          <path
-                            d="M3 9 9 3M4 3h5v5"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="1.4"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        {action}
-                      </span>
-                    ) : null}
+
                   </span>
                 </Tag>
               </React.Fragment>

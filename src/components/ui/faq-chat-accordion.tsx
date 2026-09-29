@@ -53,7 +53,7 @@ export function FaqAccordion({
               <Accordion.Trigger className="flex w-full items-center justify-start gap-x-4">
                 <div
                   className={cn(
-                    "relative flex items-center space-x-2 rounded-xl p-2 transition-colors",
+                    "relative flex items-center space-x-2 rounded-xl p-2 transition-colors text-left",
                     openItem === item.id.toString() 
                       ? "bg-primary/20 text-primary" 
                       : "bg-muted hover:bg-primary/10",
@@ -80,7 +80,7 @@ export function FaqAccordion({
 
                 <span 
                   className={cn(
-                    "text-muted-foreground",
+                    "text-muted-foreground flex-shrink-0 flex items-center justify-center transition-colors",
                     openItem === item.id.toString() && "text-primary"
                   )}
                 >

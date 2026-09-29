@@ -29,13 +29,13 @@ const FAQSection = () => {
     <section id="faq" className="py-24 bg-black relative text-white">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="faq-header text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 flex flex-wrap items-center justify-center gap-x-2 md:gap-x-2.5 gap-y-1" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-            <span className="whitespace-nowrap">Confused? We’ve Got</span>
-            <div className="relative inline-flex items-center justify-start w-[110px] h-[52px] md:w-[135px] md:h-[68px] flex-shrink-0">
+        <div className="faq-header text-center mb-10 md:mb-16">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 md:mb-4 flex flex-wrap items-center justify-center gap-x-2 md:gap-x-2.5 gap-y-2 leading-tight" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            <span>Confused? We’ve Got</span>
+            <div className="relative inline-flex items-center justify-center w-[90px] h-[45px] md:w-[135px] md:h-[68px] flex-shrink-0 mt-1 md:mt-0">
               <ParticleText
                 text="You."
-                particleSize={3}
+                particleSize={2}
                 density={4}
                 color="#ffffff"
                 highlightColor="#ffffff"
@@ -52,8 +52,8 @@ const FAQSection = () => {
         <FaqAccordion 
           data={faqs}
           className="w-full"
-          questionClassName="bg-white/5 hover:bg-white/10 text-white font-bold py-6 px-8 text-2xl border border-white/5"
-          answerClassName="bg-white text-black font-semibold py-5 px-8 text-xl max-w-2xl shadow-2xl rounded-tr-sm"
+          questionClassName="bg-white/5 hover:bg-white/10 text-white font-bold py-5 px-6 md:py-6 md:px-8 text-xl md:text-2xl border border-white/5"
+          answerClassName="bg-white text-black font-semibold py-4 px-6 md:py-5 md:px-8 text-lg md:text-xl max-w-[90%] md:max-w-2xl shadow-2xl rounded-tr-sm"
           timestamp=""
         />
 

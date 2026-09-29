@@ -66,12 +66,21 @@ const STYLES = `
 
 /* Theme-adaptive Grid Background */
 .footer-bg-grid {
-  background-size: 60px 60px;
-  background-image: 
-    linear-gradient(to right, color-mix(in oklch, white 3%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in oklch, white 3%, transparent) 1px, transparent 1px);
+  background-size: 30px 30px;
+  background-image: radial-gradient(circle, color-mix(in oklch, white 10%, transparent) 1.5px, transparent 1.5px);
   mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
   -webkit-mask-image: linear-gradient(to bottom, transparent, black 30%, black 70%, transparent);
+}
+.footer-bg-grid::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-size: 30px 30px;
+  background-image: radial-gradient(circle, color-mix(in oklch, white 60%, transparent) 1.5px, transparent 1.5px);
+  mask-image: radial-gradient(350px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, transparent 100%);
+  -webkit-mask-image: radial-gradient(350px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 0%, transparent 100%);
+  z-index: 0;
 }
 
 /* Theme-adaptive Aurora Glow */
@@ -292,9 +301,8 @@ export function CinematicFooter() {
         {/* The actual footer stays fixed to the viewport underneath everything */}
         <footer className="fixed bottom-0 left-0 flex h-screen w-full flex-col justify-between overflow-hidden bg-black text-white cinematic-footer-wrapper">
           
-          {/* Ambient Light & Grid Background */}
+          {/* Ambient Light */}
           <div className="footer-aurora absolute left-1/2 top-1/2 h-[60vh] w-[80vw] -translate-x-1/2 -translate-y-1/2 animate-footer-breathe rounded-[50%] blur-[80px] pointer-events-none z-0" />
-          <div className="footer-bg-grid absolute inset-0 z-0 pointer-events-none" />
 
           {/* Giant background text */}
           <div

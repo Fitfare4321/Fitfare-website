@@ -23,7 +23,7 @@ const ActivitiesSection = () => {
   return (
     <section
       id="activities"
-      className="py-24 bg-black relative overflow-x-clip z-10"
+      className="py-24 bg-black global-bg-grid relative overflow-x-clip z-10"
     >
       {/* Background ambient glow */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#305CDE]/10 blur-[120px] rounded-full pointer-events-none" />
@@ -62,12 +62,6 @@ const ActivitiesSection = () => {
         </div>
       </div>
 
-      <div className="text-center mt-12 mb-24 relative z-20">
-        <button className="bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-full text-sm font-bold flex items-center gap-3 mx-auto hover:bg-[#305CDE] dark:hover:bg-[#305CDE] hover:text-white dark:hover:text-white hover:scale-105 active:scale-95 transition-all duration-300">
-          Explore Fitness Near You
-          <ArrowRight size={16} />
-        </button>
-      </div>
     </section>
   );
 };

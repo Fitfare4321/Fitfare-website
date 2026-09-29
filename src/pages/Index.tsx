@@ -51,12 +51,44 @@ const organizationSchema = {
 const Index = () => {
   useEffect(() => {
     const hash = window.location.hash;
-    if (!hash) return;
-    const timer = setTimeout(() => {
-      const el = document.getElementById(hash.slice(1));
-      if (el) el.scrollIntoView({ behavior: "auto" });
-    }, 100);
-    return () => clearTimeout(timer);
+    if (hash) {
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash.slice(1));
+        if (el) el.scrollIntoView({ behavior: "auto" });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  useEffect(() => {
+    const updateMousePosition = (clientX: number, clientY: number) => {
+      const grids = document.querySelectorAll('.global-bg-grid, .footer-bg-grid');
+      grids.forEach((grid) => {
+        const rect = grid.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const y = clientY - rect.top;
+        (grid as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
+        (grid as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
+      });
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      updateMousePosition(e.clientX, e.clientY);
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (e.touches.length > 0) {
+        updateMousePosition(e.touches[0].clientX, e.touches[0].clientY);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('touchmove', handleTouchMove);
+    
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('touchmove', handleTouchMove);
+    };
   }, []);
 
   return (
@@ -71,31 +103,31 @@ const Index = () => {
       {/* 01. Navbar */}
       <Navbar />
       
-      <main className="relative z-10 w-full bg-white dark:bg-[#0a0f1c] shadow-2xl rounded-b-[40px] border-b border-black/10 dark:border-white/10">
-        <div className="relative z-0">
-          {/* 02. Hero */}
-          <HeroSection />
+      <main className="relative z-10 w-full bg-white dark:bg-[#0a0f1c] global-bg-grid shadow-2xl rounded-b-[40px] border-b border-black/10 dark:border-white/10">
+        <div className="relative z-10 w-full">
+          <div className="relative z-0">
+            {/* 02. Hero */}
+            <HeroSection />
 
-          {/* 03. Activities */}
-          <ActivitiesSection />
+            {/* 03. Activities */}
+            <ActivitiesSection />
+          </div>
+
+          {/* 04. Why FitFare */}
+          <WhyFitFareSection />
+
+          {/* 05. FindFitUse (Nearby Discovery, App Experience) */}
+          <FindFitUseSection />
+
+          {/* 07. Personalization (Coming Soon) */}
+          <PersonalizationSection />
+
+          {/* 08. Partner Section (Transition + Proposition Merged) */}
+          <PartnerTransitionSection />
+
+          {/* 09. FAQ */}
+          <FAQSection />
         </div>
-
-        {/* 04. Why FitFare */}
-        <WhyFitFareSection />
-
-        {/* 05. FindFitUse (Nearby Discovery, App Experience) */}
-        <FindFitUseSection />
-
-
-
-        {/* 07. Personalization (Coming Soon) */}
-        <PersonalizationSection />
-
-        {/* 08. Partner Section (Transition + Proposition Merged) */}
-        <PartnerTransitionSection />
-
-        {/* 09. FAQ */}
-        <FAQSection />
       </main>
 
       {/* 12. Cinematic Footer */}

@@ -18,6 +18,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { PhoneCarousel } from "@/components/ui/phone-carousel";
+import { GlassButton } from "@/components/ui/glass-button";
 gsap.registerPlugin(ScrollTrigger);
 
 import discoverImg from "@/assets/discover.png";
@@ -57,7 +58,7 @@ const FindFitUseSection = () => {
 
 
   return (
-    <section ref={sectionRef} className="py-24 bg-black relative overflow-hidden text-white">
+    <section id="how-it-works" ref={sectionRef} className="py-24 bg-black relative overflow-hidden text-white">
       {/* Background ambient glow removed for completely dark aesthetic */}
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -73,13 +74,14 @@ const FindFitUseSection = () => {
               </p>
 
               {/* The Unified Interactive Stepper + Phones */}
-              <PhoneCarousel steps={flowCards} />
-
-              <button className="mt-12 group relative inline-flex items-center gap-3 px-8 py-4 bg-white text-black rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(255,255,255,0.15)] hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]">
-                <div className="absolute inset-0 bg-gray-200 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <span className="relative z-10 text-black transition-colors duration-300">Get the FitFare App</span>
-                <ArrowRight size={16} className="relative z-10 text-black group-hover:translate-x-1 transition-all duration-300" />
-              </button>
+              <PhoneCarousel steps={flowCards}>
+                <div className="scale-100 md:scale-110 mt-2 hover:scale-105 active:scale-95 transition-transform duration-300">
+                  <GlassButton size="lg" contentClassName="flex items-center gap-2">
+                    <span>Get the FitFare App</span>
+                    <ArrowRight size={18} className="relative z-10 text-current transition-all duration-300" />
+                  </GlassButton>
+                </div>
+              </PhoneCarousel>
             </div>
 
         </div>
