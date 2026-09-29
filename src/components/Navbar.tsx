@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Compass, Info, Briefcase, HelpCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion, useMotionValue, useSpring } from "framer-motion";
+import { motion, useMotionValue, animate } from "framer-motion";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
 import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
@@ -37,9 +37,11 @@ type NavMode = "global" | "activities" | "howItWorks";
 const MobileBottomBar = ({
   activeSection,
   handleNavClick,
+  isScrollLocked,
 }: {
   activeSection: string;
   handleNavClick: (href: string) => void;
+  isScrollLocked: React.MutableRefObject<boolean>;
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -75,7 +77,7 @@ const MobileBottomBar = ({
 
   // Pill animation
   const pillX = useMotionValue(0);
-  const smoothPillX = useSpring(pillX, { stiffness: 500, damping: 38, mass: 0.8 });
+  const pillScaleY = useMotionValue(1);
 
   // Drag state
   const isDragging = useRef(false);
@@ -105,7 +107,7 @@ const MobileBottomBar = ({
   useEffect(() => {
     if (containerWidth > 0 && !isDragging.current) {
       const targetX = padding + safeActiveIndex * pillWidth;
-      pillX.set(targetX);
+      animate(pillX, targetX, { type: "spring", stiffness: 500, damping: 38, mass: 0.8 });
     }
   }, [safeActiveIndex, pillWidth, containerWidth, pillX]);
 
@@ -175,10 +177,18 @@ const MobileBottomBar = ({
     const visible = { activities: false, howItWorks: false };
 
     const updateMode = () => {
+      if (isScrollLocked.current) return;
       if (visible.activities) triggerTransition("activities");
       else if (visible.howItWorks) triggerTransition("howItWorks");
       else triggerTransition("global");
     };
+
+    const handleScroll = () => {
+      if (!isScrollLocked.current) {
+        updateMode();
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     const observers: IntersectionObserver[] = [];
 
@@ -210,8 +220,11 @@ const MobileBottomBar = ({
       observers.push(obs);
     }
 
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      observers.forEach((o) => o.disconnect());
+    };
+  }, [isScrollLocked]);
 
   // Handle tab tap
   const handleTabTap = useCallback(
@@ -250,10 +263,11 @@ const MobileBottomBar = ({
         dragStartX.current = e.clientX;
         dragStartPillX.current = currentPillLeft;
         (e.target as HTMLElement).setPointerCapture(e.pointerId);
-        smoothPillX.jump(currentPillLeft);
+        pillX.stop();
+        animate(pillScaleY, 0.75, { type: "spring", stiffness: 600, damping: 25, mass: 0.5 });
       }
     },
-    [safeActiveIndex, pillWidth, smoothPillX]
+    [safeActiveIndex, pillWidth, pillX, pillScaleY]
   );
 
   const handlePointerMove = useCallback(
@@ -284,7 +298,8 @@ const MobileBottomBar = ({
       );
 
       const snapX = padding + snappedIndex * pillWidth;
-      pillX.set(snapX);
+      animate(pillX, snapX, { type: "spring", stiffness: 500, damping: 38, mass: 0.8 });
+      animate(pillScaleY, 1, { type: "spring", stiffness: 500, damping: 30, mass: 0.8 });
 
       if (snappedIndex !== safeActiveIndex) {
         if (mode === "global") {
@@ -302,7 +317,7 @@ const MobileBottomBar = ({
         }
       }
     },
-    [pillX, pillWidth, containerWidth, tabCount, safeActiveIndex, handleNavClick, mode, lockWheel, lockCarousel]
+    [pillX, pillScaleY, pillWidth, containerWidth, tabCount, safeActiveIndex, handleNavClick, mode, lockWheel, lockCarousel]
   );
 
   return (
@@ -327,7 +342,8 @@ const MobileBottomBar = ({
             <motion.div
               className="absolute top-1.5 bottom-1.5 bg-white/12 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-grab active:cursor-grabbing"
               style={{
-                x: smoothPillX,
+                x: pillX,
+                scaleY: pillScaleY,
                 width: pillWidth,
                 left: 0,
               }}
@@ -605,6 +621,7 @@ const Navbar = () => {
       <MobileBottomBar
         activeSection={activeSection}
         handleNavClick={handleNavClick}
+        isScrollLocked={isScrollLocked}
       />
     </>
   );
