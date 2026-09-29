@@ -12,6 +12,14 @@ export type AppStep = {
 
 export function PhoneCarousel({ steps, children }: { steps: AppStep[], children?: React.ReactNode }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   const next = useCallback(() => {
     setActiveIndex((prev) => (prev + 1) % steps.length);
@@ -41,8 +49,8 @@ export function PhoneCarousel({ steps, children }: { steps: AppStep[], children?
           <div className="relative h-[150px] md:h-[500px] w-full md:w-[140%] ml-0 md:-ml-[25%] my-0 md:-my-[150px] z-10">
             <ParticleText
               text={steps[activeIndex].title}
-              particleSize={3}
-              density={5}
+              particleSize={isMobile ? 1.5 : 3}
+              density={isMobile ? 2 : 5}
               color="#ffffff"
               highlightColor="#ffffff"
               scatter={150}
