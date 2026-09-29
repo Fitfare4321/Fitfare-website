@@ -251,8 +251,10 @@ export function WorksWheel({
           const rect = track.getBoundingClientRect();
           const startScroll = window.scrollY + rect.top;
           const scrollDistance = track.scrollHeight - window.innerHeight;
-          // Progress is mapped from 0 to last + 1, so index / (last + 1) gives the normalized progress.
-          const progress = index / (last + 1);
+          // Turn 0 = ring, turn i+1 = item i at front.
+          // ScrollTrigger maps: to(progress * (last + 1))
+          // So to show item `index` we need turn = index + 1 → progress = (index + 1) / (last + 1)
+          const progress = (index + 1) / (last + 1);
           window.scrollTo({
             top: startScroll + progress * scrollDistance,
             behavior: "smooth"
@@ -391,8 +393,8 @@ export function WorksWheel({
       </div>
       <div
         ref={titleRef}
-        className="pointer-events-none absolute top-1/2 right-4 md:right-auto md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 text-right md:text-left w-[40%] md:w-auto z-50 drop-shadow-[0_2px_10px_rgba(0,0,0,1)] font-bold md:font-normal text-white leading-[1.1]"
-        style={{ fontSize: metrics.title, wordBreak: 'break-word' }}
+        className="pointer-events-none absolute top-1/2 right-4 md:right-auto md:left-[8%] -translate-y-1/2 tracking-tight opacity-0 text-right md:text-left w-auto md:w-auto z-50 drop-shadow-[0_2px_10px_rgba(0,0,0,1)] font-bold md:font-normal text-white leading-[1.1]"
+        style={{ fontSize: metrics.title }}
       >
         {items[active]?.title.split(' ').map((word, i, arr) => (
           <React.Fragment key={i}>

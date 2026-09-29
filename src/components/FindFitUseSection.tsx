@@ -74,14 +74,16 @@ const FindFitUseSection = () => {
               </p>
 
               {/* The Unified Interactive Stepper + Phones */}
-              <PhoneCarousel steps={flowCards}>
-                <div className="scale-100 md:scale-110 mt-2 hover:scale-105 active:scale-95 transition-transform duration-300">
-                  <GlassButton size="lg" contentClassName="flex items-center gap-2">
-                    <span>Get the FitFare App</span>
-                    <ArrowRight size={18} className="relative z-10 text-current transition-all duration-300" />
-                  </GlassButton>
-                </div>
-              </PhoneCarousel>
+              <div id="phone-carousel-track">
+                <PhoneCarousel steps={flowCards}>
+                  <div className="scale-100 md:scale-110 mt-2 hover:scale-105 active:scale-95 transition-transform duration-300">
+                    <GlassButton size="lg" contentClassName="flex items-center gap-2">
+                      <span>Get the FitFare App</span>
+                      <ArrowRight size={18} className="relative z-10 text-current transition-all duration-300" />
+                    </GlassButton>
+                  </div>
+                </PhoneCarousel>
+              </div>
             </div>
 
         </div>

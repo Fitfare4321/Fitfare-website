@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Compass, Info, Briefcase, HelpCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
 import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
@@ -13,10 +13,372 @@ const globalNavLinks = [
   { label: "FAQs", href: "/#faq", icon: HelpCircle },
 ];
 
+/* ─── Activity items for the mobile navbar ─── */
+const activityNavItems = [
+  { label: "Gyms", index: 0 },
+  { label: "Yoga", index: 1 },
+  { label: "Func.", index: 2 },
+  { label: "Group", index: 3 },
+  { label: "Dance", index: 4 },
+  { label: "Explore", index: 5 },
+];
+
+/* ─── How-it-works steps for the mobile navbar ─── */
+const howItWorksNavItems = [
+  { label: "Discover", index: 0 },
+  { label: "Choose", index: 1 },
+  { label: "Book & Pay", index: 2 },
+  { label: "Check In", index: 3 },
+];
+
+type NavMode = "global" | "activities" | "howItWorks";
+
+/* ─────────── iOS-style Mobile Bottom Bar ─────────── */
+const MobileBottomBar = ({
+  activeSection,
+  handleNavClick,
+}: {
+  activeSection: string;
+  handleNavClick: (href: string) => void;
+}) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  // Track which mode the navbar is in
+  const [mode, setMode] = useState<NavMode>("global");
+  const [activeWheelCard, setActiveWheelCard] = useState(0);
+  const [activeCarouselStep, setActiveCarouselStep] = useState(0);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const prevMode = useRef<NavMode>("global");
+  const wheelLocked = useRef(false);
+  const wheelLockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const carouselLocked = useRef(false);
+  const carouselLockTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Determine items based on mode
+  const currentItems = mode === "activities"
+    ? activityNavItems.map((a) => a.label)
+    : mode === "howItWorks"
+    ? howItWorksNavItems.map((a) => a.label)
+    : globalNavLinks.map((l) => l.label);
+  const tabCount = currentItems.length;
+
+  // Determine active index based on mode
+  const globalActiveIndex = globalNavLinks.findIndex(
+    (l) => l.href.split("#")[1] === activeSection
+  );
+  const activeIndex = mode === "activities"
+    ? activeWheelCard
+    : mode === "howItWorks"
+    ? activeCarouselStep
+    : (globalActiveIndex === -1 ? 0 : globalActiveIndex);
+  const safeActiveIndex = Math.max(0, Math.min(activeIndex, tabCount - 1));
+
+  // Pill animation
+  const pillX = useMotionValue(0);
+  const smoothPillX = useSpring(pillX, { stiffness: 500, damping: 38, mass: 0.8 });
+
+  // Drag state
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartPillX = useRef(0);
+
+  // Measure
+  const [pillWidth, setPillWidth] = useState(0);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const padding = 6;
+
+  useEffect(() => {
+    const measure = () => {
+      if (containerRef.current) {
+        const cw = containerRef.current.offsetWidth;
+        setContainerWidth(cw);
+        const innerWidth = cw - padding * 2;
+        setPillWidth(innerWidth / tabCount);
+      }
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, [tabCount]);
+
+  // Update pill when active tab changes
+  useEffect(() => {
+    if (containerWidth > 0 && !isDragging.current) {
+      const targetX = padding + safeActiveIndex * pillWidth;
+      pillX.set(targetX);
+    }
+  }, [safeActiveIndex, pillWidth, containerWidth, pillX]);
+
+  // Lock wheel updates during user-initiated navigation
+  const lockWheel = useCallback((targetIndex: number) => {
+    wheelLocked.current = true;
+    setActiveWheelCard(targetIndex);
+    if (wheelLockTimer.current) clearTimeout(wheelLockTimer.current);
+    wheelLockTimer.current = setTimeout(() => {
+      wheelLocked.current = false;
+    }, 1400);
+  }, []);
+
+  // Lock carousel updates during user-initiated navigation
+  const lockCarousel = useCallback((targetIndex: number) => {
+    carouselLocked.current = true;
+    setActiveCarouselStep(targetIndex);
+    if (carouselLockTimer.current) clearTimeout(carouselLockTimer.current);
+    carouselLockTimer.current = setTimeout(() => {
+      carouselLocked.current = false;
+    }, 800);
+  }, []);
+
+  // Listen for works-wheel-step events to track active card
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if (wheelLocked.current) return;
+      const idx = (e as CustomEvent).detail;
+      if (typeof idx === "number") {
+        setActiveWheelCard(idx);
+      }
+    };
+    window.addEventListener("works-wheel-step", handler);
+    return () => window.removeEventListener("works-wheel-step", handler);
+  }, []);
+
+  // Listen for phone-carousel-step events to track active step
+  useEffect(() => {
+    const handler = (e: Event) => {
+      if (carouselLocked.current) return;
+      const idx = (e as CustomEvent).detail;
+      if (typeof idx === "number") {
+        setActiveCarouselStep(idx);
+      }
+    };
+    window.addEventListener("phone-carousel-step", handler);
+    return () => window.removeEventListener("phone-carousel-step", handler);
+  }, []);
+
+  // Detect which section is visible and switch navbar mode
+  useEffect(() => {
+    const wheelTrack = document.getElementById("wheel-scroll-track");
+    const howItWorksTrack = document.getElementById("phone-carousel-track");
+
+    const triggerTransition = (newMode: NavMode) => {
+      if (newMode !== prevMode.current) {
+        prevMode.current = newMode;
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setMode(newMode);
+          setTimeout(() => setIsTransitioning(false), 50);
+        }, 180);
+      }
+    };
+
+    // We track which sections are currently intersecting
+    const visible = { activities: false, howItWorks: false };
+
+    const updateMode = () => {
+      if (visible.activities) triggerTransition("activities");
+      else if (visible.howItWorks) triggerTransition("howItWorks");
+      else triggerTransition("global");
+    };
+
+    const observers: IntersectionObserver[] = [];
+
+    if (wheelTrack) {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            visible.activities = entry.isIntersecting;
+          });
+          updateMode();
+        },
+        { threshold: 0.05, rootMargin: "-10% 0px -10% 0px" }
+      );
+      obs.observe(wheelTrack);
+      observers.push(obs);
+    }
+
+    if (howItWorksTrack) {
+      const obs = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            visible.howItWorks = entry.isIntersecting;
+          });
+          updateMode();
+        },
+        { threshold: 0.15, rootMargin: "-5% 0px -5% 0px" }
+      );
+      obs.observe(howItWorksTrack);
+      observers.push(obs);
+    }
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
+  // Handle tab tap
+  const handleTabTap = useCallback(
+    (e: React.MouseEvent, index: number) => {
+      e.preventDefault();
+      if (isDragging.current) return;
+
+      if (mode === "global") {
+        handleNavClick(globalNavLinks[index].href);
+      } else if (mode === "activities") {
+        lockWheel(index);
+        window.dispatchEvent(
+          new CustomEvent("works-wheel-set", { detail: index })
+        );
+      } else {
+        lockCarousel(index);
+        window.dispatchEvent(
+          new CustomEvent("phone-carousel-set", { detail: index })
+        );
+      }
+    },
+    [mode, handleNavClick, lockWheel, lockCarousel]
+  );
+
+  // Pointer drag handlers
+  const handlePointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      if (!containerRef.current) return;
+      const rect = containerRef.current.getBoundingClientRect();
+      const relX = e.clientX - rect.left;
+      const currentPillLeft = padding + safeActiveIndex * pillWidth;
+      const currentPillRight = currentPillLeft + pillWidth;
+
+      if (relX >= currentPillLeft - 20 && relX <= currentPillRight + 20) {
+        isDragging.current = true;
+        dragStartX.current = e.clientX;
+        dragStartPillX.current = currentPillLeft;
+        (e.target as HTMLElement).setPointerCapture(e.pointerId);
+        smoothPillX.jump(currentPillLeft);
+      }
+    },
+    [safeActiveIndex, pillWidth, smoothPillX]
+  );
+
+  const handlePointerMove = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging.current) return;
+      const delta = e.clientX - dragStartX.current;
+      const innerWidth = containerWidth - padding * 2;
+      const minX = padding;
+      const maxX = padding + innerWidth - pillWidth;
+      const newX = Math.max(minX, Math.min(maxX, dragStartPillX.current + delta));
+      pillX.set(newX);
+    },
+    [containerWidth, pillWidth, pillX]
+  );
+
+  const handlePointerUp = useCallback(
+    (e: React.PointerEvent) => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+
+      const currentPillX = pillX.get();
+      const pillCenter = currentPillX + pillWidth / 2 - padding;
+      const innerWidth = containerWidth - padding * 2;
+      const tabWidth = innerWidth / tabCount;
+      const snappedIndex = Math.max(
+        0,
+        Math.min(tabCount - 1, Math.floor(pillCenter / tabWidth))
+      );
+
+      const snapX = padding + snappedIndex * pillWidth;
+      pillX.set(snapX);
+
+      if (snappedIndex !== safeActiveIndex) {
+        if (mode === "global") {
+          handleNavClick(globalNavLinks[snappedIndex].href);
+        } else if (mode === "activities") {
+          lockWheel(snappedIndex);
+          window.dispatchEvent(
+            new CustomEvent("works-wheel-set", { detail: snappedIndex })
+          );
+        } else {
+          lockCarousel(snappedIndex);
+          window.dispatchEvent(
+            new CustomEvent("phone-carousel-set", { detail: snappedIndex })
+          );
+        }
+      }
+    },
+    [pillX, pillWidth, containerWidth, tabCount, safeActiveIndex, handleNavClick, mode, lockWheel, lockCarousel]
+  );
+
+  return (
+    <motion.div
+      initial={{ y: 80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+      className="md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
+    >
+      <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
+      <div className="glass-button-wrap w-full rounded-full pointer-events-auto">
+        <div className="glass-button w-full h-full rounded-full pointer-events-auto">
+          <div
+            ref={containerRef}
+            className="relative flex items-center justify-between p-1.5 w-full h-full z-20 pointer-events-auto select-none touch-none overflow-hidden"
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUp}
+            onPointerCancel={handlePointerUp}
+          >
+            {/* The animated pill */}
+            <motion.div
+              className="absolute top-1.5 bottom-1.5 bg-white/12 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-grab active:cursor-grabbing"
+              style={{
+                x: smoothPillX,
+                width: pillWidth,
+                left: 0,
+              }}
+            />
+
+            {/* Tab labels with blur transition */}
+            <div
+              className="flex items-center justify-between flex-1 relative z-10"
+              style={{
+                filter: isTransitioning ? "blur(8px)" : "blur(0px)",
+                opacity: isTransitioning ? 0 : 1,
+                transform: isTransitioning ? "scale(0.95)" : "scale(1)",
+                transition: "filter 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1)",
+              }}
+            >
+              {currentItems.map((label, i) => {
+                const isActive = i === safeActiveIndex;
+                return (
+                  <button
+                    key={`${mode}-${label}`}
+                    onClick={(e) => handleTabTap(e as unknown as React.MouseEvent, i)}
+                    className="relative flex items-center justify-center flex-1 py-2.5 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
+                  >
+                    <span
+                      className={`text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
+                        isActive
+                          ? "text-white font-bold"
+                          : "text-gray-400"
+                      }`}
+                    >
+                      {label}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+        <div className="glass-button-shadow rounded-full pointer-events-none" />
+      </div>
+    </motion.div>
+  );
+};
+
+
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("activities");
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const scrollLockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isScrollLocked = useRef(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -70,6 +432,9 @@ const Navbar = () => {
     const sectionIds = ["activities", "how-it-works", "partners", "faq"];
 
     const updateActive = () => {
+      // Skip scroll spy updates while user is navigating via drag/tap
+      if (isScrollLocked.current) return;
+
       // If at very top, highlight Explore
       if (window.scrollY < 150) {
         setActiveSection("activities");
@@ -109,6 +474,13 @@ const Navbar = () => {
       if (location.pathname === "/") {
         const targetElement = document.getElementById(targetId);
         if (targetElement) {
+          // Lock scroll spy so the pill doesn't bounce through intermediate sections
+          isScrollLocked.current = true;
+          if (scrollLockRef.current) clearTimeout(scrollLockRef.current);
+          scrollLockRef.current = setTimeout(() => {
+            isScrollLocked.current = false;
+          }, 1200); // unlock after smooth scroll finishes
+
           const navOffset = 70;
           const elementPosition = targetElement.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - navOffset;
@@ -229,53 +601,11 @@ const Navbar = () => {
         </motion.div>
       </motion.nav>
 
-      {/* MOBILE BOTTOM TAB BAR */}
-      <motion.div
-        initial={{ y: 80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-        className="md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
-      >
-        <div className="glass-button-wrap w-full rounded-full pointer-events-auto bg-white/20 dark:bg-black/40 backdrop-blur-3xl border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)]">
-          <div className="glass-button w-full h-full rounded-full pointer-events-auto">
-            <div className="flex items-center justify-between p-1.5 w-full h-full relative z-20 pointer-events-auto select-none">
-              {globalNavLinks.map((link) => {
-                const sectionId = link.href.split("#")[1];
-                const isActive = activeSection === sectionId;
-
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      handleNavClick(link.href);
-                    }}
-                    className="relative flex items-center justify-center flex-1 py-2.5 px-1.5 transition-all rounded-full cursor-pointer touch-manipulation z-20 pointer-events-auto"
-                  >
-                    {isActive && (
-                      <motion.div
-                        layoutId="mobileActiveTab"
-                        className="absolute inset-0 bg-white/10 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full -z-10 backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)]"
-                        transition={{ type: "spring", stiffness: 450, damping: 35 }}
-                      />
-                    )}
-                    <span
-                      className={`text-[13px] sm:text-sm font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
-                        isActive ? "text-white font-bold" : "text-gray-400 hover:text-gray-200"
-                      }`}
-                    >
-                      {link.label}
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-          <div className="glass-button-shadow rounded-full pointer-events-none"></div>
-        </div>
-      </motion.div>
+      {/* MOBILE BOTTOM TAB BAR — iOS-style draggable segmented control */}
+      <MobileBottomBar
+        activeSection={activeSection}
+        handleNavClick={handleNavClick}
+      />
     </>
   );
 };
