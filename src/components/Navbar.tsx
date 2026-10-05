@@ -358,7 +358,7 @@ const PillSegmentedControl = ({
                 <button
                   key={`${mode}-${label}`}
                   onClick={(e) => handleTabTap(e as unknown as React.MouseEvent, i)}
-                  className="relative flex items-center justify-center flex-1 py-2.5 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
+                  className="relative flex items-center justify-center flex-1 py-3.5 md:py-4 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
                 >
                   <span
                     className={`text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
