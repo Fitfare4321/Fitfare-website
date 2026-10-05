@@ -13,7 +13,7 @@ const globalNavLinks = [
   { label: "FAQs", href: "/#faq", icon: HelpCircle },
 ];
 
-/* ─── Activity items for the mobile navbar ─── */
+/* ─── Activity items for the navbar ─── */
 const activityNavItems = [
   { label: "Gyms", index: 0 },
   { label: "Yoga", index: 1 },
@@ -23,7 +23,7 @@ const activityNavItems = [
   { label: "Explore", index: 5 },
 ];
 
-/* ─── How-it-works steps for the mobile navbar ─── */
+/* ─── How-it-works steps for the navbar ─── */
 const howItWorksNavItems = [
   { label: "Discover", index: 0 },
   { label: "Choose", index: 1 },
@@ -33,8 +33,8 @@ const howItWorksNavItems = [
 
 type NavMode = "global" | "activities" | "howItWorks";
 
-/* ─────────── iOS-style Mobile Bottom Bar ─────────── */
-const MobileBottomBar = ({
+/* ─────────── Pill Segmented Control (shared inner component) ─────────── */
+const PillSegmentedControl = ({
   activeSection,
   handleNavClick,
   isScrollLocked,
@@ -321,70 +321,62 @@ const MobileBottomBar = ({
   );
 
   return (
-    <motion.div
-      initial={{ y: 80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-      className="md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
-    >
-      <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
-      <div className="glass-button-wrap w-full rounded-full pointer-events-auto">
-        <div className="glass-button w-full h-full rounded-full pointer-events-auto">
-          <div
-            ref={containerRef}
-            className="relative flex items-center justify-between p-1.5 w-full h-full z-20 pointer-events-auto select-none touch-none overflow-hidden"
-            onPointerDown={handlePointerDown}
-            onPointerMove={handlePointerMove}
-            onPointerUp={handlePointerUp}
-            onPointerCancel={handlePointerUp}
-          >
-            {/* The animated pill */}
-            <motion.div
-              className="absolute top-1.5 bottom-1.5 bg-white/12 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-grab active:cursor-grabbing"
-              style={{
-                x: pillX,
-                scaleY: pillScaleY,
-                width: pillWidth,
-                left: 0,
-              }}
-            />
+    <div className="glass-button-wrap w-full rounded-full pointer-events-auto">
+      <div className="glass-button w-full h-full rounded-full pointer-events-auto">
+        <div
+          ref={containerRef}
+          className="relative flex items-center justify-between p-1.5 w-full h-full z-20 pointer-events-auto select-none touch-none overflow-hidden"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+        >
+          {/* The animated pill */}
+          <motion.div
+            className="absolute top-1.5 bottom-1.5 bg-white/12 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-grab active:cursor-grabbing"
+            style={{
+              x: pillX,
+              scaleY: pillScaleY,
+              width: pillWidth,
+              left: 0,
+            }}
+          />
 
-            {/* Tab labels with blur transition */}
-            <div
-              className="flex items-center justify-between flex-1 relative z-10"
-              style={{
-                filter: isTransitioning ? "blur(8px)" : "blur(0px)",
-                opacity: isTransitioning ? 0 : 1,
-                transform: isTransitioning ? "scale(0.95)" : "scale(1)",
-                transition: "filter 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1)",
-              }}
-            >
-              {currentItems.map((label, i) => {
-                const isActive = i === safeActiveIndex;
-                return (
-                  <button
-                    key={`${mode}-${label}`}
-                    onClick={(e) => handleTabTap(e as unknown as React.MouseEvent, i)}
-                    className="relative flex items-center justify-center flex-1 py-2.5 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
+          {/* Tab labels with blur transition */}
+          <div
+            className="flex items-center justify-between flex-1 relative z-10"
+            style={{
+              filter: isTransitioning ? "blur(8px)" : "blur(0px)",
+              opacity: isTransitioning ? 0 : 1,
+              transform: isTransitioning ? "scale(0.95)" : "scale(1)",
+              transition: "filter 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.25s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.4,0,0.2,1)",
+            }}
+          >
+            {currentItems.map((label, i) => {
+              const isActive = i === safeActiveIndex;
+              return (
+                <button
+                  key={`${mode}-${label}`}
+                  onClick={(e) => handleTabTap(e as unknown as React.MouseEvent, i)}
+                  className="relative flex items-center justify-center flex-1 py-2.5 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
+                >
+                  <span
+                    className={`text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
+                      isActive
+                        ? "text-white font-bold"
+                        : "text-gray-400"
+                    }`}
                   >
-                    <span
-                      className={`text-[12px] sm:text-[13px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
-                        isActive
-                          ? "text-white font-bold"
-                          : "text-gray-400"
-                      }`}
-                    >
-                      {label}
-                    </span>
-                  </button>
-                );
-              })}
-            </div>
+                    {label}
+                  </span>
+                </button>
+              );
+            })}
           </div>
         </div>
-        <div className="glass-button-shadow rounded-full pointer-events-none" />
       </div>
-    </motion.div>
+      <div className="glass-button-shadow rounded-full pointer-events-none" />
+    </div>
   );
 };
 
@@ -392,7 +384,6 @@ const MobileBottomBar = ({
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("activities");
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const scrollLockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const isScrollLocked = useRef(false);
 
@@ -517,112 +508,104 @@ const Navbar = () => {
     }
   };
 
+  /* ─── Logo element (reused in mobile top bar and desktop unified bar) ─── */
+  const logoElement = (
+    <a
+      href="#home"
+      className="flex group items-center gap-2.5 md:gap-3 cursor-pointer z-20"
+      onClick={(e) => {
+        e.preventDefault();
+        handleLogoClick();
+        if (location.pathname !== "/") navigate("/");
+        else window.scrollTo({ top: 0, behavior: "smooth" });
+      }}
+    >
+      <div className="relative h-9 w-9 md:h-11 md:w-11 overflow-hidden rounded-[0.9rem] transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-6deg] shadow-lg shadow-[#305CDE]/10 dark:shadow-[#305CDE]/20">
+        <img src={logo} alt="Logo" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-0" : "opacity-100"}`} />
+        <video ref={videoRef} src={logoVideo} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
+      </div>
+      <span className="hidden md:block text-lg md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+        FitFare
+      </span>
+    </a>
+  );
+
+  /* ─── CTA buttons (reused in mobile top bar and desktop unified bar) ─── */
+  const ctaButtons = (
+    <div className="flex items-center justify-end w-auto gap-1 md:gap-3 z-20">
+      <div className="hidden xl:block scale-90 md:scale-100 origin-right">
+        <GlassButton size="default" onClick={(e: React.MouseEvent) => { e.preventDefault(); handleNavClick("/#partners"); }}>
+          Partner With FitFare
+        </GlassButton>
+      </div>
+
+      {/* GET THE APP (GLOW CTA) */}
+      <div className="ml-1 scale-90 md:scale-100 origin-right">
+        <GlassButton size="default">
+          Get the App
+        </GlassButton>
+      </div>
+    </div>
+  );
+
   return (
     <>
       <style>{glassButtonStyles}</style>
 
-      {/* TOP DESKTOP & MOBILE HEADER */}
+      {/* ─── MOBILE ONLY: Top header bar with CTAs ─── */}
       <motion.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
-        className="fixed top-4 left-0 right-0 z-50 flex justify-end md:justify-center px-4 md:px-6 pointer-events-none"
+        className="md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-end px-4 sm:px-6 pointer-events-none"
       >
-        <motion.div
-          layout
-          className={`w-auto md:w-full max-w-6xl rounded-[2rem] transition-colors duration-500 overflow-hidden pointer-events-auto ${
-            scrolled 
-              ? "md:bg-white/50 md:dark:bg-[#0a0f1c]/50 md:backdrop-blur-3xl md:border md:border-white/60 md:dark:border-white/10 md:shadow-[0_8px_32px_rgba(0,0,0,0.12)] md:dark:shadow-black/60" 
-              : "md:bg-white/30 md:dark:bg-[#0a0f1c]/30 md:backdrop-blur-xl md:border md:border-white/40 md:dark:border-white/5 md:shadow-[0_4px_24px_rgba(0,0,0,0.06)] md:dark:shadow-black/20"
-          }`}
-        >
-          <div className={`flex items-center justify-end md:justify-between relative transition-all duration-500 ${scrolled ? 'py-0 md:py-3 px-0 md:px-6' : 'py-0 md:py-5 px-0 md:px-8'}`}>
-            
-            {/* LOGO */}
-            <a
-              href="#home"
-              className="hidden md:flex group items-center gap-3 cursor-pointer z-20"
-              onClick={(e) => {
-                e.preventDefault();
-                handleLogoClick();
-                if (location.pathname !== "/") navigate("/");
-                else window.scrollTo({ top: 0, behavior: "smooth" });
-              }}
-            >
-              <div className="relative h-10 w-10 md:h-11 md:w-11 overflow-hidden rounded-[0.9rem] transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-6deg] shadow-lg shadow-[#305CDE]/10 dark:shadow-[#305CDE]/20">
-                <img src={logo} alt="Logo" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-0" : "opacity-100"}`} />
-                <video ref={videoRef} src={logoVideo} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
-              </div>
-              <span className="text-xl md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
-                FitFare
-              </span>
-            </a>
-
-            {/* DESKTOP LINKS (MAGNETIC PILL) */}
-            <div className="hidden md:flex items-center gap-1 relative z-10" onMouseLeave={() => setHoveredLink(null)}>
-              {globalNavLinks.map((link) => {
-                const sectionId = link.href.split("#")[1];
-                const isActive = activeSection === sectionId;
-                const isHovered = hoveredLink === link.label;
-
-                return (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    onMouseEnter={() => setHoveredLink(link.label)}
-                    onClick={(e) => { 
-                      e.preventDefault(); 
-                      handleNavClick(link.href); 
-                    }}
-                    className="relative z-10 px-5 py-2.5 text-[15px] font-semibold transition-colors duration-300 rounded-full outline-none cursor-pointer"
-                  >
-                    {isHovered && (
-                      <motion.div
-                        layoutId="navPill"
-                        className="absolute inset-0 bg-black/5 dark:bg-white/10 rounded-full -z-10 backdrop-blur-md"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    {isActive && !isHovered && (
-                      <motion.div
-                        layoutId="navDot"
-                        className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1.5 h-1.5 rounded-full bg-[#305CDE] dark:bg-[#5c85ff]"
-                        transition={{ type: "spring", stiffness: 400, damping: 30 }}
-                      />
-                    )}
-                    <span className={`relative z-10 transition-colors duration-300 ${isActive ? "text-[#305CDE] dark:text-[#5c85ff]" : isHovered ? "text-gray-900 dark:text-white" : "text-gray-600 dark:text-gray-300"}`}>
-                      {link.label}
-                    </span>
-                  </a>
-                );
-              })}
-            </div>
-
-            {/* RIGHT ACTIONS */}
-            <div className="flex items-center justify-end w-auto gap-1 md:gap-3 z-20">
-              <div className="hidden lg:block scale-90 md:scale-100 origin-right">
-                <GlassButton size="default" onClick={(e: React.MouseEvent) => { e.preventDefault(); handleNavClick("/#partners"); }}>
-                  Partner With FitFare
-                </GlassButton>
-              </div>
-
-              {/* GET THE APP (GLOW CTA) */}
-              <div className="ml-1 scale-90 md:scale-100 origin-right">
-                <GlassButton size="default">
-                  Get the App
-                </GlassButton>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        <div className="pointer-events-auto z-20">
+          {ctaButtons}
+        </div>
       </motion.nav>
 
-      {/* MOBILE BOTTOM TAB BAR — iOS-style draggable segmented control */}
-      <MobileBottomBar
-        activeSection={activeSection}
-        handleNavClick={handleNavClick}
-        isScrollLocked={isScrollLocked}
-      />
+      {/* ─── MOBILE ONLY: Bottom pill bar ─── */}
+      <motion.div
+        initial={{ y: 80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+        className="md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
+      >
+        <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
+        <PillSegmentedControl
+          activeSection={activeSection}
+          handleNavClick={handleNavClick}
+          isScrollLocked={isScrollLocked}
+        />
+      </motion.div>
+
+      {/* ─── DESKTOP (md+): Top navbar without full-width back glass ─── */}
+      <motion.nav
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
+        className="hidden md:flex fixed top-4 left-0 right-0 z-[999] items-center justify-between px-6 lg:px-10 pointer-events-none"
+      >
+        {/* LOGO */}
+        <div className="pointer-events-auto z-20">
+          {logoElement}
+        </div>
+
+        {/* CENTER: Pill segmented control */}
+        <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-md lg:max-w-lg pointer-events-auto drop-shadow-2xl z-20">
+          <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
+          <PillSegmentedControl
+            activeSection={activeSection}
+            handleNavClick={handleNavClick}
+            isScrollLocked={isScrollLocked}
+          />
+        </div>
+
+        {/* RIGHT: CTAs */}
+        <div className="pointer-events-auto z-20">
+          {ctaButtons}
+        </div>
+      </motion.nav>
     </>
   );
 };

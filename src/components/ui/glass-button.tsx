@@ -69,16 +69,16 @@ const glassButtonStyles = `@property --angle-1 { syntax: "<angle>"; inherits: fa
 
 .glass-button {
   -webkit-tap-highlight-color:transparent;
-  -webkit-backdrop-filter:blur(clamp(1px,.125em,4px));
-  backdrop-filter:blur(clamp(1px,.125em,4px));
+  -webkit-backdrop-filter:blur(clamp(8px, 0.5em, 16px));
+  backdrop-filter:blur(clamp(8px, 0.5em, 16px));
   transition:all var(--anim-time)var(--anim-ease);
   background:linear-gradient(-75deg,oklch(from hsl(var(--foreground))l c h/5%),oklch(from hsl(var(--foreground))l c h/15%),oklch(from hsl(var(--foreground))l c h/5%));
   box-shadow:inset 0 .125em .125em oklch(from hsl(var(--foreground))l c h/5%),inset 0 -.125em .125em oklch(from hsl(var(--background))l c h/50%),0 .25em .125em -.125em oklch(from hsl(var(--foreground))l c h/20%),0 0 .1em .25em inset oklch(from hsl(var(--background))l c h/20%),0 0 oklch(from hsl(var(--background))l c h)
 }
 
 .glass-button:hover {
-  -webkit-backdrop-filter:blur(.01em);
-  backdrop-filter:blur(.01em);
+  -webkit-backdrop-filter:blur(clamp(4px, 0.25em, 8px));
+  backdrop-filter:blur(clamp(4px, 0.25em, 8px));
   box-shadow:inset 0 .125em .125em oklch(from hsl(var(--foreground))l c h/5%),inset 0 -.125em .125em oklch(from hsl(var(--background))l c h/50%),0 .15em .05em -.1em oklch(from hsl(var(--foreground))l c h/25%),0 0 .05em .1em inset oklch(from hsl(var(--background))l c h/50%),0 0 oklch(from hsl(var(--background))l c h);
   transform:scale(.975)
 }

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import ParticleText from "@/components/ui/ParticleText";
+import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
 
 import bg1 from "@/assets/hero-card-gym.jpg";
 import bg2 from "@/assets/hero-card-yoga.jpg";
@@ -20,12 +21,12 @@ const sections = [
           <input 
             type="text" 
             placeholder="Gym / Facility Name"
-            className="w-full bg-white/10 border border-white/40 rounded-full px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base"
           />
           <input 
             type="text" 
             placeholder="City / Location"
-            className="w-full bg-white/10 border border-white/40 rounded-full px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base"
           />
         </div>
       </div>
@@ -42,12 +43,12 @@ const sections = [
           <input 
             type="text" 
             placeholder="Your Full Name"
-            className="w-full bg-white/10 border border-white/40 rounded-full px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base"
           />
           <input 
             type="email" 
             placeholder="Email Address"
-            className="w-full bg-white/10 border border-white/40 rounded-full px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base"
           />
         </div>
       </div>
@@ -64,12 +65,12 @@ const sections = [
           <input 
             type="tel" 
             placeholder="Phone Number"
-            className="w-full bg-white/10 border border-white/40 rounded-full px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-full text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base"
           />
           <textarea 
             placeholder="What type of fitness services do you offer?"
             rows={3}
-            className="w-full bg-white/10 border border-white/40 rounded-3xl px-6 py-4 text-white placeholder:text-white/60 focus:outline-none focus:border-white focus:bg-white/20 transition-all backdrop-blur-md text-base resize-none shadow-lg"
+            className="glass-button w-full px-6 py-4 rounded-3xl text-white placeholder:text-white/60 focus:outline-none focus:ring-2 focus:ring-white/30 transition-all text-base resize-none"
           ></textarea>
         </div>
       </div>
@@ -82,10 +83,13 @@ const sections = [
     content: (
       <div className="space-y-6 mt-6 w-full max-w-[350px]">
         <p className="text-white text-lg font-normal tracking-wide">Ready to join the network?</p>
-        <button className="flex items-center justify-between bg-white text-black px-8 py-5 rounded-full font-bold tracking-widest hover:bg-gray-200 transition-colors w-full group text-lg">
+        <GlassButton 
+          className="w-full group" 
+          contentClassName="flex h-full w-full items-center justify-center gap-4 font-bold tracking-widest text-xl py-4"
+        >
           <span>APPLY NOW</span>
-          <ArrowRight size={22} className="group-hover:translate-x-2 transition-transform" />
-        </button>
+          <ArrowRight size={24} className="group-hover:translate-x-2 transition-transform" />
+        </GlassButton>
       </div>
     )
   }
@@ -102,7 +106,8 @@ const PartnerFormPage = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-black overflow-hidden relative font-sans select-none">
+    <div className="w-full min-h-screen lg:h-screen bg-black overflow-y-auto overflow-x-hidden lg:overflow-hidden relative font-sans select-none">
+      <style>{glassButtonStyles}</style>
       
       {/* Back Button */}
       <Link 
@@ -117,7 +122,7 @@ const PartnerFormPage = () => {
         
         {/* Static Left/Top Pane */}
         {/* We use a pseudo-element to infinitely extend the left background on desktop. It overlaps by 5vw to prevent sub-pixel rendering gaps. */}
-        <div className="w-full h-[25vh] md:h-[30vh] lg:w-[32vw] lg:h-full bg-[#F4F4F5] relative z-50 border-b lg:border-b-0 lg:border-r border-black/10 shadow-[0_10px_30px_rgba(0,0,0,0.15)] lg:shadow-[20px_0_40px_rgba(0,0,0,0.15)] lg:before:absolute lg:before:inset-y-0 lg:before:-left-[50vw] lg:before:w-[55vw] lg:before:bg-[#F4F4F5]">
+        <div className="w-full min-h-[300px] md:min-h-[400px] lg:w-[32vw] lg:h-full bg-[#F4F4F5] relative z-50 border-b lg:border-b-0 lg:border-r border-black/10 shadow-[0_10px_30px_rgba(0,0,0,0.15)] lg:shadow-[20px_0_40px_rgba(0,0,0,0.15)] lg:before:absolute lg:before:inset-y-0 lg:before:-left-[50vw] lg:before:w-[55vw] lg:before:bg-[#F4F4F5]">
           
           {/* Un-skew content inside */}
           <div className="w-full h-full lg:skew-x-[12deg] flex flex-col justify-center absolute right-0 items-center lg:items-start">
@@ -125,15 +130,15 @@ const PartnerFormPage = () => {
             <div className="lg:ml-[5vw] flex flex-col items-center lg:items-start w-full lg:w-[120%] z-50 mt-8 lg:mt-[-15vh]">
               
               {/* "PARTNER" text: Below on mobile, Above on desktop */}
-              <div className="order-last lg:order-first -mt-4 lg:mt-0 mb-2 lg:mb-6 text-[#111] z-[100] text-center lg:text-left">
+              <div className="order-last lg:order-first mt-4 lg:mt-0 mb-2 lg:mb-6 text-[#111] z-[100] text-center lg:text-left">
                 <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold tracking-widest uppercase opacity-90">PARTNER</h2>
               </div>
               
               <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full">
                 <ParticleText 
                   text="FIT" 
-                  particleSize={3} 
-                  density={5} 
+                  particleSize={2.5} 
+                  density={3} 
                   color="#111111" 
                   highlightColor="#111111" 
                   trigger="mount" 
@@ -143,11 +148,11 @@ const PartnerFormPage = () => {
                   textAlign={isMobile ? "center" : "left"} 
                 />
               </div>
-              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full -mt-8 md:-mt-16 lg:-mt-24">
+              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full -mt-2 md:-mt-6 lg:-mt-10">
                 <ParticleText 
                   text="FARE" 
-                  particleSize={3} 
-                  density={5} 
+                  particleSize={2.5} 
+                  density={3} 
                   color="#111111" 
                   highlightColor="#111111" 
                   trigger="mount" 
@@ -163,7 +168,7 @@ const PartnerFormPage = () => {
         </div>
 
         {/* Accordion Container */}
-        <div className="flex-1 flex flex-col lg:flex-row h-[75vh] md:h-[70vh] lg:h-full lg:pr-[3vw]">
+        <div className="flex-1 flex flex-col lg:flex-row min-h-[850px] md:min-h-[900px] lg:min-h-0 lg:h-full lg:pr-[3vw]">
           {sections.map((sec, i) => {
             const isActive = active === i;
             return (
@@ -171,7 +176,7 @@ const PartnerFormPage = () => {
                 key={sec.id}
                 onMouseEnter={() => { if(window.innerWidth >= 1024) setActive(i) }}
                 onClick={() => setActive(i)}
-                className={`relative w-full lg:w-auto transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden cursor-pointer group shadow-2xl ${isActive ? 'flex-[3] lg:flex-[2.8]' : 'flex-[1] lg:flex-[1.2]'}`}
+                className={`relative w-full lg:w-auto transition-all duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] border-b lg:border-b-0 lg:border-r border-white/10 overflow-hidden cursor-pointer group shadow-2xl ${isActive ? 'flex-[4] lg:flex-[2.8]' : 'flex-[1] lg:flex-[1.2]'}`}
               >
                 {/* INACTIVE STATE */}
                 <div 
@@ -229,7 +234,7 @@ const PartnerFormPage = () => {
                     
                     {/* ACTIVE STATE */}
                     <div 
-                      className={`absolute inset-0 flex flex-col justify-center items-center px-4 transition-opacity duration-[800ms] ${isActive ? 'opacity-100 delay-300' : 'opacity-0 pointer-events-none'}`}
+                      className={`absolute inset-0 flex flex-col justify-start pt-10 lg:justify-center lg:pt-0 items-center px-4 transition-opacity duration-[800ms] ${isActive ? 'opacity-100 delay-300' : 'opacity-0 pointer-events-none'}`}
                     >
                       <div className={`relative z-10 w-full max-w-[450px] flex flex-col items-center lg:items-start transition-transform duration-[800ms]`}>
                         
@@ -245,7 +250,7 @@ const PartnerFormPage = () => {
                         
                         {/* Form Content - Smooth reveal */}
                         <div 
-                          className={`transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-full overflow-hidden flex flex-col items-center lg:items-start ${isActive ? 'max-h-[450px] translate-y-0' : 'max-h-0 translate-y-4'}`}
+                          className={`transition-all duration-[800ms] ease-[cubic-bezier(0.16,1,0.3,1)] w-full overflow-hidden flex flex-col items-center lg:items-start ${isActive ? 'max-h-[600px] translate-y-0' : 'max-h-0 translate-y-4'}`}
                         >
                           {sec.content}
                         </div>
