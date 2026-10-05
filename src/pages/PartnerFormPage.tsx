@@ -79,22 +79,6 @@ const PartnerFormPage = () => {
     return newErrors;
   };
 
-  const openMailFallback = () => {
-    const subject = encodeURIComponent(
-      `FitFare Partner Application: ${formData.facilityName || "New Partner"}`
-    );
-    const body = encodeURIComponent(
-      `NEW PARTNER APPLICATION\n\n` +
-        `Facility / Gym Name : ${formData.facilityName || "N/A"}\n` +
-        `Location / City     : ${formData.location || "N/A"}\n` +
-        `Contact Person      : ${formData.fullName || "N/A"}\n` +
-        `Email Address       : ${formData.email || "N/A"}\n` +
-        `Phone Number        : ${formData.phone || "N/A"}\n` +
-        `Services Offered    : ${formData.services || "General Gym / Fitness Services"}\n`
-    );
-    window.location.href = `mailto:collaborations@fitfare.in?subject=${subject}&body=${body}`;
-  };
-
   const handleSubmit = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     setSubmitError(null);
@@ -129,7 +113,7 @@ const PartnerFormPage = () => {
       location: formData.location,
       city: formData.location,
       services: formData.services || "General Gym / Fitness Services",
-      to_email: "collaborations@fitfare.in",
+      to_email: "info@fitfare.in",
       subject: `New Partner Application: ${formData.facilityName} (${formData.location})`,
       message: `NEW PARTNER APPLICATION
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -143,36 +127,25 @@ Services Offered    : ${formData.services || "General Gym / Fitness Services"}
     };
 
     try {
-      if (SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY) {
+      const serviceId = SERVICE_ID || import.meta.env.VITE_EMAILJS_SERVICE_ID;
+      const templateId = TEMPLATE_ID || import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+      const publicKey = PUBLIC_KEY || import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+      if (serviceId && templateId && publicKey) {
         await emailjs.send(
-          SERVICE_ID,
-          TEMPLATE_ID,
+          serviceId,
+          templateId,
           templateParams,
-          { publicKey: PUBLIC_KEY }
+          { publicKey }
         );
-        setIsSubmitted(true);
-      } else {
-        openMailFallback();
       }
+      setIsSubmitted(true);
     } catch (error) {
-      const err = error as { status?: number; text?: string };
-      const isGmailGrantError =
-        err?.status === 412 ||
-        (typeof err?.text === "string" &&
-          (err.text.includes("Gmail_API") || err.text.includes("Invalid grant")));
-
       console.error("Partner form EmailJS submission error:", error);
-
-      if (isGmailGrantError) {
-        alert(
-          "The email connection for the partner form has expired. Your email client will open so you can send your application directly."
-        );
-        openMailFallback();
-        return;
-      }
-
-      setSubmitError("Failed to submit via EmailJS. Click below to send via your email client directly.");
-      openMailFallback();
+      const err = error as { status?: number; text?: string };
+      setSubmitError(
+        err?.text || "We couldn't submit your application automatically. Please check your connection and try again."
+      );
     } finally {
       setIsSubmitting(false);
     }
