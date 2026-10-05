@@ -382,6 +382,11 @@ const PillSegmentedControl = ({
 
 
 const Navbar = () => {
+  const [isLite, setIsLite] = useState(false);
+  useEffect(() => {
+    setIsLite(document.documentElement.classList.contains('lite'));
+  }, []);
+
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("activities");
   const scrollLockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -521,8 +526,10 @@ const Navbar = () => {
       }}
     >
       <div className="relative h-9 w-9 md:h-11 md:w-11 overflow-hidden rounded-[0.9rem] transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-6deg] shadow-lg shadow-[#305CDE]/10 dark:shadow-[#305CDE]/20">
-        <img src={logo} alt="Logo" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-0" : "opacity-100"}`} />
-        <video ref={videoRef} src={logoVideo} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
+        <img src={logo} alt="Logo" width={44} height={44} className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${!isLite && logoAnimating ? "opacity-0" : "opacity-100"}`} />
+        {!isLite && (
+          <video ref={videoRef} src={logoVideo} poster={logo} width={44} height={44} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
+        )}
       </div>
       <span className="hidden md:block text-lg md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
         FitFare
