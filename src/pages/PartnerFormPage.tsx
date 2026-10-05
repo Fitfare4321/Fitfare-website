@@ -11,9 +11,9 @@ import bg2 from "@/assets/hero-card-yoga.jpg";
 import bg3 from "@/assets/strength.jpg";
 import bg4 from "@/assets/cardio.jpg";
 
-const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_f9ovdum";
-const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_tf61qab";
-const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "Ichx5707XnzOZugLe";
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 const PartnerFormPage = () => {
   const [active, setActive] = useState(0);
