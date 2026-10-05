@@ -23,25 +23,6 @@
       gtag('config', 'G-QYTTBKX4MR');
     </script>
 
-    <!-- Lite Mode Detection -->
-    <script>
-      (function() {
-        var isLite = false;
-        if (typeof navigator !== 'undefined') {
-          if ((navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
-              (navigator.deviceMemory && navigator.deviceMemory <= 4)) {
-            isLite = true;
-          }
-        }
-        if (window.matchMedia && window.matchMedia('(any-pointer: coarse)').matches) {
-          isLite = true;
-        }
-        if (isLite) {
-          document.documentElement.classList.add('lite');
-        }
-      })();
-    </script>
-
     <!-- FitFare Logo (Favicon) -->
    <link rel="icon" type="image/png" href="/blue-background-logo.png" content="rounded-xl" />
 

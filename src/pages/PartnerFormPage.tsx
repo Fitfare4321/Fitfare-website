@@ -97,10 +97,10 @@ const sections = [
 
 const PartnerFormPage = () => {
   const [active, setActive] = useState(0);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth < 1024 : false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
 
   React.useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 1024);
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
@@ -134,33 +134,41 @@ const PartnerFormPage = () => {
                 <h2 className="text-5xl md:text-6xl lg:text-8xl font-bold tracking-widest uppercase opacity-90">PARTNER</h2>
               </div>
               
-              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full">
-                <ParticleText 
-                  text="FIT" 
-                  particleSize={2.5} 
-                  density={3} 
-                  color="#111111" 
-                  highlightColor="#111111" 
-                  trigger="mount" 
-                  fontSize="clamp(4rem, 9vw, 130px)" 
-                  fontWeight={900} 
-                  glow={false} 
-                  textAlign={isMobile ? "center" : "left"} 
-                />
+              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full flex items-center justify-center lg:justify-start">
+                {isMobile ? (
+                  <h1 className="text-[clamp(4rem,9vw,130px)] font-[900] text-[#111] leading-none m-0 p-0 tracking-tight">FIT</h1>
+                ) : (
+                  <ParticleText 
+                    text="FIT" 
+                    particleSize={2.5} 
+                    density={3} 
+                    color="#111111" 
+                    highlightColor="#111111" 
+                    trigger="mount" 
+                    fontSize="clamp(4rem, 9vw, 130px)" 
+                    fontWeight={900} 
+                    glow={false} 
+                    textAlign={isMobile ? "center" : "left"} 
+                  />
+                )}
               </div>
-              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full -mt-2 md:-mt-6 lg:-mt-10">
-                <ParticleText 
-                  text="FARE" 
-                  particleSize={2.5} 
-                  density={3} 
-                  color="#111111" 
-                  highlightColor="#111111" 
-                  trigger="mount" 
-                  fontSize="clamp(4rem, 9vw, 130px)" 
-                  fontWeight={900} 
-                  glow={false} 
-                  textAlign={isMobile ? "center" : "left"} 
-                />
+              <div className="relative h-[80px] md:h-[150px] lg:h-[200px] w-full -mt-2 md:-mt-6 lg:-mt-10 flex items-center justify-center lg:justify-start">
+                {isMobile ? (
+                  <h1 className="text-[clamp(4rem,9vw,130px)] font-[900] text-[#111] leading-none m-0 p-0 tracking-tight">FARE</h1>
+                ) : (
+                  <ParticleText 
+                    text="FARE" 
+                    particleSize={2.5} 
+                    density={3} 
+                    color="#111111" 
+                    highlightColor="#111111" 
+                    trigger="mount" 
+                    fontSize="clamp(4rem, 9vw, 130px)" 
+                    fontWeight={900} 
+                    glow={false} 
+                    textAlign={isMobile ? "center" : "left"} 
+                  />
+                )}
               </div>
             </div>
 

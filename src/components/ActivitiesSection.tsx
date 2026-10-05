@@ -18,8 +18,16 @@ const activitiesData = [
 ];
 
 import { m } from "framer-motion";
+import { useState, useEffect } from "react";
 
 const ActivitiesSection = () => {
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
   return (
     <section
       id="activities"
@@ -51,16 +59,50 @@ const ActivitiesSection = () => {
         </m.p>
       </div>
 
-      <div className="w-full relative z-10 h-[400vh]" id="wheel-scroll-track">
-        <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-          <WorksWheel
-            items={activitiesData}
-            label="Explore"
-            action="View"
-            className="text-white w-full h-[90vh] min-h-[400px]"
-          />
+      {isMobile ? (
+        <div className="w-full relative z-10 pb-4 mt-12">
+          {/* Subtle scroll hint text */}
+          <div className="px-[9vw] mb-6 flex items-center justify-end text-white/50 text-xs font-semibold uppercase tracking-widest">
+            <span className="animate-pulse">Swipe ➔</span>
+          </div>
+
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-2 px-[10vw] pb-8 scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+            {activitiesData.map(item => (
+              <div 
+                key={item.id} 
+                className="relative shrink-0 snap-center w-[80vw] aspect-[4/5] rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl bg-black"
+              >
+                <img 
+                  src={item.image} 
+                  alt={item.alt} 
+                  className="absolute inset-0 w-full h-full object-cover opacity-90" 
+                />
+                
+                {/* Deep dramatic gradient for text readability */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-transparent" />
+                
+                {/* Text Content */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="text-white text-[28px] leading-tight font-black uppercase tracking-[-0.02em] mb-2 drop-shadow-md">
+                    {item.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="w-full relative z-10 h-[400vh]" id="wheel-scroll-track">
+          <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
+            <WorksWheel
+              items={activitiesData}
+              label="Explore"
+              action="View"
+              className="text-white w-full h-[90vh] min-h-[400px]"
+            />
+          </div>
+        </div>
+      )}
 
     </section>
   );

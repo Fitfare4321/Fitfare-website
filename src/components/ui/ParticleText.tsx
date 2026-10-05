@@ -114,9 +114,6 @@ const ParticleText = ({
     let height = 0;
     let dpr = 1;
 
-    let isVisible = !document.hidden;
-    let isIntersecting = true; // Assume true until observer fires
-
     const pointer = {
       active: false,
       x: 0,
@@ -163,11 +160,6 @@ const ParticleText = ({
     };
 
     const render = (now: number) => {
-      if (!isVisible || !isIntersecting) {
-        animationFrame = null;
-        return;
-      }
-
       ctx.clearRect(0, 0, width, height);
 
       if (glow && !reducedMotion) {
@@ -407,19 +399,6 @@ const ParticleText = ({
 
     const resizeObserver = new ResizeObserver(queueSample);
     resizeObserver.observe(container);
-
-    const handleVisibilityChange = () => {
-      isVisible = !document.hidden;
-      if (isVisible && isIntersecting) ensureRenderLoop();
-    };
-
-    const intersectionObserver = new IntersectionObserver(([entry]) => {
-      isIntersecting = entry.isIntersecting;
-      if (isVisible && isIntersecting) ensureRenderLoop();
-    });
-    intersectionObserver.observe(container);
-    document.addEventListener('visibilitychange', handleVisibilityChange);
-
     sampleText();
 
     return () => {
@@ -433,8 +412,6 @@ const ParticleText = ({
 
       if (animationFrame !== null) window.cancelAnimationFrame(animationFrame);
       if (resizeFrame !== null) window.cancelAnimationFrame(resizeFrame);
-      document.removeEventListener('visibilitychange', handleVisibilityChange);
-      intersectionObserver.disconnect();
     };
   }, [
     text,

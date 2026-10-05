@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { m } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
@@ -149,6 +149,13 @@ const ScrollColumn = ({
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   return (
     <section
@@ -162,12 +169,12 @@ const HeroSection = () => {
         <m.div
           animate={{ scale: [1, 1.15, 1], x: [0, 25, 0], y: [0, -15, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#305CDE]/[0.05] dark:bg-[#305CDE]/[0.07] blur-[150px]"
+          className="hidden md:block absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#305CDE]/[0.05] dark:bg-[#305CDE]/[0.07] blur-[150px]"
         />
         <m.div
           animate={{ scale: [1, 1.2, 1], x: [0, -35, 0], y: [0, 20, 0] }}
           transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-          className="absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-cyan-500/[0.03] dark:bg-cyan-400/[0.05] blur-[130px]"
+          className="hidden md:block absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-cyan-500/[0.03] dark:bg-cyan-400/[0.05] blur-[130px]"
         />
       </div>
 
@@ -232,7 +239,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 150 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="absolute bottom-24 md:bottom-16 left-6 sm:left-10 md:left-14 z-30 pointer-events-none select-none"
+        className="absolute bottom-64 md:bottom-16 left-6 sm:left-10 md:left-14 z-30 pointer-events-none select-none"
       >
         <h1
           className="text-[clamp(4rem,14vw,12rem)] font-black tracking-[-0.06em] leading-[0.82] text-black dark:text-white"
@@ -249,7 +256,7 @@ const HeroSection = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
-          className="mt-3 sm:mt-5 text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-black dark:text-gray-400"
+          className="mt-3 sm:mt-5 ml-3 text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-black dark:text-gray-400"
         >
           FITNESS, YOUR WAY
         </m.p>

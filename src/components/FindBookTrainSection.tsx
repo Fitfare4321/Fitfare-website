@@ -221,7 +221,7 @@ const FindBookTrainSection = () => {
 
               {/* Wallet UI Visual */}
               <div className="relative h-[400px] flex items-center justify-center">
-                <div className="absolute inset-0 bg-[#305CDE]/10 rounded-full blur-[100px]" />
+                <div className="hidden md:block absolute inset-0 bg-[#305CDE]/10 rounded-full blur-[100px]" />
                 <div className="relative z-10 w-full max-w-sm bg-gray-900 rounded-[2.5rem] p-8 shadow-2xl border border-gray-800">
                   <div className="flex justify-between items-center mb-8">
                     <span className="text-sm font-bold text-gray-400">FitFare Wallet</span>

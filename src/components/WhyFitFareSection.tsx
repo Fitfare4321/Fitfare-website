@@ -41,7 +41,7 @@ const WhyFitFareSection = () => {
 
   return (
     <section ref={sectionRef} className="pt-2 pb-24 bg-black global-bg-grid relative overflow-hidden text-white">
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
+      <div className="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-white/10 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="w-full mx-auto relative z-10 flex flex-col items-center">
         <div className="why-fitfare-title text-center max-w-2xl px-4 mb-8">
