@@ -32,16 +32,22 @@ const FAQSection = () => {
         <div className="faq-header text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 md:mb-4 flex flex-wrap items-center justify-center gap-x-2 md:gap-x-2.5 gap-y-2 leading-tight" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             <span>Confused? We’ve Got</span>
-            <div className="relative inline-flex items-center justify-center w-[90px] h-[45px] md:w-[135px] md:h-[68px] flex-shrink-0 mt-1 md:mt-0">
+            <div className="relative inline-flex items-center justify-center w-[85px] h-[45px] md:w-[130px] md:h-[65px] flex-shrink-0 mt-0.5 md:mt-0">
               <ParticleText
                 text="You."
-                particleSize={2}
-                density={4}
+                particleSize={1.6}
+                density={2}
                 color="#ffffff"
                 highlightColor="#ffffff"
                 trigger="mount"
-                fontSize="clamp(2.25rem, 4.5vw, 3rem)"
+                scatter={70}
+                gatherDuration={1200}
+                idleDrift={0.35}
+                repelRadius={70}
+                pointerRepel={25}
+                fontSize="clamp(1.875rem, 4.5vw, 3rem)"
                 fontWeight={700}
+                fontFamily="'DM Sans', sans-serif"
                 textAlign="left"
                 className="w-full h-full"
               />

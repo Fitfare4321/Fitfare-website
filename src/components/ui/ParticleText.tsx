@@ -146,16 +146,10 @@ const ParticleText = ({
     };
 
     const drawParticle = (particle: any) => {
-      const size = particle.size;
+      const radius = Math.max(0.5, particle.size / 2);
       ctx.fillStyle = particle.color;
-
-      if (size <= 2.1) {
-        ctx.fillRect(particle.x - size / 2, particle.y - size / 2, size, size);
-        return;
-      }
-
       ctx.beginPath();
-      ctx.arc(particle.x, particle.y, size / 2, 0, Math.PI * 2);
+      ctx.arc(particle.x, particle.y, radius, 0, Math.PI * 2);
       ctx.fill();
     };
 
@@ -163,7 +157,7 @@ const ParticleText = ({
       ctx.clearRect(0, 0, width, height);
 
       if (glow && !reducedMotion) {
-        ctx.shadowBlur = particleSize * 3;
+        ctx.shadowBlur = Math.min(5, particleSize * 1.5);
         ctx.shadowColor = highlightColor;
       } else {
         ctx.shadowBlur = 0;
@@ -287,7 +281,7 @@ const ParticleText = ({
 
       const imageData = offCtx.getImageData(0, 0, offscreen.width, offscreen.height);
       const targets = [];
-      const step = Math.max(2, Math.floor(density));
+      const step = Math.max(1, Math.round(density));
 
       const offsetX = textAlign === 'left'
         ? -padding
