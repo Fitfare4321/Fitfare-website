@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { m } from "framer-motion";
+import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
 // Card images
@@ -186,7 +186,7 @@ const HeroSection = () => {
     >
       {/* ── BACKGROUND GLOWS (Hardware Accelerated Radial Gradients) ── */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-        <m.div
+        <motion.div
           animate={{ scale: [1, 1.15, 1], x: [0, 25, 0], y: [0, -15, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
           className="hidden md:block absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none transform-gpu"
@@ -194,7 +194,7 @@ const HeroSection = () => {
             background: "radial-gradient(circle, rgba(48,92,222,0.12) 0%, rgba(48,92,222,0.03) 50%, transparent 70%)",
           }}
         />
-        <m.div
+        <motion.div
           animate={{ scale: [1, 1.2, 1], x: [0, -35, 0], y: [0, 20, 0] }}
           transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: 6 }}
           className="hidden md:block absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none transform-gpu"
@@ -261,7 +261,7 @@ const HeroSection = () => {
       <div className="absolute inset-y-0 left-0 w-[45%] z-20 pointer-events-none bg-gradient-to-r from-[#eceef1] via-[#eceef1]/80 to-transparent dark:from-[#060608] dark:via-[#060608]/80 dark:to-transparent" />
 
       {/* ── FITFARE TEXT (Bottom-Left — rises and STAYS) ── */}
-      <m.div
+      <motion.div
         initial={{ opacity: 0, y: 150 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
@@ -278,15 +278,15 @@ const HeroSection = () => {
           <br />
           FARE
         </h1>
-        <m.p
+        <motion.p
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 1.2 }}
           className="mt-3 sm:mt-5 ml-3 text-xs sm:text-sm font-bold tracking-[0.3em] uppercase text-black dark:text-gray-400"
         >
           FITNESS, YOUR WAY
-        </m.p>
-      </m.div>
+        </motion.p>
+      </motion.div>
 
 
       {/* ── CSS ANIMATIONS ── */}
