@@ -250,15 +250,16 @@ const glassButtonTextVariants = cva(
   },
 );
 
-export interface GlassButtonProps
-  extends
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof glassButtonVariants> {
-  contentClassName?: string;
-}
+export type GlassButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
+  React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  VariantProps<typeof glassButtonVariants> & {
+    contentClassName?: string;
+    as?: React.ElementType;
+  };
 
-const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
-  ({ className, children, size, contentClassName, ...props }, ref) => {
+const GlassButton = React.forwardRef<HTMLElement, GlassButtonProps>(
+  ({ className, children, size, contentClassName, as, href, ...props }, ref) => {
+    const Component = (as || (href ? "a" : "button")) as React.ElementType;
     return (
       <>
         <style>{glassButtonStyles}</style>
@@ -268,9 +269,10 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
             className,
           )}
         >
-          <button
-            className={cn("glass-button w-full h-full", glassButtonVariants({ size }))}
-            ref={ref}
+          <Component
+            className={cn("glass-button w-full h-full block no-underline", glassButtonVariants({ size }))}
+            ref={ref as any}
+            href={href}
             {...props}
           >
             <span
@@ -281,7 +283,7 @@ const GlassButton = React.forwardRef<HTMLButtonElement, GlassButtonProps>(
             >
               {children}
             </span>
-          </button>
+          </Component>
           <div className="glass-button-shadow rounded-full"></div>
         </div>
       </>

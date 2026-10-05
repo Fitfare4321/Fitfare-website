@@ -51,7 +51,13 @@ const FinalCTASection = () => {
           </div>
           
           <div className="w-full sm:w-auto scale-90 sm:scale-100 hover:scale-[1.03] active:scale-[0.97] transition-transform duration-300">
-            <GlassButton size="lg" contentClassName="flex items-center gap-3">
+            <GlassButton 
+              size="lg" 
+              href="https://play.google.com/store/apps/details?id=in.fitfare.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              contentClassName="flex items-center gap-3"
+            >
               <CIcon icon={cibGooglePlay} className="w-7 h-7" />
               <div className="text-left">
                 <div className="text-[10px] uppercase tracking-wider font-bold leading-none mb-1 opacity-70">Get it on</div>

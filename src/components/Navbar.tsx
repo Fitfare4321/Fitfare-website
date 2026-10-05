@@ -550,7 +550,12 @@ const Navbar = () => {
 
       {/* GET THE APP (GLOW CTA) */}
       <div className="ml-1 scale-90 md:scale-100 origin-right">
-        <GlassButton size="default">
+        <GlassButton 
+          size="default"
+          href="https://play.google.com/store/apps/details?id=in.fitfare.app"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Get the App
         </GlassButton>
       </div>

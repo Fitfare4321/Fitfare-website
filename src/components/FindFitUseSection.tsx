@@ -77,7 +77,13 @@ const FindFitUseSection = () => {
               <div id="phone-carousel-track" className="w-full mt-12">
                 <PhoneCarousel steps={flowCards}>
                   <div className="scale-100 md:scale-110 mt-2 hover:scale-105 active:scale-95 transition-transform duration-300 inline-block">
-                    <GlassButton size="lg" contentClassName="flex items-center gap-2">
+                    <GlassButton 
+                      size="lg" 
+                      href="https://play.google.com/store/apps/details?id=in.fitfare.app"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      contentClassName="flex items-center gap-2"
+                    >
                       <span>Get the FitFare App</span>
                       <ArrowRight size={18} className="relative z-10 text-current transition-all duration-300" />
                     </GlassButton>

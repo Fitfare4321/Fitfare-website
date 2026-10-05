@@ -39,7 +39,7 @@ const timelineData = [
 
 const PersonalizationSection = () => {
   return (
-    <section className="overflow-hidden bg-[#0A0A0A] global-bg-grid text-white">
+    <section className="relative overflow-hidden bg-[#0A0A0A] global-bg-grid text-white">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-16">
         <div className="px-6 py-10 md:px-10 md:py-16 lg:px-16 lg:py-20">
           <div className="max-w-2xl space-y-4">
@@ -59,7 +59,7 @@ const PersonalizationSection = () => {
             </div>
           </div>
         </div>
-        <div>
+        <div className="relative">
           <Timeline items={timelineData} />
         </div>
         <div className="h-18 md:h-28" />
