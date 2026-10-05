@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
+import { ArrowUp } from "lucide-react";
 
 // Register ScrollTrigger safely for React
 if (typeof window !== "undefined") {
@@ -353,7 +354,7 @@ export function CinematicFooter() {
           </div>
 
           {/* 3. Bottom Bar / Credits */}
-          <div className="relative z-20 w-full pb-[100px] md:pb-8 pt-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
+          <div className="relative z-20 w-full pb-[140px] md:pb-8 pt-4 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-6">
             
             {/* Copyright */}
             <div className="text-muted-foreground text-[10px] md:text-xs font-semibold tracking-widest uppercase order-2 md:order-1 md:w-1/4 text-center md:text-left">
@@ -374,16 +375,17 @@ export function CinematicFooter() {
             </div>
 
             {/* Back to top */}
-            <div className="order-3 absolute bottom-6 right-6 md:relative md:bottom-auto md:right-auto md:w-1/4 flex justify-end">
-              <MagneticButton
-                as="button"
-                onClick={scrollToTop}
-                className="w-12 h-12 rounded-full footer-glass-pill flex items-center justify-center text-muted-foreground hover:text-foreground group"
-              >
-                <svg className="w-5 h-5 transform group-hover:-translate-y-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
-                </svg>
-              </MagneticButton>
+            <div className="order-3 absolute bottom-28 right-5 sm:right-6 md:relative md:bottom-auto md:right-auto md:w-1/4 flex justify-end z-30">
+              <div className="glass-button-wrap rounded-full">
+                <MagneticButton
+                  as="button"
+                  onClick={scrollToTop}
+                  aria-label="Back to top"
+                  className="w-12 h-12 rounded-full bg-white/[0.08] hover:bg-white/[0.18] active:bg-white/[0.25] backdrop-blur-2xl border border-white/20 hover:border-white/40 active:border-white/50 shadow-[0_8px_24px_rgba(0,0,0,0.5),inset_0_1px_1px_rgba(255,255,255,0.35),inset_0_-1px_2px_rgba(0,0,0,0.4)] hover:shadow-[0_0_24px_rgba(59,130,245,0.35),0_8px_28px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.5)] flex items-center justify-center text-white transition-all duration-300 group cursor-pointer"
+                >
+                  <ArrowUp className="w-5 h-5 text-white stroke-[2.4] transform group-hover:-translate-y-1 transition-transform duration-300 drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]" />
+                </MagneticButton>
+              </div>
             </div>
 
           </div>
