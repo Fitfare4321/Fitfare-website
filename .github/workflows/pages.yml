@@ -3,7 +3,7 @@ name: Pages Deployment
 
 on:
   push:
-    branches: ['main']
+    branches: ['new-ff-web']
   workflow_dispatch:
 
 permissions:
