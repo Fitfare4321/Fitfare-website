@@ -239,7 +239,7 @@ const HeroSection = () => {
         initial={{ opacity: 0, y: 150 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-        className="absolute bottom-64 md:bottom-16 left-6 sm:left-10 md:left-14 z-30 pointer-events-none select-none"
+        className="absolute bottom-72 md:bottom-16 left-6 sm:left-10 md:left-14 z-30 pointer-events-none select-none"
       >
         <h1
           className="text-[clamp(4rem,14vw,12rem)] font-black tracking-[-0.06em] leading-[0.82] text-black dark:text-white"
