@@ -56,11 +56,11 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
               {/* Text Side */}
               <div className={`w-full md:w-1/2 pl-8 md:pl-0 flex flex-col justify-center ${isEven ? "md:pr-12 lg:pr-24 md:items-end md:text-right" : "md:pl-12 lg:pl-24 md:items-start md:text-left"}`}>
                 <motion.div 
-                  initial={{ opacity: 0, x: isEven ? -60 : 60, filter: "blur(10px)" }}
-                  whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+                  initial={{ opacity: 0, x: isEven ? -60 : 60 }}
+                  whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true, margin: "0px" }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                  className="max-w-md w-full"
+                  className="max-w-md w-full transform-gpu"
                 >
                   {item.date && (
                     <motion.span 

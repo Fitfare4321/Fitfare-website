@@ -352,6 +352,7 @@ function BackgroundScene({ isDark }: { isDark: boolean }) {
   const scrollRef = useRef(0);
   const pausedRef = useRef(false);
   useEffect(() => {
+    let rafId: number | null = null;
     const onMove = (e: MouseEvent) => {
       const x = (e.clientX / window.innerWidth) * 2 - 1;
       const y = (e.clientY / window.innerHeight) * 2 - 1;
@@ -359,7 +360,11 @@ function BackgroundScene({ isDark }: { isDark: boolean }) {
       pointer.current.y = y;
     };
     const onScroll = () => {
-      scrollRef.current = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        scrollRef.current = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
+      });
     };
     const onVis = () => {
       pausedRef.current = document.hidden;
@@ -367,11 +372,12 @@ function BackgroundScene({ isDark }: { isDark: boolean }) {
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", onScroll, { passive: true });
     document.addEventListener("visibilitychange", onVis);
-    onScroll();
+    scrollRef.current = Math.min(1, window.scrollY / Math.max(1, window.innerHeight));
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", onScroll);
       document.removeEventListener("visibilitychange", onVis);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
   useFrame((_, delta) => {
@@ -414,6 +420,9 @@ function BackgroundScene({ isDark }: { isDark: boolean }) {
 
 export default function NetworkBackground3D({ isDark }: { isDark: boolean }) {
   const [webgl, setWebgl] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
+  const containerRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     try {
       const c = document.createElement("canvas");
@@ -423,6 +432,19 @@ export default function NetworkBackground3D({ isDark }: { isDark: boolean }) {
       setWebgl(false);
     }
   }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        setIsVisible(entry.isIntersecting);
+      }
+    }, { threshold: 0.05 });
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   if (!webgl) {
     const bg = isDark
       ? "radial-gradient(circle at 0% 0%, rgba(37,99,235,0.12) 0, transparent 55%), radial-gradient(circle at 100% 100%, rgba(56,189,248,0.16) 0, transparent 55%), linear-gradient(to right, rgba(148,163,184,0.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.14) 1px, transparent 1px)"
@@ -431,15 +453,13 @@ export default function NetworkBackground3D({ isDark }: { isDark: boolean }) {
   }
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
   const dprRange: [number, number] = mobile ? [1, 1.25] : [1, 1.5];
-  const mainColor = isDark ? "#1e40af" : "#60a5fa";
-  const accentColor = isDark ? "#7c3aed" : "#a78bfa";
-  const tertiaryColor = isDark ? "#059669" : "#34d399";
 
   return (
-    <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+    <div ref={containerRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
       <Canvas
         camera={{ position: [0, 0, 9], fov: 55 }}
         dpr={dprRange}
+        frameloop={isVisible ? "always" : "never"}
         gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
         style={{ background: "transparent" }}
       >

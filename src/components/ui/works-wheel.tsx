@@ -122,6 +122,7 @@ export function WorksWheel({
   // everything else is written to the DOM, so turning the wheel is not a render.
   const turn = React.useRef(0);
   const target = React.useRef(0);
+  const requestDrawRef = React.useRef<() => void>(() => {});
   const [active, setActive] = React.useState(0);
   const [stage, setStage] = React.useState<Stage>({ w: 0, h: 0 });
 
@@ -178,15 +179,44 @@ export function WorksWheel({
   }, [stage, count]);
 
   // One pass per frame: ease toward the target, then write every transform.
+  // Sleeps when resting and when offscreen to prevent continuous CPU usage.
   React.useEffect(() => {
     if (!stage.h) return;
     let frame = 0;
+    let isRunning = false;
+    let isVisible = true;
     const { ringR, ringScale, drumR, bow } = metrics;
 
+    const requestDraw = () => {
+      if (!isRunning && isVisible) {
+        isRunning = true;
+        frame = requestAnimationFrame(draw);
+      }
+    };
+    requestDrawRef.current = requestDraw;
+
+    const el = stageRef.current;
+    let io: IntersectionObserver | null = null;
+    if (el) {
+      io = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            requestDraw();
+          } else if (frame) {
+            cancelAnimationFrame(frame);
+            frame = 0;
+            isRunning = false;
+          }
+        }
+      }, { threshold: 0.05 });
+      io.observe(el);
+    }
+
     const draw = () => {
-      frame = requestAnimationFrame(draw);
       const gap = target.current - turn.current;
-      if (Math.abs(gap) < 0.0005) turn.current = target.current;
+      const isSettled = Math.abs(gap) < 0.0003;
+      if (isSettled) turn.current = target.current;
       else turn.current += gap * (reduced ? 1 : EASE);
 
       const t = turn.current;
@@ -194,8 +224,6 @@ export function WorksWheel({
       const pos = Math.max(0, t - 1);
 
       // The drum is pulled back so its front face lands on the picture plane.
-      // That set-back has to arrive with the drum, or the ring would sit at the
-      // far side of the perspective and render at half its size.
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translateZ(${-m * drumR}px)`;
         wheelRef.current.style.left = metrics.isMobile ? `${lerp(50, 40, m)}%` : '50%';
@@ -217,7 +245,6 @@ export function WorksWheel({
           // Smooth culling by distance to prevent jarring pop-ins
           let opacity = 1;
           if (m > 0.5) {
-            // Start fading out 0.5 units before the CULL point
             const excess = Math.abs(d) - (CULL - 0.5);
             opacity = clamp(1 - excess * 2, 0, 1);
           }
@@ -232,10 +259,21 @@ export function WorksWheel({
       if (titleRef.current) titleRef.current.style.opacity = String(m);
       const near = clamp(Math.round(pos), 0, last);
       setActive((prev) => (prev === near ? prev : near));
+
+      if (isSettled || !isVisible) {
+        isRunning = false;
+        frame = 0;
+      } else {
+        frame = requestAnimationFrame(draw);
+      }
     };
 
-    frame = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(frame);
+    requestDraw();
+
+    return () => {
+      if (frame) cancelAnimationFrame(frame);
+      if (io) io.disconnect();
+    };
   }, [metrics, stage.h, count, last, reduced]);
 
   React.useEffect(() => {
@@ -269,6 +307,7 @@ export function WorksWheel({
   const to = React.useCallback(
     (next: number) => {
       target.current = clamp(next, 0, last + 1);
+      requestDrawRef.current();
     },
     [last],
   );

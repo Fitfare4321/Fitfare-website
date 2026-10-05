@@ -61,33 +61,44 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    const updateMousePosition = (clientX: number, clientY: number) => {
-      const grids = document.querySelectorAll('.global-bg-grid, .footer-bg-grid');
-      grids.forEach((grid) => {
+    let rafId: number | null = null;
+    let lastX = -1000;
+    let lastY = -1000;
+    let grids: HTMLElement[] = [];
+
+    const refreshGrids = () => {
+      grids = Array.from(document.querySelectorAll<HTMLElement>('.global-bg-grid, .footer-bg-grid'));
+    };
+    refreshGrids();
+    window.addEventListener('resize', refreshGrids, { passive: true });
+
+    const updateVisibleGrids = () => {
+      rafId = null;
+      const vh = window.innerHeight;
+      for (let i = 0; i < grids.length; i++) {
+        const grid = grids[i];
         const rect = grid.getBoundingClientRect();
-        const x = clientX - rect.left;
-        const y = clientY - rect.top;
-        (grid as HTMLElement).style.setProperty('--mouse-x', `${x}px`);
-        (grid as HTMLElement).style.setProperty('--mouse-y', `${y}px`);
-      });
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      updateMousePosition(e.clientX, e.clientY);
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (e.touches.length > 0) {
-        updateMousePosition(e.touches[0].clientX, e.touches[0].clientY);
+        if (rect.bottom >= 0 && rect.top <= vh) {
+          grid.style.setProperty('--mouse-x', `${lastX - rect.left}px`);
+          grid.style.setProperty('--mouse-y', `${lastY - rect.top}px`);
+        }
       }
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('touchmove', handleTouchMove);
+    const handleMouseMove = (e: MouseEvent) => {
+      lastX = e.clientX;
+      lastY = e.clientY;
+      if (rafId === null) {
+        rafId = requestAnimationFrame(updateVisibleGrids);
+      }
+    };
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
     
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('resize', refreshGrids);
+      if (rafId !== null) cancelAnimationFrame(rafId);
     };
   }, []);
 
@@ -103,7 +114,7 @@ const Index = () => {
       {/* 01. Navbar */}
       <Navbar />
       
-      <main className="relative z-10 w-full bg-white dark:bg-[#0a0f1c] global-bg-grid shadow-2xl rounded-b-[40px] border-b border-black/10 dark:border-white/10">
+      <main className="relative z-10 w-full bg-white dark:bg-[#0a0f1c] shadow-2xl rounded-b-[40px] border-b border-black/10 dark:border-white/10">
         <div className="relative z-10 w-full">
           <div className="relative z-0">
             {/* 02. Hero */}

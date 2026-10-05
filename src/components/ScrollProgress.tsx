@@ -1,23 +1,38 @@
-import { useState, useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 const ScrollProgress = () => {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    let rafId: number | null = null;
+
     const onScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      setProgress(docHeight > 0 ? (scrollTop / docHeight) * 100 : 0);
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (!barRef.current) return;
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const progress = docHeight > 0 ? Math.min(1, Math.max(0, scrollTop / docHeight)) : 0;
+        barRef.current.style.transform = `scaleX(${progress})`;
+      });
     };
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-1 z-[60]">
+    <div className="fixed top-0 left-0 w-full h-1 z-[60] pointer-events-none">
       <div
-        className="h-full scroll-progress transition-all duration-150"
-        style={{ width: `${progress}%` }}
+        ref={barRef}
+        className="h-full w-full scroll-progress origin-left transform-gpu"
+        style={{ transform: "scaleX(0)" }}
       />
     </div>
   );

@@ -43,7 +43,10 @@ const PartnerTransitionSection = () => {
   return (
     <section ref={sectionRef} id="partners" className="py-24 bg-black global-bg-grid relative overflow-hidden text-white">
       {/* Background Glow */}
-      <div className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] bg-[#305CDE]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div 
+        className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none transform-gpu" 
+        style={{ background: "radial-gradient(circle, rgba(48,92,222,0.12) 0%, rgba(48,92,222,0.03) 50%, transparent 70%)" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         

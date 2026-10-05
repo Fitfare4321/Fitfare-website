@@ -80,19 +80,18 @@ const FloatingCard = ({
   const s = sizeClasses[size];
   return (
     <div
-      className={`relative overflow-hidden flex-shrink-0 group ${s.card} ${s.radius}`}
-      style={{ aspectRatio: "3/4" }}
+      className={`relative overflow-hidden flex-shrink-0 group transform-gpu ${s.card} ${s.radius}`}
+      style={{ aspectRatio: "3/4", willChange: "transform" }}
     >
       <img
         src={src}
         alt={label}
         className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-110"
         loading="eager"
+        decoding="async"
       />
       {/* Bottom gradient */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/5 to-transparent" />
-
-
 
       {/* Inner ring */}
       <div
@@ -112,12 +111,14 @@ const ScrollColumn = ({
   speed,
   offsetY = 0,
   direction = "up",
+  isIntersecting = true,
 }: {
   cards: { src: string; label: string }[];
   size: CardSize;
   speed: number;
   offsetY?: number;
   direction?: "up" | "down";
+  isIntersecting?: boolean;
 }) => {
   const animName = direction === "up" ? "scrollUp" : "scrollDown";
 
@@ -133,9 +134,13 @@ const ScrollColumn = ({
       }}
     >
       <div
-        className="flex flex-col gap-5 sm:gap-7"
+        className="flex flex-col gap-5 sm:gap-7 transform-gpu"
         style={{
           animation: `${animName} ${speed}s linear infinite`,
+          animationPlayState: isIntersecting ? "running" : "paused",
+          willChange: "transform",
+          transform: "translate3d(0, 0, 0)",
+          backfaceVisibility: "hidden",
         }}
       >
         {/* Duplicate cards for seamless loop */}
@@ -149,12 +154,28 @@ const ScrollColumn = ({
 
 const HeroSection = () => {
   const containerRef = useRef<HTMLElement>(null);
-  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined"
+      ? window.matchMedia("(max-width: 768px), (pointer: coarse)").matches
+      : false
+  );
+  const [isIntersecting, setIsIntersecting] = useState(true);
 
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    const handleResize = () =>
+      setIsMobile(window.matchMedia("(max-width: 768px), (pointer: coarse)").matches);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsIntersecting(entry.isIntersecting),
+      { threshold: 0 }
+    );
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -163,18 +184,23 @@ const HeroSection = () => {
       id="home"
       className="sticky top-0 h-screen w-full overflow-hidden bg-[#eceef1] dark:bg-[#060608] transition-colors duration-500 z-0"
     >
-      {/* ── BACKGROUND ── */}
+      {/* ── BACKGROUND GLOWS (Hardware Accelerated Radial Gradients) ── */}
       <div className="absolute inset-0 pointer-events-none z-[1]">
-
         <m.div
           animate={{ scale: [1, 1.15, 1], x: [0, 25, 0], y: [0, -15, 0] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="hidden md:block absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full bg-[#305CDE]/[0.05] dark:bg-[#305CDE]/[0.07] blur-[150px]"
+          className="hidden md:block absolute top-[5%] right-[10%] w-[500px] h-[500px] rounded-full pointer-events-none transform-gpu"
+          style={{
+            background: "radial-gradient(circle, rgba(48,92,222,0.12) 0%, rgba(48,92,222,0.03) 50%, transparent 70%)",
+          }}
         />
         <m.div
           animate={{ scale: [1, 1.2, 1], x: [0, -35, 0], y: [0, 20, 0] }}
           transition={{ duration: 24, repeat: Infinity, ease: "easeInOut", delay: 6 }}
-          className="hidden md:block absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full bg-cyan-500/[0.03] dark:bg-cyan-400/[0.05] blur-[130px]"
+          className="hidden md:block absolute bottom-[10%] left-[5%] w-[400px] h-[400px] rounded-full pointer-events-none transform-gpu"
+          style={{
+            background: "radial-gradient(circle, rgba(6,182,212,0.08) 0%, rgba(6,182,212,0.02) 50%, transparent 70%)",
+          }}
         />
       </div>
 

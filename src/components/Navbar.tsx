@@ -183,13 +183,6 @@ const PillSegmentedControl = ({
       else triggerTransition("global");
     };
 
-    const handleScroll = () => {
-      if (!isScrollLocked.current) {
-        updateMode();
-      }
-    };
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
     const observers: IntersectionObserver[] = [];
 
     if (wheelTrack) {
@@ -221,7 +214,6 @@ const PillSegmentedControl = ({
     }
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
       observers.forEach((o) => o.disconnect());
     };
   }, [isScrollLocked]);
@@ -424,7 +416,14 @@ const Navbar = () => {
 
   // Scroll Detection for Top Navbar appearance
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    let prev = false;
+    const handleScroll = () => {
+      const isPast = window.scrollY > 20;
+      if (isPast !== prev) {
+        prev = isPast;
+        setScrolled(isPast);
+      }
+    };
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -444,20 +443,27 @@ const Navbar = () => {
     }
 
     const sectionIds = ["activities", "how-it-works", "partners", "faq"];
+    let rafId: number | null = null;
+    let lastActive = "";
 
     const updateActive = () => {
-      // Skip scroll spy updates while user is navigating via drag/tap
       if (isScrollLocked.current) return;
 
       // If at very top, highlight Explore
       if (window.scrollY < 150) {
-        setActiveSection("activities");
+        if (lastActive !== "activities") {
+          lastActive = "activities";
+          setActiveSection("activities");
+        }
         return;
       }
 
       // If near bottom of the page, highlight FAQs
       if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 150) {
-        setActiveSection("faq");
+        if (lastActive !== "faq") {
+          lastActive = "faq";
+          setActiveSection("faq");
+        }
         return;
       }
 
@@ -474,12 +480,26 @@ const Navbar = () => {
         }
       }
 
-      setActiveSection(current);
+      if (current !== lastActive) {
+        lastActive = current;
+        setActiveSection(current);
+      }
+    };
+
+    const onScroll = () => {
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        updateActive();
+      });
     };
 
     updateActive();
-    window.addEventListener("scroll", updateActive, { passive: true });
-    return () => window.removeEventListener("scroll", updateActive);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, [location.pathname]);
 
   const handleNavClick = (href: string) => {

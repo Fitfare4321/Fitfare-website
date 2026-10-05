@@ -179,19 +179,58 @@ const ShapeBlur = ({
     const quad = new THREE.Mesh(geo, material);
     scene.add(quad);
 
+    let isVisible = false;
+    let isHovered = false;
+    let isRendering = false;
+    let cachedRect = null;
+
+    const startLoop = () => {
+      if (!active || isRendering || !isVisible) return;
+      isRendering = true;
+      lastTime = performance.now() * 0.001;
+      animationFrameId = requestAnimationFrame(update);
+    };
+
+    const stopLoop = () => {
+      isRendering = false;
+      if (animationFrameId) {
+        cancelAnimationFrame(animationFrameId);
+        animationFrameId = null;
+      }
+    };
+
+    const targetEl = mount.parentElement || mount;
+
+    const onPointerEnter = () => {
+      isHovered = true;
+      cachedRect = targetEl.getBoundingClientRect();
+      startLoop();
+    };
+
+    const onPointerLeave = () => {
+      isHovered = false;
+      cachedRect = null;
+    };
+
     const onPointerMove = e => {
-      const rect = mount.getBoundingClientRect();
+      if (!isHovered) {
+        isHovered = true;
+        cachedRect = targetEl.getBoundingClientRect();
+        startLoop();
+      }
+      const rect = cachedRect || targetEl.getBoundingClientRect();
       vMouse.set(e.clientX - rect.left, e.clientY - rect.top);
     };
 
-    document.addEventListener('mousemove', onPointerMove);
-    document.addEventListener('pointermove', onPointerMove);
+    targetEl.addEventListener('pointerenter', onPointerEnter);
+    targetEl.addEventListener('pointerleave', onPointerLeave);
+    targetEl.addEventListener('pointermove', onPointerMove, { passive: true });
 
     const resize = () => {
       if (!active) return;
       w = mount.clientWidth;
       h = mount.clientHeight;
-      const dpr = Math.min(window.devicePixelRatio, 2);
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
       renderer.setSize(w, h);
       renderer.setPixelRatio(dpr);
@@ -205,6 +244,10 @@ const ShapeBlur = ({
       quad.scale.set(w, h, 1);
       vResolution.set(w, h).multiplyScalar(dpr);
       material.uniforms.u_pixelRatio.value = dpr;
+      if (targetEl) cachedRect = targetEl.getBoundingClientRect();
+      if (isVisible) {
+        renderer.render(scene, camera);
+      }
     };
 
     resize();
@@ -216,29 +259,54 @@ const ShapeBlur = ({
     });
     ro.observe(mount);
 
+    const io = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      }
+    }, { threshold: 0.05 });
+    io.observe(mount);
+
     const update = () => {
-      if (!active) return;
+      if (!active || !isVisible) {
+        isRendering = false;
+        return;
+      }
       time = performance.now() * 0.001;
       const dt = time - lastTime;
       lastTime = time;
 
+      let diff = 0;
       ['x', 'y'].forEach(k => {
+        const prev = vMouseDamp[k];
         vMouseDamp[k] = THREE.MathUtils.damp(vMouseDamp[k], vMouse[k], 8, dt);
+        diff += Math.abs(vMouseDamp[k] - prev);
       });
 
       renderer.render(scene, camera);
+
+      // If mouse isn't hovered and damping has settled, sleep the loop to save GPU
+      if (!isHovered && diff < 0.001) {
+        isRendering = false;
+        return;
+      }
+
       animationFrameId = requestAnimationFrame(update);
     };
-    update();
 
     return () => {
       active = false;
-
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
       window.removeEventListener('resize', resize);
       ro.disconnect();
-      document.removeEventListener('mousemove', onPointerMove);
-      document.removeEventListener('pointermove', onPointerMove);
+      io.disconnect();
+      targetEl.removeEventListener('pointerenter', onPointerEnter);
+      targetEl.removeEventListener('pointerleave', onPointerLeave);
+      targetEl.removeEventListener('pointermove', onPointerMove);
       if (mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
       }

@@ -33,8 +33,11 @@ const ActivitiesSection = () => {
       id="activities"
       className="py-24 bg-black global-bg-grid relative overflow-x-clip z-10"
     >
-      {/* Background ambient glow - Hidden on mobile for performance */}
-      <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#305CDE]/10 blur-[120px] rounded-full pointer-events-none transform-gpu" />
+      {/* Background ambient glow - GPU-accelerated radial gradient */}
+      <div 
+        className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-full pointer-events-none transform-gpu" 
+        style={{ background: "radial-gradient(ellipse at center, rgba(48,92,222,0.14) 0%, rgba(48,92,222,0.03) 50%, transparent 75%)" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-0 md:mb-20 mt-10">
         <m.h2

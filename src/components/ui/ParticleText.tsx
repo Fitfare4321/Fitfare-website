@@ -113,6 +113,7 @@ const ParticleText = ({
     let width = 0;
     let height = 0;
     let dpr = 1;
+    let isVisible = false;
 
     const pointer = {
       active: false,
@@ -154,6 +155,11 @@ const ParticleText = ({
     };
 
     const render = (now: number) => {
+      if (!isVisible) {
+        animationFrame = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       if (glow && !reducedMotion) {
@@ -212,11 +218,17 @@ const ParticleText = ({
         gathering = false;
       }
 
+      // If finished gathering, pointer is inactive, and no idle drift, pause loop
+      if (!gathering && !pointer.active && idleDrift === 0 && Math.abs(pointer.smoothX - pointer.x) < 0.5) {
+        animationFrame = null;
+        return;
+      }
+
       animationFrame = window.requestAnimationFrame(render);
     };
 
     const ensureRenderLoop = () => {
-      if (animationFrame === null) {
+      if (animationFrame === null && isVisible) {
         animationFrame = window.requestAnimationFrame(render);
       }
     };
@@ -229,7 +241,7 @@ const ParticleText = ({
 
       if (width <= 0 || height <= 0) return;
 
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.max(1, Math.floor(width * dpr));
       canvas.height = Math.max(1, Math.floor(height * dpr));
       canvas.style.width = '100%';
@@ -359,24 +371,31 @@ const ParticleText = ({
       resizeFrame = window.requestAnimationFrame(sampleText);
     };
 
+    let cachedCanvasRect: DOMRect | null = null;
+
     const handlePointerMove = (event: PointerEvent) => {
-      const rect = canvas.getBoundingClientRect();
-      pointer.x = event.clientX - rect.left;
-      pointer.y = event.clientY - rect.top;
+      if (!cachedCanvasRect) cachedCanvasRect = canvas.getBoundingClientRect();
+      pointer.x = event.clientX - cachedCanvasRect.left;
+      pointer.y = event.clientY - cachedCanvasRect.top;
       pointer.active = true;
+      ensureRenderLoop();
     };
 
     const handlePointerLeave = () => {
       pointer.active = false;
+      cachedCanvasRect = null;
     };
 
     const handlePointerEnter = (event: PointerEvent) => {
+      cachedCanvasRect = canvas.getBoundingClientRect();
       handlePointerMove(event);
       if (trigger === 'hover') startGather(true);
+      ensureRenderLoop();
     };
 
     const handleClick = () => {
       if (trigger === 'click') startGather(true);
+      ensureRenderLoop();
     };
 
     const reduceMotionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -387,17 +406,35 @@ const ParticleText = ({
 
     reduceMotionQuery?.addEventListener('change', handleReduceMotionChange);
     canvas.addEventListener('pointerenter', handlePointerEnter);
-    canvas.addEventListener('pointermove', handlePointerMove);
+    canvas.addEventListener('pointermove', handlePointerMove, { passive: true });
     canvas.addEventListener('pointerleave', handlePointerLeave);
     canvas.addEventListener('click', handleClick);
 
-    const resizeObserver = new ResizeObserver(queueSample);
+    const resizeObserver = new ResizeObserver(() => {
+      cachedCanvasRect = null;
+      queueSample();
+    });
     resizeObserver.observe(container);
+
+    const intersectionObserver = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          ensureRenderLoop();
+        } else if (animationFrame !== null) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      }
+    }, { threshold: 0.05 });
+    intersectionObserver.observe(container);
+
     sampleText();
 
     return () => {
       buildId += 1;
       resizeObserver.disconnect();
+      intersectionObserver.disconnect();
       reduceMotionQuery?.removeEventListener('change', handleReduceMotionChange);
       canvas.removeEventListener('pointerenter', handlePointerEnter);
       canvas.removeEventListener('pointermove', handlePointerMove);

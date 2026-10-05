@@ -54,7 +54,10 @@ const PartnerPropositionSection = () => {
   return (
     <section ref={sectionRef} className="py-24 bg-black relative overflow-hidden text-white">
       {/* Background Glow */}
-      <div className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#305CDE]/10 rounded-[100%] blur-[120px] pointer-events-none" />
+      <div 
+        className="hidden md:block absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] rounded-[100%] pointer-events-none transform-gpu" 
+        style={{ background: "radial-gradient(ellipse at center, rgba(48,92,222,0.12) 0%, rgba(48,92,222,0.03) 50%, transparent 75%)" }}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
