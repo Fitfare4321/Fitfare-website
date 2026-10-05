@@ -181,10 +181,13 @@ export function WorksWheel({
   React.useEffect(() => {
     if (!stage.h) return;
     let frame = 0;
+    let isVisible = !document.hidden;
+    let isIntersecting = true; // Assume true until observer fires
     const { ringR, ringScale, drumR, bow } = metrics;
 
     const draw = () => {
-      frame = requestAnimationFrame(draw);
+      if (!isVisible || !isIntersecting) return;
+      
       const gap = target.current - turn.current;
       if (Math.abs(gap) < 0.0005) turn.current = target.current;
       else turn.current += gap * (reduced ? 1 : EASE);
@@ -193,9 +196,6 @@ export function WorksWheel({
       const m = clamp(t, 0, 1);
       const pos = Math.max(0, t - 1);
 
-      // The drum is pulled back so its front face lands on the picture plane.
-      // That set-back has to arrive with the drum, or the ring would sit at the
-      // far side of the perspective and render at half its size.
       if (wheelRef.current) {
         wheelRef.current.style.transform = `translateZ(${-m * drumR}px)`;
         wheelRef.current.style.left = metrics.isMobile ? `${lerp(50, 40, m)}%` : '50%';
@@ -214,10 +214,8 @@ export function WorksWheel({
             bow,
             m,
           );
-          // Smooth culling by distance to prevent jarring pop-ins
           let opacity = 1;
           if (m > 0.5) {
-            // Start fading out 0.5 units before the CULL point
             const excess = Math.abs(d) - (CULL - 0.5);
             opacity = clamp(1 - excess * 2, 0, 1);
           }
@@ -232,10 +230,36 @@ export function WorksWheel({
       if (titleRef.current) titleRef.current.style.opacity = String(m);
       const near = clamp(Math.round(pos), 0, last);
       setActive((prev) => (prev === near ? prev : near));
+      
+      frame = requestAnimationFrame(draw);
     };
 
+    const handleVisibilityChange = () => {
+      isVisible = !document.hidden;
+      if (isVisible && isIntersecting) {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(draw);
+      }
+    };
+
+    const observer = new IntersectionObserver(([entry]) => {
+      isIntersecting = entry.isIntersecting;
+      if (isVisible && isIntersecting) {
+        cancelAnimationFrame(frame);
+        frame = requestAnimationFrame(draw);
+      }
+    });
+
+    if (stageRef.current) observer.observe(stageRef.current);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
     frame = requestAnimationFrame(draw);
-    return () => cancelAnimationFrame(frame);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      observer.disconnect();
+    };
   }, [metrics, stage.h, count, last, reduced]);
 
   React.useEffect(() => {
