@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import {
     Wallet,
     CheckCircle2,
@@ -142,7 +142,7 @@ function SavingsCalc({ isDark }: { isDark: boolean }) {
                             <span style={{ color: row.color }} className="font-black">₹{row.val}</span>
                         </div>
                         <div className="h-2 rounded-full w-full" style={{ background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)" }}>
-                            <motion.div
+                            <m.div
                                 className="h-full rounded-full"
                                 style={{ background: row.color, opacity: row.crossed ? 0.35 : 1 }}
                                 animate={{ width: `${Math.min(100, (row.val / traditional) * 100)}%` }}
@@ -156,7 +156,7 @@ function SavingsCalc({ isDark }: { isDark: boolean }) {
             {/* Saving highlight */}
             <AnimatePresence mode="wait">
                 {saved > 0 && (
-                    <motion.div
+                    <m.div
                         key={saved}
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
@@ -168,17 +168,17 @@ function SavingsCalc({ isDark }: { isDark: boolean }) {
                         <span className="text-lg font-black" style={{ color: ACCENT }}>
                             ₹{saved} ({savePercent}%)
                         </span>
-                    </motion.div>
+                    </m.div>
                 )}
                 {saved <= 0 && (
-                    <motion.div
+                    <m.div
                         key="break-even"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         className={`text-center text-xs ${isDark ? "text-white/30" : "text-black/40"} py-2`}
                     >
                         You've hit the traditional price — but with full flex!
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
         </div>
@@ -239,7 +239,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
             <div className="relative max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-16 md:py-24">
 
                 {/* ── HEADER ── */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.7 }}
@@ -263,7 +263,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                         No subscriptions, no wasted money. FitFare's Pay-As-You-Go model gives you
                         complete financial control — pay per session, only when you show up.
                     </p>
-                </motion.div>
+                </m.div>
 
                
 
@@ -271,7 +271,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                 <div className="grid lg:grid-cols-2 gap-10 xl:gap-16 mb-16 items-start">
 
                     {/* LEFT — Benefits + Steps */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: -30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, delay: 0.1 }}
@@ -286,7 +286,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                                 {BENEFITS.map((b, i) => {
                                     const Icon = b.icon;
                                     return (
-                                        <motion.div
+                                        <m.div
                                             key={i}
                                             initial={{ opacity: 0, y: 16 }}
                                             animate={{ opacity: 1, y: 0 }}
@@ -311,7 +311,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                                             </div>
                                             <p className="text-sm font-bold leading-tight mb-0.5">{b.label}</p>
                                             <p className={`text-[11px] ${isDark ? "text-white/40" : "text-black/50"}`}>{b.desc}</p>
-                                        </motion.div>
+                                        </m.div>
                                     );
                                 })}
                             </div>
@@ -325,7 +325,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                             <div className="relative flex flex-col gap-0">
                                 {STEPS.map((step, i) => {
                                     return (
-                                        <motion.div
+                                        <m.div
                                             key={i}
                                             initial={{ opacity: 0, x: -20 }}
                                             animate={{ opacity: 1, x: 0 }}
@@ -349,15 +349,15 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                                                 <p className="font-bold text-sm">{step.title}</p>
                                                 <p className={`text-xs ${isDark ? "text-white/40" : "text-black/50"} mt-0.5`}>{step.desc}</p>
                                             </div>
-                                        </motion.div>
+                                        </m.div>
                                     );
                                 })}
                             </div>
                         </div>
-                    </motion.div>
+                    </m.div>
 
                     {/* RIGHT — Ticker + Calculator */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: 30 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.7, delay: 0.2 }}
@@ -367,7 +367,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                         <SavingsCalc isDark={isDark} />
 
                         {/* Wallet badge */}
-                        <motion.div
+                        <m.div
                             className="flex items-center gap-4 px-5 py-4 rounded-2xl border"
                             style={{ background: `${ACCENT}08`, borderColor: `${ACCENT}28` }}
                             initial={{ opacity: 0, y: 12 }}
@@ -386,12 +386,12 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
                                     Your wallet shows exactly what you spent, session by session. No surprises, no fine print.
                                 </p>
                             </div>
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
                 </div>
 
                 {/* ── BOTTOM COMPARISON STRIP ── */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.6 }}
@@ -468,7 +468,7 @@ export default function PayAsYouGoUI({ isDark = true }: Props) {
   </ul>
 </div>
                     </div>
-                </motion.div>
+                </m.div>
             </div>
         </section>
     );

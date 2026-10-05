@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { useTheme } from "next-themes";
 import { useState } from "react";
 import {
@@ -216,16 +216,16 @@ const CareerPage = () => {
             HERO SECTION
         ════════════════════════════════════════ */}
         <div className="text-center max-w-5xl mx-auto mb-32">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-8 text-[10px] font-black tracking-[0.2em] uppercase border border-blue-500/20 bg-blue-500/5 text-blue-400"
           >
             <Sparkles size={12} />
             We are hiring builders
-          </motion.div>
+          </m.div>
 
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
@@ -234,9 +234,9 @@ const CareerPage = () => {
             Join the <span className="text-blue-500">Fitness</span>
             <br />
             Revolution.
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -244,10 +244,10 @@ const CareerPage = () => {
           >
             FitFare is reimagining fitness accessibility. We're looking for
             ambitious minds to build the core infrastructure of the future.
-          </motion.p>
+          </m.p>
 
           {/* Quick Stats */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}
@@ -273,7 +273,7 @@ const CareerPage = () => {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ════════════════════════════════════════
@@ -294,7 +294,7 @@ const CareerPage = () => {
                 className={`relative px-8 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "jobs" ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"}`}
               >
                 {activeTab === "jobs" && (
-                  <motion.div
+                  <m.div
                     layoutId="tab-bg"
                     className="absolute inset-0 bg-blue-600 rounded-xl -z-10 shadow-lg shadow-blue-600/20"
                   />
@@ -306,7 +306,7 @@ const CareerPage = () => {
                 className={`relative px-8 py-3 rounded-xl text-sm font-black transition-all ${activeTab === "internships" ? "text-white" : "text-slate-500 hover:text-slate-900 dark:hover:text-white"}`}
               >
                 {activeTab === "internships" && (
-                  <motion.div
+                  <m.div
                     layoutId="tab-bg"
                     className="absolute inset-0 bg-blue-600 rounded-xl -z-10 shadow-lg shadow-blue-600/20"
                   />
@@ -318,7 +318,7 @@ const CareerPage = () => {
 
           <div className="grid gap-6 max-w-6xl mx-auto">
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={activeTab}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -328,7 +328,7 @@ const CareerPage = () => {
               >
                 {(activeTab === "jobs" ? fullTimeJobs : internshipJobs).map(
                   (job, index) => (
-                    <motion.div
+                    <m.div
                       key={job.id}
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -405,10 +405,10 @@ const CareerPage = () => {
                           </p>
                         </div>
                       </div>
-                    </motion.div>
+                    </m.div>
                   ),
                 )}
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         </div>

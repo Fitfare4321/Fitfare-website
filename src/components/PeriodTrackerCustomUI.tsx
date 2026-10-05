@@ -1,4 +1,4 @@
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import {
   Plus,
@@ -156,7 +156,7 @@ function CycleRing({
         const startAngle = (p.range[0] / totalDays) * 360;
         const endAngle = (p.range[1] / totalDays) * 360 - 1;
         return (
-          <motion.path
+          <m.path
             key={p.name}
             d={arcPath(startAngle, endAngle, 145)}
             fill="none"
@@ -173,7 +173,7 @@ function CycleRing({
 
       {/* Progress arc (days elapsed) */}
       {currentDay > 0 && (
-        <motion.path
+        <m.path
           d={arcPath(0, currentAngle - 0.5, 145)}
           fill="none"
           stroke={phase.color}
@@ -220,7 +220,7 @@ function CycleRing({
         const y = 200 + Math.sin(rad) * 145;
         return (
           <g>
-            <motion.circle
+            <m.circle
               cx={x} cy={y} r={12}
               fill={phase.color}
               filter="url(#softGlow)"
@@ -228,7 +228,7 @@ function CycleRing({
               transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
             />
             <circle cx={x} cy={y} r={5} fill="white" opacity={0.9} />
-            <motion.circle
+            <m.circle
               cx={x} cy={y} r={20}
               fill="none"
               stroke={phase.color}
@@ -284,7 +284,7 @@ function HormoneWave({ currentDay, totalDays }: { currentDay: number; totalDays:
         </defs>
 
         {/* Estrogen wave – rises around ovulation */}
-        <motion.path
+        <m.path
           d="M0,160 C100,155 150,140 200,155 C250,165 280,120 357,60 C380,40 420,50 440,70 C470,100 500,155 600,158 C700,160 800,158 1000,160 L1000,180 L0,180 Z"
           fill="url(#estrogen)"
           animate={{
@@ -296,7 +296,7 @@ function HormoneWave({ currentDay, totalDays }: { currentDay: number; totalDays:
           }}
           transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.path
+        <m.path
           d="M0,160 C100,155 150,140 200,155 C250,165 280,120 357,60 C380,40 420,50 440,70 C470,100 500,155 600,158 C700,160 800,158 1000,160"
           fill="none" stroke="#f43f5e" strokeWidth="2" opacity="0.7"
           filter="url(#waveGlow)"
@@ -305,7 +305,7 @@ function HormoneWave({ currentDay, totalDays }: { currentDay: number; totalDays:
         />
 
         {/* Progesterone wave – rises in luteal */}
-        <motion.path
+        <m.path
           d="M0,170 C200,172 350,168 500,165 C550,163 580,145 620,120 C660,95 700,85 750,90 C800,95 850,120 900,140 C950,155 980,165 1000,168 L1000,180 L0,180 Z"
           fill="url(#progesterone)"
           animate={{
@@ -317,7 +317,7 @@ function HormoneWave({ currentDay, totalDays }: { currentDay: number; totalDays:
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.path
+        <m.path
           d="M0,170 C200,172 350,168 500,165 C550,163 580,145 620,120 C660,95 700,85 750,90 C800,95 850,120 900,140 C950,155 980,165 1000,168"
           fill="none" stroke="#818cf8" strokeWidth="2" opacity="0.7"
           filter="url(#waveGlow)"
@@ -326,13 +326,13 @@ function HormoneWave({ currentDay, totalDays }: { currentDay: number; totalDays:
         />
 
         {/* LH spike at ovulation */}
-        <motion.path
+        <m.path
           d="M0,178 C300,178 330,178 355,178 C365,178 370,110 357,30 C344,110 349,178 365,178 C500,178 1000,178 1000,178 L1000,180 L0,180 Z"
           fill="url(#lh)"
           animate={{ opacity: [0.4, 0.8, 0.4] }}
           transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.path
+        <m.path
           d="M357,178 C357,178 357,100 357,28 C357,100 357,178 357,178"
           fill="none" stroke="#10b981" strokeWidth="2.5" opacity="0.8"
           filter="url(#waveGlow)"
@@ -380,7 +380,7 @@ function FeatureRow({ f, i, isDark }: { f: typeof FEATURES[0]; i: number; isDark
   const IconComp = f.icon;
 
   return (
-    <motion.div
+    <m.div
       ref={ref}
       initial={{ opacity: 0, y: 30 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
@@ -398,7 +398,7 @@ function FeatureRow({ f, i, isDark }: { f: typeof FEATURES[0]; i: number; isDark
       }}
     >
       {/* Left indicator bar */}
-      <motion.div
+      <m.div
         className="absolute left-0 top-0 bottom-0 w-[3px] rounded-full"
         style={{ background: f.color, opacity: 0 }}
         whileHover={{ opacity: 1 }}
@@ -451,7 +451,7 @@ function FeatureRow({ f, i, isDark }: { f: typeof FEATURES[0]; i: number; isDark
         size={20}
         className="absolute right-6 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-30 transition-all duration-300 translate-x-2 group-hover:translate-x-0"
       />
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -507,7 +507,7 @@ const PeriodTrackerCustomUI = ({
     <div className="flex flex-col items-center w-full max-w-full md:max-w-5xl mx-auto py-10 px-3 sm:px-4">
 
       {/* ── HERO HEADER ── */}
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7 }}
@@ -539,12 +539,12 @@ const PeriodTrackerCustomUI = ({
           Advanced AI-powered cycle intelligence — helping you track, understand, and
           optimize your body through every phase, every day.
         </p>
-      </motion.div>
+      </m.div>
 
       {/* ── EDITORIAL BENTO ── */}
       <div className="w-full grid grid-cols-1 md:grid-cols-12 gap-5 mb-16">
         {/* Main editorial card */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -568,11 +568,11 @@ const PeriodTrackerCustomUI = ({
               Track, understand, and own every phase of your cycle — with insights that are as unique as you are.
             </p>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Side stack */}
         <div className="md:col-span-4 flex flex-col gap-5">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
@@ -584,9 +584,9 @@ const PeriodTrackerCustomUI = ({
             <p className="opacity-55 text-sm leading-relaxed">
               Align workouts and diet with your cycle for peak performance — every phase, every day.
             </p>
-          </motion.div>
+          </m.div>
 
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.18 }}
@@ -602,7 +602,7 @@ const PeriodTrackerCustomUI = ({
                 Data-Driven<br />Insights
               </p>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </div>
 
@@ -612,7 +612,7 @@ const PeriodTrackerCustomUI = ({
           const IconComp = p.icon;
           const isActive = activePhaseIdx === i;
           return (
-            <motion.button
+            <m.button
               key={p.name}
               onClick={() => setActivePhaseIdx(i)}
               whileHover={{ scale: 1.04 }}
@@ -625,7 +625,7 @@ const PeriodTrackerCustomUI = ({
               }}
             >
               {isActive && (
-                <motion.div
+                <m.div
                   layoutId="phaseActive"
                   className="absolute inset-0 rounded-2xl"
                   style={{ background: `${p.color}08` }}
@@ -643,17 +643,17 @@ const PeriodTrackerCustomUI = ({
               <p className="text-[10px] opacity-40 mb-2">{p.days}</p>
               <AnimatePresence>
                 {isActive && (
-                  <motion.p
+                  <m.p
                     initial={{ opacity: 0, height: 0 }}
                     animate={{ opacity: 1, height: "auto" }}
                     exit={{ opacity: 0, height: 0 }}
                     className="text-[11px] leading-relaxed opacity-60 overflow-hidden"
                   >
                     {p.mood}
-                  </motion.p>
+                  </m.p>
                 )}
               </AnimatePresence>
-            </motion.button>
+            </m.button>
           );
         })}
       </div>
@@ -663,7 +663,7 @@ const PeriodTrackerCustomUI = ({
         {/* Ring */}
         <div className="relative w-full md:w-auto max-w-[360px] mx-auto aspect-square">
           {/* Background glow */}
-          <motion.div
+          <m.div
             className="absolute inset-0 rounded-full blur-[80px]"
             style={{ background: phase.glow }}
             animate={{ scale: [1, 1.08, 1], opacity: [0.4, 0.65, 0.4] }}
@@ -674,7 +674,7 @@ const PeriodTrackerCustomUI = ({
           {/* Center */}
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center pointer-events-none">
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={currentDay}
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -696,7 +696,7 @@ const PeriodTrackerCustomUI = ({
                 >
                   {phase.name} Phase
                 </div>
-              </motion.div>
+              </m.div>
             </AnimatePresence>
           </div>
         </div>
@@ -704,7 +704,7 @@ const PeriodTrackerCustomUI = ({
         {/* Phase detail + CTA */}
         <div className="flex flex-col gap-5">
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={phase.name}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
@@ -724,7 +724,7 @@ const PeriodTrackerCustomUI = ({
               </div>
               <p className="text-sm leading-relaxed opacity-70">{phase.desc}</p>
               <p className="text-xs font-bold mt-3 opacity-50">Mood: {phase.mood}</p>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
 
           {/* Day scrubber */}
@@ -734,7 +734,7 @@ const PeriodTrackerCustomUI = ({
               <span>{phase.name}</span>
             </div>
             <div className="relative h-2 rounded-full bg-white/8 overflow-hidden">
-              <motion.div
+              <m.div
                 className="h-full rounded-full"
                 style={{ background: phase.color, boxShadow: `0 0 10px ${phase.color}` }}
                 animate={{ width: `${((currentDay + 1) / totalDays) * 100}%` }}
@@ -762,7 +762,7 @@ const PeriodTrackerCustomUI = ({
           </div>
 
           {/* Add Period button */}
-          <motion.button
+          <m.button
             onClick={() => setShowPicker(true)}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -773,7 +773,7 @@ const PeriodTrackerCustomUI = ({
             }}
           >
             <Plus size={16} /> Log Period Dates
-          </motion.button>
+          </m.button>
         </div>
       </div>
 
@@ -786,7 +786,7 @@ const PeriodTrackerCustomUI = ({
               startDate && endDate && day.full >= startDate && day.full <= endDate;
             const isToday = i === 0;
             return (
-              <motion.div
+              <m.div
                 key={i}
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -817,7 +817,7 @@ const PeriodTrackerCustomUI = ({
                 {isPeriod && (
                   <div className="w-1.5 h-1.5 rounded-full bg-rose-500 mt-1.5 animate-pulse" />
                 )}
-              </motion.div>
+              </m.div>
             );
           })}
         </div>
@@ -851,14 +851,14 @@ const PeriodTrackerCustomUI = ({
       <AnimatePresence>
         {showPicker && (
           <>
-            <motion.div
+            <m.div
               className="fixed inset-0 bg-black/60 backdrop-blur-md z-40"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setShowPicker(false)}
             />
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 50, scale: 0.93 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 50, scale: 0.93 }}
@@ -934,7 +934,7 @@ const PeriodTrackerCustomUI = ({
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </>
         )}
       </AnimatePresence>

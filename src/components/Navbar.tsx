@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import { Compass, Info, Briefcase, HelpCircle } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { motion, useMotionValue, animate } from "framer-motion";
+import { m, useMotionValue, animate } from "framer-motion";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
 import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
@@ -332,7 +332,7 @@ const PillSegmentedControl = ({
           onPointerCancel={handlePointerUp}
         >
           {/* The animated pill */}
-          <motion.div
+          <m.div
             className="absolute top-1.5 bottom-1.5 bg-white/12 dark:bg-white/15 border border-white/20 dark:border-white/25 rounded-full backdrop-blur-md shadow-[inset_0_1px_1px_rgba(255,255,255,0.15)] cursor-grab active:cursor-grabbing"
             style={{
               x: pillX,
@@ -553,7 +553,7 @@ const Navbar = () => {
       <style>{glassButtonStyles}</style>
 
       {/* ─── MOBILE ONLY: Top header bar with CTAs ─── */}
-      <motion.nav
+      <m.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
@@ -562,10 +562,10 @@ const Navbar = () => {
         <div className="pointer-events-auto z-20">
           {ctaButtons}
         </div>
-      </motion.nav>
+      </m.nav>
 
       {/* ─── MOBILE ONLY: Bottom pill bar ─── */}
-      <motion.div
+      <m.div
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
@@ -577,10 +577,10 @@ const Navbar = () => {
           handleNavClick={handleNavClick}
           isScrollLocked={isScrollLocked}
         />
-      </motion.div>
+      </m.div>
 
       {/* ─── DESKTOP (md+): Top navbar without full-width back glass ─── */}
-      <motion.nav
+      <m.nav
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
@@ -605,7 +605,7 @@ const Navbar = () => {
         <div className="pointer-events-auto z-20">
           {ctaButtons}
         </div>
-      </motion.nav>
+      </m.nav>
     </>
   );
 };

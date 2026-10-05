@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
   Target,
@@ -151,7 +151,7 @@ function SectionWrapper({ children, className = "" }: { children: React.ReactNod
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-80px" });
   return (
-    <motion.div
+    <m.div
       ref={ref}
       variants={stagger}
       initial="hidden"
@@ -159,7 +159,7 @@ function SectionWrapper({ children, className = "" }: { children: React.ReactNod
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -214,7 +214,7 @@ export default function AboutFitfare() {
 
 
         <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <motion.h1
+          <m.h1
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -226,9 +226,9 @@ export default function AboutFitfare() {
               className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
               Scalable Fitness Growth
             </span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -238,7 +238,7 @@ export default function AboutFitfare() {
             FitFare is a performance first growth partner for modern fitness brands.
             We combine strategy, systems, and execution to transform ambition into
             scalable, compounding results.
-          </motion.p>
+          </m.p>
 
 
         </div>
@@ -251,13 +251,13 @@ export default function AboutFitfare() {
         style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
       >
         <SectionWrapper className="max-w-6xl mx-auto">
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 text-center mb-4"
           >
             Our Purpose
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-4xl md:text-5xl font-extrabold text-center mb-20 leading-tight"
           >
@@ -265,7 +265,7 @@ export default function AboutFitfare() {
             <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
               Mission & Vision
             </span>
-          </motion.h2>
+          </m.h2>
 
           <div className="grid md:grid-cols-2 gap-8">
             {[
@@ -286,7 +286,7 @@ export default function AboutFitfare() {
                 points: ["Global fitness growth leader", "Digital & operational excellence", "Scalable impact frameworks"],
               },
             ].map(({ Icon, color, glow, label, text, points }) => (
-              <motion.div
+              <m.div
                 key={label}
                 variants={fadeUp}
                 className="relative overflow-hidden rounded-3xl p-8 border group transition-all duration-500"
@@ -313,7 +313,7 @@ export default function AboutFitfare() {
                     </li>
                   ))}
                 </ul>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </SectionWrapper>
@@ -333,7 +333,7 @@ export default function AboutFitfare() {
             {stats.map((item, i) => {
               const Icon = item.icon;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   variants={fadeUp}
                   whileHover={{ y: -6, scale: 1.02 }}
@@ -359,7 +359,7 @@ export default function AboutFitfare() {
                   <p className="text-sm" style={{ color: isDark ? "#64748b" : "#94a3b8" }}>
                     {item.label}
                   </p>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
@@ -372,13 +372,13 @@ export default function AboutFitfare() {
         style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
       >
         <SectionWrapper className="max-w-6xl mx-auto">
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-xs font-semibold uppercase tracking-[0.3em] text-[#42A4E6] text-center mb-4"
           >
             Our Journey
-          </motion.p>
-          <motion.h2
+          </m.p>
+          <m.h2
             variants={fadeUp}
             className="text-4xl md:text-5xl font-extrabold text-center mb-20"
           >
@@ -386,7 +386,7 @@ export default function AboutFitfare() {
             <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
               Era of Fitness Brands
             </span>
-          </motion.h2>
+          </m.h2>
 
           <div className="relative">
             {/* Vertical line */}
@@ -397,7 +397,7 @@ export default function AboutFitfare() {
 
             <div className="space-y-10 pl-16 md:pl-0">
               {milestones.map((m, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   variants={fadeUp}
                   className={`relative flex flex-col md:flex-row gap-6 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
@@ -431,7 +431,7 @@ export default function AboutFitfare() {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
@@ -452,34 +452,34 @@ export default function AboutFitfare() {
         }}
       >
         <SectionWrapper className="max-w-7xl mx-auto">
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold justify-center flex text-xl mb-5"
           >
             How We Operate
-          </motion.p>
+          </m.p>
 
-          <motion.h2
+          <m.h2
             variants={fadeUp}
             className="text-4xl md:text-5xl font-extrabold text-center mb-6"
           >
             Our Core Philosophy
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-center max-w-2xl mx-auto mb-16 text-sm leading-relaxed"
             style={{ color: isDark ? "#64748b" : "#94a3b8" }}
           >
             The operating principles that define how Fitfare executes,
             communicates, and scales impact — every single day.
-          </motion.p>
+          </m.p>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
             {coreValues.map((item, i) => {
               const Icon = item.icon;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   variants={fadeUp}
                   whileHover={{ y: -8, scale: 1.02 }}
@@ -511,7 +511,7 @@ export default function AboutFitfare() {
                   <p className="text-xs leading-relaxed relative z-10" style={{ color: isDark ? "#94a3b8" : "#64748b" }}>
                     {item.description}
                   </p>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
@@ -526,13 +526,13 @@ export default function AboutFitfare() {
         <SectionWrapper className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-              <motion.p
+              <m.p
                 variants={fadeUp}
                 className="text-xs font-semibold uppercase tracking-[0.3em] text-[#40B2DF] mb-4"
               >
                 Our Team DNA
-              </motion.p>
-              <motion.h2
+              </m.p>
+              <m.h2
                 variants={fadeUp}
                 className="text-4xl md:text-5xl font-extrabold leading-tight mb-6"
               >
@@ -540,21 +540,21 @@ export default function AboutFitfare() {
                 <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
                   Differently
                 </span>
-              </motion.h2>
-              <motion.p
+              </m.h2>
+              <m.p
                 variants={fadeUp}
                 className="text-sm leading-relaxed"
                 style={{ color: isDark ? "#94a3b8" : "#64748b" }}
               >
                 FitFare is a fully remote team of innovators, thinkers, and doers — united by a passion for performance. We don’t just work together; we elevate each other and our outcomes.
-              </motion.p>
+              </m.p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {teamPrinciples.map((p, i) => {
                 const Icon = p.icon;
                 return (
-                  <motion.div
+                  <m.div
                     key={i}
                     variants={fadeUp}
                     className="flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 group"
@@ -572,7 +572,7 @@ export default function AboutFitfare() {
                       <Icon size={15} />
                     </div>
                     <span className="text-xs font-medium leading-snug">{p.text}</span>
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
@@ -597,13 +597,13 @@ export default function AboutFitfare() {
           /> */}
 
       {/* <SectionWrapper>
-            <motion.p
+            <m.p
               variants={fadeUp}
               className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 mb-4"
             >
               Work With Us
-            </motion.p>
-            <motion.h2
+            </m.p>
+            <m.h2
               variants={fadeUp}
               className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight"
             >
@@ -614,27 +614,27 @@ export default function AboutFitfare() {
               >
                 High-Performance Brand?
               </span>
-            </motion.h2> */}
+            </m.h2> */}
 
-      {/* <motion.p
+      {/* <m.p
               variants={fadeUp}
               className="text-base leading-relaxed max-w-xl mx-auto mb-12"
               style={{ color: isDark ? "#94a3b8" : "#64748b" }}
             >
               Let's engineer systems that compound growth, strengthen positioning, and
               create long-term leverage. Your ambition, our infrastructure.
-            </motion.p> */}
+            </m.p> */}
 
 
 
       {/* Trust line */}
-      {/* <motion.p
+      {/* <m.p
               variants={fadeUp}
               className="mt-8 text-xs"
               style={{ color: isDark ? "#475569" : "#94a3b8" }}
             >
               No long-term contracts · Results-oriented engagement · Cancel anytime
-            </motion.p>
+            </m.p>
           </SectionWrapper> */}
       {/* </div>
       </section> */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTheme } from "next-themes";
 import { Sparkles } from "lucide-react";
 
@@ -19,17 +19,17 @@ const Event = () => {
       <div className="max-w-3xl text-center">
 
         {/* Title */}
-        <motion.h1
+        <m.h1
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-4xl md:text-5xl font-bold mb-6 mt-10 bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent"
         >
           Thriveathon
-        </motion.h1>
+        </m.h1>
 
         {/* Badge */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.3 }}
@@ -41,10 +41,10 @@ const Event = () => {
         >
           <Sparkles size={16} className="opacity-80" />
           Coming Soon
-        </motion.div>
+        </m.div>
 
         {/* Description */}
-        <motion.p
+        <m.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
@@ -55,7 +55,7 @@ const Event = () => {
           We’re preparing something exciting for the fitness community.
           Thriveathon will bring innovation, energy, and collaboration
           together. Stay tuned for updates.
-        </motion.p>
+        </m.p>
 
       </div>
     </section>

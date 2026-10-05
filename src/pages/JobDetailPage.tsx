@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { jobsData } from "@/data/jobsData";
 import { 
   ArrowLeft, 
@@ -58,7 +58,7 @@ const JobDetailPage = () => {
       
       {/* ── Ambient Background Elements ── */}
       <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <motion.div
+        <m.div
           className="absolute w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
           style={{
             background: `radial-gradient(circle, ${job.accent} 0%, transparent 70%)`,
@@ -71,7 +71,7 @@ const JobDetailPage = () => {
           }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
+        <m.div
           className="absolute w-[500px] h-[500px] rounded-full blur-[120px] opacity-10"
           style={{
             background: `radial-gradient(circle, ${job.accent} 0%, transparent 70%)`,
@@ -88,7 +88,7 @@ const JobDetailPage = () => {
 
       <main className="relative z-10 flex-1 max-w-7xl mx-auto px-6 pt-24 pb-32 w-full">
         {/* ── Back Navigation ── */}
-        <motion.button
+        <m.button
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           onClick={() => navigate("/careers")}
@@ -98,7 +98,7 @@ const JobDetailPage = () => {
             <ArrowLeft size={18} />
           </div>
           Back to Openings
-        </motion.button>
+        </m.button>
 
         <div className="grid lg:grid-cols-[1fr,380px] gap-12 items-start">
           
@@ -106,7 +106,7 @@ const JobDetailPage = () => {
           <div className="space-y-16">
             
             {/* Header Section */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
@@ -130,13 +130,13 @@ const JobDetailPage = () => {
               <p className={`text-xl leading-relaxed opacity-80 max-w-2xl font-medium ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                 {job.overview}
               </p>
-            </motion.div>
+            </m.div>
 
             {/* Content Sections */}
             <div className="space-y-20">
               
               {/* Responsibilities */}
-              <motion.section
+              <m.section
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -165,10 +165,10 @@ const JobDetailPage = () => {
                     </div>
                   ))}
                 </div>
-              </motion.section>
+              </m.section>
 
               {/* Requirements */}
-              <motion.section
+              <m.section
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -205,10 +205,10 @@ const JobDetailPage = () => {
                     </div>
                   </div>
                 </div>
-              </motion.section>
+              </m.section>
 
               {/* Why Join */}
-              <motion.section
+              <m.section
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -237,7 +237,7 @@ const JobDetailPage = () => {
                 
                 {/* Visual decoration */}
                 <div className={`absolute top-0 right-0 w-64 h-64 blur-[100px] rounded-full opacity-10 pointer-events-none translate-x-1/2 -translate-y-1/2`} style={{ backgroundColor: job.accent }} />
-              </motion.section>
+              </m.section>
 
             </div>
           </div>
@@ -246,7 +246,7 @@ const JobDetailPage = () => {
           <aside className="sticky top-24 space-y-6">
             
             {/* Job Summary Card */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
@@ -315,10 +315,10 @@ const JobDetailPage = () => {
                   Takes less than 2 minutes
                 </p>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Support Card */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, x: 30 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -338,7 +338,7 @@ const JobDetailPage = () => {
   Contact Recruiting Team (info@fitfare.in)
   <ChevronRight size={14} />
 </a>
-            </motion.div>
+            </m.div>
 
           </aside>
 

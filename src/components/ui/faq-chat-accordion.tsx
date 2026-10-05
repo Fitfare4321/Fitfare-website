@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import * as Accordion from "@radix-ui/react-accordion";
 import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -93,7 +93,7 @@ export function FaqAccordion({
               </Accordion.Trigger>
             </Accordion.Header>
             <Accordion.Content asChild forceMount>
-              <motion.div
+              <m.div
                 initial="collapsed"
                 animate={openItem === item.id.toString() ? "open" : "collapsed"}
                 variants={{
@@ -113,7 +113,7 @@ export function FaqAccordion({
                     {item.answer}
                   </div>
                 </div>
-              </motion.div>
+              </m.div>
             </Accordion.Content>
           </Accordion.Item>
         ))}

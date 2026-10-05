@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Check } from "lucide-react";
 
 const plans = [
@@ -55,7 +55,7 @@ const PricingSection = () => {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-indigo-100/50 rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -70,11 +70,11 @@ const PricingSection = () => {
           <p className="text-gray-600 max-w-2xl mx-auto text-lg">
             Whether you want to drop in occasionally or train everyday, we have a plan for you.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {plans.map((plan, i) => (
-            <motion.div
+            <m.div
               key={i}
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +113,7 @@ const PricingSection = () => {
                 ))}
               </ul>
 
-              <motion.button
+              <m.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 className={`w-full py-4 rounded-xl font-bold transition-all ${plan.popular
@@ -122,8 +122,8 @@ const PricingSection = () => {
                   }`}
               >
                 {plan.buttonText}
-              </motion.button>
-            </motion.div>
+              </m.button>
+            </m.div>
           ))}
         </div>
       </div>

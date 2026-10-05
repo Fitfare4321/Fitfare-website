@@ -17,7 +17,7 @@ const activitiesData = [
   { id: 6, title: "Explore More", image: exploreImg, alt: "Explore More", href: "#" }
 ];
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 
 const ActivitiesSection = () => {
   return (
@@ -29,7 +29,7 @@ const ActivitiesSection = () => {
       <div className="hidden md:block absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-[#305CDE]/10 blur-[120px] rounded-full pointer-events-none transform-gpu" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center mb-0 md:mb-20 mt-10">
-        <motion.h2
+        <m.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -38,9 +38,9 @@ const ActivitiesSection = () => {
           style={{ fontFamily: "'Inter', 'DM Sans', sans-serif" }}
         >
           One App. <br className="hidden sm:block" /> More Ways to Move.
-        </motion.h2>
+        </m.h2>
         
-        <motion.p 
+        <m.p 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -48,7 +48,7 @@ const ActivitiesSection = () => {
           className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto"
         >
           Find the kind of movement that feels right today, all in one place.
-        </motion.p>
+        </m.p>
       </div>
 
       <div className="w-full relative z-10 h-[400vh]" id="wheel-scroll-track">

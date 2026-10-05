@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import {
   Globe,
   MapPin,
@@ -173,7 +173,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
 
       <div className="relative max-w-7xl mx-auto px-6 md:px-12 py-12 md:py-20">
         {/* — HEADER — */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -211,12 +211,12 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
             Seamless check-ins, real-time availability, and zero downtime on
             your fitness journey.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* — MAIN CONTENT — */}
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* LEFT – Benefits + Steps */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
@@ -225,7 +225,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
             {/* Benefit Cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {benefits.map((b, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -248,7 +248,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                     {b.label}
                   </p>
                   <p className={`text-xs ${isDark ? "text-white/45" : "text-slate-500"}`}>{b.desc}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
@@ -264,7 +264,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
               </h3>
               <div className="space-y-4">
                 {steps.map((step, i) => (
-                  <motion.div
+                  <m.div
                     key={i}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -285,14 +285,14 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                       size={14}
                       className="opacity-0 group-hover:opacity-100 transition-all duration-300 text-cyan-400"
                     />
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* RIGHT – Interactive Map + Gym Card */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
@@ -361,7 +361,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
 
                 {/* Gym pins */}
                 {gyms.map((gym, i) => (
-                  <motion.button
+                  <m.button
                     key={gym.city}
                     initial={{ scale: 0, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
@@ -374,7 +374,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                   >
                     {/* Pulse ring for active */}
                     {activeGym === i && (
-                      <motion.div
+                      <m.div
                         className="absolute rounded-full border"
                         style={{ borderColor: `${ACCENT}60` }}
                         initial={{ width: 10, height: 10, opacity: 0.8 }}
@@ -395,7 +395,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                     </div>
                     <AnimatePresence>
                       {(hovered === i || activeGym === i) && (
-                        <motion.div
+                        <m.div
                           initial={{ opacity: 0, y: 5 }}
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: 5 }}
@@ -406,16 +406,16 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                           }}
                         >
                           {gym.city}
-                        </motion.div>
+                        </m.div>
                       )}
                     </AnimatePresence>
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
 
               {/* Active Gym Details */}
               <AnimatePresence mode="wait">
-                <motion.div
+                <m.div
                   key={activeGym}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -463,7 +463,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                       <span className="text-xs text-emerald-500 font-semibold">Available Now</span>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               </AnimatePresence>
 
               {/* Gym List Tabs */}
@@ -486,7 +486,7 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
             </div>
 
             {/* Floating Badge – QR */}
-            <motion.div
+            <m.div
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
               className={`absolute -bottom-2 -right-2 md:-bottom-5 md:-right-5 p-4 rounded-2xl border ${isDark ? "border-white/10 shadow-2xl" : "border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-white/95"} flex items-center gap-3`}
@@ -505,10 +505,10 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
                 <p className={`text-xs font-bold ${isDark ? "text-white" : "text-slate-900"}`}>Instant Check-In</p>
                 <p className={`text-[10px] ${isDark ? "text-white/40" : "text-slate-500"}`}>Scan & enter in 2 sec</p>
               </div>
-            </motion.div>
+            </m.div>
 
             {/* Floating Badge – Members */}
-            <motion.div
+            <m.div
               animate={{ y: [0, 8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className={`absolute -top-2 -left-2 md:-top-5 md:-left-5 p-3 rounded-2xl border ${isDark ? "border-white/10 shadow-2xl" : "border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.12)] bg-white/95"} flex items-center gap-2`}
@@ -521,8 +521,8 @@ export default function MultipleClubsUI({ isDark = true }: Props) {
               <p className={`text-xs font-bold ${isDark ? "text-white/80" : "text-slate-800"}`}>
                 Network
               </p>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
         </div>
       </div>
     </section>

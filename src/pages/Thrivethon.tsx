@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
+import { m, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, ChevronDown } from "lucide-react";
 import img1 from "@/assets/img1.png";
@@ -15,7 +15,7 @@ import { Instagram, Linkedin, X, ArrowRight } from "lucide-react";
 
 /* ─── Floating particle ─── */
 const Particle = ({ style }: { style: React.CSSProperties }) => (
-    <motion.div
+    <m.div
         className="absolute rounded-full pointer-events-none"
         style={{ width: 4, height: 4, background: "#a3e635", ...style }}
         animate={{ y: [0, -30, 0], opacity: [0.4, 1, 0.4] }}
@@ -65,7 +65,7 @@ const faqData = [
 const FAQItem = ({ item, index }: { item: typeof faqData[0]; index: number }) => {
     const [open, setOpen] = useState(item.active ?? false);
     return (
-        <motion.div
+        <m.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.08 }}
@@ -79,13 +79,13 @@ const FAQItem = ({ item, index }: { item: typeof faqData[0]; index: number }) =>
                 <span className={`text-sm md:text-base font-semibold tracking-wide uppercase transition-colors ${open ? "text-[#a3e635]" : "text-white group-hover:text-[#a3e635]"}`}>
                     {item.q}
                 </span>
-                <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <m.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.3 }}>
                     <ChevronDown size={18} className={open ? "text-[#a3e635]" : "text-white/40"} />
-                </motion.div>
+                </m.div>
             </button>
             <AnimatePresence initial={false}>
                 {open && (
-                    <motion.div
+                    <m.div
                         key="content"
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
@@ -96,10 +96,10 @@ const FAQItem = ({ item, index }: { item: typeof faqData[0]; index: number }) =>
                         <p className="text-white/60 text-sm md:text-base leading-relaxed pb-5 pr-4">
                             {item.a}
                         </p>
-                    </motion.div>
+                    </m.div>
                 )}
             </AnimatePresence>
-        </motion.div>
+        </m.div>
     );
 };
 
@@ -182,7 +182,7 @@ const ThrivethonPage = () => {
             <canvas ref={canvasRef} className="fixed inset-0 pointer-events-none z-0" />
 
             {/* Glow Orbs */}
-            <motion.div
+            <m.div
                 className="fixed pointer-events-none z-0"
                 style={{
                     width: 700,
@@ -199,7 +199,7 @@ const ThrivethonPage = () => {
                 transition={{ duration: 18, repeat: Infinity }}
             />
 
-            <motion.div
+            <m.div
                 className="fixed pointer-events-none z-0"
                 style={{
                     width: 500,
@@ -227,7 +227,7 @@ const ThrivethonPage = () => {
             ))}
 
             {/* Back Button */}
-            <motion.button
+            <m.button
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 whileHover={{ scale: 1.06, borderColor: "rgba(163,230,53,0.6)" }}
@@ -236,7 +236,7 @@ const ThrivethonPage = () => {
             >
                 <ArrowLeft size={16} />
                 Back
-            </motion.button>
+            </m.button>
 
             {/* ───────────────── HERO SECTION ───────────────── */}
             <section className="relative z-10 min-h-screen flex items-center px-6 md:px-20">
@@ -252,7 +252,7 @@ const ThrivethonPage = () => {
                 />
 
                 {/* Scan line sweep */}
-                <motion.div
+                <m.div
                     className="absolute inset-0 pointer-events-none z-0"
                     style={{
                         background: "linear-gradient(transparent 0%, rgba(163,230,53,0.015) 50%, transparent 100%)",
@@ -265,7 +265,7 @@ const ThrivethonPage = () => {
                 <div className="relative w-full grid md:grid-cols-2 items-center">
 
                     {/* LEFT SIDE */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: -50 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.9, ease: "easeOut" }}
@@ -273,33 +273,33 @@ const ThrivethonPage = () => {
                     >
 
                         {/* Logo Row */}
-                        <motion.div
+                        <m.div
                             className="flex items-center gap-3 mb-6"
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.2 }}
                         >
-                            <motion.span
+                            <m.span
                                 className="text-white text-base tracking-widest"
                                 animate={{ opacity: [0.6, 1, 0.6] }}
                                 transition={{ duration: 3, repeat: Infinity }}
                             >
                                 A 12-Hour Creative Battle by FitFare
-                            </motion.span>
-                        </motion.div>
+                            </m.span>
+                        </m.div>
 
                         {/* Coming Soon */}
-                        <motion.p
+                        <m.p
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3 }}
                             className="text-white/70 text-base md:text-lg tracking-widest font-semibold mb-4"
                         >
                             Coming Soon...
-                        </motion.p>
+                        </m.p>
 
                         {/* Title */}
-                        <motion.h1
+                        <m.h1
                             initial={{ opacity: 0, y: 30 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.8 }}
@@ -311,20 +311,20 @@ const ThrivethonPage = () => {
                         >
                             <span className="block text-[#a3e635] drop-shadow-[0_0_40px_rgba(163,230,53,0.5)]">THRIVE</span>
                             <span className="block text-white">ATHON</span>
-                        </motion.h1>
+                        </m.h1>
 
                         {/* Tagline */}
-                        <motion.p
+                        <m.p
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.55 }}
                             className="mt-4 text-[#a3e635] font-bold tracking-wide text-lg"
                         >
                             CREATE. DISRUPT. INSPIRE.
-                        </motion.p>
+                        </m.p>
 
                         {/* Stats */}
-                        <motion.div
+                        <m.div
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.7 }}
@@ -340,14 +340,14 @@ const ThrivethonPage = () => {
                                 <p className="text-6xl font-black tabular-nums">5K</p>
                                 <p className="text-lg tracking-widest text-white/60 uppercase">Prizepool</p>
                             </div>
-                        </motion.div>
-                    </motion.div>
+                        </m.div>
+                    </m.div>
 
                     {/* RIGHT SIDE IMAGE */}
                     <div className="relative flex justify-center md:justify-end">
 
                         {/* Checkered Accent */}
-                        <motion.div
+                        <m.div
                             className="absolute left-10 top-16 w-72 h-72 opacity-20"
                             style={{
                                 backgroundImage: "repeating-conic-gradient(#a3e635 0% 25%, transparent 0% 50%)",
@@ -358,7 +358,7 @@ const ThrivethonPage = () => {
                             transition={{ duration: 10, repeat: Infinity }}
                         />
 
-                        <motion.img
+                        <m.img
                             src={img1}
                             alt="Designathon"
                             initial={{ opacity: 0, x: 80, scale: 0.95 }}
@@ -380,7 +380,7 @@ const ThrivethonPage = () => {
                     {/* Icon + Heading Row */}
                     <div className="flex items-center gap-6 mb-10">
 
-                        <motion.img
+                        <m.img
                             src={img2}
                             alt="Icon"
                             initial={{ opacity: 0, y: 40, rotate: -10 }}
@@ -391,7 +391,7 @@ const ThrivethonPage = () => {
                             className="w-28 md:w-36 mb-8 cursor-pointer"
                         />
 
-                        <motion.h2
+                        <m.h2
                             initial={{ opacity: 0, y: 40 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.8, delay: 0.2 }}
@@ -400,12 +400,12 @@ const ThrivethonPage = () => {
                         >
                             WHAT IS{" "}
                             <span className="text-[#c084fc] drop-shadow-[0_0_30px_rgba(192,132,252,0.4)]">THRIVEATHON?</span>
-                        </motion.h2>
+                        </m.h2>
 
                     </div>
 
                     {/* Paragraph */}
-                    <motion.p
+                    <m.p
                         initial={{ opacity: 0, y: 40 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.4 }}
@@ -419,14 +419,14 @@ const ThrivethonPage = () => {
                         It's built for{" "}
                         <span className="text-white font-semibold">students and emerging talents</span>{" "}
                         ready to think big and build bigger.
-                    </motion.p>
+                    </m.p>
                 </div>
 
                 {/* ───── DOUBLE LAYER DIAGONAL STRIP ───── */}
 
                 {/* Purple Under Layer */}
                 <div className="absolute bottom-16 left-0 w-full rotate-[-4deg]">
-                    <motion.div
+                    <m.div
                         className="bg-[#c084fc] py-6"
                         animate={{ opacity: [0.7, 1, 0.7] }}
                         transition={{ duration: 3, repeat: Infinity }}
@@ -435,7 +435,7 @@ const ThrivethonPage = () => {
 
                 {/* Green Main Strip Using Image */}
                 <div className="absolute bottom-10 left-0 w-full rotate-[-4deg]">
-                    <motion.div
+                    <m.div
                         className="w-full h-24 md:h-28 overflow-hidden"
                         animate={{ x: [0, -10, 0] }}
                         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
@@ -445,7 +445,7 @@ const ThrivethonPage = () => {
                             alt="Thrivethon Strip"
                             className="w-full h-full object-cover"
                         />
-                    </motion.div>
+                    </m.div>
                 </div>
 
             </section>
@@ -461,7 +461,7 @@ const ThrivethonPage = () => {
                         { label: "First Runners Up", amount: "3,000 INR", color: "#a3e635", delay: 0.1 },
                         { label: "Second Runners Up", amount: "2,000 INR", color: "#fde047", delay: 0.2 },
                     ].map(({ label, amount, color, delay }) => (
-                        <motion.div
+                        <m.div
                             key={label}
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -475,15 +475,15 @@ const ThrivethonPage = () => {
                                 style={{ background: `${color}15` }}
                             />
                             <p className="text-white/60 tracking-widest text-sm uppercase">{label}</p>
-                            <motion.p
+                            <m.p
                                 className="text-4xl md:text-5xl font-bold mt-2"
                                 style={{ color }}
                                 animate={{ textShadow: [`0 0 0px ${color}00`, `0 0 30px ${color}60`, `0 0 0px ${color}00`] }}
                                 transition={{ duration: 3, repeat: Infinity, delay }}
                             >
                                 {amount}
-                            </motion.p>
-                        </motion.div>
+                            </m.p>
+                        </m.div>
                     ))}
 
                 </div>
@@ -492,7 +492,7 @@ const ThrivethonPage = () => {
                 <div className="relative z-10 grid md:grid-cols-2 items-center gap-16">
 
                     {/* LEFT IMAGE */}
-                    <motion.div
+                    <m.div
                         className="relative flex justify-center md:justify-start"
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -502,7 +502,7 @@ const ThrivethonPage = () => {
                         {/* Soft Glow */}
                         <div className="absolute w-[450px] h-[450px] bg-[#a3e635]/10 blur-[140px] rounded-full" />
 
-                        <motion.img
+                        <m.img
                             src={prizeImg}
                             alt="Prize Illustration"
                             className="relative z-10 w-[380px] md:w-[520px] object-contain"
@@ -510,10 +510,10 @@ const ThrivethonPage = () => {
                             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
                             whileHover={{ scale: 1.04 }}
                         />
-                    </motion.div>
+                    </m.div>
 
                     {/* RIGHT CONTENT */}
-                    <motion.div
+                    <m.div
                         className="flex flex-col items-center md:items-start text-center md:text-left"
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -522,25 +522,25 @@ const ThrivethonPage = () => {
                     >
 
                         {/* ANGLED REGISTER BUTTON */}
-                        <motion.button
+                        <m.button
                             className="relative px-12 py-4 font-bold tracking-wide text-white uppercase mb-10 group"
                             whileHover={{ scale: 1.06 }}
                             whileTap={{ scale: 0.97 }}
                         >
-                            <motion.span
+                            <m.span
                                 className="absolute inset-0 bg-gradient-to-r from-[#d946ef] to-[#a855f7] skew-x-[-20deg] rounded-sm"
                                 animate={{ boxShadow: ["0 0 0px #d946ef00", "0 0 30px #d946ef60", "0 0 0px #d946ef00"] }}
                                 transition={{ duration: 2.5, repeat: Infinity }}
                             />
                             <span className="relative z-10">REGISTER FOR FREE</span>
-                        </motion.button>
+                        </m.button>
 
                         {/* Deadline */}
                         <p className="text-white/60 tracking-widest uppercase text-sm">
                             Applications Closes On
                         </p>
 
-                        <motion.h3
+                        <m.h3
                             className="text-4xl md:text-6xl font-extrabold mt-3"
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -548,14 +548,14 @@ const ThrivethonPage = () => {
                             viewport={{ once: true }}
                         >
                             MARCH 20<sup className="text-xl align-super">TH</sup>
-                        </motion.h3>
+                        </m.h3>
                         <div className="w-full flex justify-center md:justify-start">
                             <button className="mt-10 bg-white text-black px-8 py-3 rounded-lg font-medium flex items-center gap-3 hover:scale-105 transition">
                                 <span className="w-3 h-3 bg-black rounded-full"></span>
                                 Apply Now
                             </button>
                         </div>
-                    </motion.div>
+                    </m.div>
 
                 </div>
 
@@ -702,27 +702,27 @@ const ThrivethonPage = () => {
                 <div className="relative grid md:grid-cols-2 items-start gap-20">
 
                     {/* LEFT IMAGE */}
-                    <motion.div
+                    <m.div
                         className="flex justify-center md:justify-start md:sticky md:top-24"
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <motion.img
+                        <m.img
                             src={FAQ}
                             alt="FAQ Retro Illustration"
                             className="w-[400px] md:w-[500px] object-contain rounded-2xl"
                             whileHover={{ scale: 1.03, rotate: 1 }}
                             transition={{ type: "spring", stiffness: 200 }}
                         />
-                    </motion.div>
+                    </m.div>
 
                     {/* RIGHT CONTENT */}
                     <div className="max-w-xl">
 
                         {/* MAIN HEADING */}
-                        <motion.h2
+                        <m.h2
                             initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.7 }}
@@ -731,7 +731,7 @@ const ThrivethonPage = () => {
                         >
                             <span>FREQUENTLY ASKED </span>
                             <span className="text-[#a855f7] drop-shadow-[0_0_25px_rgba(168,85,247,0.4)]">QUESTIONS</span>
-                        </motion.h2>
+                        </m.h2>
 
                         {/* FAQ ACCORDION */}
                         <div className="divide-y divide-white/10">
@@ -773,7 +773,7 @@ const ThrivethonPage = () => {
 
                 <div className="relative max-w-7xl mx-auto px-6 pt-32 pb-16">
                     {/* ================= PARTNERS HEADING ================= */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
@@ -785,7 +785,7 @@ const ThrivethonPage = () => {
                             <span className="text-[#a3e635] drop-shadow-[0_0_30px_rgba(163,230,53,0.3)]">WITH</span>
                         </h2>
 
-                    </motion.div>
+                    </m.div>
 
                     {/* ================= LOGOS GRID ================= */}
                     <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10 mb-20 ">
@@ -795,7 +795,7 @@ const ThrivethonPage = () => {
                             { logo: hackerrankLogo, name: "HackerRank" },
                             { logo: hackerearthLogo, name: "HackerEarth" }
                         ].map((partner, i) => (
-                            <motion.div
+                            <m.div
                                 key={i}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 whileInView={{ opacity: 1, scale: 1 }}
@@ -809,7 +809,7 @@ const ThrivethonPage = () => {
                                     alt={partner.name}
                                     className="h-10 md:h-14 w-auto object-contain grayscale hover:grayscale-0 transition-all duration-300 opacity-70 hover:opacity-100 rounded-xl"
                                 />
-                            </motion.div>
+                            </m.div>
                         ))}
                     </div>
 
@@ -859,7 +859,7 @@ const ThrivethonPage = () => {
 
                                     { icon: <Linkedin size={20} />, link: "https://www.linkedin.com/company/firfare/", label: "LinkedIn" }
                                 ].map((social, i) => (
-                                    <motion.a
+                                    <m.a
                                         key={i}
                                         href={social.link}
                                         target="_blank"
@@ -870,7 +870,7 @@ const ThrivethonPage = () => {
                                         title={social.label}
                                     >
                                         {social.icon}
-                                    </motion.a>
+                                    </m.a>
                                 ))}
                             </div>
                             <p className="text-white/30 text-[10px] uppercase tracking-[0.15em] leading-relaxed">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import {
   ShieldOff,
   Wallet,
@@ -136,7 +136,7 @@ function ComparePanel({ isDark }: { isDark: boolean }) {
         <AnimatePresence mode="wait">
           {(mode === "traditional" ? TRADITIONAL : fitfareItems).map(
             (item, i) => (
-              <motion.div
+              <m.div
                 key={`${mode}-${i}`}
                 initial={{ opacity: 0, x: mode === "traditional" ? -16 : 16 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -171,7 +171,7 @@ function ComparePanel({ isDark }: { isDark: boolean }) {
                 >
                   {item}
                 </span>
-              </motion.div>
+              </m.div>
             ),
           )}
         </AnimatePresence>
@@ -234,7 +234,7 @@ export default function NoContractsUI({ isDark = true }: Props) {
 
       <div className="relative max-w-7xl mx-auto px-5 sm:px-8 md:px-12 py-16 md:py-24">
         {/* ── HEADER ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -270,12 +270,12 @@ export default function NoContractsUI({ isDark = true }: Props) {
             We earn your loyalty every day — not through restrictive contracts.
             Total freedom to train, pause, or leave on your terms, always.
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── MAIN GRID ── */}
         <div className="grid lg:grid-cols-2 gap-10 xl:gap-16 mb-14 md:mb-20 items-start">
           {/* LEFT — Perks grid */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.1 }}
@@ -290,7 +290,7 @@ export default function NoContractsUI({ isDark = true }: Props) {
               {PERKS.map((perk, i) => {
                 const Icon = perk.icon;
                 return (
-                  <motion.div
+                  <m.div
                     key={i}
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -327,13 +327,13 @@ export default function NoContractsUI({ isDark = true }: Props) {
                       {perk.label}
                     </p>
                     <p className={`text-[11px] ${mutedColor}`}>{perk.sub}</p>
-                  </motion.div>
+                  </m.div>
                 );
               })}
             </div>
 
             {/* Infinity badge */}
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7 }}
@@ -357,22 +357,22 @@ export default function NoContractsUI({ isDark = true }: Props) {
                   forever welcome.
                 </p>
               </div>
-            </motion.div>
-          </motion.div>
+            </m.div>
+          </m.div>
 
           {/* RIGHT — Contract mockup + Compare */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.7, delay: 0.2 }}
             className="flex flex-col gap-5"
           >
             <ComparePanel isDark={isDark} />
-          </motion.div>
+          </m.div>
         </div>
 
         {/* ── HOW IT WORKS — Timeline ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.3 }}
@@ -400,7 +400,7 @@ export default function NoContractsUI({ isDark = true }: Props) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-5">
               {STEPS.map((step, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -408,7 +408,7 @@ export default function NoContractsUI({ isDark = true }: Props) {
                   className="flex flex-col items-center text-center group"
                 >
                   {/* Number bubble */}
-                  <motion.div
+                  <m.div
                     whileHover={{ scale: 1.1 }}
                     className="w-14 h-14 rounded-2xl flex items-center justify-center mb-4 relative transition-all duration-300 border"
                     style={{
@@ -442,23 +442,23 @@ export default function NoContractsUI({ isDark = true }: Props) {
                         />
                       </div>
                     )}
-                  </motion.div>
+                  </m.div>
 
                   <p className="font-bold text-sm mb-1">{step.text}</p>
                   <p className={`text-xs ${mutedColor}`}>{step.detail}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* ── BOTTOM CTA ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.6 }}
           className="mt-16 md:mt-20 flex flex-col sm:flex-row items-center justify-center gap-4"
-        ></motion.div>
+        ></m.div>
       </div>
     </section>
   );
