@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   Wallet,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import {
@@ -172,7 +172,7 @@ const WebappDemo = () => {
         className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-6"
       >
         {/* HEADER */}
-        <motion.header
+        <m.header
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           className="flex items-center justify-between py-6 mb-8"
@@ -201,12 +201,12 @@ const WebappDemo = () => {
             <Download className="w-4 h-4" />
             <span className="hidden sm:inline">Export PDF</span>
           </button>
-        </motion.header>
+        </m.header>
 
         {/* MAIN CONFIGURATION GRID */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
           {/* LEFT: INPUTS CARD */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             className={`lg:col-span-4 rounded-3xl p-6 border shadow-2xl backdrop-blur-xl ${
@@ -356,7 +356,7 @@ const WebappDemo = () => {
 
                 <AnimatePresence>
                   {selectedPlan === "other" && (
-                    <motion.div
+                    <m.div
                       initial={{ opacity: 0, height: 0, marginTop: 0 }}
                       animate={{ opacity: 1, height: "auto", marginTop: 12 }}
                       exit={{ opacity: 0, height: 0, marginTop: 0 }}
@@ -377,15 +377,15 @@ const WebappDemo = () => {
                             : "bg-white text-slate-900"
                         }`}
                       />
-                    </motion.div>
+                    </m.div>
                   )}
                 </AnimatePresence>
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* RIGHT: CHART CARD */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
             className={`lg:col-span-8 rounded-3xl p-6 border shadow-2xl backdrop-blur-xl flex flex-col ${
@@ -550,10 +550,10 @@ const WebappDemo = () => {
                 </div>
               )}
             </div>
-          </motion.div>
+          </m.div>
         </div>
         {dayWiseData.length > 0 && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             className="mb-10"
@@ -568,7 +568,7 @@ const WebappDemo = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {(showAllDays ? dayWiseData : dayWiseData.slice(0, 6)).map(
                 (item, index) => (
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, scale: 0.95 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: index * 0.05 }}
@@ -636,7 +636,7 @@ const WebappDemo = () => {
                       
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ),
               )}
             </div>
@@ -656,7 +656,7 @@ const WebappDemo = () => {
                 </button>
               </div>
             )}
-          </motion.div>
+          </m.div>
         )}
       </div>
     </div>

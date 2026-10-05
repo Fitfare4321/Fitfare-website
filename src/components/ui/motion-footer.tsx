@@ -234,6 +234,14 @@ export function CinematicFooter() {
   const headingRef = useRef<HTMLHeadingElement>(null);
   const linksRef = useRef<HTMLDivElement>(null);
 
+  const [isMobile, setIsMobile] = React.useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     if (!wrapperRef.current) return;
@@ -307,7 +315,8 @@ export function CinematicFooter() {
           {/* Giant background text */}
           <div
             ref={giantTextRef}
-            className="footer-giant-bg-text absolute bottom-36 md:-bottom-[5vh] left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+            className="footer-giant-bg-text absolute left-1/2 -translate-x-1/2 whitespace-nowrap z-0 pointer-events-none select-none"
+            style={{ bottom: isMobile ? "25vh" : "-5vh" }}
           >
             FITFARE
           </div>

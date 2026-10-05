@@ -1,5 +1,5 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { m, useInView } from "framer-motion";
 import { Code, Trophy, Zap, ArrowRight, Star } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -36,7 +36,7 @@ const CountdownTimer = ({ isDark }: { isDark: boolean }) => {
             {units.map((u, i) => (
                 <div key={u.l} className="flex items-end gap-4 md:gap-8">
                     <div className="text-center">
-                        <motion.div
+                        <m.div
                             key={u.v}
                             initial={{ y: -8, opacity: 0.3 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -44,7 +44,7 @@ const CountdownTimer = ({ isDark }: { isDark: boolean }) => {
                                 }`}
                         >
                             {String(u.v).padStart(2, "0")}
-                        </motion.div>
+                        </m.div>
                         <div
                             className="text-[10px] uppercase tracking-[0.25em] mt-1 font-bold"
                             style={{ color: isDark ? "#94a3b8" : "rgba(255,255,255,0.5)" }}
@@ -78,7 +78,7 @@ const Orb = ({
     style: React.CSSProperties;
     duration: number;
 }) => (
-    <motion.div
+    <m.div
         className="absolute rounded-full pointer-events-none"
         style={{
             width: size,
@@ -175,7 +175,7 @@ const HackathonSection = () => {
             <div className="relative z-10 pt-24 pb-16 md:pt-36 md:pb-24 px-6 max-w-7xl mx-auto">
 
                 {/* Badge */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.5 }}
@@ -189,7 +189,7 @@ const HackathonSection = () => {
                             color: isDark ? "#6366f1" : "#93c5fd",
                         }}
                     >
-                        <motion.span
+                        <m.span
                             className="w-1.5 h-1.5 rounded-full"
                             style={{ background: isDark ? "#6366f1" : "#60a5fa" }}
                             animate={{ opacity: [1, 0.3, 1] }}
@@ -197,10 +197,10 @@ const HackathonSection = () => {
                         />
                         Flagship Event · 2026
                     </span>
-                </motion.div>
+                </m.div>
 
                 {/* GIANT Title */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, y: 40 }}
                     animate={inView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8, delay: 0.1 }}
@@ -223,10 +223,10 @@ const HackathonSection = () => {
                             Hackathon
                         </span>
                     </h2>
-                </motion.div>
+                </m.div>
 
                 {/* Tagline */}
-                <motion.p
+                <m.p
                     initial={{ opacity: 0 }}
                     animate={inView ? { opacity: 1 } : {}}
                     transition={{ duration: 0.7, delay: 0.3 }}
@@ -235,10 +235,10 @@ const HackathonSection = () => {
                 >
                     Code. Create. Conquer. <br className="hidden md:block" />
                     Build the future of fitness technology — <strong style={{ color: textPrimary }}>no fees required.</strong>
-                </motion.p>
+                </m.p>
 
                 {/* COUNTDOWN */}
-                <motion.div
+                <m.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={inView ? { opacity: 1, scale: 1 } : {}}
                     transition={{ duration: 0.7, delay: 0.4 }}
@@ -251,11 +251,11 @@ const HackathonSection = () => {
                         Registrations open in
                     </p>
                     <CountdownTimer isDark={isDark} />
-                </motion.div>
+                </m.div>
             </div>
 
             {/* ────────── DIVIDER LINE ────────── */}
-            <motion.div
+            <m.div
                 initial={{ scaleX: 0 }}
                 animate={inView ? { scaleX: 1 } : {}}
                 transition={{ duration: 1, delay: 0.5 }}
@@ -270,7 +270,7 @@ const HackathonSection = () => {
             <div className="relative z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
                 <div className="space-y-0">
                     {highlights.map((h, idx) => (
-                        <motion.div
+                        <m.div
                             key={idx}
                             initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
                             animate={inView ? { opacity: 1, x: 0 } : {}}
@@ -317,13 +317,13 @@ const HackathonSection = () => {
                             </div>
 
                             {/* Right: hover arrow */}
-                            <motion.div
+                            <m.div
                                 className="hidden md:flex items-center gap-2 font-semibold text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300 shrink-0"
                                 style={{ color: h.accent }}
                             >
                                 Coming Soon <ArrowRight size={16} />
-                            </motion.div>
-                        </motion.div>
+                            </m.div>
+                        </m.div>
                     ))}
                 </div>
             </div>
@@ -340,7 +340,7 @@ const HackathonSection = () => {
             >
                 <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 flex flex-col md:flex-row items-center justify-between gap-10">
                     {/* Left copy */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, y: 30 }}
                         animate={inView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.6 }}
@@ -373,16 +373,16 @@ const HackathonSection = () => {
                         >
                             Problem statements dropping soon. Prepare your team and your ideas — this is your moment.
                         </p>
-                    </motion.div>
+                    </m.div>
 
                     {/* Right CTA */}
-                    <motion.div
+                    <m.div
                         initial={{ opacity: 0, x: 40 }}
                         animate={inView ? { opacity: 1, x: 0 } : {}}
                         transition={{ duration: 0.7, delay: 0.75 }}
                         className="flex flex-col sm:flex-row gap-4 shrink-0"
                     >
-                        <motion.button
+                        <m.button
                             whileHover={{ scale: 1.06, y: -2 }}
                             whileTap={{ scale: 0.97 }}
                             className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-bold text-white cursor-not-allowed"
@@ -394,9 +394,9 @@ const HackathonSection = () => {
                         >
                             <Zap size={16} />
                             Register Soon
-                        </motion.button>
+                        </m.button>
 
-                        <motion.button
+                        <m.button
                             whileHover={{ scale: 1.04, y: -2 }}
                             whileTap={{ scale: 0.97 }}
                             className="inline-flex items-center gap-2 px-8 py-4 rounded-full font-semibold transition-all duration-300"
@@ -407,8 +407,8 @@ const HackathonSection = () => {
                             }}
                         >
                             View Problems <ArrowRight size={16} />
-                        </motion.button>
-                    </motion.div>
+                        </m.button>
+                    </m.div>
                 </div>
             </div>
         </section>

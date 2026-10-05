@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
   Activity,
@@ -139,7 +139,7 @@ function SectionWrapper({ children, className = "" }: { children: React.ReactNod
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div
+    <m.div
       ref={ref}
       variants={stagger}
       initial="hidden"
@@ -147,7 +147,7 @@ function SectionWrapper({ children, className = "" }: { children: React.ReactNod
       className={className}
     >
       {children}
-    </motion.div>
+    </m.div>
   );
 }
 
@@ -192,7 +192,7 @@ export default function Services() {
         </div>
 
         <SectionWrapper className="relative z-10 max-w-4xl mx-auto">
-          <motion.div variants={fadeUp} className="mb-6 flex justify-center">
+          <m.div variants={fadeUp} className="mb-6 flex justify-center">
             <span
               className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase px-4 py-2 rounded-full border"
               style={{
@@ -203,9 +203,9 @@ export default function Services() {
             >
               <Activity size={12} /> Elite Programming
             </span>
-          </motion.div>
+          </m.div>
 
-          <motion.h1
+          <m.h1
             variants={fadeUp}
             className="text-5xl md:text-7xl font-extrabold leading-[1.05] tracking-tight mb-8"
           >
@@ -218,9 +218,9 @@ export default function Services() {
             >
               Limits.
             </span>
-          </motion.h1>
+          </m.h1>
 
-          <motion.p
+          <m.p
             variants={fadeUp}
             className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-10"
             style={{ color: isDark ? "#94a3b8" : "#64748b" }}
@@ -228,7 +228,7 @@ export default function Services() {
             Access a comprehensive ecosystem of specialized training modalities.
             From hypertrophy block-training to immersive flow state yoga, your
             body dictates the demand, we provide the supply.
-          </motion.p>
+          </m.p>
         </SectionWrapper>
       </section>
 
@@ -241,7 +241,7 @@ export default function Services() {
               const isActive = activeService === service.id;
 
               return (
-                <motion.div
+                <m.div
                   key={service.id}
                   variants={fadeUp}
                   onMouseEnter={() => setActiveService(service.id)}
@@ -324,17 +324,17 @@ export default function Services() {
 
                     {/* Action Arrow (Animated on hover) */}
                     <div className="absolute bottom-8 right-8 overflow-hidden rounded-full">
-                      <motion.div
+                      <m.div
                         initial={{ x: -40, opacity: 0 }}
                         animate={{ x: isActive ? 0 : -40, opacity: isActive ? 1 : 0 }}
                         transition={{ duration: 0.3 }}
                         className={`w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-tr ${service.color} text-white shadow-lg`}
                       >
                         <ChevronRight size={20} strokeWidth={3} />
-                      </motion.div>
+                      </m.div>
                     </div>
                   </div>
-                </motion.div>
+                </m.div>
               );
             })}
           </div>

@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { Award, CheckCircle2, CreditCard, ShieldAlert } from "lucide-react";
 import { useTheme } from "next-themes";
 
@@ -41,7 +41,7 @@ const CancellationRefundsPage = () => {
       <Navbar />
 
       <main className="mx-auto max-w-5xl px-4 pb-20 pt-28 sm:px-6 lg:px-8">
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -60,11 +60,11 @@ const CancellationRefundsPage = () => {
           <p className={`mt-5 max-w-3xl text-base leading-8 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
             These terms explain how bookings are cancelled, how refunds are issued, and how partner settlements are adjusted when a session cannot be honoured or a booking is disputed.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           {sections.map(({ icon: Icon, title, text }) => (
-            <motion.div
+            <m.div
               key={title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ const CancellationRefundsPage = () => {
               <p className={`mt-3 text-sm leading-7 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                 {text}
               </p>
-            </motion.div>
+            </m.div>
           ))}
         </div>
 

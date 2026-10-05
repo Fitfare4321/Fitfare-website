@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { useTheme } from "next-themes";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -779,7 +779,7 @@ const Blog = () => {
       {!active && (
       <section className="relative pt-28 pb-10 px-4">
         <div className="max-w-5xl mx-auto">
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
@@ -817,7 +817,7 @@ const Blog = () => {
               >
               <CarouselContent>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href="/blog/top-10-beginner"
                     onClick={(e) => {
                       e.preventDefault();
@@ -833,10 +833,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">Top 10 Beginner Workouts to Start Your Fitness Journey</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href="/blog/post-workout-recipes"
                     onClick={(e) => {
                       e.preventDefault();
@@ -852,10 +852,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">Healthy Post-Workout Recipes to Speed Recovery</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post3Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -871,10 +871,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post3Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post4Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -890,10 +890,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post4Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post5Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -909,10 +909,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post5Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post6Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -928,10 +928,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post6Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post7Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -947,10 +947,10 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post7Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
                 <CarouselItem className="basis-full sm:basis-1/2 lg:basis-1/3">
-                  <motion.a
+                  <m.a
                     href={`/blog/${post8Id}`}
                     onClick={(e) => {
                       e.preventDefault();
@@ -966,7 +966,7 @@ const Blog = () => {
                     <div className="absolute bottom-3 left-4 right-4">
                       <div className="text-white font-extrabold text-base">{post8Title}</div>
                     </div>
-                  </motion.a>
+                  </m.a>
                 </CarouselItem>
               </CarouselContent>
               <CarouselPrevious 
@@ -987,7 +987,7 @@ const Blog = () => {
               />
             </Carousel>
             </div>
-          </motion.div>
+          </m.div>
         </div>
       </section>
       )}
@@ -996,7 +996,7 @@ const Blog = () => {
       <section className="relative pt-20 md:pt-28 pb-20 px-4" key={active}>
         <div className="max-w-4xl mx-auto">
           {active === "top-10-beginner" && (
-          <motion.article
+          <m.article
             id="top-10-beginner"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1033,14 +1033,14 @@ const Blog = () => {
 
             <div className="mt-8 space-y-6">
               {workouts.map((w, idx) => (
-                <motion.div key={idx} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
+                <m.div key={idx} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>
                   <h3 className="text-lg md:text-xl font-bold mb-1">{idx + 1}. {w.title}</h3>
                   <div className="space-y-2">
                     {w.paras.map((para, j) => (
                       <p key={j} className={isDark ? "text-slate-300" : "text-slate-700"}>{para}</p>
                     ))}
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
@@ -1075,11 +1075,11 @@ const Blog = () => {
               </p>
               <p className={isDark ? "text-slate-300" : "text-slate-700"}>Now go start. Not Monday. Today. 💪</p>
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === "post-workout-recipes" && (
-          <motion.article
+          <m.article
             id="post-workout-recipes"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1153,11 +1153,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post3Id && (
-          <motion.article
+          <m.article
             id={post3Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1239,11 +1239,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post4Id && (
-          <motion.article
+          <m.article
             id={post4Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1339,11 +1339,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post5Id && (
-          <motion.article
+          <m.article
             id={post5Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1453,11 +1453,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post6Id && (
-          <motion.article
+          <m.article
             id={post6Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1532,11 +1532,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post7Id && (
-          <motion.article
+          <m.article
             id={post7Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1625,11 +1625,11 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active === post8Id && (
-          <motion.article
+          <m.article
             id={post8Id}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -1697,7 +1697,7 @@ const Blog = () => {
                 <p key={i} className={isDark ? "text-slate-300" : "text-slate-700"}>{p}</p>
               ))}
             </div>
-          </motion.article>
+          </m.article>
           )}
 
           {active && relatedPosts.length > 0 && (
@@ -1713,7 +1713,7 @@ const Blog = () => {
 
               <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
                 {relatedPosts.map((post) => (
-                  <motion.a
+                  <m.a
                     key={post.slug}
                     href={`/blog/${post.slug}`}
                     onClick={(e) => {
@@ -1738,7 +1738,7 @@ const Blog = () => {
                         {post.title}
                       </h4>
                     </div>
-                  </motion.a>
+                  </m.a>
                 ))}
               </div>
             </div>

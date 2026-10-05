@@ -358,7 +358,7 @@ const PillSegmentedControl = ({
                 <button
                   key={`${mode}-${label}`}
                   onClick={(e) => handleTabTap(e as unknown as React.MouseEvent, i)}
-                  className="relative flex items-center justify-center flex-1 py-3.5 md:py-4 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
+                  className="relative flex items-center justify-center flex-1 py-4 md:py-3.5 px-0.5 rounded-full z-10 cursor-pointer touch-manipulation"
                 >
                   <span
                     className={`text-[12px] sm:text-[13px] md:text-[14px] lg:text-[15px] font-semibold tracking-tight transition-colors duration-200 whitespace-nowrap ${
@@ -382,6 +382,7 @@ const PillSegmentedControl = ({
 
 
 const Navbar = () => {
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.matchMedia('(max-width: 768px), (pointer: coarse)').matches : false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("activities");
   const scrollLockRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -427,6 +428,12 @@ const Navbar = () => {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.matchMedia('(max-width: 768px), (pointer: coarse)').matches);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Active Section Detection (Scroll Spy)
@@ -521,8 +528,10 @@ const Navbar = () => {
       }}
     >
       <div className="relative h-9 w-9 md:h-11 md:w-11 overflow-hidden rounded-[0.9rem] transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-6deg] shadow-lg shadow-[#305CDE]/10 dark:shadow-[#305CDE]/20">
-        <img src={logo} alt="Logo" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-0" : "opacity-100"}`} />
-        <video ref={videoRef} src={logoVideo} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
+        <img src={logo} alt="Logo" className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${!isMobile && logoAnimating ? "opacity-0" : "opacity-100"}`} />
+        {!isMobile && (
+          <video ref={videoRef} src={logoVideo} muted playsInline className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${logoAnimating ? "opacity-100" : "opacity-0"}`} />
+        )}
       </div>
       <span className="hidden md:block text-lg md:text-2xl font-extrabold tracking-tight text-gray-900 dark:text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
         FitFare
@@ -557,7 +566,7 @@ const Navbar = () => {
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
-        className="md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-end px-4 sm:px-6 pointer-events-none"
+        className="navbar-ui md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-end px-4 sm:px-6 pointer-events-none"
       >
         <div className="pointer-events-auto z-20">
           {ctaButtons}
@@ -569,7 +578,7 @@ const Navbar = () => {
         initial={{ y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
-        className="md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
+        className="navbar-ui md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
       >
         <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
         <PillSegmentedControl

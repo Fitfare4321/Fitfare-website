@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { features } from "@/data/features";
 import { ArrowLeft, CheckCircle2, Zap, Shield, Target, Cpu } from "lucide-react";
 import { useTheme } from "next-themes";
@@ -47,7 +47,7 @@ const FeatureDetailPage = () => {
       {/* Background elements */}
       <Navbar />
       <div className="fixed inset-0 pointer-events-none z-0">
-        <motion.div
+        <m.div
           className="absolute w-[500px] h-[500px] rounded-full blur-[120px] opacity-20"
           style={{
             background: `radial-gradient(circle, ${feature.accent} 0%, transparent 70%)`,
@@ -60,7 +60,7 @@ const FeatureDetailPage = () => {
           }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
+        <m.div
           className="absolute w-[500px] h-[500px] rounded-full blur-[120px] opacity-10"
           style={{
             background: `radial-gradient(circle, ${feature.accent} 0%, transparent 70%)`,
@@ -98,7 +98,7 @@ const FeatureDetailPage = () => {
               feature.slug === "pay-as-you-go-pricing" ? (<PayAsYouGoUI isDark={isDark} />) : (
                 <div className="grid lg:grid-cols-2 gap-16 items-start">
                   {/* Content Left */}
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut" }}
@@ -135,10 +135,10 @@ const FeatureDetailPage = () => {
                         <p className="text-sm opacity-70">Powered by advanced analytics and real-time insights.</p>
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
 
                   {/* Right side - Visual & Technicals */}
-                  <motion.div
+                  <m.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 1, delay: 0.2 }}
@@ -153,7 +153,7 @@ const FeatureDetailPage = () => {
                       }}
                     >
                       {/* Animated Icon Container */}
-                      <motion.div
+                      <m.div
                         className="w-20 h-20 rounded-2xl flex items-center justify-center mb-10"
                         style={{
                           background: `${feature.accent}20`,
@@ -167,7 +167,7 @@ const FeatureDetailPage = () => {
                         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
                       >
                         <Icon size={40} style={{ color: feature.accent }} />
-                      </motion.div>
+                      </m.div>
 
                       <h2 className="text-2xl font-bold mb-8 flex items-center gap-3">
                         Key Benefits
@@ -175,7 +175,7 @@ const FeatureDetailPage = () => {
 
                       <ul className="space-y-6">
                         {feature.benefits.map((benefit, i) => (
-                          <motion.li
+                          <m.li
                             key={i}
                             initial={{ opacity: 0, y: 10 }}
                             animate={{ opacity: 1, y: 0 }}
@@ -186,7 +186,7 @@ const FeatureDetailPage = () => {
                               <CheckCircle2 size={20} style={{ color: feature.accent }} />
                             </div>
                             <span className="text-lg font-medium opacity-90">{benefit}</span>
-                          </motion.li>
+                          </m.li>
                         ))}
                       </ul>
 
@@ -208,7 +208,7 @@ const FeatureDetailPage = () => {
                     </div>
 
                     {/* Floating Element */}
-                    <motion.div
+                    <m.div
                       className={`absolute -bottom-6 -right-6 md:-bottom-10 md:-right-10 p-6 rounded-2xl border ${isDark ? "bg-white/10 border-white/20" : "bg-white border-slate-200"} shadow-2xl backdrop-blur-xl hidden md:block`}
                       animate={{ y: [0, -10, 0] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
@@ -216,8 +216,8 @@ const FeatureDetailPage = () => {
                       <Cpu className="mb-2" style={{ color: feature.accent }} />
                       <div className="font-bold text-xs uppercase tracking-tighter">Proprietary Tech</div>
                       <div className="text-[10px] opacity-60">Optimized for reliability</div>
-                    </motion.div>
-                  </motion.div>
+                    </m.div>
+                  </m.div>
                 </div>
               )}
       </main>

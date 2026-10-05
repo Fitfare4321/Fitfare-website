@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   BarChart3,
   CheckCircle2,
@@ -47,12 +47,12 @@ export default function ProfessionalDashboardUI() {
     <div className={`min-h-screen p-4 sm:p-6 md:p-12 ${bgMain}`}>
       <div className="max-w-7xl mx-auto px-2 sm:px-4 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start lg:items-center mt-8 md:mt-12">
         {/* LEFT */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, x: -50 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className="inline-flex items-center gap-2 px-4 py-1 rounded-full mb-6 mt-10 md:mt-0 text-xs font-bold uppercase backdrop-blur-xl"
@@ -63,7 +63,7 @@ export default function ProfessionalDashboardUI() {
             }}
           >
             <Activity size={12} /> Premium Analytics
-          </motion.div>
+          </m.div>
 
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-6xl font-black mb-4 sm:mb-5 lg:mb-6 leading-tight">
             {feature.title}
@@ -76,7 +76,7 @@ export default function ProfessionalDashboardUI() {
           {/* BENEFITS */}
           <div className="grid sm:grid-cols-2 gap-4">
             {feature.benefits.map((b, i) => (
-              <motion.div
+              <m.div
                 key={i}
                 whileHover={{ scale: 1.05, y: -5 }}
                 transition={{ type: "spring", stiffness: 200 }}
@@ -84,13 +84,13 @@ export default function ProfessionalDashboardUI() {
               >
                 <CheckCircle2 size={18} style={{ color: feature.accent }} />
                 <p className="mt-2 text-sm opacity-80">{b}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
-        </motion.div>
+        </m.div>
 
         {/* RIGHT DASHBOARD */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.9 }}
@@ -103,7 +103,7 @@ export default function ProfessionalDashboardUI() {
             {/* ANIMATED GRAPH */}
             <div className="h-36 md:h-44 rounded-xl bg-gradient-to-r from-blue-500/10 to-blue-500/5 flex items-end p-3 md:p-4 gap-2 overflow-hidden">
               {[40, 60, 30, 80, 55, 90, 70].map((h, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ height: 0 }}
                   animate={{ height: `${h}%` }}
@@ -126,7 +126,7 @@ export default function ProfessionalDashboardUI() {
             {/* HOW IT WORKS */}
             <div className="mt-6 space-y-3">
               {feature.howItWorks.map((step, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -143,27 +143,27 @@ export default function ProfessionalDashboardUI() {
                     {i + 1}
                   </span>
                   {step}
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
 
           {/* FLOATING ELEMENT */}
-          <motion.div
+          <m.div
             animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4, repeat: Infinity }}
             className="hidden md:flex absolute -top-6 -right-6 sm:-top-8 sm:-right-8 bg-blue-500/10 p-3 sm:p-4 rounded-xl backdrop-blur-xl border border-blue-400/20"
           >
             <BarChart3 size={28} className="text-blue-400" />
-          </motion.div>
-        </motion.div>
+          </m.div>
+        </m.div>
       </div>
     </div>
   );
 }
 
 const StatCard = ({ icon: Icon, label, value, change }: any) => (
-  <motion.div
+  <m.div
     whileHover={{ scale: 1.05 }}
     className="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-xl"
   >
@@ -171,7 +171,7 @@ const StatCard = ({ icon: Icon, label, value, change }: any) => (
     <p className="text-xs opacity-70 mt-1">{label}</p>
     <h4 className="text-lg font-bold">{value}</h4>
     <span className="text-xs text-green-400">{change}</span>
-  </motion.div>
+  </m.div>
 );
 
 const MiniCard = ({ icon: Icon, label, value }: any) => (

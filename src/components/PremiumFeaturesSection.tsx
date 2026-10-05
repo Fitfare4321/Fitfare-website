@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect, lazy, Suspense } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { m, useInView, useMotionValue, useSpring } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
   DollarSign,
@@ -88,14 +88,14 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
   const navigate = useNavigate();
 
   return (
-    <motion.div
+    <m.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.6, delay: index * 0.1, type: "spring" }}
       className={`relative z-10 w-full sm:w-[280px] md:w-[280px] lg:w-[280px] xl:w-[280px]`}
     >
-      <motion.div
+      <m.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -157,18 +157,18 @@ const ConnectedNodeFeature = ({ feature, index, isDark }: any) => {
             </p>
             <div className="flex items-center gap-1 mt-3 text-[10px] font-semibold opacity-70 group-hover:opacity-100 transition">
               <span>View Details</span>
-              <motion.span
+              <m.span
                 initial={{ x: 0 }}
                 whileHover={{ x: 4 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 →
-              </motion.span>
+              </m.span>
             </div>
           </div>
         </div>
-      </motion.div>
-    </motion.div>
+      </m.div>
+    </m.div>
   );
 };
 
@@ -219,7 +219,7 @@ const ConnectionLines = ({ isDark }: { isDark: boolean }) => {
 
           {/* Animated Pulsing Lines overlay */}
           {paths.map((p) => (
-            <motion.path
+            <m.path
               key={`pulse-${p.id}`}
               d={p.d}
               stroke={pulseColor}
@@ -264,7 +264,7 @@ const MobileConnectionLines = ({ isDark }: { isDark: boolean }) => {
     <div className="absolute top-[80px] bottom-[50px] left-[50%] w-[2px] -translate-x-1/2 pointer-events-none" style={{ background: lineColor }}>
       {/* Container for the pulsing light, hidden overflow so it clips gracefully at top and bottom */}
       <div className="absolute inset-0 overflow-hidden w-full h-full">
-        <motion.div
+        <m.div
           className="absolute left-1/2 -translate-x-1/2 w-[3px] h-[200px] rounded-full"
           style={{
             background: pulseColor,
@@ -436,7 +436,7 @@ const PremiumFeaturesSection = () => {
 
       {/* Animated Gradient Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none" style={{ zIndex: 1 }}>
-        <motion.div
+        <m.div
           className="absolute w-96 h-96 rounded-full blur-3xl opacity-30"
           style={{
             background: sectionDark
@@ -448,7 +448,7 @@ const PremiumFeaturesSection = () => {
           animate={{ x: [0, 100, 0], y: [0, 50, 0], scale: [1, 1.2, 1] }}
           transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
         />
-        <motion.div
+        <m.div
           className="absolute w-96 h-96 rounded-full blur-3xl opacity-20"
           style={{
             background: sectionDark
@@ -464,13 +464,13 @@ const PremiumFeaturesSection = () => {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12">
         {/* Section Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 50 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-20"
         >
-          <motion.div
+          <m.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={isInView ? { opacity: 1, scale: 1 } : {}}
             transition={{ duration: 1, delay: 0.1 }}
@@ -485,9 +485,9 @@ const PremiumFeaturesSection = () => {
           >
             <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: sectionDark ? "#60a5fa" : "#1e40af" }} />
             Why We Exist
-          </motion.div>
+          </m.div>
 
-          <motion.h2
+          <m.h2
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -510,9 +510,9 @@ const PremiumFeaturesSection = () => {
             >
               Truly Different
             </span>
-          </motion.h2>
+          </m.h2>
 
-          <motion.p
+          <m.p
             initial={{ opacity: 0 }}
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -523,11 +523,11 @@ const PremiumFeaturesSection = () => {
             }}
           >
             Data-driven innovation meets cutting-edge technology
-          </motion.p>
-        </motion.div>
+          </m.p>
+        </m.div>
 
         {/* Challenges Section – narrative + mini chart */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.3 }}
@@ -535,7 +535,7 @@ const PremiumFeaturesSection = () => {
         >
           <div className="flex flex-col md:flex-row gap-10 items-stretch ">
             {/* left: compact chart card */}
-            <motion.div
+            <m.div
 
               className="md:w-5/12 -mt-14 md:-mt-16 rounded-3xl p-6 md:p-7 relative overflow-hidden backdrop-blur-xl"
               style={{
@@ -583,7 +583,7 @@ const PremiumFeaturesSection = () => {
               </p>
               <div className="mt-1 space-y-4 md:hidden">
                 {challenges.map((c, idx) => (
-                  <motion.div
+                  <m.div
                     key={c.title}
                     initial={{ opacity: 0, y: 16 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -632,13 +632,13 @@ const PremiumFeaturesSection = () => {
                         {c.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
 
               <div className="mt-1 hidden md:grid md:grid-cols-3 gap-3">
                 {challenges.map((c, idx) => (
-                  <motion.div
+                  <m.div
                     key={c.title}
                     initial={{ opacity: 0, y: 20 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -678,15 +678,15 @@ const PremiumFeaturesSection = () => {
                       }`}>
                       {c.description}
                     </p>
-                  </motion.div>
+                  </m.div>
                 ))}
               </div>
-            </motion.div>
+            </m.div>
 
             {/* right: friendly story list */}
             <div className="hidden md:block md:w-7/12 space-y-5 md-4">
               {challenges.map((challenge, i) => (
-                <motion.div
+                <m.div
                   key={challenge.title}
                   initial={{ opacity: 0, y: 30 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
@@ -716,14 +716,14 @@ const PremiumFeaturesSection = () => {
                       {challenge.description}
                     </p>
                   </div>
-                </motion.div>
+                </m.div>
               ))}
             </div>
           </div>
-        </motion.div>
+        </m.div>
 
         {/* Analysis Section */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.5 }}
@@ -764,7 +764,7 @@ const PremiumFeaturesSection = () => {
             {analysis.map((stat, i) => {
               const Icon = stat.icon;
               return (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 60, scale: 0.8 }}
                   animate={
@@ -787,7 +787,7 @@ const PremiumFeaturesSection = () => {
                       : "0 8px 32px rgba(0,0,0,0.1), inset 0 1px 0 rgba(255,255,255,0.5)",
                   }}
                 >
-                  <motion.div
+                  <m.div
                     className="mb-3 md:mb-5 inline-flex items-center justify-center p-2.5 md:p-3 rounded-2xl backdrop-blur-md"
                     style={{
                       background: sectionDark
@@ -804,9 +804,9 @@ const PremiumFeaturesSection = () => {
                     whileHover={{ scale: 1.05 }}
                   >
                     <Icon size={30} style={{ color: stat.color }} />
-                  </motion.div>
+                  </m.div>
 
-                  <motion.div
+                  <m.div
                     className="text-2xl md:text-4xl font-black mb-2.5 md:mb-3.5"
                     style={{
                       color: stat.color,
@@ -822,7 +822,7 @@ const PremiumFeaturesSection = () => {
                       prefix={stat.prefix}
                       decimals={stat.value.includes(".") ? 1 : 0}
                     />
-                  </motion.div>
+                  </m.div>
                   <h4
                     className={`text-base md:text-lg font-black mb-1.5 md:mb-2.5 ${sectionDark ? "text-white" : "text-slate-900"
                       }`}
@@ -836,11 +836,11 @@ const PremiumFeaturesSection = () => {
                     {stat.description}
                   </p>
 
-                </motion.div>
+                </m.div>
               );
             })}
           </div>
-        </motion.div>
+        </m.div>
 
       
       </div>

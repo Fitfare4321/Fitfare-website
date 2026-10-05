@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { motion, AnimatePresence, useInView } from "framer-motion";
+import { m, AnimatePresence, useInView } from "framer-motion";
 import {
   DollarSign,
   TrendingUp,
@@ -65,13 +65,13 @@ function LiveDemandBar() {
           Live Demand
         </span>
         <div className="flex items-center gap-1.5">
-          <motion.div
+          <m.div
             animate={{ opacity: [1, 0.2, 1] }}
             transition={{ duration: 1.2, repeat: Infinity }}
             className="w-1.5 h-1.5 rounded-full"
             style={{ background: color }}
           />
-          <motion.span
+          <m.span
             key={val}
             initial={{ opacity: 0, y: -6 }}
             animate={{ opacity: 1, y: 0 }}
@@ -79,12 +79,12 @@ function LiveDemandBar() {
             style={{ color }}
           >
             {val}%
-          </motion.span>
+          </m.span>
         </div>
       </div>
 
       <div className="h-2.5 w-full bg-gray-200 dark:bg-white/5 rounded-full overflow-hidden">
-        <motion.div
+        <m.div
           animate={{ width: `${val}%`, background: color }}
           transition={{ duration: 0.9, ease: "easeInOut" }}
           className="h-full rounded-full"
@@ -111,7 +111,7 @@ function MiniChart({ slot }: { slot: (typeof slots)[0] }) {
       {Array.from({ length: 8 }).map((_, i) => {
         const h = Math.max(20, Math.min(100, slot.demand + Math.sin(i * 1.3) * 25));
         return (
-          <motion.div
+          <m.div
             key={i}
             className="w-1.5 rounded-sm"
             style={{ background: `${slot.color}60` }}
@@ -155,7 +155,7 @@ export default function DynamicPricingPage() {
 
       <div className="relative w-full md:max-w-7xl md:mx-auto px-4 md:px-12 py-10 md:py-20">
         {/* ── HEADER ── */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
@@ -188,12 +188,12 @@ export default function DynamicPricingPage() {
           <p className="text-lg text-gray-500 dark:text-white/50 max-w-2xl mx-auto leading-relaxed">
             “Flexible pricing based on peak hours and availability — ensuring better access and fair pricing for every member.”
           </p>
-        </motion.div>
+        </m.div>
 
         {/* ── TWO-COLUMN LAYOUT ── */}
         <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-start">
           {/* ── LEFT ── */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
@@ -228,7 +228,7 @@ export default function DynamicPricingPage() {
               </h3>
               <div className="space-y-3">
                 {slots.map((slot, i) => (
-                  <motion.button
+                  <m.button
                     key={slot.time}
                     onClick={() => setActiveSlot(i)}
                     initial={{ opacity: 0, x: -20 }}
@@ -260,7 +260,7 @@ export default function DynamicPricingPage() {
                           <div
                             className="h-1.5 w-16 rounded-full bg-gray-200 dark:bg-white/5 overflow-hidden"
                           >
-                            <motion.div
+                            <m.div
                               className="h-full rounded-full"
                               style={{ background: slot.color }}
                               initial={{ width: 0 }}
@@ -279,14 +279,14 @@ export default function DynamicPricingPage() {
                     <div className="shrink-0">
                       <MiniChart slot={slot} />
                     </div>
-                  </motion.button>
+                  </m.button>
                 ))}
               </div>
             </div>
-          </motion.div>
+          </m.div>
 
           {/* ── RIGHT ── */}
-          <motion.div
+          <m.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
@@ -317,7 +317,7 @@ export default function DynamicPricingPage() {
                     >
                       <BrainCircuit size={22} style={{ color: ACCENT }} />
                     </div>
-                    <motion.div
+                    <m.div
                       animate={{ scale: [1, 1.6, 1], opacity: [0.6, 0, 0.6] }}
                       transition={{ duration: 2, repeat: Infinity }}
                       className="absolute inset-0 rounded-xl"
@@ -338,7 +338,7 @@ export default function DynamicPricingPage() {
                 {/* Engine pillars */}
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-7">
                   {pillars.map((p, i) => (
-                    <motion.div
+                    <m.div
                       key={i}
                       whileHover={{ scale: 1.06, borderColor: `${ACCENT}60` }}
                       className="flex flex-col items-center p-3 md:p-4 rounded-xl border border-white/8  bg-gray-100 dark:bg-white/[0.03] text-center transition-all duration-300 cursor-default"
@@ -351,7 +351,7 @@ export default function DynamicPricingPage() {
                       </div>
                       <p className="text-xs font-bold text-white mb-0.5">{p.label}</p>
                       <p className="text-[10px] text-gray-500 dark:text-white/35">{p.desc}</p>
-                    </motion.div>
+                    </m.div>
                   ))}
                 </div>
 
@@ -362,7 +362,7 @@ export default function DynamicPricingPage() {
                   </h4>
                   <div className="space-y-3">
                     {benefits.map((b, i) => (
-                      <motion.div
+                      <m.div
                         key={i}
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
@@ -378,7 +378,7 @@ export default function DynamicPricingPage() {
                         <span className="text-sm text-gray-500 dark:text-white/35 group-hover:text-gray-900 dark:group-hover:text-white transition-colors duration-300">
                           {b.text}
                         </span>
-                      </motion.div>
+                      </m.div>
                     ))}
                   </div>
                 </div>
@@ -392,7 +392,7 @@ export default function DynamicPricingPage() {
                 { value: "−18%", label: "Overcrowding", color: "#3b82f6" },
                 { value: "24/7", label: "Automation", color: ACCENT },
               ].map((s, i) => (
-                <motion.div
+                <m.div
                   key={i}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -406,13 +406,13 @@ export default function DynamicPricingPage() {
                     {s.value}
                   </p>
                   <p className="text-[10px] md:text-[11px] text-gray-500 dark:text-white/40 leading-tight">{s.label}</p>
-                </motion.div>
+                </m.div>
               ))}
             </div>
 
             {/* Active slot detail */}
             <AnimatePresence mode="wait">
-              <motion.div
+              <m.div
                 key={activeSlot}
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -430,9 +430,9 @@ export default function DynamicPricingPage() {
 
                 </div>
 
-              </motion.div>
+              </m.div>
             </AnimatePresence>
-          </motion.div>
+          </m.div>
         </div>
       </div>
     </section>

@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { motion } from "framer-motion";
 import * as Accordion from "@radix-ui/react-accordion";
 import { Minus, Plus } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -50,7 +49,7 @@ export function FaqAccordion({
             className="mb-2"
           >
             <Accordion.Header>
-              <Accordion.Trigger className="flex w-full items-center justify-start gap-x-4">
+              <Accordion.Trigger className="flex w-full items-center justify-start gap-x-4 focus:outline-none">
                 <div
                   className={cn(
                     "relative flex items-center space-x-2 rounded-xl p-2 transition-colors text-left",
@@ -92,28 +91,17 @@ export function FaqAccordion({
                 </span>
               </Accordion.Trigger>
             </Accordion.Header>
-            <Accordion.Content asChild forceMount>
-              <motion.div
-                initial="collapsed"
-                animate={openItem === item.id.toString() ? "open" : "collapsed"}
-                variants={{
-                  open: { opacity: 1, height: "auto" },
-                  collapsed: { opacity: 0, height: 0 },
-                }}
-                transition={{ duration: 0.4 }}
-                className="overflow-hidden"
-              >
-                <div className="mt-2 mb-4 flex w-full justify-end">
-                  <div
-                    className={cn(
-                      "relative rounded-2xl bg-primary px-4 py-2 text-primary-foreground shadow-lg",
-                      answerClassName
-                    )}
-                  >
-                    {item.answer}
-                  </div>
+            <Accordion.Content className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+              <div className="mt-2 mb-4 flex w-full justify-end">
+                <div
+                  className={cn(
+                    "relative rounded-2xl bg-primary px-4 py-2 text-primary-foreground shadow-lg text-left",
+                    answerClassName
+                  )}
+                >
+                  {item.answer}
                 </div>
-              </motion.div>
+              </div>
             </Accordion.Content>
           </Accordion.Item>
         ))}

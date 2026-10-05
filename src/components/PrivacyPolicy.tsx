@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTheme } from "next-themes";
 import {
   Shield,
@@ -83,7 +83,7 @@ export default function PrivacyPolicy() {
       }`}
     >
       <div className="mx-auto max-w-6xl px-4 py-24 sm:px-6 lg:px-8">
-        <motion.header
+        <m.header
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
@@ -118,7 +118,7 @@ export default function PrivacyPolicy() {
               partner app, and website, and explains how we collect, process, and protect your data.
             </p>
           </div>
-        </motion.header>
+        </m.header>
 
         <div className="mb-14 grid gap-4 md:grid-cols-3">
           {highlights.map((item) => (
@@ -144,7 +144,7 @@ export default function PrivacyPolicy() {
               const Icon = section.icon;
 
               return (
-                <motion.article
+                <m.article
                   key={section.title}
                   initial={{ opacity: 0, y: 18 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -166,7 +166,7 @@ export default function PrivacyPolicy() {
                   <p className={`text-sm leading-8 sm:text-[15px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                     {section.content}
                   </p>
-                </motion.article>
+                </m.article>
               );
             })}
           </div>

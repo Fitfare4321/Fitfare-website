@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import { useTheme } from "next-themes";
 import { FileText, ShieldCheck, Clock, ArrowRight } from "lucide-react";
 
@@ -85,7 +85,7 @@ const TermsAndConditions = () => {
       }`}
     >
       <div className="mx-auto max-w-5xl px-4 pb-24 pt-24 sm:px-6 lg:px-8">
-        <motion.header
+        <m.header
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -119,11 +119,11 @@ const TermsAndConditions = () => {
             </div>
             These Terms explain how FitFare operates, your rights and responsibilities as a user, and the conditions governing access to our platform and partner gym services.
           </div>
-        </motion.header>
+        </m.header>
 
         <div className="mt-10 space-y-6">
           {sections.map((section, index) => (
-            <motion.article
+            <m.article
               key={section.title}
               initial={{ opacity: 0, y: 18 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -143,7 +143,7 @@ const TermsAndConditions = () => {
               <p className={`whitespace-pre-line text-sm leading-8 sm:text-[15px] ${isDark ? "text-slate-300" : "text-slate-600"}`}>
                 {section.content}
               </p>
-            </motion.article>
+            </m.article>
           ))}
         </div>
       </div>

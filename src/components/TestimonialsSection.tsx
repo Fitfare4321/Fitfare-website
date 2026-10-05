@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import { Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useCallback } from "react";
 import jaiKaushik from "@/assets/JaiKaushik.jpg";
@@ -77,7 +77,7 @@ const TestimonialsSection = () => {
 
       <div className="relative max-w-4xl mx-auto">
         {/* Header */}
-        <motion.div
+        <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -89,7 +89,7 @@ const TestimonialsSection = () => {
           <h2 className="text-4xl lg:text-5xl font-bold tracking-tight text-white">
             What Our Users Say
           </h2>
-        </motion.div>
+        </m.div>
 
         {/* Spotlight testimonial */}
         <div className="relative min-h-[300px] flex items-center justify-center">
@@ -99,7 +99,7 @@ const TestimonialsSection = () => {
           </div>
 
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={current}
               initial={{ opacity: 0, y: 20, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
@@ -140,20 +140,20 @@ const TestimonialsSection = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </AnimatePresence>
         </div>
 
         {/* Controls */}
         <div className="flex items-center justify-center gap-6 mt-12">
-          <motion.button
+          <m.button
             whileHover={{ x: -3 }}
             whileTap={{ scale: 0.9 }}
             onClick={prev}
             className="p-2 text-white/30 hover:text-white/60 transition-colors"
           >
             <ChevronLeft size={20} />
-          </motion.button>
+          </m.button>
 
           {/* Progress dots */}
           <div className="flex gap-2">
@@ -169,7 +169,7 @@ const TestimonialsSection = () => {
               >
                 <div className="absolute inset-0 bg-white/10 rounded-full" />
                 {current === i && (
-                  <motion.div
+                  <m.div
                     className="absolute inset-0 bg-blue-500 rounded-full origin-left"
                     style={{ scaleX: autoProgress / 100 }}
                   />
@@ -178,14 +178,14 @@ const TestimonialsSection = () => {
             ))}
           </div>
 
-          <motion.button
+          <m.button
             whileHover={{ x: 3 }}
             whileTap={{ scale: 0.9 }}
             onClick={next}
             className="p-2 text-white/30 hover:text-white/60 transition-colors"
           >
             <ChevronRight size={20} />
-          </motion.button>
+          </m.button>
         </div>
       </div>
     </section>

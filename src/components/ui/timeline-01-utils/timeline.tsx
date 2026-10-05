@@ -58,7 +58,7 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
                 <motion.div 
                   initial={{ opacity: 0, x: isEven ? -60 : 60, filter: "blur(10px)" }}
                   whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
-                  viewport={{ once: true, margin: "-100px" }}
+                  viewport={{ once: true, margin: "0px" }}
                   transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
                   className="max-w-md w-full"
                 >
@@ -88,7 +88,7 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
                      <motion.div 
                        initial={{ opacity: 0, scale: 0.8, rotateY: isEven ? -20 : 20, rotateX: 10, y: 50 }}
                        whileInView={{ opacity: 1, scale: 1, rotateY: 0, rotateX: 0, y: 0 }}
-                       viewport={{ once: true, margin: "-100px" }}
+                       viewport={{ once: true, margin: "0px" }}
                        transition={{ duration: 1, type: "spring", bounce: 0.4, delay: 0.2 }}
                        whileHover={{ scale: 1.05, rotateY: isEven ? 5 : -5, transition: { duration: 0.4 } }}
                        className="overflow-hidden rounded-[24px] w-full relative group border border-white/10"
@@ -97,7 +97,7 @@ const Timeline = ({ items }: { items: TimelineItem[] }) => {
                        <motion.div 
                           initial={{ scaleY: 1 }}
                           whileInView={{ scaleY: 0 }}
-                          viewport={{ once: true, margin: "-100px" }}
+                          viewport={{ once: true, margin: "0px" }}
                           transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
                           className="absolute inset-0 bg-[#0A0A0A] z-10 origin-top"
                        />

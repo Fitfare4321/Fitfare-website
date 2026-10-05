@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { m } from "framer-motion";
 import {
   ArrowRight,
   Check,
@@ -209,7 +209,7 @@ const NoidaPage = () => {
           <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)", backgroundSize: "28px 28px" }} />
 
           <div className="relative mx-auto max-w-7xl">
-            <motion.div
+            <m.div
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
@@ -290,7 +290,7 @@ const NoidaPage = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </m.div>
           </div>
         </section>
 
@@ -302,7 +302,7 @@ const NoidaPage = () => {
 
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
             {quickBenefits.map(({ title, description, icon: Icon }) => (
-              <motion.div
+              <m.div
                 key={title}
                 initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -315,7 +315,7 @@ const NoidaPage = () => {
                 </div>
                 <h3 className="text-xl font-semibold text-white">{title}</h3>
                 <p className="mt-3 text-sm leading-7 text-slate-300">{description}</p>
-              </motion.div>
+              </m.div>
             ))}
           </div>
         </section>
