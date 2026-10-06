@@ -175,8 +175,8 @@ function TrackLane({
 }) {
   const meshRef = useRef<THREE.Mesh>(null!);
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const segments = mobile ? 160 : 280;
-  const radial = 8;
+  const segments = mobile ? 100 : 160;
+  const radial = 6;
   const curve = useMemo(() => {
     const pts: THREE.Vector3[] = [];
     const steps = 100;
@@ -221,8 +221,8 @@ function EnergyRibbon({
 }) {
   const materialRef = useRef<THREE.ShaderMaterial>(null!);
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const segments = mobile ? 120 : 220;
-  const radial = mobile ? 6 : 10;
+  const segments = mobile ? 80 : 120;
+  const radial = mobile ? 4 : 6;
 
   const curve = useMemo(() => {
     const pts: THREE.Vector3[] = [];
@@ -452,7 +452,7 @@ export default function NetworkBackground3D({ isDark }: { isDark: boolean }) {
     return <div className="absolute inset-0 pointer-events-none" style={{ zIndex: 0, backgroundImage: bg, backgroundSize: "120% 120%, 120% 120%, 80px 80px, 80px 80px" }} />;
   }
   const mobile = typeof window !== "undefined" && window.innerWidth < 768;
-  const dprRange: [number, number] = mobile ? [1, 1.25] : [1, 1.5];
+  const dprRange: [number, number] = [1, 1];
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none" style={{ zIndex: 0 }}>
