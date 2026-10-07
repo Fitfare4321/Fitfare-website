@@ -1,4 +1,6 @@
-"use client";
+import re
+
+content = """\"use client\";
 
 import { useRef, useState } from "react";
 import { m, AnimatePresence, useScroll, useTransform } from "framer-motion";
@@ -109,7 +111,7 @@ export default function Services() {
       
       {/* 1. Giant Animated Scrolling Text (Images 1-4) */}
       <div className="w-full flex items-center overflow-hidden mb-32 whitespace-nowrap select-none">
-         <m.div style={{ x: x1 }} className="flex items-center gap-6 sm:gap-10 text-[18vw] leading-none font-black tracking-tighter">
+         <m.div style={{ x: x1 }} className="flex items-center gap-6 sm:gap-10 text-[18vw] leading-none font-black tracking-tighter mix-blend-difference">
             <span className="text-white/40" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.1)", color: "transparent" }}>We</span>
             
             {/* Wavy Arrow */}
@@ -126,7 +128,7 @@ export default function Services() {
               </svg>
             </div>
 
-            <span className="text-white">best:</span>
+            <span className="text-white/40" style={{ WebkitTextStroke: "2px rgba(255,255,255,0.1)", color: "transparent" }}>best:</span>
          </m.div>
       </div>
 
@@ -197,3 +199,9 @@ export default function Services() {
     </div>
   )
 }
+"""
+
+with open("src/components/Services.tsx", "w") as f:
+    f.write(content)
+
+print("Services.tsx rewritten!")

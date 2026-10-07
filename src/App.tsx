@@ -53,6 +53,7 @@ const App = () => (
             <Route path="/thrivethon" element={<ThrivethonPage />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
+            <Route path="/privacy" element={<PrivacyPolicyPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/cancellation-refunds" element={<CancellationRefundsPage />} />
             <Route path="/legal/privacy-policy.html" element={<PrivacyPolicyPage />} />

@@ -5,7 +5,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import ShapeBlur from "./ui/ShapeBlur";
-import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
+import { GlassButton } from "@/components/ui/glass-button";
 
 import img1 from "@/assets/bento_get_discovered.png";
 import img2 from "@/assets/bento_manage_bookings.png";
@@ -130,7 +130,7 @@ const PartnerTransitionSection = () => {
           {/* CTA */}
           <div className="text-center flex justify-center mt-2 hover:scale-105 active:scale-95 transition-transform duration-300">
             <Link to="/partner-form">
-              <style>{glassButtonStyles}</style>
+              
               <GlassButton size="lg" contentClassName="flex items-center gap-2">
                 <span>Become a FitFare Partner</span>
                 <ArrowRight size={18} className="relative z-10 text-current transition-all duration-300 group-hover:translate-x-1" />

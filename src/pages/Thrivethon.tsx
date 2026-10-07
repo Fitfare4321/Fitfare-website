@@ -884,9 +884,9 @@ const ThrivethonPage = () => {
                         <div className="text-[10px] md:text-xs text-white/30 tracking-[0.2em] font-medium uppercase">
                             © 2026 FITFARE TECHNOLOGY. ALL RIGHTS RESERVED.
                         </div>
-                        <div className="flex gap-8 text-[10px] md:text-xs text-white/20 uppercase tracking-widest">
-                            <span className="cursor-pointer hover:text-white transition-colors">Privacy Policy</span>
-                            <span className="cursor-pointer hover:text-white transition-colors">Terms of Service</span>
+                        <div className="flex gap-8 text-[10px] md:text-xs text-white/40 uppercase tracking-widest">
+                            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
+                            <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</a>
                         </div>
                     </div>
                 </div>

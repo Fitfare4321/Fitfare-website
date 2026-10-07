@@ -1,26 +1,40 @@
 import { FaqAccordion } from "@/components/ui/faq-chat-accordion";
-import ParticleText from "@/components/ui/ParticleText";
 
 const faqs = [
   {
     id: 1,
     question: "What is FitFare?",
-    answer: "FitFare is an app that lets you discover, book, and access participating fitness centres and activities around you, without needing a traditional gym membership."
+    answer: "FitFare is a flexible fitness platform that lets you discover and access partnered gyms and fitness centres without committing to a traditional long-term membership. Find a centre that suits you, book your workout, and pay based on the fitness services you actually use."
   },
   {
     id: 2,
-    question: "How do I pay for a booking?",
-    answer: "You can pay per booking using your preferred payment method or by adding credits to your FitFare balance and applying them to eligible sessions."
+    question: "How does FitFare work?",
+    answer: "Simply create your FitFare account, explore available fitness centres near you, choose the service or session you want, complete your booking, and check in at the centre using FitFare. Your bookings and visits can all be managed through the app."
   },
   {
     id: 3,
-    question: "Do I need a gym membership to use FitFare?",
-    answer: "No. FitFare gives you access to participating fitness centres on a pay-as-you-go basis."
+    question: "Do I need to buy a monthly or yearly membership?",
+    answer: "No. FitFare is built around flexibility rather than long-term commitments. You can access participating fitness centres without locking yourself into a conventional monthly or annual membership. "
   },
   {
     id: 4,
-    question: "Can I use FitFare at any gym?",
-    answer: "You can use FitFare at any participating partner centre listed in the app."
+    question: "What are Fit Credits?",
+    answer: "Fit Credits are prepaid credits that can be used to book eligible physical fitness services at FitFare partner gyms and studios. Your available balance and transactions can be managed directly through your FitFare account."
+  },
+  {
+    id: 5,
+    question: "How do I check in at a fitness centre?",
+    answer: "Once you arrive at the centre for your booking, you can use the FitFare app to complete the QR-based check-in process. Your visit is then recorded digitally, making the experience simple for both you and the fitness centre. "
+  },
+  {
+    id: 6,
+    question: "Is FitFare suitable for people with irregular schedules or frequent travel?",
+    answer: "Yes. FitFare is designed for people whose fitness routine doesn’t always fit a fixed membership whether because of work, travel, college, changing schedules, or simply wanting the freedom to train at different locations."
+  },
+  {
+    id: 7,
+    question: "Why should I use FitFare instead of a traditional membership?",
+    answer: "A traditional membership usually ties you to one centre and a fixed membership period. FitFare is built around choice and actual usage: discover different fitness centres, book according to your schedule, access multiple locations, and avoid being locked into a long term membership you may not fully use."
   }
 ];
 
@@ -32,26 +46,7 @@ const FAQSection = () => {
         <div className="faq-header text-center mb-10 md:mb-16">
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6 md:mb-4 flex flex-wrap items-center justify-center gap-x-2 md:gap-x-2.5 gap-y-2 leading-tight" style={{ fontFamily: "'DM Sans', sans-serif" }}>
             <span>Confused? We’ve Got</span>
-            <div className="relative inline-flex items-center justify-center w-[85px] h-[45px] md:w-[130px] md:h-[65px] flex-shrink-0 mt-0.5 md:mt-0">
-              <ParticleText
-                text="You."
-                particleSize={1.6}
-                density={2}
-                color="#ffffff"
-                highlightColor="#ffffff"
-                trigger="mount"
-                scatter={70}
-                gatherDuration={1200}
-                idleDrift={0.35}
-                repelRadius={70}
-                pointerRepel={25}
-                fontSize="clamp(1.875rem, 4.5vw, 3rem)"
-                fontWeight={700}
-                fontFamily="'DM Sans', sans-serif"
-                textAlign="left"
-                className="w-full h-full"
-              />
-            </div>
+            <span className="text-white">You.</span>
           </h2>
         </div>
 

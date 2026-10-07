@@ -1,197 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { m } from "framer-motion";
-import { Link } from "react-router-dom";
-import {
-  Shield,
-  Lock,
-  Eye,
-  Database,
-  Smartphone,
-  Building2,
-  Globe,
-  Share2,
-  Clock,
-  Trash2,
-  CheckCircle2,
-  ChevronRight,
-  ArrowUp,
-  Printer,
-  Copy,
-  Check,
-  Phone,
-  Mail,
-  ExternalLink,
-  Info,
-  Scale,
-  Users,
-  AlertCircle
-} from "lucide-react";
-import GlassButton from "@/components/ui/glass-button";
-import PageSEO from "@/components/PageSEO";
+import re
 
-const TOC_ITEMS = [
+with open('src/pages/PrivacyPolicyPage.tsx', 'r') as f:
+    privacy = f.read()
+
+# Replace TOC_ITEMS
+new_toc = """const TOC_ITEMS = [
   { id: "common", label: "1. Common terms", short: "Common terms" },
   { id: "users", label: "2. Part A — User terms", short: "User terms" },
   { id: "partners", label: "3. Part B — Partner terms", short: "Partner terms" },
   { id: "website", label: "4. Part C — Website terms", short: "Website terms" },
   { id: "legal", label: "5. Liability, disputes & governing law", short: "Legal" },
-];
+];"""
 
-const TermsAndConditionsPage: React.FC = () => {
-  const [activeSection, setActiveSection] = useState<string>("who");
-  const [copied, setCopied] = useState<boolean>(false);
-  const [showMobileTOC, setShowMobileTOC] = useState<boolean>(false);
-  const [showBackToTop, setShowBackToTop] = useState<boolean>(false);
+content = re.sub(r"const TOC_ITEMS = \[\n(.*?)\n\];", new_toc, privacy, flags=re.DOTALL)
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 400);
+# Replace the PageSEO metadata
+content = content.replace('title="FitFare — Privacy Policy | Data Protection & Privacy Rights"', 'title="FitFare — Terms of Service"')
+content = content.replace('description="FitFare Privacy Policy', 'description="FitFare Terms of Service')
+content = content.replace('canonical="https://fitfare.in/privacy-policy"', 'canonical="https://fitfare.in/terms-and-conditions"')
 
-      // Scrollspy
-      const sections = TOC_ITEMS.map((item) => document.getElementById(item.id));
-      const scrollPosition = window.scrollY + 200;
+# Replace title in sidebar
+content = content.replace('Privacy<br />Policy', 'Terms of<br />Service')
 
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const sec = sections[i];
-        if (sec && sec.offsetTop <= scrollPosition) {
-          setActiveSection(TOC_ITEMS[i].id);
-          break;
-        }
-      }
-    };
+# Replace the right content entirely.
+# We will find the start of Right Content
+right_content_start = content.find('{/* 1. Who we are & how to contact us */}')
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+# We will find the end of Right Content (just before the table of contents floating index)
+# Looking for "</div>\n        </div>\n\n        {/* Floating Table of Contents */}"
+# In privacy policy, it is:
+right_content_end = content.find('{/* Floating Table of Contents */}')
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      const topOffset = 100;
-      const elementPosition = el.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.pageYOffset - topOffset;
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "smooth"
-      });
-      setActiveSection(id);
-      setShowMobileTOC(false);
-    }
-  };
-
-  const copyPageUrl = () => {
-    navigator.clipboard.writeText(window.location.href);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const renderBadge = (val: string) => {
-    const lower = val.toLowerCase();
-    if (lower.startsWith("yes")) {
-      return (
-        <span className="inline-flex items-center gap-2 text-emerald-400 font-medium tracking-wide">
-          <div className="w-1.5 h-1.5 rounded-full bg-emerald-400"></div>
-          {val}
-        </span>
-      );
-    }
-    if (lower.startsWith("no")) {
-      return (
-        <span className="inline-flex items-center gap-2 text-slate-500 font-medium tracking-wide">
-          <div className="w-1.5 h-1.5 rounded-full bg-slate-500"></div>
-          {val}
-        </span>
-      );
-    }
-    if (lower.includes("optional")) {
-      return (
-        <span className="inline-flex items-center gap-2 text-amber-400 font-medium tracking-wide">
-          <div className="w-1.5 h-1.5 rounded-full bg-amber-400"></div>
-          {val}
-        </span>
-      );
-    }
-    if (lower.includes("required")) {
-      return (
-        <span className="inline-flex items-center gap-2 text-[#D9A84E] font-medium tracking-wide">
-          <div className="w-1.5 h-1.5 rounded-full bg-[#D9A84E]"></div>
-          {val}
-        </span>
-      );
-    }
-    return <span>{val}</span>;
-  };
-
-  return (
-    <div className="min-h-screen bg-black text-slate-200 font-sans selection:bg-[#D9A84E]/30 selection:text-white">
-      <PageSEO
-        title="FitFare — Terms of Service"
-        description="FitFare Terms of Service covering the FitFare user app, FitFare Partner app, and fitfare.in website. Read our comprehensive rules, eligibility, cancellations, and booking policies."
-        canonical="https://fitfare.in/terms-and-conditions"
-      />
-
-      {/* Back Button */}
-      <div className="fixed top-6 left-6 sm:top-8 sm:left-8 z-[100]">
-        <Link to="/">
-          <GlassButton size="sm" className="flex items-center gap-2">
-            <span className="flex items-center gap-2">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-              Home
-            </span>
-          </GlassButton>
-        </Link>
-      </div>
-
-      
-      <div className="min-h-screen bg-black flex flex-col lg:flex-row">
-        {/* Left Sidebar */}
-        <div className="lg:w-[40%] xl:w-[35%] lg:fixed lg:inset-y-0 lg:left-0 flex items-center justify-center bg-black relative overflow-hidden z-10">
-          <m.div 
-            initial={{ scale: 1.05, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
-            className="absolute inset-0 z-0 flex items-center justify-center"
-          >
-            {/* The 4k Statue Background */}
-            <img src="/discipline-statue-v2.jpg" alt="Perfection" className="absolute inset-0 w-full h-full object-cover object-[70%_20%] opacity-50" />
-            
-            {/* FOCUS Text layered between image and gradient */}
-            <div className="absolute inset-y-0 right-4 lg:right-8 xl:right-12 flex items-center justify-center z-10 pointer-events-none mix-blend-screen opacity-60">
-               <span className="[writing-mode:vertical-rl] text-[8vh] sm:text-[10vh] lg:text-[12vh] font-sans font-black text-white tracking-widest uppercase">
-                 Discipline
-               </span>
-            </div>
-
-            {/* Darker gradient on the left side to contrast with text, and a fade-to-black on the right edge to blend seamlessly with the right column */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent z-10"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black z-10"></div>
-          </m.div>
-          <div className="relative z-20 p-8 lg:p-12 xl:p-16 flex flex-col justify-end w-full h-full min-h-[60vh] lg:min-h-0 pl-16 sm:pl-20">
-             <m.div
-               initial={{ y: 20, opacity: 0 }}
-               animate={{ y: 0, opacity: 1 }}
-               transition={{ delay: 0.5, duration: 0.8 }}
-               className="relative max-w-xs"
-             >
-                
-                <h1 className="text-5xl sm:text-6xl xl:text-7xl font-serif font-black text-white tracking-tight leading-none mb-6 drop-shadow-[0_4px_24px_rgba(0,0,0,1)]">
-                  Terms of<br />Service
-                </h1>
-                <p className="text-white/50 tracking-[0.2em] text-xs uppercase font-medium">FitFare Legal / 2026</p>
-             </m.div>
-          </div>
-        </div>
-
-        {/* Right Content */}
-        <div className="lg:w-[60%] xl:w-[65%] lg:ml-auto bg-black min-h-screen relative z-0">
-          
-          <div className="max-w-4xl mx-auto px-6 sm:px-12 lg:px-20 pt-20 lg:pt-32 pb-32 relative z-10">
-            <div className="flex flex-col">
-              
+new_right_content = """
 {/* 1. Common terms */}
 <m.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-100px" }} transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }} id="common" className="flex gap-4 sm:gap-8 group scroll-mt-24 pt-8 pb-16 sm:pb-24 border-b border-white/[0.05]">
   <div className="flex flex-col items-center">
@@ -391,24 +231,10 @@ const TermsAndConditionsPage: React.FC = () => {
     </div>
   </div>
 </m.div>
+"""
 
+content = content[:right_content_start] + new_right_content + "\n              </div>\n            </div>\n" + content[right_content_end:]
 
-          </div>
-        </div>
-      </div>
-      </div>
-      {/* Floating Back to Top Button */}
-      {showBackToTop && (
-        <button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          aria-label="Back to top"
-          className="fixed bottom-8 right-6 sm:right-8 z-40 w-12 h-12 rounded-full bg-white/[0.08] hover:bg-white/[0.18] active:bg-white/[0.25] backdrop-blur-2xl border border-white/20 hover:border-white/40 shadow-[0_8px_24px_rgba(0,0,0,0.5)] flex items-center justify-center text-white transition-all duration-300 group cursor-pointer"
-        >
-          <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
-        </button>
-      )}
-    </div>
-  );
-};
+with open("src/pages/TermsAndConditionsPage.tsx", "w") as f:
+    f.write(content)
 
-export default TermsAndConditionsPage;

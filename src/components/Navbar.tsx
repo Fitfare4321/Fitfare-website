@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { motion, useMotionValue, animate } from "framer-motion";
 import logo from "@/assets/blue-background-logo.png";
 import logoVideo from "@/assets/logo_animate2.mp4";
-import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
+import { GlassButton } from "@/components/ui/glass-button";
 
 const globalNavLinks = [
   { label: "Explore", href: "/#activities", icon: Compass },
@@ -584,7 +584,7 @@ const Navbar = () => {
 
   return (
     <>
-      <style>{glassButtonStyles}</style>
+      
 
       {/* ─── MOBILE ONLY: Top header bar with CTAs ─── */}
       <motion.nav
@@ -605,7 +605,7 @@ const Navbar = () => {
         transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
         className="navbar-ui md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
       >
-        <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
+        <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
         <PillSegmentedControl
           activeSection={activeSection}
           handleNavClick={handleNavClick}
@@ -627,7 +627,7 @@ const Navbar = () => {
 
         {/* CENTER: Pill segmented control */}
         <div className="absolute left-1/2 -translate-x-1/2 w-full max-w-md lg:max-w-lg pointer-events-auto drop-shadow-2xl z-20">
-          <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-3xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
+          <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
           <PillSegmentedControl
             activeSection={activeSection}
             handleNavClick={handleNavClick}

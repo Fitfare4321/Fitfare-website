@@ -91,7 +91,7 @@ export function FaqAccordion({
                 </span>
               </Accordion.Trigger>
             </Accordion.Header>
-            <Accordion.Content className="overflow-hidden transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+            <Accordion.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
               <div className="mt-2 mb-4 flex w-full justify-end">
                 <div
                   className={cn(

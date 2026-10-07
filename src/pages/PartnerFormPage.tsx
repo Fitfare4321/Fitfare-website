@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight, CheckCircle, Loader2 } from "lucide-react";
 import ParticleText from "@/components/ui/ParticleText";
-import { GlassButton, glassButtonStyles } from "@/components/ui/glass-button";
+import { GlassButton } from "@/components/ui/glass-button";
 import emailjs from "@emailjs/browser";
 import { cn } from "@/lib/utils";
 
@@ -481,7 +481,7 @@ Services Offered    : ${formData.services || "General Gym / Fitness Services"}
 
   return (
     <div className="w-full min-h-screen lg:h-screen bg-black overflow-y-auto overflow-x-hidden lg:overflow-hidden relative font-sans">
-      <style>{glassButtonStyles}</style>
+      
 
       {/* Back Button */}
       <Link
