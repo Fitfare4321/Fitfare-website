@@ -88,7 +88,7 @@ const ContactPage = () => {
             href="https://maps.google.com/?q=WeWork+Atrium+Place,+Udyog+Vihar,+Gurugram" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="absolute inset-0 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.4)] pointer-events-auto cursor-pointer hover:scale-110 hover:shadow-[0_0_50px_rgba(220,38,38,0.7)] transition-all duration-300 group"
+            className="absolute inset-0 rounded-full bg-white/5 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.37)] hover:bg-white/10 pointer-events-auto cursor-pointer hover:scale-110 transition-all duration-300 group"
           >
             <m.div
               animate={{ opacity: [0.7, 1, 0.7] }}
