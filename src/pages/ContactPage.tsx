@@ -208,7 +208,7 @@ const ContactPage = () => {
               <button 
                 type="submit"
                 disabled={isSubmitting || isSuccess || (step === 0 && !name.trim()) || (step === 1 && !email.trim())}
-                className={`order-3 sm:order-2 self-start sm:self-auto mt-8 sm:mt-0 sm:ml-12 group flex items-center gap-4 shrink-0 transition-opacity ${
+                className={`order-3 sm:order-2 self-end sm:self-auto mt-8 sm:mt-0 sm:ml-12 group flex items-center gap-4 shrink-0 transition-opacity ${
                   (step === 0 && !name.trim()) || (step === 1 && !email.trim()) ? "opacity-50 cursor-not-allowed" : "hover:opacity-80"
                 }`}
               >
