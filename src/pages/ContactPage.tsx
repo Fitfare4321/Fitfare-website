@@ -64,7 +64,7 @@ const ContactPage = () => {
       />
       
       {/* Map Pins / Location markers (as seen in the design) */}
-      <div className="absolute top-[35%] right-[8%] lg:right-[15%] xl:right-[18%] z-0 pointer-events-none hidden md:block">
+      <div className="absolute top-[35%] right-[8%] lg:right-[15%] xl:right-[18%] z-20 pointer-events-none hidden md:block">
         
         <div className="relative flex items-center justify-center w-14 h-14">
           
