@@ -71,16 +71,21 @@ const ContactPage = () => {
           {/* Large faint outer ring */}
           <div className="absolute w-[350px] h-[350px] rounded-full border border-white/5" />
           
-          {/* Stunning Radar Pulse Animation */}
+          {/* Modern Glowing Neon Ripple Animation */}
           <m.div
-            animate={{ scale: [0.8, 3], opacity: [0, 0.4, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-            className="absolute inset-0 rounded-full border border-[#dc2626]"
+            animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.5, 0.2] }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute inset-[-20%] rounded-full bg-[#dc2626] blur-[20px] pointer-events-none"
           />
           <m.div
-            animate={{ scale: [0.8, 3], opacity: [0, 0.4, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: 2.5 }}
-            className="absolute inset-0 rounded-full border border-[#dc2626]"
+            animate={{ scale: [0.8, 3], opacity: [0, 0.8, 0], borderWidth: ["2px", "1px", "0px"] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full border-[#dc2626] shadow-[0_0_20px_rgba(220,38,38,0.8)] pointer-events-none"
+          />
+          <m.div
+            animate={{ scale: [0.8, 3], opacity: [0, 0.8, 0], borderWidth: ["2px", "1px", "0px"] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeOut", delay: 2 }}
+            className="absolute inset-0 rounded-full border-[#dc2626] shadow-[0_0_20px_rgba(220,38,38,0.8)] pointer-events-none"
           />
 
           {/* Clickable Map Pin */}
