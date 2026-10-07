@@ -71,10 +71,32 @@ const ContactPage = () => {
           {/* Large faint outer ring */}
           <div className="absolute w-[350px] h-[350px] rounded-full border border-white/5" />
           
-          {/* The solid pin container with a strong static glow */}
-          <div className="absolute inset-0 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_0_50px_rgba(220,38,38,0.5)]">
-            <MapPin size={24} className="text-[#dc2626]" strokeWidth={2.5} />
-          </div>
+          {/* Smooth, subtle radar animations */}
+          <m.div 
+            animate={{ scale: [1, 1.8, 2.5], opacity: [0.6, 0.2, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full bg-[#dc2626]/30" 
+          />
+          <m.div 
+            animate={{ scale: [1, 1.5, 2], opacity: [0.8, 0.4, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeOut", delay: 2 }}
+            className="absolute inset-0 rounded-full bg-[#dc2626]/20" 
+          />
+
+          {/* Clickable Map Pin */}
+          <a 
+            href="https://maps.google.com/?q=WeWork+Atrium+Place,+Udyog+Vihar,+Gurugram" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="absolute inset-0 rounded-full bg-black/80 backdrop-blur-md border border-white/20 flex items-center justify-center shadow-[0_0_30px_rgba(220,38,38,0.4)] pointer-events-auto cursor-pointer hover:scale-110 hover:shadow-[0_0_50px_rgba(220,38,38,0.7)] transition-all duration-300 group"
+          >
+            <m.div
+              animate={{ opacity: [0.7, 1, 0.7] }}
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            >
+              <MapPin size={24} className="text-[#dc2626] group-hover:text-red-400 transition-colors" strokeWidth={2.5} />
+            </m.div>
+          </a>
         </div>
       </div>
       
