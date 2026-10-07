@@ -168,8 +168,9 @@ const ContactPage = () => {
 
           {/* Interactive Form */}
           <div className="relative">
-            <form onSubmit={handleNext} className="flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-12 relative z-10 pb-4 w-full">
-              <div className="flex-1 overflow-hidden">
+            <form onSubmit={handleNext} className="flex flex-col sm:flex-row sm:items-end sm:flex-wrap relative z-10 pb-4 w-full">
+              {/* 1. Input Field */}
+              <div className="w-full sm:flex-1 overflow-hidden order-1 sm:order-1 mb-2 sm:mb-0">
                 <AnimatePresence mode="wait">
                   {step === 0 ? (
                     <m.input
@@ -203,11 +204,11 @@ const ContactPage = () => {
                 </AnimatePresence>
               </div>
 
-              {/* Action Button */}
+              {/* 2. Action Button (Order 3 on mobile, Order 2 on desktop) */}
               <button 
                 type="submit"
                 disabled={isSubmitting || isSuccess || (step === 0 && !name.trim()) || (step === 1 && !email.trim())}
-                className={`group flex items-center gap-4 shrink-0 self-end sm:self-auto transition-opacity ${
+                className={`order-3 sm:order-2 self-start sm:self-auto mt-8 sm:mt-0 sm:ml-12 group flex items-center gap-4 shrink-0 transition-opacity ${
                   (step === 0 && !name.trim()) || (step === 1 && !email.trim()) ? "opacity-50 cursor-not-allowed" : "hover:opacity-80"
                 }`}
               >
@@ -226,10 +227,9 @@ const ContactPage = () => {
                   )}
                 </div>
               </button>
-            </form>
 
-            {/* Progress Track */}
-            <div className="relative mt-2">
+            {/* 3. Progress Track (Order 2 on mobile, Order 3 on desktop) */}
+            <div className="relative w-full order-2 sm:order-3 mt-4 sm:mt-6">
               <div className="h-[1px] w-full bg-gray-800 absolute top-0 left-0" />
               {/* Active segment indicator */}
               <m.div 
@@ -251,6 +251,7 @@ const ContactPage = () => {
                 </span>
               </div>
             </div>
+            </form>
 
             {/* Success Message */}
             <AnimatePresence>
