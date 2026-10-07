@@ -73,14 +73,14 @@ const ContactPage = () => {
           
           {/* Stunning Radar Pulse Animation */}
           <m.div
-            animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
-            className="absolute inset-0 rounded-full border-2 border-[#dc2626]"
+            animate={{ scale: [1, 3], opacity: [0.4, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 rounded-full border border-[#dc2626]"
           />
           <m.div
-            animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 1 }}
-            className="absolute inset-0 rounded-full border-2 border-[#dc2626]"
+            animate={{ scale: [1, 3], opacity: [0.4, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear", delay: 2 }}
+            className="absolute inset-0 rounded-full border border-[#dc2626]"
           />
 
           {/* Clickable Map Pin */}
