@@ -71,16 +71,16 @@ const ContactPage = () => {
           {/* Large faint outer ring */}
           <div className="absolute w-[350px] h-[350px] rounded-full border border-white/5" />
           
-          {/* Smooth, subtle radar animations */}
-          <m.div 
-            animate={{ scale: [1, 1.8, 2.5], opacity: [0.6, 0.2, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeOut" }}
-            className="absolute inset-0 rounded-full bg-[#dc2626]/30" 
+          {/* Stunning Radar Pulse Animation */}
+          <m.div
+            animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut" }}
+            className="absolute inset-0 rounded-full border-2 border-[#dc2626]"
           />
-          <m.div 
-            animate={{ scale: [1, 1.5, 2], opacity: [0.8, 0.4, 0] }}
-            transition={{ duration: 4, repeat: Infinity, ease: "easeOut", delay: 2 }}
-            className="absolute inset-0 rounded-full bg-[#dc2626]/20" 
+          <m.div
+            animate={{ scale: [1, 2.2], opacity: [0.8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeOut", delay: 1 }}
+            className="absolute inset-0 rounded-full border-2 border-[#dc2626]"
           />
 
           {/* Clickable Map Pin */}
@@ -133,15 +133,22 @@ const ContactPage = () => {
             transition={{ duration: 0.8, ease: "easeOut", delay: 0.1 }}
             className="flex flex-col"
           >
-            <div className="flex items-center gap-3 text-white font-medium mb-4">
-              <MapPin size={18} className="text-gray-400" />
-              <span>Address</span>
-            </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-[250px]">
-              WeWork Atrium Place, 6th Floor, Tower 3<br />
-              Vanijya Nikunj, Phase V, Udyog Vihar<br />
-              Gurugram, Haryana 122006, India
-            </p>
+            <a 
+              href="https://maps.google.com/?q=WeWork+Atrium+Place,+Udyog+Vihar,+Gurugram" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="group block"
+            >
+              <div className="flex items-center gap-3 text-white font-medium mb-4">
+                <MapPin size={18} className="text-[#dc2626] group-hover:scale-110 transition-transform" />
+                <span>Address</span>
+              </div>
+              <p className="text-gray-500 text-sm leading-relaxed max-w-[250px] group-hover:text-gray-300 transition-colors">
+                WeWork Atrium Place, 6th Floor, Tower 3<br />
+                Vanijya Nikunj, Phase V, Udyog Vihar<br />
+                Gurugram, Haryana 122006, India
+              </p>
+            </a>
           </m.div>
 
           {/* Phone */}
