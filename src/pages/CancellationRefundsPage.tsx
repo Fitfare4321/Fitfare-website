@@ -28,7 +28,7 @@ const sections = [
     icon: Award,
     title: "Disputes and support",
     text:
-      "If you need help, email collaborations@fitfare.in with your booking ID and date, or call +91 7666400518. We review requests within a reasonable business period and aim to resolve them fairly.",
+      "If you need help, email support@fitfare.in with your booking ID and date, or call +91 7666400518. We review requests within a reasonable business period and aim to resolve them fairly.",
   },
 ];
 
@@ -88,7 +88,7 @@ const CancellationRefundsPage = () => {
         <div className={`mt-12 rounded-2xl border p-6 ${isDark ? "border-slate-800 bg-slate-900/70" : "border-slate-200 bg-white"}`}>
           <h3 className="text-xl font-bold">Need help?</h3>
           <p className={`mt-3 text-sm leading-7 ${isDark ? "text-slate-300" : "text-slate-600"}`}>
-            Email <a href="mailto:collaborations@fitfare.in" className="text-blue-400 underline">collaborations@fitfare.in</a> with your booking ID and date, or call <a href="tel:+917666400518" className="text-blue-400 underline">+91 7666400518</a>.
+            Email <a href="mailto:support@fitfare.in" className="text-blue-400 underline">support@fitfare.in</a> with your booking ID and date, or call <a href="tel:+917666400518" className="text-blue-400 underline">+91 7666400518</a>.
           </p>
         </div>
       </main>

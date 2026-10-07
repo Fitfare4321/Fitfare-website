@@ -380,13 +380,13 @@ const TermsAndConditionsPage: React.FC = () => {
       <p>FitFare is not responsible for the acts or omissions of Partners, payment gateways, or other third-party services, beyond our own obligations in these Terms.</p>
 
       <h3 className="text-xl font-medium text-white mt-8 mb-2">5.4 Disputes</h3>
-      <p>Contact <a href="mailto:collaborations@fitfare.in" className="text-blue-400 hover:underline">collaborations@fitfare.in</a> with your booking id and date, and we will review within a reasonable business period. We encourage good-faith resolution before formal proceedings.</p>
+      <p>Contact <a href="mailto:support@fitfare.in" className="text-blue-400 hover:underline">support@fitfare.in</a> with your booking id and date, and we will review within a reasonable business period. We encourage good-faith resolution before formal proceedings.</p>
 
       <h3 className="text-xl font-medium text-white mt-8 mb-2">5.5 Governing law</h3>
       <p>These Terms are governed by the laws of India, and courts in India have exclusive jurisdiction, subject to mandatory consumer protections available to you.</p>
 
       <h3 className="text-xl font-medium text-white mt-8 mb-2">5.6 Contact</h3>
-      <p><a href="mailto:collaborations@fitfare.in" className="text-blue-400 hover:underline">collaborations@fitfare.in</a> · <a href="tel:+917666400518" className="text-blue-400 hover:underline">+91 7666400518</a></p>
+      <p><a href="mailto:support@fitfare.in" className="text-blue-400 hover:underline">support@fitfare.in</a> · <a href="tel:+917666400518" className="text-blue-400 hover:underline">+91 7666400518</a></p>
 
     </div>
   </div>

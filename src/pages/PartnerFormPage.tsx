@@ -124,8 +124,8 @@ const PartnerFormPage = () => {
       location: formData.location,
       city: formData.location,
       services: formData.services || "General Gym / Fitness Services",
-      to_email: "collaborations@fitfare.in, info@fitfare.in",
-      recipient_email: "collaborations@fitfare.in",
+      to_email: "support@fitfare.in, info@fitfare.in",
+      recipient_email: "support@fitfare.in",
       admin_email: "info@fitfare.in",
       subject: `New Partner Application: ${formData.facilityName} (${formData.location})`,
       message: `NEW PARTNER APPLICATION
@@ -144,7 +144,7 @@ Services Offered    : ${formData.services || "General Gym / Fitness Services"}
 
       if (!serviceId || !templateId || !publicKey) {
         throw new Error(
-          "Email service configuration is missing. Please reach out to collaborations@fitfare.in directly."
+          "Email service configuration is missing. Please reach out to support@fitfare.in directly."
         );
       }
 

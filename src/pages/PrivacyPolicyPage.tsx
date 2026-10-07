@@ -240,16 +240,16 @@ const PrivacyPolicyPage: React.FC = () => {
                     <tr className="border-b border-white/20 hover:bg-white/[0.02] transition-colors group text-center [&>*:first-child]:text-left [&>*:nth-child(n+2)]:text-center">
                       <td className="py-8 pr-4 font-medium align-top group-hover:text-white transition-colors">Privacy, data requests, deletion, grievance</td>
                       <td className="py-8 pr-4 align-top text-slate-400 group-hover:text-slate-200 transition-colors">
-                        <a href="mailto:collaborations@fitfare.in" className="text-blue-400 hover:underline font-medium break-all">
-                          collaborations@fitfare.in
+                        <a href="mailto:support@fitfare.in" className="text-blue-400 hover:underline font-medium break-all">
+                          support@fitfare.in
                         </a>
                       </td>
                     </tr>
                     <tr className="border-b border-white/20 hover:bg-white/[0.02] transition-colors group text-center [&>*:first-child]:text-left [&>*:nth-child(n+2)]:text-center">
                       <td className="py-8 pr-4 font-medium align-top group-hover:text-white transition-colors">General support</td>
                       <td className="py-8 pr-4 align-top text-slate-400 group-hover:text-slate-200 transition-colors">
-                        <a href="mailto:collaborations@fitfare.in" className="text-blue-400 hover:underline font-medium break-all">
-                          collaborations@fitfare.in
+                        <a href="mailto:support@fitfare.in" className="text-blue-400 hover:underline font-medium break-all">
+                          support@fitfare.in
                         </a>
                       </td>
                     </tr>
@@ -991,7 +991,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   Partner app
                 </h4>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  Request deletion from the Partner app profile screen, or email <a href="mailto:collaborations@fitfare.in" className="text-blue-400 underline font-medium break-all">collaborations@fitfare.in</a> from your registered address. Pending settlements are reconciled first; KYC/financial records are retained where law requires.
+                  Request deletion from the Partner app profile screen, or email <a href="mailto:support@fitfare.in" className="text-blue-400 underline font-medium break-all">support@fitfare.in</a> from your registered address. Pending settlements are reconciled first; KYC/financial records are retained where law requires.
                 </p>
               </div>
 
@@ -1002,7 +1002,7 @@ const PrivacyPolicyPage: React.FC = () => {
                   Either app
                 </h4>
                 <p className="text-slate-300 text-sm leading-relaxed">
-                  You can always email <a href="mailto:collaborations@fitfare.in" className="text-blue-400 underline font-medium break-all">collaborations@fitfare.in</a> for a verified deletion request.
+                  You can always email <a href="mailto:support@fitfare.in" className="text-blue-400 underline font-medium break-all">support@fitfare.in</a> for a verified deletion request.
                 </p>
               </div>
                 </div>
@@ -1081,7 +1081,7 @@ const PrivacyPolicyPage: React.FC = () => {
               </ul>
 
               <div className="p-4 rounded-xl bg-white/[0.03] border border-white/10 text-slate-300 text-sm leading-relaxed">
-                Email <a href="mailto:collaborations@fitfare.in" className="text-white font-bold underline break-all">collaborations@fitfare.in</a>. We may verify your identity before acting and will respond within the period required by law.
+                Email <a href="mailto:support@fitfare.in" className="text-white font-bold underline break-all">support@fitfare.in</a>. We may verify your identity before acting and will respond within the period required by law.
               </div>
                 </div>
               </div>
@@ -1439,11 +1439,11 @@ const PrivacyPolicyPage: React.FC = () => {
                 <div className="p-5 rounded-2xl bg-white/[0.03] border border-white/10">
                   <p className="text-slate-400 text-xs uppercase tracking-wider font-semibold mb-2">Privacy, deletion and grievance</p>
                   <a
-                    href="mailto:collaborations@fitfare.in"
+                    href="mailto:support@fitfare.in"
                     className="text-white hover:text-[#D9A84E] font-semibold text-base transition-colors flex items-center gap-2"
                   >
                     <Mail size={16} className="text-white" />
-                    collaborations@fitfare.in
+                    support@fitfare.in
                   </a>
                 </div>
 

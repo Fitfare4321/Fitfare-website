@@ -66,7 +66,7 @@ const sections = [
     icon: Mail,
     title: "8. Contact",
     content:
-      "Privacy, deletion and grievance: collaborations@fitfare.in · Phone: +91 7666400518. Full policy (authoritative HTML, used for Google Play): https://fitfare.in/legal/privacy-policy.html",
+      "Privacy, deletion and grievance: support@fitfare.in · Phone: +91 7666400518. Full policy (authoritative HTML, used for Google Play): https://fitfare.in/legal/privacy-policy.html",
   },
 ];
 
