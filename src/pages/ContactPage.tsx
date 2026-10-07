@@ -143,7 +143,7 @@ const ContactPage = () => {
                 <MapPin size={18} className="text-[#dc2626] group-hover:scale-110 transition-transform" />
                 <span>Address</span>
               </div>
-              <p className="text-gray-500 text-sm leading-relaxed max-w-[250px] group-hover:text-gray-300 transition-colors">
+              <p className="text-gray-500 text-sm leading-relaxed max-w-[300px] group-hover:text-gray-300 transition-colors">
                 WeWork Atrium Place, 6th Floor, Tower 3<br />
                 Vanijya Nikunj, Phase V, Udyog Vihar<br />
                 Gurugram, Haryana 122006, India
