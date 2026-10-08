@@ -29,6 +29,23 @@ try {
   const notFoundHtml = path.join(dist, '404.html');
   fs.copyFileSync(indexHtml, notFoundHtml);
 
+  // Create explicit directories for known static routes to prevent 404 console errors
+  const staticRoutes = [
+    'privacy-policy',
+    'terms-and-conditions',
+    'cancellation-refunds',
+    'contact',
+    'partner-form'
+  ];
+
+  staticRoutes.forEach(route => {
+    const routeDir = path.join(dist, route);
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+    fs.copyFileSync(indexHtml, path.join(routeDir, 'index.html'));
+  });
+
   // Ensure Jekyll does not process output
   const nojekyllDist = path.join(dist, '.nojekyll');
   fs.writeFileSync(nojekyllDist, '');
