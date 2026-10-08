@@ -39,8 +39,15 @@ try {
   ];
 
   staticRoutes.forEach(route => {
-    // Generate route.html so GitHub Pages can serve it cleanly for /route
+    // 1. Generate route.html for extensionless URLs
     fs.copyFileSync(indexHtml, path.join(dist, `${route}.html`));
+    
+    // 2. Generate route/index.html for trailing slash URLs
+    const routeDir = path.join(dist, route);
+    if (!fs.existsSync(routeDir)) {
+      fs.mkdirSync(routeDir, { recursive: true });
+    }
+    fs.copyFileSync(indexHtml, path.join(routeDir, 'index.html'));
   });
 
   // Ensure Jekyll does not process output
