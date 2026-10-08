@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
@@ -369,13 +370,13 @@ export function CinematicFooter() {
 
             {/* Secondary Text Links */}
             <div className="flex flex-wrap justify-center gap-3 md:gap-6 w-full md:w-auto order-1 md:order-2 md:w-1/2">
-              <MagneticButton as="a" href="/privacy-policy" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+              <MagneticButton as={Link} to="/privacy-policy" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
                 Privacy Policy
               </MagneticButton>
-              <MagneticButton as="a" href="/terms-and-conditions" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+              <MagneticButton as={Link} to="/terms-and-conditions" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
                 Terms of Service
               </MagneticButton>
-              <MagneticButton as="a" href="/contact" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
+              <MagneticButton as={Link} to="/contact" className="footer-glass-pill px-6 py-3 rounded-full text-muted-foreground font-medium text-xs md:text-sm hover:text-foreground">
                 Support
               </MagneticButton>
             </div>

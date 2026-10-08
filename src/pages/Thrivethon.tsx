@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { m, useMotionValue, useSpring, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { ArrowLeft, ChevronDown } from "lucide-react";
 import img1 from "@/assets/img1.png";
 import img2 from "@/assets/img2.webp";
@@ -885,8 +885,8 @@ const ThrivethonPage = () => {
                             © 2026 FITFARE TECHNOLOGY. ALL RIGHTS RESERVED.
                         </div>
                         <div className="flex gap-8 text-[10px] md:text-xs text-white/40 uppercase tracking-widest">
-                            <a href="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</a>
-                            <a href="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</a>
+                            <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+                            <Link to="/terms-and-conditions" className="hover:text-white transition-colors">Terms of Service</Link>
                         </div>
                     </div>
                 </div>

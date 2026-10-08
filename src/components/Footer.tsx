@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Instagram, Linkedin, Twitter } from "lucide-react";
 import logo from "@/assets/blue-background-logo.png";
 
@@ -10,14 +11,14 @@ const Footer = () => {
           
           {/* Brand Col */}
           <div className="md:col-span-2">
-            <a href="#home" className="flex items-center gap-3 mb-6 inline-flex">
+            <Link to="/" className="flex items-center gap-3 mb-6 inline-flex">
               <div className="w-10 h-10 rounded-[0.8rem] overflow-hidden">
                 <img src={logo} alt="FitFare" className="w-full h-full object-cover" />
               </div>
               <span className="text-xl font-bold tracking-tight text-white" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                 FitFare
               </span>
-            </a>
+            </Link>
             <p className="text-gray-400 font-medium text-lg">
               Fitness, Your Way.
             </p>
@@ -27,10 +28,10 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white mb-6 tracking-tight">FitFare</h4>
             <ul className="space-y-4">
-              <li><a href="#activities" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Explore</a></li>
-              <li><a href="#how-it-works" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">How it Works</a></li>
-              <li><a href="#partners" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Partner With Us</a></li>
-              <li><a href="#faq" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">FAQs</a></li>
+              <li><Link to="/#activities" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Explore</Link></li>
+              <li><Link to="/#how-it-works" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">How it Works</Link></li>
+              <li><Link to="/#partners" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Partner With Us</Link></li>
+              <li><Link to="/#faq" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">FAQs</Link></li>
             </ul>
           </div>
 
@@ -38,9 +39,9 @@ const Footer = () => {
           <div>
             <h4 className="font-bold text-white mb-6 tracking-tight">Legal</h4>
             <ul className="space-y-4">
-              <li><a href="/terms-and-conditions" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Terms of Service</a></li>
-              <li><a href="/privacy-policy" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Privacy Policy</a></li>
-              <li><a href="/cancellation-refunds" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Cancellation & Refunds</a></li>
+              <li><Link to="/terms-and-conditions" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Terms of Service</Link></li>
+              <li><Link to="/privacy-policy" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Privacy Policy</Link></li>
+              <li><Link to="/cancellation-refunds" className="text-gray-400 hover:text-[#305CDE] font-medium transition-colors">Cancellation & Refunds</Link></li>
             </ul>
           </div>
 
