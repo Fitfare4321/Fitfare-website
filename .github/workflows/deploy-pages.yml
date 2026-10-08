@@ -32,27 +32,17 @@ jobs:
         run: npm ci || npm install
 
       - name: Build site
-        run: npm run build
+        run: npm run build:pages
         env:
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_CONTACT_API: ${{ secrets.VITE_CONTACT_API }}
 
-      - name: Prepare SPA fallback for GitHub Pages
-        run: |
-          # Copy index.html to 404.html for SPA routing
-          cp dist/index.html dist/404.html
-          # Disable Jekyll processing
-          touch dist/.nojekyll
-          # Ensure custom domain CNAME is present
-          echo "fitfare.in" > dist/CNAME
-          echo "✅ SPA fallback (404.html) created successfully"
-
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          path: './docs'
 
   deploy:
     environment:
