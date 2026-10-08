@@ -174,6 +174,8 @@ const ParticleText = ({
 
       let complete = true;
 
+      let allSettled = true;
+
       particles.forEach(particle => {
         let baseX = particle.targetX;
         let baseY = particle.targetY;
@@ -206,6 +208,10 @@ const ParticleText = ({
         const follow = reducedMotion ? 1 : 0.22;
         particle.x += (baseX - particle.x) * follow;
         particle.y += (baseY - particle.y) * follow;
+        
+        if (Math.abs(particle.x - baseX) > 0.1 || Math.abs(particle.y - baseY) > 0.1) {
+          allSettled = false;
+        }
 
         ctx.globalAlpha = clamp(0.35 + progress * 0.65, 0, 1);
         drawParticle(particle);
@@ -218,8 +224,8 @@ const ParticleText = ({
         gathering = false;
       }
 
-      // If finished gathering, pointer is inactive, and no idle drift, pause loop
-      if (!gathering && !pointer.active && idleDrift === 0 && Math.abs(pointer.smoothX - pointer.x) < 0.5) {
+      // If finished gathering, pointer is inactive, no idle drift, and all particles are settled, pause loop
+      if (!gathering && !pointer.active && idleDrift === 0 && Math.abs(pointer.smoothX - pointer.x) < 0.5 && allSettled) {
         animationFrame = null;
         return;
       }
