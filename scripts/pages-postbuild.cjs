@@ -39,11 +39,8 @@ try {
   ];
 
   staticRoutes.forEach(route => {
-    const routeDir = path.join(dist, route);
-    if (!fs.existsSync(routeDir)) {
-      fs.mkdirSync(routeDir, { recursive: true });
-    }
-    fs.copyFileSync(indexHtml, path.join(routeDir, 'index.html'));
+    // Generate route.html so GitHub Pages can serve it cleanly for /route
+    fs.copyFileSync(indexHtml, path.join(dist, `${route}.html`));
   });
 
   // Ensure Jekyll does not process output
