@@ -6,7 +6,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { LazyMotion, domAnimation } from "framer-motion";
 
 createRoot(document.getElementById("root")!).render(
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="dark" forcedTheme="dark" storageKey="fitfare-theme">
         <LazyMotion features={domAnimation}>
             <App />
         </LazyMotion>
