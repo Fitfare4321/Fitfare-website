@@ -2,44 +2,55 @@ import { useRef, useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 
-// Card images
-import heroCardGym from "@/assets/hero-card-gym.jpg";
-import heroCardYoga from "@/assets/hero-card-yoga.jpg";
-import strengthImg from "@/assets/strength.jpg";
-import cardioImg from "@/assets/cardio.jpg";
-import kickboxingImg from "@/assets/kickboxing.jpg";
-import yogaImg from "@/assets/yoga.jpg";
-import zumbaImg from "@/assets/zumba.jpg";
+// Activity category card images (no duplicates)
+import pilatesImg from "@/assets/categories/pilates.jpg";
+import cyclingImg from "@/assets/categories/cycling.jpg";
+import meditationImg from "@/assets/categories/meditation.jpg";
+import aerobicsImg from "@/assets/categories/aerobics.jpg";
+import gymImg from "@/assets/categories/gym.jpg";
+import boxingImg from "@/assets/categories/boxing.jpg";
+import calisthenicsImg from "@/assets/categories/calisthenics.jpg";
+import swimmingImg from "@/assets/categories/swimming.jpg";
+import yogaImg from "@/assets/categories/yoga.jpg";
+import crossfitImg from "@/assets/categories/crossfit.jpg";
+import climbingImg from "@/assets/categories/climbing.jpg";
+import functionalImg from "@/assets/categories/functional.jpg";
+import kickboxingImg from "@/assets/categories/kickboxing.jpg";
+import zumbaImg from "@/assets/categories/zumba.jpg";
+import hiitImg from "@/assets/categories/hiit.jpg";
+import cardioImg from "@/assets/categories/cardio.jpg";
 
-// ── 4 Columns: outer = small, inner = big ──
+// ── 4 Columns: 16 unique activity categories, zero duplicates ──
 // Col 1 (far left — smallest)
 const col1Cards = [
-  { src: cardioImg, label: "CARDIO" },
-  { src: yogaImg, label: "WELLNESS" },
-  { src: zumbaImg, label: "ZUMBA" },
+  { src: pilatesImg, label: "PILATES" },
+  { src: cyclingImg, label: "CYCLING" },
+  { src: meditationImg, label: "MEDITATION" },
+  { src: aerobicsImg, label: "GROUP FITNESS" },
 ];
 
 // Col 2 (inner left — biggest)
 const col2Cards = [
-  { src: heroCardGym, label: "GYM" },
-  { src: strengthImg, label: "STRENGTH" },
-  { src: kickboxingImg, label: "KICKBOXING" },
-  { src: heroCardYoga, label: "YOGA" },
+  { src: gymImg, label: "GYM" },
+  { src: boxingImg, label: "BOXING" },
+  { src: calisthenicsImg, label: "CALISTHENICS" },
+  { src: swimmingImg, label: "SWIMMING" },
 ];
 
 // Col 3 (inner right — biggest)
 const col3Cards = [
-  { src: heroCardYoga, label: "YOGA" },
-  { src: heroCardGym, label: "FITNESS" },
-  { src: zumbaImg, label: "MOVEMENT" },
-  { src: strengthImg, label: "POWER" },
+  { src: yogaImg, label: "YOGA" },
+  { src: crossfitImg, label: "CROSSFIT" },
+  { src: climbingImg, label: "ROPE CLIMBING" },
+  { src: functionalImg, label: "FUNCTIONAL" },
 ];
 
 // Col 4 (far right — smallest)
 const col4Cards = [
-  { src: kickboxingImg, label: "BOXING" },
-  { src: cardioImg, label: "HIIT" },
-  { src: yogaImg, label: "STRETCH" },
+  { src: kickboxingImg, label: "KICKBOXING" },
+  { src: zumbaImg, label: "DANCE & ZUMBA" },
+  { src: hiitImg, label: "HIIT" },
+  { src: cardioImg, label: "CARDIO" },
 ];
 
 const marqueeItems = [

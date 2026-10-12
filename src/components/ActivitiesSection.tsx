@@ -1,12 +1,13 @@
 import { WorksWheel } from "@/components/ui/works-wheel";
 import { ArrowRight } from "lucide-react";
 
-import gymImg from "@/assets/hero-card-gym.jpg";
-import yogaImg from "@/assets/yoga.jpg";
-import functionalImg from "@/assets/strength.jpg";
-import groupImg from "@/assets/cardio.jpg";
-import danceImg from "@/assets/zumba.jpg";
-import exploreImg from "@/assets/kickboxing.jpg"; // Mock image for explore more
+import gymImg from "@/assets/categories/gym.jpg";
+import yogaImg from "@/assets/categories/yoga.jpg";
+import functionalImg from "@/assets/categories/functional.jpg";
+import groupImg from "@/assets/categories/aerobics.jpg";
+import danceImg from "@/assets/categories/zumba.jpg";
+import climbingImg from "@/assets/categories/climbing.jpg";
+import swimmingImg from "@/assets/categories/swimming.jpg";
 
 const activitiesData = [
   { id: 1, title: "Gyms", image: gymImg, alt: "Gyms", href: "#" },
@@ -14,7 +15,8 @@ const activitiesData = [
   { id: 3, title: "Functional Training", image: functionalImg, alt: "Functional Training", href: "#" },
   { id: 4, title: "Group Fitness", image: groupImg, alt: "Group Fitness", href: "#" },
   { id: 5, title: "Dance & Zumba", image: danceImg, alt: "Dance & Zumba", href: "#" },
-  { id: 6, title: "Explore More", image: exploreImg, alt: "Explore More", href: "#" }
+  { id: 6, title: "Rope Climbing", image: climbingImg, alt: "Rope Climbing", href: "#" },
+  { id: 7, title: "Swimming", image: swimmingImg, alt: "Swimming", href: "#" }
 ];
 
 import { m } from "framer-motion";
