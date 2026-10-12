@@ -35,6 +35,7 @@ import OwnerReviews from "./pages/ownerpages/OwnerReviews";
 import OwnerProfile from "./pages/ownerpages/OwnerProfile";
 import OwnerGallery from "./pages/ownerpages/OwnerGallery";
 import PartnerFormPage from "./pages/PartnerFormPage";
+import PartnerLandingPage from "./pages/PartnerLandingPage";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
 
@@ -86,6 +87,8 @@ const App = () => (
             <Route path="/owner-access/profile" element={<OwnerProfile />} />
             <Route path="/owner-access/gallery" element={<OwnerGallery />} />
             <Route path="/partner-form" element={<PartnerFormPage />} />
+            <Route path="/for-partners" element={<PartnerLandingPage />} />
+            <Route path="/partners" element={<PartnerLandingPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

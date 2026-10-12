@@ -169,6 +169,12 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://fitfare.in/for-partners</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://fitfare.in/gurgaon</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -206,6 +212,12 @@
   </url>
   <url>
     <loc>https://fitfare.in/partner-form</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://fitfare.in/partners</loc>
     <lastmod>2026-10-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

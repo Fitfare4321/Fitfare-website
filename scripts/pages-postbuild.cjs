@@ -35,7 +35,9 @@ try {
     'terms-and-conditions',
     'cancellation-refunds',
     'contact',
-    'partner-form'
+    'partner-form',
+    'for-partners',
+    'partners'
   ];
 
   staticRoutes.forEach(route => {
