@@ -4,7 +4,7 @@ import logo from "@/assets/blue-background-logo.png";
 
 const Footer = () => {
   return (
-    <footer className="bg-black pt-20 pb-10 border-t border-gray-900 text-white">
+    <footer id="footer" className="bg-black pt-20 pb-10 border-t border-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">

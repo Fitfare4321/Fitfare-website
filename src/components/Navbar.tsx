@@ -572,9 +572,16 @@ const Navbar = () => {
       <div className="ml-1 scale-90 md:scale-100 origin-right">
         <GlassButton 
           size="default"
-          href="https://play.google.com/store/apps/details?id=in.fitfare.app"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#footer"
+          onClick={(e: React.MouseEvent) => {
+            e.preventDefault();
+            const footerEl = document.getElementById("footer");
+            if (footerEl) {
+              footerEl.scrollIntoView({ behavior: "smooth" });
+            } else {
+              handleNavClick("/#footer");
+            }
+          }}
         >
           Get the App
         </GlassButton>

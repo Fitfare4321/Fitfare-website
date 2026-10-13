@@ -41,7 +41,13 @@ const FinalCTASection = () => {
 
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
           <div className="w-full sm:w-auto scale-90 sm:scale-100 hover:scale-[1.03] active:scale-[0.97] transition-transform duration-300">
-            <GlassButton size="lg" contentClassName="flex items-center gap-3">
+            <GlassButton 
+              size="lg" 
+              href="https://apps.apple.com/in/app/fitfare-pay-per-go-fitness/id6797875405"
+              target="_blank"
+              rel="noopener noreferrer"
+              contentClassName="flex items-center gap-3"
+            >
               <CIcon icon={cibApple} className="w-7 h-7" />
               <div className="text-left">
                 <div className="text-[10px] uppercase tracking-wider font-bold leading-none mb-1 opacity-70">Download on the</div>

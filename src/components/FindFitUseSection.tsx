@@ -79,9 +79,16 @@ const FindFitUseSection = () => {
                   <div className="scale-100 md:scale-110 mt-2 hover:scale-105 active:scale-95 transition-transform duration-300 inline-block">
                     <GlassButton 
                       size="lg" 
-                      href="https://play.google.com/store/apps/details?id=in.fitfare.app"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="#footer"
+                      onClick={(e: React.MouseEvent) => {
+                        e.preventDefault();
+                        const footerEl = document.getElementById("footer");
+                        if (footerEl) {
+                          footerEl.scrollIntoView({ behavior: "smooth" });
+                        } else {
+                          window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+                        }
+                      }}
                       contentClassName="flex items-center gap-2"
                     >
                       <span>Get the FitFare App</span>
