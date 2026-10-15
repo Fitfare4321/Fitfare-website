@@ -548,144 +548,112 @@
   color: #71717a;
 }
 
-/* ── Mission & Vision Section (Architectural Foundation) ── */
-.about-editorial-wrapper .mission-vision-section {
-  padding: 7rem 0 7.5rem 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+/* ── Mission & Vision Section ── */
+.mission-vision-section {
+  padding: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
-  background: #060608;
+  background: #050508;
   overflow: hidden;
 }
 
-.about-editorial-wrapper .mv-backdrop-mesh {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: radial-gradient(
-      ellipse 90% 60% at 50% 0%,
-      rgba(48, 92, 222, 0.12) 0%,
-      rgba(48, 92, 222, 0.02) 50%,
-      transparent 80%
-    ),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.015) 0%, transparent 60%);
-}
-
-.about-editorial-wrapper .mv-section-header {
-  margin-bottom: 4rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
+.mv-main-grid {
+  max-width: 1440px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
   position: relative;
-  z-index: 2;
+  z-index: 1;
 }
 
-.about-editorial-wrapper .mv-kicker-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.38rem 0.95rem;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.mv-cta-link:hover {
+  color: #ffffff !important;
 }
 
-.about-editorial-wrapper .mv-kicker-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
-  animation: pulseDot 2.2s infinite ease-in-out;
+.mv-cta-link:hover svg {
+  transform: translate(2px, -2px);
+  transition: transform 0.3s ease;
 }
 
-.about-editorial-wrapper .mv-kicker-text {
-  font-family: monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: #e4e4e7;
-  font-weight: 700;
+@media (max-width: 1024px) {
+  .mv-main-grid {
+    grid-template-columns: 1fr !important;
+    min-height: auto !important;
+  }
+  .mv-photo-col {
+    min-height: 380px !important;
+    max-height: 480px !important;
+    order: -1 !important;
+  }
+  .mv-blend-edge {
+    background: linear-gradient(180deg, transparent 60%, #050508 100%) !important;
+  }
+  .mv-left-col {
+    padding: 3rem 2rem !important;
+  }
 }
 
-.about-editorial-wrapper .mv-editorial-title {
-  font-size: clamp(2.3rem, 4.2vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-  line-height: 1.15;
-  color: #ffffff;
-  margin: 0;
-  font-family: 'Inter', 'DM Sans', system-ui, sans-serif;
+@media (max-width: 768px) {
+  .mv-left-col {
+    padding: 2.5rem 1.5rem !important;
+  }
+  .mv-statement-card {
+    padding: 1.75rem 1.5rem !important;
+    border-radius: 1.25rem !important;
+  }
+  .mv-card-title {
+    font-size: 1.35rem !important;
+  }
+  .mv-card-desc {
+    font-size: 0.9rem !important;
+    line-height: 1.65 !important;
+  }
 }
 
-.about-editorial-wrapper .mv-editorial-highlight {
-  background: linear-gradient(135deg, #ffffff 40%, #a1a1aa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.about-editorial-wrapper .mv-editorial-sub {
-  font-size: 1.05rem;
-  line-height: 1.75;
-  color: #a1a1aa;
-  max-width: 680px;
-  margin: 0;
-  text-align: center;
-  font-weight: 400;
-}
-
-/* ── Unified Mission & Vision Showcase Card (Matching Reference Layout) ── */
-.about-editorial-wrapper .unified-vm-card {
-  position: relative;
-  border-radius: 2.25rem;
-  background: #0b1120;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 30px 90px -15px rgba(0, 0, 0, 0.9), 0 0 50px rgba(48, 92, 222, 0.08);
-  overflow: hidden;
-  transition: border-color 0.4s ease, box-shadow 0.4s ease;
-}
-
-.about-editorial-wrapper .unified-vm-card:hover {
-  border-color: rgba(255, 255, 255, 0.3);
-  box-shadow: 0 35px 100px -10px rgba(0, 0, 0, 0.95), 0 0 60px rgba(48, 92, 222, 0.15);
-}
-
-.about-editorial-wrapper .vm-block {
-  border-radius: 1.25rem;
-  transition: background 0.3s ease;
-}
-
-.about-editorial-wrapper .bg-radial-vignette {
-  background: radial-gradient(circle at 60% 50%, transparent 45%, rgba(7, 13, 26, 0.45) 85%, #070d1a 100%);
-}
-
-/* Keyframe Animations */
-@keyframes radarSweep {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes orbitSpin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-@keyframes pulseRing {
-  0% { transform: scale(1); opacity: 0.9; }
-  50% { transform: scale(1.6); opacity: 0.3; }
-  100% { transform: scale(2.2); opacity: 0; }
-}
-
-@keyframes pulseDot {
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.25); opacity: 0.7; }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(3px); }
-  to { opacity: 1; transform: translateY(0); }
+@media (max-width: 480px) {
+  .mv-photo-col {
+    min-height: 260px !important;
+    max-height: 320px !important;
+  }
+  .mv-left-col {
+    padding: 2rem 1rem !important;
+  }
+  .mv-kicker-fade {
+    margin-bottom: 1.25rem !important;
+  }
+  .mv-statement-card {
+    padding: 1.35rem 1.15rem !important;
+    border-radius: 1rem !important;
+    margin-bottom: 0.85rem !important;
+  }
+  .mv-card-title {
+    font-size: 1.2rem !important;
+  }
+  .mv-card-desc {
+    font-size: 0.86rem !important;
+    line-height: 1.55 !important;
+  }
+  .mv-stats-row {
+    display: grid !important;
+    grid-template-columns: repeat(3, 1fr) !important;
+    gap: 0.45rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .mv-stat-pill {
+    padding: 0.5rem 0.35rem !important;
+    justify-content: center !important;
+    gap: 0.3rem !important;
+    border-radius: 8px !important;
+  }
+  .mv-stat-val {
+    font-size: 0.78rem !important;
+  }
+  .mv-stat-lbl {
+    font-size: 0.58rem !important;
+    letter-spacing: 0.02em !important;
+  }
 }
 
 /* ── Gallery Section ── */

@@ -9,6 +9,7 @@ import {
 import gymImg from "@/assets/categories/gym.jpg";
 import yogaImg from "@/assets/categories/yoga.jpg";
 import boxingImg from "@/assets/categories/boxing.jpg";
+import "./AboutEditorial.css";
 
 export const MissionVisionSection: React.FC = () => {
   const [activeCard, setActiveCard] = useState<"vision" | "mission" | null>(null);
@@ -537,101 +538,6 @@ export const MissionVisionSection: React.FC = () => {
           </div>
         </div>
       </div>
-
-      {/* Responsive CSS injected as style tag */}
-      <style>{`
-        .mv-main-grid {
-          grid-template-columns: 1fr 1fr !important;
-        }
-
-        .mv-cta-link:hover {
-          color: #ffffff !important;
-        }
-
-        .mv-cta-link:hover svg {
-          transform: translate(2px, -2px);
-          transition: transform 0.3s ease;
-        }
-
-        @media (max-width: 1024px) {
-          .mv-main-grid {
-            grid-template-columns: 1fr !important;
-            min-height: auto !important;
-          }
-          .mv-photo-col {
-            min-height: 380px !important;
-            max-height: 480px !important;
-            order: -1 !important;
-          }
-          .mv-blend-edge {
-            background: linear-gradient(180deg, transparent 60%, #050508 100%) !important;
-          }
-          .mv-left-col {
-            padding: 3rem 2rem !important;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .mv-left-col {
-            padding: 2.5rem 1.5rem !important;
-          }
-          .mv-statement-card {
-            padding: 1.75rem 1.5rem !important;
-            border-radius: 1.25rem !important;
-          }
-          .mv-card-title {
-            font-size: 1.35rem !important;
-          }
-          .mv-card-desc {
-            font-size: 0.9rem !important;
-            line-height: 1.65 !important;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .mv-photo-col {
-            min-height: 260px !important;
-            max-height: 320px !important;
-          }
-          .mv-left-col {
-            padding: 2rem 1rem !important;
-          }
-          .mv-kicker-fade {
-            margin-bottom: 1.25rem !important;
-          }
-          .mv-statement-card {
-            padding: 1.35rem 1.15rem !important;
-            border-radius: 1rem !important;
-            margin-bottom: 0.85rem !important;
-          }
-          .mv-card-title {
-            font-size: 1.2rem !important;
-          }
-          .mv-card-desc {
-            font-size: 0.86rem !important;
-            line-height: 1.55 !important;
-          }
-          .mv-stats-row {
-            display: grid !important;
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 0.45rem !important;
-            margin-bottom: 1.5rem !important;
-          }
-          .mv-stat-pill {
-            padding: 0.5rem 0.35rem !important;
-            justify-content: center !important;
-            gap: 0.3rem !important;
-            border-radius: 8px !important;
-          }
-          .mv-stat-val {
-            font-size: 0.78rem !important;
-          }
-          .mv-stat-lbl {
-            font-size: 0.58rem !important;
-            letter-spacing: 0.02em !important;
-          }
-        }
-      `}</style>
     </section>
   );
 };
