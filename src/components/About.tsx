@@ -1,643 +1,453 @@
-"use client";
-
-import { useRef } from "react";
-import { m, useInView } from "framer-motion";
-import { useTheme } from "next-themes";
+import React, { useEffect, useRef, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { CustomEase } from "gsap/CustomEase";
 import {
+  ArrowLeft,
+  ArrowUpRight,
   Target,
-  Eye,
-  Sparkles,
-  Clock,
-  Handshake,
-  Users,
-  TrendingUp,
-  Award,
-  ShieldCheck,
-  Zap,
   Globe,
-  CheckCircle2,
-  BarChart3,
-  ArrowRight,
-  Heart,
-  Lightbulb,
-  Rocket,
 } from "lucide-react";
+import "./AboutEditorial.css";
+import MissionVisionSection from "./MissionVisionSection";
 
-/* ─────────────────────── DATA ─────────────────────── */
+// High-fidelity fitness photography from the codebase
+import gymImg from "@/assets/categories/gym.jpg";
+import yogaImg from "@/assets/categories/yoga.jpg";
+import pilatesImg from "@/assets/categories/pilates.jpg";
+import boxingImg from "@/assets/categories/boxing.jpg";
+import functionalImg from "@/assets/categories/functional.jpg";
+import heroFitnessImg from "@/assets/gym_interior_color_1790323279413.jpg";
 
-const coreValues = [
-  {
-    title: "Client-Aligned Execution",
-    description:
-      "We operate as strategic partners aligning every initiative with measurable outcomes and long-term client success.",
-    icon: Target,
-    gradient: "from-blue-500/20 to-cyan-500/10",
-    iconColor: "text-blue-400",
-    border: "border-blue-500/20",
-  },
-  {
-    title: "Precision With Creative Freedom",
-    description:
-      "We define the strategy with clarity and empower creative excellence in execution where systems meet artistry.",
-    icon: Sparkles,
-    gradient: "from-violet-500/20 to-purple-500/10",
-    iconColor: "text-violet-400",
-    border: "border-violet-500/20",
-  },
-  {
-    title: "Time & Energy Discipline",
-    description:
-      "We prioritize ruthlessly. Efficiency is our operating system eliminating waste, maximizing impact.",
-    icon: Clock,
-    gradient: "from-amber-500/20 to-orange-500/10",
-    iconColor: "text-amber-400",
-    border: "border-amber-500/20",
-  },
-  {
-    title: "Relationship Driven Growth",
-    description:
-      "We optimize for long-term trust, not short-term transactions. Partnerships built on transparency compound exponentially.",
-    icon: Handshake,
-    gradient: "from-emerald-500/20 to-teal-500/10",
-    iconColor: "text-emerald-400",
-    border: "border-emerald-500/20",
-  },
-  {
-    title: "The Team Is the Brand",
-    description:
-      "Our people define our reputation, performance, and future. We hire character first, skill second.",
-    icon: Users,
-    gradient: "from-rose-500/20 to-pink-500/10",
-    iconColor: "text-rose-400",
-    border: "border-rose-500/20",
-  },
-  {
-    title: "Transparent Execution",
-    description:
-      "Clarity in communication. Visibility in progress. Accountability in results no surprises, ever.",
-    icon: Eye,
-    gradient: "from-cyan-500/20 to-sky-500/10",
-    iconColor: "text-cyan-400",
-    border: "border-cyan-500/20",
-  },
-];
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger, CustomEase);
 
-const stats = [
-  { number: "Niche-Focused", label: "Fitness Industry Only", icon: Users },
-  { number: "System-Led", label: "Structured Growth Approach", icon: TrendingUp },
-  { number: "Performance-Driven", label: "Outcome Oriented Execution", icon: ShieldCheck },
-  { number: "Pioneering", label: "Redefining Fitness Brand Growth", icon: Award },
-];
-
-const milestones = [
-  {
-    title: "Vision & Foundation (2025)",
-    desc: "FitFare was born from our own experiences in gyms we realized the challenges fitness brands and users face daily. Our purpose became clear: to empower brands to scale with structured strategy and performance driven execution, while creating better experiences for fitness enthusiasts\u00A0everywhere."
-  },
-  {
-    title: "Establishing Core Systems",
-    desc: "We built robust operating frameworks, internal workflows, and defined processes that ensure consistency, efficiency, and measurable results."
-  },
-  {
-    title: "Scaling a Remote Team",
-    desc: "Assembled a fully remote team of strategists, creatives, technologists, and operators collaborating seamlessly across regions to deliver impactful results."
-  },
-  {
-    title: "First Brand Collaborations",
-    desc: "Partnered with emerging fitness brands to enhance marketing clarity, optimize customer funnels, and create scalable growth strategies."
-  },
-
-  {
-    title: "Operational Excellence",
-    desc: "Developed internal playbooks and repeatable workflows, allowing us to maintain high quality outcomes across every project and partnership."
-  },
-  {
-    title: "Future Growth & Impact",
-    desc: "Focused on long term partnerships and continuous improvement, FitFare is committed to driving sustainable growth for fitness brands worldwide while enhancing experiences for users everywhere."
-  },
-];
-
-const teamPrinciples = [
-  { icon: Lightbulb, text: "Think strategically, act decisively" },
-  { icon: Heart, text: "Put client outcomes above everything" },
-  { icon: Rocket, text: "Ship fast, iterate faster" },
-  { icon: Globe, text: "Build for global impact, start local" },
-  { icon: Zap, text: "Energy and excellence, always" },
-  { icon: CheckCircle2, text: "Accountability without blame" },
-];
-
-/* ─────────────────────── ANIMATION VARIANTS ─────────────────────── */
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.7,
-      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
-    },
-  },
-};
-
-const stagger = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.1 } },
-};
-
-/* ─────────────────────── SECTION COMPONENT ─────────────────────── */
-
-function SectionWrapper({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
-  return (
-    <m.div
-      ref={ref}
-      variants={stagger}
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      className={className}
-    >
-      {children}
-    </m.div>
-  );
+// Create custom easing profiles from the design system
+try {
+  CustomEase.create("verticalEase", "0.4, 0, 0.2, 1");
+  CustomEase.create("blurEase", "0.65, 0, 0.35, 1");
+  CustomEase.create("svgEase", "0.25, 0.1, 0.25, 1");
+} catch (e) {
+  // Keep silent if eases are already created
 }
 
-/* ─────────────────────── MAIN COMPONENT ─────────────────────── */
+export default function About() {
+  const compRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
-export default function AboutFitfare() {
-  const { resolvedTheme } = useTheme();
-  const isDark = resolvedTheme === "dark";
+  // Interactive step & discipline state for human-crafted responsiveness
+  const [activeStep, setActiveStep] = useState(0);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+  const [isHovered, setIsHovered] = useState(false);
+
+  const steps = [
+    {
+      num: "01",
+      tag: "DISCOVER",
+      title: "Discover Centres",
+      desc: "Browse vetted strength gyms, yoga studios, and combat spaces near you with zero friction.",
+      img: gymImg,
+      badge: "600+ CURATED SPACES",
+      discipline: "STRENGTH & WEIGHTS",
+    },
+    {
+      num: "02",
+      tag: "SCHEDULE",
+      title: "Schedule Freely",
+      desc: "Book single sessions whenever inspiration strikes. Your timetable, strictly on your terms.",
+      img: yogaImg,
+      badge: "ZERO CALENDAR LOCKS",
+      discipline: "MINDFUL YOGA & REFORMER",
+    },
+    {
+      num: "03",
+      tag: "FLEXIBILITY",
+      title: "Pay As You Go",
+      desc: "Fair per-visit pricing. No monthly recurring fees, no surprise subscription renewals.",
+      img: boxingImg,
+      badge: "PAY ONLY WHEN YOU TRAIN",
+      discipline: "COMBAT & ATHLETICS",
+    },
+  ];
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    setTilt({ x: -(y * 6), y: x * 6 });
+  };
+
+  const handleMouseLeave = () => {
+    setTilt({ x: 0, y: 0 });
+    setIsHovered(false);
+  };
+
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
+
+  useEffect(() => {
+    // GSAP context for safe React mounting & cleanup
+    const ctx = gsap.context(() => {
+      // 1. Hero scale & blur animation
+      gsap.to(".hero-image", {
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top bottom",
+          end: "center center",
+          scrub: true,
+        },
+        scale: 1,
+        opacity: 1,
+        filter: "blur(0px)",
+        duration: 1.5,
+        ease: "blurEase",
+      });
+
+      // 2. Hero content staggered reveal
+      gsap.fromTo(
+        [
+          ".editorial-kicker",
+          ".editorial-headline",
+          ".about-text",
+          ".editorial-pillars",
+          ".editorial-belief-quote",
+        ],
+        { y: 35, opacity: 0, filter: "blur(5px)" },
+        {
+          scrollTrigger: {
+            trigger: ".row-content",
+            start: "top bottom-=60",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          stagger: 0.1,
+          duration: 1.1,
+          ease: "verticalEase",
+        }
+      );
+
+      // 4. Gallery clip-path reveals
+      const galleryItems = document.querySelectorAll(".gallery-item img");
+      galleryItems.forEach((item, index) => {
+        gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: item.parentElement,
+              start: "top bottom-=60",
+              toggleActions: "play none none reverse",
+            },
+          })
+          .fromTo(
+            item,
+            { clipPath: "inset(100% 0 0 0)" },
+            {
+              clipPath: "inset(0% 0 0 0)",
+              duration: 1.1,
+              delay: index * 0.08,
+              ease: "verticalEase",
+            }
+          );
+      });
+
+      // 5. Gallery caption animation
+      gsap.fromTo(
+        ".gallery-caption",
+        { y: 30, opacity: 0, filter: "blur(4px)" },
+        {
+          scrollTrigger: {
+            trigger: ".gallery-caption",
+            start: "top bottom-=60",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 1,
+          ease: "verticalEase",
+        }
+      );
+
+      // 6. Future experience card reveal
+      gsap.fromTo(
+        ".future-experience-card",
+        { y: 45, opacity: 0, filter: "blur(6px)" },
+        {
+          scrollTrigger: {
+            trigger: ".future-experience-section",
+            start: "top bottom-=80",
+            toggleActions: "play none none reverse",
+          },
+          y: 0,
+          opacity: 1,
+          filter: "blur(0px)",
+          duration: 1.2,
+          ease: "verticalEase",
+        }
+      );
+    }, compRef);
+
+    return () => {
+      ctx.revert();
+    };
+  }, []);
 
   return (
-    <div
-      className="overflow-hidden"
-      style={{
-        background: isDark
-          ? "linear-gradient(160deg, #070b13 0%, #0c1422 60%, #0d1120 100%)"
-          : "linear-gradient(160deg, #ffffff 0%, #f4f6fb 60%, #eef1f8 100%)",
-        color: isDark ? "#f1f5f9" : "#1e293b",
-      }}
-    >
-      {/* ═══════════════ HERO ═══════════════ */}
-      <section className="relative min-h-[92vh] flex items-center justify-center px-6 py-14 md:py-32 overflow-hidden">
-        {/* Background orbs */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div
-            className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[900px] h-[900px] rounded-full blur-[160px]"
-            style={{
-              background: isDark
-                ? "radial-gradient(circle, rgba(30,80,180,0.12) 0%, transparent 70%)"
-                : "radial-gradient(circle, rgba(99,179,237,0.18) 0%, transparent 70%)",
-            }}
-          />
-          <div
-            className="absolute bottom-0 right-0 w-[600px] h-[600px] rounded-full blur-[120px]"
-            style={{
-              background: isDark
-                ? "rgba(109,40,217,0.07)"
-                : "rgba(167,139,250,0.1)",
-            }}
-          />
-          {/* Dot grid */}
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: isDark
-                ? "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0)"
-                : "radial-gradient(circle at 1px 1px, rgba(0,0,0,0.04) 1px, transparent 0)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-        </div>
+    <div ref={compRef} className="about-editorial-wrapper wrapper">
 
-
-
-        <div className="relative z-10 max-w-5xl mx-auto text-center">
-          <m.h1
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
-            className="text-5xl md:text-7xl xl:text-8xl font-extrabold leading-[1.05] tracking-tight mb-8"
-          >
-            Architecting{" "}
-            <br className="hidden md:block" />
-            <span
-              className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
-              Scalable Fitness Growth
-            </span>
-          </m.h1>
-
-          <m.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-lg md:text-xl leading-relaxed max-w-2xl mx-auto mb-12"
-            style={{ color: isDark ? "#94a3b8" : "#64748b" }}
-          >
-            FitFare is a performance first growth partner for modern fitness brands.
-            We combine strategy, systems, and execution to transform ambition into
-            scalable, compounding results.
-          </m.p>
-
-
-        </div>
-
-      </section>
-
-      {/* ═══════════════ MISSION & VISION ═══════════════ */}
-     <section
-  className="py-14 md:py-28 px-6"
-        style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
+      {/* ── Editorial Floating Back Button ── */}
+      <button
+        onClick={handleBack}
+        className="about-back-btn group"
+        aria-label="Go back"
       >
-        <SectionWrapper className="max-w-6xl mx-auto">
-          <m.p
-            variants={fadeUp}
-            className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 text-center mb-4"
-          >
-            Our Purpose
-          </m.p>
-          <m.h2
-            variants={fadeUp}
-            className="text-4xl md:text-5xl font-extrabold text-center mb-20 leading-tight"
-          >
-            Driven by{" "}
-            <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent">
-              Mission & Vision
-            </span>
-          </m.h2>
+        <ArrowLeft size={16} />
+        <span>Back</span>
+      </button>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {[
-              {
-                Icon: Target,
-                color: "text-blue-400",
-                glow: "rgba(96,165,250,0.08)",
-                label: "Our Mission",
-                text: "To empower fitness businesses with structured growth systems, predictable revenue frameworks, and brand authority positioning  without compromising authenticity or long-term sustainability. We build engines, not campaigns.",
-                points: ["Structured growth systems", "Predictable revenue frameworks", "Brand authority positioning"],
-              },
-              {
-                Icon: Eye,
-                color: "text-blue-400",
-                glow: "rgba(96,165,250,0.08)",
-                label: "Our Vision",
-                text: "To become the strategic backbone behind high performance fitness brands globally  redefining how digital infrastructure, marketing psychology, and operational excellence combine into a single unified growth system.",
-                points: ["Global fitness growth leader", "Digital & operational excellence", "Scalable impact frameworks"],
-              },
-            ].map(({ Icon, color, glow, label, text, points }) => (
-              <m.div
-                key={label}
-                variants={fadeUp}
-                className="relative overflow-hidden rounded-3xl p-8 border group transition-all duration-500"
-                style={{
-                  background: isDark ? `radial-gradient(ellipse at top left, ${glow}, transparent 60%), rgba(255,255,255,0.02)` : `radial-gradient(ellipse at top left, ${glow}, transparent 60%), rgba(0,0,0,0.02)`,
-                  borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)",
-                }}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      {/* Hero Section (#hero)                                              */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      <section id="hero" className="hero">
+        <div className="container">
+          {/* Top Full-Width Typographic SVG Wordmark */}
+          <div className="row row-svg">
+            <div className="col-12">
+              <div className="svg-container">
+                <svg
+                  width="100%"
+                  height="auto"
+                  viewBox="0 0 1000 120"
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="w-full h-auto select-none"
+                >
+                  <text
+                    x="500"
+                    y="92"
+                    textAnchor="middle"
+                    fill="#ffffff"
+                    fontFamily="'Inter', 'PP Neue Montreal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+                    fontWeight="900"
+                    fontSize="104"
+                    letterSpacing="0.15em"
+                  >
+                    ABOUT US
+                  </text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Row Content (Editorial Showcase: Interactive Stage Left, Narrative Right) */}
+          <div className="row row-content">
+            <div className="col-5 hero-left">
+              <div
+                className="hero-image-stage"
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={handleMouseLeave}
               >
+                {/* Ambient Backlight Aura */}
+                <div className="hero-image-aura" />
+
+                {/* 3D Perspective Card Stage */}
                 <div
-                  className={`w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${color}`}
-                  style={{ background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)", border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.07)" }}
+                  className="hero-image"
+                  style={{
+                    transform: `perspective(1000px) rotateX(${tilt.x}deg) rotateY(${tilt.y}deg)`,
+                    transition: isHovered
+                      ? "transform 0.12s cubic-bezier(0.16, 1, 0.3, 1)"
+                      : "transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
                 >
-                  <Icon size={22} />
-                </div>
-                <h3 className="text-xl font-bold mb-3">{label}</h3>
-                <p className="text-sm leading-relaxed mb-5" style={{ color: isDark ? "#94a3b8" : "#64748b" }}>
-                  {text}
-                </p>
-                <ul className="space-y-2">
-                  {points.map((p) => (
-                    <li key={p} className="flex items-center gap-2 text-sm" style={{ color: isDark ? "#64748b" : "#94a3b8" }}>
-                      <CheckCircle2 size={14} className={color} />
-                      {p}
-                    </li>
+                  {/* Layered Athletics Photography with Fluid Cross-fade */}
+                  {steps.map((step, idx) => (
+                    <img
+                      key={idx}
+                      src={step.img}
+                      alt={step.title}
+                      className={`stage-img ${activeStep === idx ? "active" : ""}`}
+                    />
                   ))}
-                </ul>
-              </m.div>
-            ))}
-          </div>
-        </SectionWrapper>
-      </section>
+                  <div className="stage-vignette" />
 
-      {/* ═══════════════ STATS ═══════════════ */}
-      <section
-        className="py-24 px-6"
-        style={{
-          background: isDark
-            ? "linear-gradient(180deg, transparent 0%, rgba(30,58,138,0.06) 50%, transparent 100%)"
-            : "linear-gradient(180deg, transparent 0%, rgba(219,234,254,0.4) 50%, transparent 100%)",
-        }}
-      >
-        <SectionWrapper className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {stats.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <m.div
-                  key={i}
-                  variants={fadeUp}
-                  whileHover={{ y: -6, scale: 1.02 }}
-                  className="relative overflow-hidden rounded-2xl p-6 text-center group transition-all duration-500"
-                  style={{
-                    background: isDark ? "rgba(255,255,255,0.04)" : "rgba(255,255,255,0.8)",
-                    border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.07)",
-                    backdropFilter: "blur(16px)",
-                  }}
-                >
-                  {/* Top glow on hover */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                    style={{ background: "radial-gradient(ellipse at top, rgba(42,157,143,0.12), transparent 60%)" }}
-                  />
-                  <Icon size={20} className="mx-auto mb-3 text-blue-400" />
-                  <div
-  className="text-xl sm:text-2xl font-extrabold mb-1 bg-clip-text text-transparent leading-tight break-words"
-  style={{ backgroundImage: "linear-gradient(to right,#60A5FA,#3B82F6,#06B6D4)" }}
->
-  {item.number}
-</div>
-                  <p className="text-sm" style={{ color: isDark ? "#64748b" : "#94a3b8" }}>
-                    {item.label}
-                  </p>
-                </m.div>
-              );
-            })}
-          </div>
-        </SectionWrapper>
-      </section>
-
-      {/* ═══════════════ OUR STORY / TIMELINE ═══════════════ */}
-      <section
-        className="py-20 px-6"
-        style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
-      >
-        <SectionWrapper className="max-w-6xl mx-auto">
-          <m.p
-            variants={fadeUp}
-            className="text-xs font-semibold uppercase tracking-[0.3em] text-[#42A4E6] text-center mb-4"
-          >
-            Our Journey
-          </m.p>
-          <m.h2
-            variants={fadeUp}
-            className="text-4xl md:text-5xl font-extrabold text-center mb-20"
-          >
-            Shaping the Next {" "}
-            <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
-              Era of Fitness Brands
-            </span>
-          </m.h2>
-
-          <div className="relative">
-            {/* Vertical line */}
-            <div
-              className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px md:-translate-x-1/2"
-              style={{ background: isDark ? "linear-gradient(180deg, transparent, rgba(255,255,255,0.1) 20%, rgba(255,255,255,0.1) 80%, transparent)" : "linear-gradient(180deg, transparent, rgba(0,0,0,0.08) 20%, rgba(0,0,0,0.08) 80%, transparent)" }}
-            />
-
-            <div className="space-y-10 pl-16 md:pl-0">
-              {milestones.map((m, i) => (
-                <m.div
-                  key={i}
-                  variants={fadeUp}
-                  className={`relative flex flex-col md:flex-row gap-6 ${i % 2 === 0 ? "md:flex-row-reverse" : ""}`}
-                >
-                  {/* Dot */}
-                  <div
-                    className="absolute left-[-2.6rem] md:left-1/2 top-3 w-3 h-3 rounded-full md:-translate-x-1/2"
-                    style={{
-                      background: "#2a9d8f",
-                      boxShadow: `0 0 0 4px ${isDark ? "rgba(42,157,143,0.2)" : "rgba(42,157,143,0.15)"}`,
-                    }}
-                  />
-
-                  {/* Year */}
-                  <div className={`md:w-[calc(50%-2rem)] flex ${i % 2 === 0 ? "md:justify-start" : "md:justify-end"}`}>
-
+                  {/* Editorial Frame Header */}
+                  <div className="stage-frame-header">
+                    <span className="stage-meta-tag">ARCHIVE // {steps[activeStep].num}</span>
+                    <span className="stage-meta-discipline">{steps[activeStep].discipline}</span>
                   </div>
+                </div>
+              </div>
+            </div>
 
-                  {/* Card */}
-                  <div className={`md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:text-right" : ""}`}>
-                    <div
-                      className="rounded-2xl p-5 border transition-all duration-300"
-                      style={{
-                        background: isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.9)",
-                        borderColor: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)",
-                      }}
-                    >
-                      <h4 className="font-bold mb-1">{m.title}</h4>
-                      <p className="text-sm leading-relaxed" style={{ color: isDark ? "#94a3b8" : "#64748b" }}>
-                        {m.desc}
-                      </p>
+            <div className="col-1" /> {/* Breathing space */}
+
+            <div className="col-6 hero-right">
+              {/* Editorial Kicker */}
+              <div className="editorial-kicker">
+                <span className="kicker-index">01</span>
+                <span className="kicker-sep">/</span>
+                <span className="kicker-label">THE FITFARE MANIFESTO</span>
+              </div>
+
+              {/* Editorial Display Headline */}
+              <h2 className="editorial-headline">
+                Fitness That <br />
+                <span className="editorial-headline-accent">Fits Your Life.</span>
+              </h2>
+
+              {/* Exact Required Body Text */}
+              <p className="about-text">
+                FitFare makes fitness more flexible by giving people access to fitness centres
+                without the commitment of traditional memberships. Whether it’s strength training,
+                yoga, dance, or other fitness activities, users can discover centres, schedule their
+                sessions, and pay based on when they work out.
+              </p>
+
+              {/* 3 Interactive Editorial Pillars (Hover to cross-fade visual stage) */}
+              <div className="editorial-pillars">
+                {steps.map((step, idx) => (
+                  <div
+                    key={idx}
+                    className={`editorial-pillar-row ${activeStep === idx ? "active" : ""}`}
+                    onMouseEnter={() => setActiveStep(idx)}
+                    onClick={() => setActiveStep(idx)}
+                    role="button"
+                    tabIndex={0}
+                  >
+                    <div className="pillar-num-col">
+                      <span className="pillar-num">{step.num}</span>
+                      <div className="pillar-indicator" />
+                    </div>
+                    <div className="pillar-content">
+                      <div className="pillar-header">
+                        <h3 className="pillar-title">{step.title}</h3>
+                        <span className="pillar-badge">{step.tag}</span>
+                      </div>
+                      <p className="pillar-desc">{step.desc}</p>
                     </div>
                   </div>
-                </m.div>
-              ))}
+                ))}
+              </div>
+
+              {/* Editorial Belief Statement */}
+              <div className="editorial-belief-quote">
+                <div className="quote-accent-bar" />
+                <div className="quote-body">
+                  <p className="quote-text">
+                    “We believe fitness should fit into your lifestyle,{" "}
+                    <span className="quote-highlight">not the other way around.</span>”
+                  </p>
+                  <div className="quote-meta">
+                    <span className="quote-tag">THE FITFARE PRINCIPLE</span>
+                    <span className="quote-divider">•</span>
+                    <span className="quote-sub">BUILT FOR REAL ROUTINES</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </SectionWrapper>
+        </div>
       </section>
 
+      {/* ───────────────────────────────────────────────────────────────── */}
+      {/* Mission & Vision Section (Architectural Interactive Centerpiece)  */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      <MissionVisionSection />
 
-      {/* ═══════════════ CORE VALUES ═══════════════ */}
-      <section
-        className="py-28 px-6"
-        style={{
-          borderTop: isDark
-            ? "1px solid rgba(255,255,255,0.06)"
-            : "1px solid rgba(0,0,0,0.06)",
-          background: isDark
-            ? "linear-gradient(180deg, transparent 0%, rgba(109,40,217,0.04) 50%, transparent 100%)"
-            : "linear-gradient(180deg, transparent 0%, rgba(233,213,255,0.2) 50%, transparent 100%)",
-        }}
-      >
-        <SectionWrapper className="max-w-7xl mx-auto">
-          <m.p
-            variants={fadeUp}
-            className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold justify-center flex text-xl mb-5"
-          >
-            How We Operate
-          </m.p>
-
-          <m.h2
-            variants={fadeUp}
-            className="text-4xl md:text-5xl font-extrabold text-center mb-6"
-          >
-            Our Core Philosophy
-          </m.h2>
-
-          <m.p
-            variants={fadeUp}
-            className="text-center max-w-2xl mx-auto mb-16 text-sm leading-relaxed"
-            style={{ color: isDark ? "#64748b" : "#94a3b8" }}
-          >
-            The operating principles that define how Fitfare executes,
-            communicates, and scales impact — every single day.
-          </m.p>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {coreValues.map((item, i) => {
-              const Icon = item.icon;
-              return (
-                <m.div
-                  key={i}
-                  variants={fadeUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  transition={{ duration: 0.3, ease: "easeOut" }}
-                  className="group relative overflow-hidden rounded-2xl p-6 border transition-all duration-300"
-                  style={{
-                    background: isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.9)",
-                    borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.07)",
-                    backdropFilter: "blur(12px)",
-                  }}
-                >
-                  {/* Hover glow */}
-                  <div
-                    className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"
-                    style={{ background: "radial-gradient(ellipse at top left, rgba(42,157,143,0.1), transparent 60%)" }}
-                  />
-
-                  <div
-                    className={`w-10 h-10 rounded-xl flex items-center justify-center mb-4 ${item.iconColor}`}
-                    style={{
-                      background: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)",
-                      border: isDark ? "1px solid rgba(255,255,255,0.08)" : "1px solid rgba(0,0,0,0.06)",
-                    }}
-                  >
-                    <Icon size={18} />
-                  </div>
-
-                  <h4 className="font-bold text-sm mb-2 relative z-10">{item.title}</h4>
-                  <p className="text-xs leading-relaxed relative z-10" style={{ color: isDark ? "#94a3b8" : "#64748b" }}>
-                    {item.description}
-                  </p>
-                </m.div>
-              );
-            })}
-          </div>
-        </SectionWrapper>
-      </section>
-
-      {/* ═══════════════ TEAM PRINCIPLES ═══════════════ */}
-      <section
-        className="py-24 px-6"
-        style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
-      >
-        <SectionWrapper className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+      {/* ───────────────────────────────────────────────────────────────── */}
+      {/* Gallery Section (#gallery) - How FitFare Works                    */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      <section id="gallery" className="gallery">
+        <div className="container">
+          <div className="gallery-header-row">
             <div>
-              <m.p
-                variants={fadeUp}
-                className="text-xs font-semibold uppercase tracking-[0.3em] text-[#40B2DF] mb-4"
-              >
-                Our Team DNA
-              </m.p>
-              <m.h2
-                variants={fadeUp}
-                className="text-4xl md:text-5xl font-extrabold leading-tight mb-6"
-              >
-                A Team Built{" "}
-                <span className="bg-gradient-to-r from-[#60A5FA] via-[#3B82F6] to-[#06B6D4] bg-clip-text text-transparent font-extrabold">
-                  Differently
-                </span>
-              </m.h2>
-              <m.p
-                variants={fadeUp}
-                className="text-sm leading-relaxed"
-                style={{ color: isDark ? "#94a3b8" : "#64748b" }}
-              >
-                FitFare is a fully remote team of innovators, thinkers, and doers — united by a passion for performance. We don’t just work together; we elevate each other and our outcomes.
-              </m.p>
+              <div className="gallery-tag">✦ HOW FITFARE WORKS ✦</div>
+              <h2 className="gallery-title">Every Movement. Zero Contracts.</h2>
             </div>
+            <Link
+              to="/for-partners"
+              className="hidden sm:inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-zinc-400 hover:text-white transition-colors"
+            >
+              <span>Explore Partner Studios</span>
+              <ArrowUpRight size={14} />
+            </Link>
+          </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {teamPrinciples.map((p, i) => {
-                const Icon = p.icon;
-                return (
-                  <m.div
-                    key={i}
-                    variants={fadeUp}
-                    className="flex items-center gap-3 p-4 rounded-xl border transition-all duration-300 group"
-                    style={{
-                      background: isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.85)",
-                      borderColor: isDark ? "rgba(255,255,255,0.07)" : "rgba(0,0,0,0.07)",
-                    }}
-                  >
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center shrink-0 text-[#50ACE8]"
-                      style={{
-                        background: isDark ? "rgba(244,63,94,0.1)" : "rgba(244,63,94,0.07)",
-                      }}
-                    >
-                      <Icon size={15} />
-                    </div>
-                    <span className="text-xs font-medium leading-snug">{p.text}</span>
-                  </m.div>
-                );
-              })}
+          <div className="row">
+            <div className="col-12">
+              {/* 5 Vertical Gallery Panels with Upward Clip-Path Reveal */}
+              <div className="gallery-wrapper">
+                <div className="gallery-item">
+                  <span className="gallery-item-badge">01 STRENGTH</span>
+                  <img src={gymImg} alt="Strength & Gym Training" />
+                  <div className="gallery-item-title">Gym & Weights</div>
+                </div>
+
+                <div className="gallery-item">
+                  <span className="gallery-item-badge">02 MINDFUL</span>
+                  <img src={yogaImg} alt="Yoga & Mindfulness" />
+                  <div className="gallery-item-title">Yoga Studios</div>
+                </div>
+
+                <div className="gallery-item">
+                  <span className="gallery-item-badge">03 MOBILITY</span>
+                  <img src={pilatesImg} alt="Pilates & Posture" />
+                  <div className="gallery-item-title">Reformer Pilates</div>
+                </div>
+
+                <div className="gallery-item">
+                  <span className="gallery-item-badge">04 COMBAT</span>
+                  <img src={boxingImg} alt="Boxing & Agility" />
+                  <div className="gallery-item-title">Boxing & Kickboxing</div>
+                </div>
+
+                <div className="gallery-item">
+                  <span className="gallery-item-badge">05 FUNCTIONAL</span>
+                  <img src={functionalImg} alt="Functional & HIIT" />
+                  <div className="gallery-item-title">HIIT & Conditioning</div>
+                </div>
+              </div>
+
+              {/* Caption - How FitFare Works */}
+              <div className="gallery-caption">
+                <h3>How FitFare Works</h3>
+                <p>
+                  FitFare connects fitness enthusiasts with fitness centres through a simple,
+                  flexible platform. Users can discover participating centres, add credits, and
+                  schedule their fitness sessions as needed. Our partner platform helps fitness
+                  centres connect with new customers and make their facilities accessible to a
+                  wider audience.
+                </p>
+              </div>
             </div>
           </div>
-        </SectionWrapper>
+        </div>
       </section>
 
-      {/* ═══════════════ CTA ═══════════════ */}
-      {/* <section
-        className="py-32 px-6"
-        style={{ borderTop: isDark ? "1px solid rgba(255,255,255,0.06)" : "1px solid rgba(0,0,0,0.06)" }}
-      >
-        <div className="max-w-4xl mx-auto text-center relative">
-         
-          <div
-            className="absolute inset-0 -z-10 pointer-events-none"
-            style={{
-              background: isDark
-                ? "radial-gradient(ellipse at center, rgba(30,80,180,0.12) 0%, transparent 70%)"
-                : "radial-gradient(ellipse at center, rgba(99,179,237,0.15) 0%, transparent 70%)",
-            }}
-          /> */}
-
-      {/* <SectionWrapper>
-            <m.p
-              variants={fadeUp}
-              className="text-xs font-semibold uppercase tracking-[0.3em] text-blue-400 mb-4"
-            >
-              Work With Us
-            </m.p>
-            <m.h2
-              variants={fadeUp}
-              className="text-4xl md:text-6xl font-extrabold mb-6 leading-tight"
-            >
-              Ready to Build a{" "}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{ backgroundImage: "linear-gradient(135deg, #1f6f8b 0%, #2a9d8f 50%, #3db4c7 100%)" }}
-              >
-                High-Performance Brand?
-              </span>
-            </m.h2> */}
-
-      {/* <m.p
-              variants={fadeUp}
-              className="text-base leading-relaxed max-w-xl mx-auto mb-12"
-              style={{ color: isDark ? "#94a3b8" : "#64748b" }}
-            >
-              Let's engineer systems that compound growth, strengthen positioning, and
-              create long-term leverage. Your ambition, our infrastructure.
-            </m.p> */}
-
-
-
-      {/* Trust line */}
-      {/* <m.p
-              variants={fadeUp}
-              className="mt-8 text-xs"
-              style={{ color: isDark ? "#475569" : "#94a3b8" }}
-            >
-              No long-term contracts · Results-oriented engagement · Cancel anytime
-            </m.p>
-          </SectionWrapper> */}
-      {/* </div>
-      </section> */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      {/* Building a More Flexible Fitness Experience Section               */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      <section className="future-experience-section">
+        <div className="container">
+          <div className="future-experience-card">
+            <span className="future-tag">✦ THE HORIZON ✦</span>
+            <h2 className="future-headline">Building a More Flexible Fitness Experience</h2>
+            <p className="future-body">
+              We are working towards a future where staying active is easier, more convenient, and more
+              adaptable to everyday life. With our apps available on Android and iOS, FitFare is
+              building a growing community around flexible fitness access.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

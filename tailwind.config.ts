@@ -17,6 +17,11 @@ export default {
       fontFamily: {
         sans: ["Open Sans", "sans-serif"],
         display: ["Open Sans", "sans-serif"],
+        serif: ["'Playfair Display'", "Georgia", "serif"],
+        editorial: ["'Playfair Display'", "Georgia", "serif"],
+        jakarta: ["'Plus Jakarta Sans'", "'DM Sans'", "sans-serif"],
+        script: ["'Caveat'", "cursive"],
+        handwriting: ["'Caveat'", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",

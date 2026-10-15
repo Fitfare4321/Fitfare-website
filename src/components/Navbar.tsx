@@ -563,7 +563,14 @@ const Navbar = () => {
   const ctaButtons = (
     <div className="flex items-center justify-end w-auto gap-1 md:gap-3 z-20">
       <div className="hidden xl:block scale-90 md:scale-100 origin-right">
-        <GlassButton size="default" onClick={(e: React.MouseEvent) => { e.preventDefault(); handleNavClick("/partner-form"); }}>
+        <GlassButton 
+          size="default" 
+          href="/for-partners"
+          onClick={(e: React.MouseEvent) => { 
+            e.preventDefault(); 
+            handleNavClick("/for-partners"); 
+          }}
+        >
           Partner With FitFare
         </GlassButton>
       </div>

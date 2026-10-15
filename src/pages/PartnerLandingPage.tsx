@@ -628,22 +628,28 @@ const PartnerFooter = () => {
           </div>
 
           {/* Quick links per PRD */}
-          <div className="flex flex-wrap justify-center items-center gap-3">
+          <div className="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3">
+            <Link
+              to="/about-FitFare"
+              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all whitespace-nowrap"
+            >
+              About Us
+            </Link>
             <Link
               to="/privacy-policy"
-              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all"
+              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all whitespace-nowrap"
             >
               Privacy Policy
             </Link>
             <Link
               to="/terms-and-conditions"
-              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all"
+              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all whitespace-nowrap"
             >
               Terms of Service
             </Link>
             <Link
               to="/contact"
-              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all"
+              className="px-4 py-2 rounded-full border border-white/10 bg-white/[0.03] text-xs font-medium text-white/70 hover:text-white hover:border-white/25 hover:bg-white/[0.06] transition-all whitespace-nowrap"
             >
               Support
             </Link>
