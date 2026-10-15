@@ -16,6 +16,15 @@ const HOMEPAGE_DESCRIPTION =
   "Find fitness centers and studios with flexible accessibility. Book instantly and work out on your schedule.";
 const HOMEPAGE_CANONICAL = "https://fitfare.in/";
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "FitFare",
+  url: "https://fitfare.in/",
+  description:
+    "Find fitness centers and studios with flexible accessibility. Book instantly and work out on your schedule.",
+};
+
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -108,7 +117,7 @@ const Index = () => {
         title={HOMEPAGE_TITLE}
         description={HOMEPAGE_DESCRIPTION}
         canonical={HOMEPAGE_CANONICAL}
-        jsonLd={[organizationSchema]}
+        jsonLd={[websiteSchema, organizationSchema]}
       />
       
       {/* 01. Navbar */}
