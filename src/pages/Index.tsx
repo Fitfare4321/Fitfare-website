@@ -134,8 +134,6 @@ const Index = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#0f172a', color: '#f1f5f9', minHeight: '100vh' }}>
       <PageSEO
-        title={hi}
-        description={hi there}
         canonical={HOMEPAGE_CANONICAL}
         jsonLd={[organizationSchema, faqSchema]}
       />
