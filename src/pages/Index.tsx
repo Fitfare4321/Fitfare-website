@@ -11,9 +11,9 @@ import FAQSection from "@/components/FAQSection";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import PageSEO from "@/components/PageSEO";
 
-const HOMEPAGE_TITLE = "FitFare | Wellbeing, Rebuilt for Fitness";
+const HOMEPAGE_TITLE = "Pay Per Go Fitness | FitFare";
 const HOMEPAGE_DESCRIPTION =
-  "Find gyms and fitness centres with pay-per-session, pay-per-use, and flexible memberships. Book instantly and work out on your schedule.";
+  "Find fitness centers and studios with flexible accessibility. Book instantly and work out on your schedule.";
 const HOMEPAGE_CANONICAL = "https://fitfare.in/";
 
 const organizationSchema = {
