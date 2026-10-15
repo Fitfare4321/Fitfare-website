@@ -3,31 +3,33 @@ import {
   Users,
   MapPin,
   Clock,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 
-// Cinematic fitness photography from existing assets
-import gymImg from "@/assets/categories/gym.jpg";
-import yogaImg from "@/assets/categories/yoga.jpg";
-import boxingImg from "@/assets/categories/boxing.jpg";
+// Cinematic fitness photography (distinct from previous cards)
+import heroGymImg from "@/assets/hero-card-gym.jpg";
+import heroYogaImg from "@/assets/hero-card-yoga.jpg";
+import calisthenicsImg from "@/assets/categories/calisthenics.jpg";
 import "./AboutEditorial.css";
 
 export const MissionVisionSection: React.FC = () => {
   const [activeCard, setActiveCard] = useState<"vision" | "mission" | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
 
-  const photos = [gymImg, yogaImg, boxingImg];
+  const photos = [heroGymImg, heroYogaImg, calisthenicsImg];
 
-  // Slow cinematic photo crossfade
+  // Auto-advance photos, resetting the 5s timer whenever photoIndex changes
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setPhotoIndex((prev) => (prev + 1) % photos.length);
     }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+    return () => clearInterval(timer);
+  }, [photoIndex, photos.length]);
 
-  // Intersection observer for scroll-triggered entrance
+  // Intersection observer for subtle scroll triggered entrance
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,11 +37,41 @@ export const MissionVisionSection: React.FC = () => {
           setIsInView(true);
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.05 }
     );
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
+
+  // Touch gesture / swipe handling for mobile & tablet layouts
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return;
+    const endX = e.changedTouches[0].clientX;
+    const endY = e.changedTouches[0].clientY;
+    const diffX = touchStartX.current - endX;
+    const diffY = touchStartY.current ? Math.abs(touchStartY.current - endY) : 0;
+
+    // Minimum swipe threshold: 35px horizontally and more horizontal than vertical
+    if (Math.abs(diffX) > 35 && Math.abs(diffX) > diffY) {
+      if (diffX > 0) {
+        // Swiped left -> next
+        setPhotoIndex((prev) => (prev + 1) % photos.length);
+      } else {
+        // Swiped right -> prev
+        setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+      }
+    }
+    touchStartX.current = null;
+    touchStartY.current = null;
+  };
 
   return (
     <section
@@ -395,6 +427,8 @@ export const MissionVisionSection: React.FC = () => {
         {/* ═══════════════════════════════════════════════════════════ */}
         <div
           className="mv-photo-col"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
           style={{
             position: "relative",
             overflow: "hidden",
@@ -407,6 +441,7 @@ export const MissionVisionSection: React.FC = () => {
               key={idx}
               src={photo}
               alt="FitFare fitness"
+              draggable={false}
               style={{
                 position: "absolute",
                 inset: 0,
@@ -416,8 +451,10 @@ export const MissionVisionSection: React.FC = () => {
                 objectPosition: "center",
                 opacity: photoIndex === idx ? 1 : 0,
                 transform: photoIndex === idx ? "scale(1.02)" : "scale(1.08)",
-                transition: "opacity 1.8s cubic-bezier(0.16, 1, 0.3, 1), transform 6s cubic-bezier(0.16, 1, 0.3, 1)",
+                transition: "opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 5s cubic-bezier(0.16, 1, 0.3, 1)",
                 filter: "brightness(0.55) contrast(1.1) saturate(0.85)",
+                pointerEvents: "none",
+                userSelect: "none",
               }}
             />
           ))}
@@ -476,35 +513,115 @@ export const MissionVisionSection: React.FC = () => {
             }}
           />
 
+          {/* Previous Arrow */}
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={(e) => {
+              e.stopPropagation();
+              setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+            }}
+            className="mv-nav-arrow"
+            style={{
+              position: "absolute",
+              left: "1.25rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              background: "rgba(0, 0, 0, 0.45)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              border: "1px solid rgba(255, 255, 255, 0.16)",
+              color: "#ffffff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <ChevronLeft size={18} />
+          </button>
 
+          {/* Next Arrow */}
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={(e) => {
+              e.stopPropagation();
+              setPhotoIndex((prev) => (prev + 1) % photos.length);
+            }}
+            className="mv-nav-arrow"
+            style={{
+              position: "absolute",
+              right: "1.25rem",
+              top: "50%",
+              transform: "translateY(-50%)",
+              zIndex: 10,
+              width: "36px",
+              height: "36px",
+              borderRadius: "50%",
+              background: "rgba(0, 0, 0, 0.45)",
+              backdropFilter: "blur(8px)",
+              WebkitBackdropFilter: "blur(8px)",
+              border: "1px solid rgba(255, 255, 255, 0.16)",
+              color: "#ffffff",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              cursor: "pointer",
+            }}
+          >
+            <ChevronRight size={18} />
+          </button>
 
           {/* Photo Index Dots */}
           <div
+            className="mv-photo-dots"
             style={{
               position: "absolute",
               bottom: "2.75rem",
               right: "2.5rem",
               zIndex: 10,
               display: "flex",
-              gap: "6px",
+              gap: "2px",
               alignItems: "center",
-              opacity: isInView ? 1 : 0,
-              transition: "opacity 1s ease 0.8s",
             }}
           >
             {photos.map((_, idx) => (
-              <div
+              <button
                 key={idx}
-                style={{
-                  width: photoIndex === idx ? "20px" : "6px",
-                  height: "6px",
-                  borderRadius: "3px",
-                  background: photoIndex === idx ? "#ffffff" : "rgba(255,255,255,0.25)",
-                  transition: "all 0.5s cubic-bezier(0.16, 1, 0.3, 1)",
-                  cursor: "pointer",
+                type="button"
+                aria-label={`Go to photo ${idx + 1}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setPhotoIndex(idx);
                 }}
-                onClick={() => setPhotoIndex(idx)}
-              />
+                style={{
+                  background: "transparent",
+                  border: "none",
+                  padding: "10px 4px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  outline: "none",
+                }}
+              >
+                <span
+                  style={{
+                    display: "block",
+                    width: photoIndex === idx ? "20px" : "6px",
+                    height: "6px",
+                    borderRadius: "3px",
+                    background: photoIndex === idx ? "#ffffff" : "rgba(255,255,255,0.3)",
+                    boxShadow: photoIndex === idx ? "0 0 10px rgba(255,255,255,0.6)" : "none",
+                    transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                  }}
+                />
+              </button>
             ))}
           </div>
 
