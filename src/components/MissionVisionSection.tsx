@@ -7,27 +7,54 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-// Cinematic fitness photography (distinct from previous cards)
-import heroGymImg from "@/assets/hero-card-gym.jpg";
-import heroYogaImg from "@/assets/hero-card-yoga.jpg";
-import calisthenicsImg from "@/assets/categories/calisthenics.jpg";
+// Premium cinematic fitness photography (distinct from previous cards)
+import treadmillRunnerImg from "@/assets/treadmill_color_1790323310637.jpg";
+import yogaStudioImg from "@/assets/yoga_color_1790323324020.jpg";
+import gymInteriorImg from "@/assets/gym_interior_color_1790323279413.jpg";
 import "./AboutEditorial.css";
+
+const SLIDE_PHOTOS = [
+  { src: treadmillRunnerImg, alt: "Cardio & Smart Treadmills" },
+  { src: yogaStudioImg, alt: "Mindfulness & Yoga Sanctuary" },
+  { src: gymInteriorImg, alt: "State of the Art Fitness Club" },
+];
 
 export const MissionVisionSection: React.FC = () => {
   const [activeCard, setActiveCard] = useState<"vision" | "mission" | null>(null);
   const [photoIndex, setPhotoIndex] = useState(0);
   const [isInView, setIsInView] = useState(true);
   const sectionRef = useRef<HTMLDivElement>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const photos = [heroGymImg, heroYogaImg, calisthenicsImg];
+  // Reliable autoplay timer that smoothly resets on any user interaction
+  const resetAutoplay = () => {
+    if (timerRef.current) clearInterval(timerRef.current);
+    timerRef.current = setInterval(() => {
+      setPhotoIndex((prev) => (prev + 1) % SLIDE_PHOTOS.length);
+    }, 4500);
+  };
 
-  // Auto-advance photos, resetting the 5s timer whenever photoIndex changes
   useEffect(() => {
-    const timer = setInterval(() => {
-      setPhotoIndex((prev) => (prev + 1) % photos.length);
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [photoIndex, photos.length]);
+    resetAutoplay();
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, []);
+
+  const goToSlide = (idx: number) => {
+    setPhotoIndex(idx);
+    resetAutoplay();
+  };
+
+  const nextSlide = () => {
+    setPhotoIndex((prev) => (prev + 1) % SLIDE_PHOTOS.length);
+    resetAutoplay();
+  };
+
+  const prevSlide = () => {
+    setPhotoIndex((prev) => (prev - 1 + SLIDE_PHOTOS.length) % SLIDE_PHOTOS.length);
+    resetAutoplay();
+  };
 
   // Intersection observer for subtle scroll triggered entrance
   useEffect(() => {
@@ -62,11 +89,9 @@ export const MissionVisionSection: React.FC = () => {
     // Minimum swipe threshold: 35px horizontally and more horizontal than vertical
     if (Math.abs(diffX) > 35 && Math.abs(diffX) > diffY) {
       if (diffX > 0) {
-        // Swiped left -> next
-        setPhotoIndex((prev) => (prev + 1) % photos.length);
+        nextSlide();
       } else {
-        // Swiped right -> prev
-        setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+        prevSlide();
       }
     }
     touchStartX.current = null;
@@ -436,28 +461,32 @@ export const MissionVisionSection: React.FC = () => {
           }}
         >
           {/* Crossfading Photos */}
-          {photos.map((photo, idx) => (
-            <img
-              key={idx}
-              src={photo}
-              alt="FitFare fitness"
-              draggable={false}
-              style={{
-                position: "absolute",
-                inset: 0,
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center",
-                opacity: photoIndex === idx ? 1 : 0,
-                transform: photoIndex === idx ? "scale(1.02)" : "scale(1.08)",
-                transition: "opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 5s cubic-bezier(0.16, 1, 0.3, 1)",
-                filter: "brightness(0.55) contrast(1.1) saturate(0.85)",
-                pointerEvents: "none",
-                userSelect: "none",
-              }}
-            />
-          ))}
+          {SLIDE_PHOTOS.map((item, idx) => {
+            const isActive = photoIndex === idx;
+            return (
+              <img
+                key={idx}
+                src={item.src}
+                alt={item.alt}
+                draggable={false}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "center",
+                  opacity: isActive ? 1 : 0,
+                  zIndex: isActive ? 2 : 1,
+                  transform: isActive ? "scale(1.02)" : "scale(1.06)",
+                  transition: "opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 5s cubic-bezier(0.16, 1, 0.3, 1)",
+                  filter: "brightness(0.65) contrast(1.1) saturate(0.95)",
+                  pointerEvents: "none",
+                  userSelect: "none",
+                }}
+              />
+            );
+          })}
 
           {/* Left edge blend into content column */}
           <div
@@ -467,7 +496,7 @@ export const MissionVisionSection: React.FC = () => {
               inset: 0,
               background: "linear-gradient(90deg, #050508 0%, rgba(5,5,8,0.6) 15%, transparent 40%)",
               pointerEvents: "none",
-              zIndex: 2,
+              zIndex: 3,
             }}
           />
 
@@ -481,7 +510,7 @@ export const MissionVisionSection: React.FC = () => {
               height: "40%",
               background: "linear-gradient(to top, #050508 0%, transparent 100%)",
               pointerEvents: "none",
-              zIndex: 2,
+              zIndex: 3,
             }}
           />
 
@@ -495,7 +524,7 @@ export const MissionVisionSection: React.FC = () => {
               height: "25%",
               background: "linear-gradient(to bottom, #050508 0%, transparent 100%)",
               pointerEvents: "none",
-              zIndex: 2,
+              zIndex: 3,
             }}
           />
 
@@ -509,7 +538,7 @@ export const MissionVisionSection: React.FC = () => {
               width: "15%",
               background: "linear-gradient(to left, rgba(5,5,8,0.4) 0%, transparent 100%)",
               pointerEvents: "none",
-              zIndex: 2,
+              zIndex: 3,
             }}
           />
 
@@ -519,7 +548,7 @@ export const MissionVisionSection: React.FC = () => {
             aria-label="Previous slide"
             onClick={(e) => {
               e.stopPropagation();
-              setPhotoIndex((prev) => (prev - 1 + photos.length) % photos.length);
+              prevSlide();
             }}
             className="mv-nav-arrow"
             style={{
@@ -528,13 +557,13 @@ export const MissionVisionSection: React.FC = () => {
               top: "50%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              width: "36px",
-              height: "36px",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
-              background: "rgba(0, 0, 0, 0.45)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              border: "1px solid rgba(255, 255, 255, 0.16)",
+              background: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
               color: "#ffffff",
               display: "flex",
               alignItems: "center",
@@ -542,7 +571,7 @@ export const MissionVisionSection: React.FC = () => {
               cursor: "pointer",
             }}
           >
-            <ChevronLeft size={18} />
+            <ChevronLeft size={20} />
           </button>
 
           {/* Next Arrow */}
@@ -551,7 +580,7 @@ export const MissionVisionSection: React.FC = () => {
             aria-label="Next slide"
             onClick={(e) => {
               e.stopPropagation();
-              setPhotoIndex((prev) => (prev + 1) % photos.length);
+              nextSlide();
             }}
             className="mv-nav-arrow"
             style={{
@@ -560,13 +589,13 @@ export const MissionVisionSection: React.FC = () => {
               top: "50%",
               transform: "translateY(-50%)",
               zIndex: 10,
-              width: "36px",
-              height: "36px",
+              width: "38px",
+              height: "38px",
               borderRadius: "50%",
-              background: "rgba(0, 0, 0, 0.45)",
-              backdropFilter: "blur(8px)",
-              WebkitBackdropFilter: "blur(8px)",
-              border: "1px solid rgba(255, 255, 255, 0.16)",
+              background: "rgba(0, 0, 0, 0.5)",
+              backdropFilter: "blur(10px)",
+              WebkitBackdropFilter: "blur(10px)",
+              border: "1px solid rgba(255, 255, 255, 0.2)",
               color: "#ffffff",
               display: "flex",
               alignItems: "center",
@@ -574,7 +603,7 @@ export const MissionVisionSection: React.FC = () => {
               cursor: "pointer",
             }}
           >
-            <ChevronRight size={18} />
+            <ChevronRight size={20} />
           </button>
 
           {/* Photo Index Dots */}
@@ -586,18 +615,18 @@ export const MissionVisionSection: React.FC = () => {
               right: "2.5rem",
               zIndex: 10,
               display: "flex",
-              gap: "2px",
+              gap: "4px",
               alignItems: "center",
             }}
           >
-            {photos.map((_, idx) => (
+            {SLIDE_PHOTOS.map((_, idx) => (
               <button
                 key={idx}
                 type="button"
                 aria-label={`Go to photo ${idx + 1}`}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setPhotoIndex(idx);
+                  goToSlide(idx);
                 }}
                 style={{
                   background: "transparent",
@@ -613,12 +642,12 @@ export const MissionVisionSection: React.FC = () => {
                 <span
                   style={{
                     display: "block",
-                    width: photoIndex === idx ? "20px" : "6px",
-                    height: "6px",
-                    borderRadius: "3px",
-                    background: photoIndex === idx ? "#ffffff" : "rgba(255,255,255,0.3)",
-                    boxShadow: photoIndex === idx ? "0 0 10px rgba(255,255,255,0.6)" : "none",
-                    transition: "all 0.4s cubic-bezier(0.16, 1, 0.3, 1)",
+                    width: photoIndex === idx ? "22px" : "7px",
+                    height: "7px",
+                    borderRadius: "4px",
+                    background: photoIndex === idx ? "#ffffff" : "rgba(255,255,255,0.35)",
+                    boxShadow: photoIndex === idx ? "0 0 12px rgba(255,255,255,0.7)" : "none",
+                    transition: "all 0.35s cubic-bezier(0.16, 1, 0.3, 1)",
                   }}
                 />
               </button>
