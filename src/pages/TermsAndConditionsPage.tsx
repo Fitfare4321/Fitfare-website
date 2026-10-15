@@ -28,6 +28,7 @@ import {
 } from "lucide-react";
 import GlassButton from "@/components/ui/glass-button";
 import PageSEO from "@/components/PageSEO";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 
 const TOC_ITEMS = [
   { id: "common", label: "1. Common terms", short: "Common terms" },
@@ -45,7 +46,8 @@ const TermsAndConditionsPage: React.FC = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowBackToTop(window.scrollY > 400);
+      const isNearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 700;
+      setShowBackToTop(window.scrollY > 400 && !isNearBottom);
 
       // Scrollspy
       const sections = TOC_ITEMS.map((item) => document.getElementById(item.id));
@@ -147,9 +149,9 @@ const TermsAndConditionsPage: React.FC = () => {
       </div>
 
       
-      <div className="min-h-screen bg-black flex flex-col lg:flex-row">
+      <div className="min-h-screen bg-black flex flex-col lg:flex-row relative z-10">
         {/* Left Sidebar */}
-        <div className="lg:w-[40%] xl:w-[35%] lg:fixed lg:inset-y-0 lg:left-0 flex items-center justify-center bg-black relative overflow-hidden z-10">
+        <div className="lg:w-[40%] xl:w-[35%] lg:sticky lg:top-0 lg:h-screen flex items-center justify-center bg-black relative overflow-hidden z-10">
           <m.div 
             initial={{ scale: 1.05, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -187,7 +189,7 @@ const TermsAndConditionsPage: React.FC = () => {
         </div>
 
         {/* Right Content */}
-        <div className="lg:w-[60%] xl:w-[65%] lg:ml-auto bg-black min-h-screen relative z-0">
+        <div className="lg:w-[60%] xl:w-[65%] bg-black min-h-screen relative z-10">
           
           <div className="max-w-4xl mx-auto px-6 sm:px-12 lg:px-20 pt-20 lg:pt-32 pb-32 relative z-10">
             <div className="flex flex-col">
@@ -407,6 +409,9 @@ const TermsAndConditionsPage: React.FC = () => {
           <ArrowUp size={20} className="group-hover:-translate-y-1 transition-transform" />
         </button>
       )}
+
+      {/* Footer */}
+      <CinematicFooter />
     </div>
   );
 };

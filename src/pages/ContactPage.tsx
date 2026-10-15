@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, ArrowRight, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import GlassButton from "@/components/ui/glass-button";
 import PageSEO from "@/components/PageSEO";
+import { CinematicFooter } from "@/components/ui/motion-footer";
 
 const ContactPage = () => {
   const [step, setStep] = useState(0);
@@ -34,7 +35,7 @@ const ContactPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans relative overflow-hidden">
+    <div className="min-h-screen bg-[#0a0a0a] text-white font-sans selection:bg-white selection:text-black">
       <PageSEO 
         title="Contact Us | FitFare"
         description="Get in touch with the FitFare team. We'd love to hear from you."
@@ -52,7 +53,8 @@ const ContactPage = () => {
         </Link>
       </div>
 
-      {/* Dark Map Background */}
+      <div className="relative z-10 w-full min-h-screen bg-[#0a0a0a] overflow-hidden">
+        {/* Dark Map Background */}
       <div 
         className="absolute inset-0 z-0 opacity-100 pointer-events-none"
         style={{
@@ -304,6 +306,10 @@ const ContactPage = () => {
         </m.div>
 
       </main>
+      </div>
+
+      {/* Footer same as Home page */}
+      <CinematicFooter />
     </div>
   );
 };

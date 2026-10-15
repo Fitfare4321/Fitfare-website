@@ -35,6 +35,7 @@ try {
     'terms-and-conditions',
     'cancellation-refunds',
     'contact',
+    'support',
     'partner-form',
     'for-partners',
     'partners'
