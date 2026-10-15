@@ -3,8 +3,6 @@ import {
   Users,
   MapPin,
   Clock,
-  ChevronLeft,
-  ChevronRight,
 } from "lucide-react";
 
 // Premium cinematic fitness photography (distinct from previous cards)
@@ -557,69 +555,6 @@ export const MissionVisionSection: React.FC = () => {
             }}
           />
 
-          {/* Previous Arrow */}
-          <button
-            type="button"
-            aria-label="Previous slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              prevSlide();
-            }}
-            className="mv-nav-arrow"
-            style={{
-              position: "absolute",
-              left: "1.25rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-              width: "38px",
-              height: "38px",
-              borderRadius: "50%",
-              background: "rgba(0, 0, 0, 0.5)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              color: "#ffffff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          {/* Next Arrow */}
-          <button
-            type="button"
-            aria-label="Next slide"
-            onClick={(e) => {
-              e.stopPropagation();
-              nextSlide();
-            }}
-            className="mv-nav-arrow"
-            style={{
-              position: "absolute",
-              right: "1.25rem",
-              top: "50%",
-              transform: "translateY(-50%)",
-              zIndex: 10,
-              width: "38px",
-              height: "38px",
-              borderRadius: "50%",
-              background: "rgba(0, 0, 0, 0.5)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              border: "1px solid rgba(255, 255, 255, 0.2)",
-              color: "#ffffff",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              cursor: "pointer",
-            }}
-          >
-            <ChevronRight size={20} />
-          </button>
 
           {/* Photo Index Dots */}
           <div
