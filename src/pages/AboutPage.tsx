@@ -13,6 +13,7 @@ const AboutPage = () => {
       grids = Array.from(document.querySelectorAll<HTMLElement>('.global-bg-grid, .footer-bg-grid'));
     };
     refreshGrids();
+    {/* This is a comment inside JSX */}
     window.addEventListener('resize', refreshGrids, { passive: true });
 
     const updateVisibleGrids = () => {
