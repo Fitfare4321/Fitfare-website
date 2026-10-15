@@ -14,7 +14,7 @@ import ScrollProgress from "@/components/ScrollProgress";
 import Preloader from "@/components/Preloader";
 import PageSEO from "@/components/PageSEO";
 
-const HOMEPAGE_TITLE = "Gym and Fitness Centre with Flexible Membership | FitFare";
+const HOMEPAGE_TITLE = "FitFare | Pay Per Go Fitness";
 const HOMEPAGE_DESCRIPTION =
   "Find gyms and fitness centres with pay-per-session, pay-per-use, and flexible memberships. Book instantly and work out on your schedule.";
 const HOMEPAGE_CANONICAL = "https://fitfare.in/";
