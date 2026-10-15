@@ -457,6 +457,7 @@ export const MissionVisionSection: React.FC = () => {
           style={{
             position: "relative",
             overflow: "hidden",
+            isolation: "isolate",
             minHeight: "600px",
           }}
         >
@@ -514,17 +515,31 @@ export const MissionVisionSection: React.FC = () => {
             }}
           />
 
-          {/* Top gradient */}
+          {/* Top gradient & seam shield */}
           <div
             style={{
               position: "absolute",
               top: 0,
               left: 0,
               right: 0,
-              height: "25%",
-              background: "linear-gradient(to bottom, #050508 0%, transparent 100%)",
+              height: "35%",
+              background: "linear-gradient(to bottom, #050508 0%, rgba(5,5,8,0.95) 15%, rgba(5,5,8,0.5) 45%, transparent 100%)",
               pointerEvents: "none",
-              zIndex: 3,
+              zIndex: 4,
+            }}
+          />
+
+          {/* 3px Solid top edge cap preventing any sub-pixel GPU composite bleed */}
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              height: "3px",
+              background: "#050508",
+              pointerEvents: "none",
+              zIndex: 6,
             }}
           />
 

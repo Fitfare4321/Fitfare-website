@@ -606,12 +606,21 @@
     min-height: 380px !important;
     max-height: 480px !important;
     order: -1 !important;
+    isolation: isolate;
   }
   .mv-nav-arrow {
     opacity: 0.75;
   }
   .mv-blend-edge {
-    background: linear-gradient(180deg, transparent 60%, #050508 100%) !important;
+    background: linear-gradient(
+      180deg,
+      #050508 0%,
+      rgba(5, 5, 8, 0.8) 10%,
+      transparent 30%,
+      transparent 70%,
+      rgba(5, 5, 8, 0.85) 90%,
+      #050508 100%
+    ) !important;
   }
   .mv-left-col {
     padding: 3rem 2rem !important;
