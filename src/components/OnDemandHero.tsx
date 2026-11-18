@@ -58,7 +58,7 @@ const Link = ({
 const SparkleStar = ({
   className = "",
   size = 20,
-  color = "#60a5fa",
+  color = "#ffffff",
 }: {
   className?: string;
   size?: number;
@@ -70,7 +70,7 @@ const SparkleStar = ({
     viewBox="0 0 24 24"
     fill={color}
     className={className}
-    style={{ filter: `drop-shadow(0 0 8px ${color})` }}
+    style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.45))" }}
   >
     <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" />
   </svg>
@@ -83,12 +83,12 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
     height="54"
     viewBox="0 0 54 54"
     fill="none"
-    stroke="#818cf8"
+    stroke="#d4d4d8"
     strokeWidth="2.2"
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
-    style={{ filter: "drop-shadow(0 0 8px rgba(129,140,248,0.5))" }}
+    style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.8))" }}
   >
     <path d="M10 22 C 18 42, 38 42, 44 20" />
     <path d="M33 17 L 44 20 L 44 31" />
@@ -348,7 +348,7 @@ export default function OnDemandHero() {
   };
 
   return (
-    <section className="ff relative bg-[#060608] p-2 text-white sm:p-3 lg:p-4 overflow-hidden">
+    <section className="ff relative bg-black text-white overflow-hidden min-h-screen flex flex-col justify-between">
       {/* ── Global Styles & Keyframe Animations ── */}
       <style>{`
         @keyframes ff-rise {
@@ -408,34 +408,27 @@ export default function OnDemandHero() {
         }
       `}</style>
 
-      <div className="relative max-w-[1440px] mx-auto">
-        {/* ───────── Main Hero Board (Curved Luxury Dark Tile) ───────── */}
-        <div className="ff-pop relative flex min-h-[calc(100svh-1rem)] sm:min-h-[calc(100svh-1.5rem)] flex-col justify-between overflow-hidden rounded-[28px] sm:rounded-[36px] bg-[#07090e] border border-white/[0.08] shadow-[0_25px_70px_rgba(0,0,0,0.85)] px-4 pb-6 pt-5 sm:px-8 sm:pb-8 sm:pt-6 lg:px-10 lg:pb-8 lg:pt-6">
-          
-          {/* ── Background: Topographic Contour Waves & Radiant Glow Orbs ── */}
-          <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-            {/* Ambient Aurora Orbs */}
-            <div className="absolute top-1/4 -left-20 w-[460px] h-[460px] bg-blue-600/15 rounded-full blur-[130px] animate-pulse-glow" />
-            <div className="absolute top-1/6 right-0 w-[420px] h-[420px] bg-purple-600/15 rounded-full blur-[140px] animate-pulse-glow" style={{ animationDelay: "-2.5s" }} />
-            <div className="absolute bottom-10 left-1/3 w-[500px] h-[350px] bg-cyan-500/10 rounded-full blur-[150px]" />
+      {/* ── Background: Neutral Topographic Contour Lines (Pure Black, No Blue) ── */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <svg
+          className="absolute inset-0 w-full h-full opacity-20"
+          viewBox="0 0 1440 900"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
+        >
+          <path d="M-100 150 C320 280, 680 80, 1540 380" stroke="rgba(255,255,255,0.06)" strokeWidth="1.2" />
+          <path d="M-100 210 C340 340, 700 140, 1540 440" stroke="rgba(255,255,255,0.05)" strokeWidth="1.2" />
+          <path d="M-100 270 C360 400, 720 200, 1540 500" stroke="rgba(255,255,255,0.04)" strokeWidth="1.2" />
+          <path d="M-100 330 C380 460, 740 260, 1540 560" stroke="rgba(255,255,255,0.03)" strokeWidth="1.2" />
+          <path d="M-100 390 C400 520, 760 320, 1540 620" stroke="rgba(255,255,255,0.03)" strokeWidth="1.2" />
+        </svg>
+      </div>
 
-            {/* Subtle Diagonal Topographic Contour Lines */}
-            <svg
-              className="absolute inset-0 w-full h-full opacity-35"
-              viewBox="0 0 1440 900"
-              preserveAspectRatio="xMidYMid slice"
-              fill="none"
-            >
-              <path d="M-100 150 C320 280, 680 80, 1540 380" stroke="rgba(255,255,255,0.08)" strokeWidth="1.2" />
-              <path d="M-100 210 C340 340, 700 140, 1540 440" stroke="rgba(255,255,255,0.06)" strokeWidth="1.2" />
-              <path d="M-100 270 C360 400, 720 200, 1540 500" stroke="rgba(255,255,255,0.05)" strokeWidth="1.2" />
-              <path d="M-100 330 C380 460, 740 260, 1540 560" stroke="rgba(255,255,255,0.04)" strokeWidth="1.2" />
-              <path d="M-100 390 C400 520, 760 320, 1540 620" stroke="rgba(255,255,255,0.04)" strokeWidth="1.2" />
-            </svg>
-          </div>
-
-          {/* ────── TOP ROW: Brand Header ────── */}
-          <div className="relative z-20 w-full flex items-center justify-between">
+      {/* ────── Main Hero Content Container (Full Bleed Edge-to-Edge Hero, No Inner Card) ────── */}
+      <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 pt-6 sm:pt-8 pb-4 flex flex-col justify-between flex-1">
+        
+        {/* ────── TOP ROW: Brand Header ────── */}
+        <div className="relative z-20 w-full flex items-center justify-between">
             <Link href="/" className="group flex items-center gap-2.5">
               <img
                 src={logo}
@@ -450,7 +443,7 @@ export default function OnDemandHero() {
 
             {/* Minimalist Header Action / Tag */}
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-xs font-semibold text-neutral-300">
+              <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-[11px] sm:text-xs font-semibold text-neutral-300">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
                 Fitness On Demand
               </span>
@@ -479,27 +472,27 @@ export default function OnDemandHero() {
               <StadiumCapsuleCard src={zumbaImg} alt="Zumba and Energy Group Fitness" className="w-full h-full" />
             </div>
 
-            {/* ── Floating Sparkle Stars & Doodle Arrow (Matches Reference) ── */}
-            <SparkleStar size={24} color="#38bdf8" className="hidden lg:block absolute left-[19%] top-[8%] animate-pulse-glow" />
-            <SparkleStar size={18} color="#c084fc" className="hidden lg:block absolute right-[32%] top-[10%] animate-pulse-glow" />
-            <SparkleStar size={22} color="#60a5fa" className="hidden lg:block absolute right-[34%] bottom-[46%] animate-pulse-glow" />
-            <SparkleStar size={16} color="#38bdf8" className="hidden lg:block absolute left-[28%] bottom-[16%] opacity-60" />
+            {/* ── Floating Sparkle Stars & Doodle Arrow (Neutral/White, No Blue) ── */}
+            <SparkleStar size={24} color="#ffffff" className="hidden lg:block absolute left-[19%] top-[8%] animate-pulse-glow" />
+            <SparkleStar size={18} color="#e4e4e7" className="hidden lg:block absolute right-[32%] top-[10%] animate-pulse-glow" />
+            <SparkleStar size={22} color="#ffffff" className="hidden lg:block absolute right-[34%] bottom-[46%] animate-pulse-glow" />
+            <SparkleStar size={16} color="#d4d4d8" className="hidden lg:block absolute left-[28%] bottom-[16%] opacity-60" />
             
             {/* Curved Hand-Drawn Doodle Arrow */}
             <DoodleArrow className="hidden lg:block absolute right-[185px] xl:right-[230px] bottom-[125px] xl:bottom-[155px] rotate-[8deg]" />
 
             {/* ── Core Editorial Typography ── */}
             <div className="relative z-20 text-center max-w-2xl xl:max-w-3xl mx-auto px-2">
-              <h1 className="font-serif tracking-tight text-center leading-[1.05] sm:leading-[1.02] select-none">
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white">
+              <h1 className="font-serif tracking-tight text-center leading-[1.1] sm:leading-[1.02] select-none">
+                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white">
                   Paying for a full month.
                 </span>
-                <span className="block text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-1 sm:mt-2">
+                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-1 sm:mt-2">
                   Showing up for a few days?
                 </span>
               </h1>
 
-              <p className="ff-fade mt-3 sm:mt-4 max-w-lg mx-auto text-sm sm:text-base md:text-lg text-neutral-300 font-normal leading-relaxed">
+              <p className="ff-fade mt-3 sm:mt-4 max-w-lg mx-auto text-xs sm:text-base md:text-lg text-neutral-300 font-normal leading-relaxed">
                 Busy weeks happen. Your fitness spending should fit your routine.
               </p>
 
@@ -507,33 +500,33 @@ export default function OnDemandHero() {
               <div className="ff-fade mt-4 sm:mt-5 flex flex-col items-center gap-2">
                 <Link
                   href="#download"
-                  className="group inline-flex items-center justify-center gap-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white px-7 sm:px-10 py-3 sm:py-3.5 text-sm sm:text-base font-bold shadow-[0_0_35px_rgba(37,99,235,0.5),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white px-5 sm:px-10 py-2.5 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(37,99,235,0.5),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
                 >
                   <span>Find a workout that fits your day</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </Link>
 
                 <div className="text-center">
-                  <span className="text-xs sm:text-sm font-medium text-neutral-300">
+                  <span className="text-[11px] sm:text-sm font-medium text-neutral-300">
                     Options from ₹14/day to ₹500+.*
                   </span>
-                  <p className="mt-0.5 text-[10.5px] text-neutral-400 italic">
+                  <p className="mt-0.5 text-[9.5px] sm:text-[10.5px] text-neutral-400 italic">
                     *Prices vary by centre, activity and booking. Check the app for current rates and availability.
                   </p>
                 </div>
               </div>
 
               {/* ── Interactive Week Workout Capsule Selector (Fully Responsive) ── */}
-              <div className="ff-fade mt-4 sm:mt-5 w-full max-w-sm sm:max-w-md mx-auto rounded-3xl border border-white/10 bg-neutral-950/85 backdrop-blur-xl p-3 text-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.65)]">
+              <div className="ff-fade mt-4 sm:mt-5 w-full max-w-[335px] sm:max-w-md mx-auto rounded-3xl border border-white/10 bg-[#0c0c0e]/90 backdrop-blur-xl p-2.5 sm:p-3 text-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
                 <div className="flex items-center justify-between text-xs mb-2">
-                  <span className="flex items-center gap-2 font-medium text-neutral-300">
+                  <span className="flex items-center gap-2 font-medium text-neutral-300 text-[11px] sm:text-xs">
                     <span className="relative flex h-2 w-2">
                       <span className="ff-ping absolute inset-0 rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative h-2 w-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.6)]" />
                     </span>
                     This week
                   </span>
-                  <span className="font-semibold text-white">From ₹14/day</span>
+                  <span className="font-semibold text-white text-[11px] sm:text-xs">From ₹14/day</span>
                 </div>
 
                 <div className="flex items-center justify-between gap-1 sm:gap-1.5">
@@ -545,16 +538,16 @@ export default function OnDemandHero() {
                         type="button"
                         onClick={() => toggleDay(index)}
                         title={`Click to book ${item.day}`}
-                        className={`group relative flex flex-col items-center justify-between rounded-full w-9 sm:w-10 h-13 sm:h-14 py-1.5 transition-all duration-300 select-none ${
+                        className={`group relative flex flex-col items-center justify-between rounded-full w-8 sm:w-10 h-12 sm:h-14 py-1.5 transition-all duration-300 select-none ${
                           on
                             ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)] scale-[1.04]"
                             : "bg-white/[0.06] text-neutral-300 hover:bg-white/[0.12] hover:scale-[1.02]"
                         }`}
                       >
-                        <span className={`text-[10px] sm:text-[11px] tracking-tight ${on ? "text-white/90 font-medium" : "text-neutral-400"}`}>
+                        <span className={`text-[9px] sm:text-[11px] tracking-tight ${on ? "text-white/90 font-medium" : "text-neutral-400"}`}>
                           {item.day}
                         </span>
-                        <span className={`text-xs sm:text-sm tracking-tight ${on ? "text-white font-bold" : "text-neutral-200"}`}>
+                        <span className={`text-[11px] sm:text-sm tracking-tight ${on ? "text-white font-bold" : "text-neutral-200"}`}>
                           {item.date}
                         </span>
                       </button>
@@ -595,22 +588,20 @@ export default function OnDemandHero() {
             </div>
 
           </div>
+        </div>
 
-          {/* ────── BOTTOM ROW: Auto-moving Category Pills (Left to Right Marquee) ────── */}
-          <div className="relative z-20 w-full overflow-hidden pt-3 pb-1 -mx-4 sm:-mx-8 lg:-mx-10 px-4 sm:px-8 lg:px-10 border-t border-white/[0.06] [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-            <div className="ff-marquee-ltr flex w-max items-center py-0.5 will-change-transform">
-              {[...ALL_CATEGORIES, ...ALL_CATEGORIES].map((c, idx) => (
-                <Link
-                  key={`${c}-${idx}`}
-                  href="#download"
-                  className="rounded-full bg-black/45 hover:bg-white hover:text-black border border-white/15 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-all duration-200 backdrop-blur-md whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95"
-                >
-                  {c}
-                </Link>
-              ))}
-            </div>
-          </div>
-
+      {/* ────── BOTTOM ROW: Auto-moving Category Pills (Full-bleed Left to Right Marquee) ────── */}
+      <div className="relative z-20 w-full overflow-hidden py-3 border-t border-white/[0.08] bg-black/80 backdrop-blur-md [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+        <div className="ff-marquee-ltr flex w-max items-center py-0.5 will-change-transform">
+          {[...ALL_CATEGORIES, ...ALL_CATEGORIES].map((c, idx) => (
+            <Link
+              key={`${c}-${idx}`}
+              href="#download"
+              className="rounded-full bg-neutral-900/80 hover:bg-white hover:text-black border border-white/10 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-all duration-200 backdrop-blur-md whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95"
+            >
+              {c}
+            </Link>
+          ))}
         </div>
       </div>
     </section>

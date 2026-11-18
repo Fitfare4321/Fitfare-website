@@ -96,7 +96,7 @@ const flowCards = [
 
 const CompactLandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-[#060608] text-white selection:bg-blue-600/30 selection:text-white font-sans antialiased overflow-x-clip relative">
+    <div className="min-h-screen bg-black text-white selection:bg-blue-600/30 selection:text-white font-sans antialiased overflow-x-clip relative">
       <PageSEO
         title="Fitness On Demand | FitFare — Pay Only When You Train"
         description="Paying for a full month but showing up for a few days? Meet FitFare. Use prepaid Fit Credits to book individual workouts at 650+ fitness centres. Options from ₹14/day."
@@ -104,13 +104,10 @@ const CompactLandingPage: React.FC = () => {
       />
 
       {/* Main page content wrapped with rounded bottom for curtain reveal footer */}
-      <main className="relative z-10 w-full bg-[#060608] shadow-2xl rounded-b-[40px] border-b border-white/10 overflow-hidden">
-        {/* ── Background Grid & Dynamic Glows ── */}
+      <main className="relative z-10 w-full bg-black shadow-2xl rounded-b-[40px] border-b border-white/10 overflow-hidden">
+        {/* ── Background Grid (Pure Black Neutral Grid) ── */}
         <div className="fixed inset-0 pointer-events-none z-0">
-          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0d_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
-          <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 w-[700px] h-[500px] bg-gradient-to-b from-blue-600/15 via-cyan-500/5 to-transparent blur-[140px] rounded-full" />
-          <div className="absolute top-[40%] right-[-10%] w-[500px] h-[500px] bg-blue-700/10 blur-[150px] rounded-full" />
-          <div className="absolute bottom-[10%] left-[-10%] w-[600px] h-[600px] bg-cyan-600/10 blur-[160px] rounded-full" />
+          <div className="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:24px_24px] opacity-40" />
         </div>
 
         {/* ───────────────────────────────────────────────────────────────────
