@@ -499,8 +499,8 @@ export default function OnDemandHero() {
             <div className="hidden lg:block absolute left-0 xl:left-2 top-2 xl:top-4 w-[265px] xl:w-[310px] h-[280px] xl:h-[328px] z-10 animate-float-slow pointer-events-auto">
               <Figure8Card src={gymInteriorImg} alt="Fitness Gym Facility" className="w-full h-full" />
               {/* Starburst Badge Docked at Lower-Right of Figure-8 (Matching BlooZoom Reference) */}
-              <div className="absolute -bottom-4 right-1 xl:-bottom-5 xl:right-2 z-20">
-                <StarburstBadge src={dumbbellsImg} alt="Strength" size={84} />
+              <div className="absolute -bottom-16 right-3 xl:-bottom-20 xl:right-6 z-20">
+                <StarburstBadge src={dumbbellsImg} alt="Strength" size={88} />
               </div>
             </div>
 
@@ -551,7 +551,7 @@ export default function OnDemandHero() {
               {/* Mini Figure-8 with Starburst */}
               <div className="relative w-24 h-[101px] shrink-0">
                 <Figure8Card src={gymInteriorImg} alt="Gym" className="w-full h-full" />
-                <div className="absolute -bottom-2 -right-1">
+                <div className="absolute -bottom-5 -right-1">
                   <StarburstBadge src={dumbbellsImg} alt="Strength" size={38} />
                 </div>
               </div>
