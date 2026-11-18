@@ -36,8 +36,10 @@ import OwnerProfile from "./pages/ownerpages/OwnerProfile";
 import OwnerGallery from "./pages/ownerpages/OwnerGallery";
 import PartnerFormPage from "./pages/PartnerFormPage";
 import PartnerLandingPage from "./pages/PartnerLandingPage";
+import CompactLandingPage from "./pages/CompactLandingPage";
 
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { CityTransitionProvider } from "@/context/CityTransitionContext";
 
 const queryClient = new QueryClient();
 
@@ -49,7 +51,8 @@ const App = () => (
         <Sonner />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
-          <Routes>
+          <CityTransitionProvider>
+            <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/thrivethon" element={<ThrivethonPage />} />
             <Route path="/terms-and-conditions" element={<TermsAndConditionsPage />} />
@@ -91,10 +94,16 @@ const App = () => (
             <Route path="/partner-form" element={<PartnerFormPage />} />
             <Route path="/for-partners" element={<PartnerLandingPage />} />
             <Route path="/partners" element={<PartnerLandingPage />} />
+            <Route path="/on-demand" element={<CompactLandingPage />} />
+            <Route path="/compact" element={<CompactLandingPage />} />
+            <Route path="/fitness-on-demand" element={<CompactLandingPage />} />
+            <Route path="/fit-credits" element={<CompactLandingPage />} />
+            <Route path="/pay-per-go" element={<CompactLandingPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </BrowserRouter>
+        </CityTransitionProvider>
+      </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
   </ThemeProvider>

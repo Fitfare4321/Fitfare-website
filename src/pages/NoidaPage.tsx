@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
+import CityHeroParallax from "@/components/CityHeroParallax";
+import noidaImg from "@/assets/city-noida.jpg";
 
 const faqItems = [
   {
@@ -204,15 +206,22 @@ const NoidaPage = () => {
       <Navbar />
 
       <main>
-        <section className="relative overflow-hidden pt-28 pb-20 px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),transparent_45%),linear-gradient(180deg,#020817_0%,#0f172a_100%)]" />
-          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+        {/* ═══════════════════ CINEMATIC FULL-SCREEN PARALLAX CITY HERO SECTION ═══════════════════ */}
+        <CityHeroParallax
+          cityName="Noida"
+          tagline="Modern Fitness Corridor"
+          image={noidaImg}
+          accentColor="#38BDF8"
+        />
 
+        {/* ═══════════════════ OVERVIEW & SESSION BOOKING SECTION ═══════════════════ */}
+        <section className="relative overflow-hidden py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
           <div className="relative mx-auto max-w-7xl">
             <m.div
               initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6 }}
               className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]"
             >
               <div>
@@ -220,11 +229,11 @@ const NoidaPage = () => {
                   <Sparkles size={14} /> Best Gyms in Noida
                 </span>
 
-                <h1 className="mt-6 max-w-3xl text-4xl font-black tracking-tight text-white sm:text-5xl lg:text-7xl">
+                <h2 className="mt-6 max-w-3xl text-3xl font-black tracking-tight text-white sm:text-5xl lg:text-6xl">
                   Find the Best Gyms in Noida for Workouts That Fit Your Schedule
-                </h1>
+                </h2>
 
-                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
+                <p className="mt-6 max-w-2xl text-base sm:text-lg leading-7 sm:leading-8 text-slate-300">
                   Noida runs on sectors, shifts and long commutes. A gym membership bought in January assumes that none of it changes. FitFare works by the session, so you book a slot, train, and pay only for that day.
                 </p>
 

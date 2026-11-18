@@ -19,7 +19,7 @@ const faqs = [
   {
     id: 4,
     question: "What are Fit Credits?",
-    answer: "Fit Credits are prepaid credits that can be used to book eligible physical fitness services at FitFare partner gyms and studios. Your available balance and transactions can be managed directly through your FitFare account."
+    answer: "Fit Credits are prepaid credits that can be used to book eligible physical fitness services at Fitfare partnered fitness centers and studios. Your available balance and transactions can be managed directly through your FitFare account."
   },
   {
     id: 5,

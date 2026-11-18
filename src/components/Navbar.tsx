@@ -596,15 +596,21 @@ const Navbar = () => {
     </div>
   );
 
+  const isFromTransition = !!location.state?.fromTransition;
+
   return (
     <>
       
 
       {/* ─── MOBILE ONLY: Top header bar with CTAs ─── */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={isFromTransition ? { y: 0, opacity: 0 } : { y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
+        transition={
+          isFromTransition
+            ? { duration: 0.65, delay: 0.75, ease: "easeOut" }
+            : { type: "spring", stiffness: 100, damping: 20, delay: 0.1 }
+        }
         className="navbar-ui md:hidden fixed top-4 left-0 right-0 z-50 flex items-center justify-end px-4 sm:px-6 pointer-events-none"
       >
         <div className="pointer-events-auto z-20">
@@ -614,9 +620,13 @@ const Navbar = () => {
 
       {/* ─── MOBILE ONLY: Bottom pill bar ─── */}
       <motion.div
-        initial={{ y: 80, opacity: 0 }}
+        initial={isFromTransition ? { y: 0, opacity: 0 } : { y: 80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.2 }}
+        transition={
+          isFromTransition
+            ? { duration: 0.65, delay: 0.75, ease: "easeOut" }
+            : { type: "spring", stiffness: 100, damping: 20, delay: 0.2 }
+        }
         className="navbar-ui md:hidden fixed bottom-6 left-4 right-4 z-[999] pointer-events-auto drop-shadow-2xl"
       >
         <div className="absolute inset-0 bg-white/20 dark:bg-black/40 backdrop-blur-xl rounded-full border border-white/30 dark:border-white/20 shadow-[0_8px_32px_rgba(0,0,0,0.2)] pointer-events-none" />
@@ -629,9 +639,13 @@ const Navbar = () => {
 
       {/* ─── DESKTOP (md+): Top navbar without full-width back glass ─── */}
       <motion.nav
-        initial={{ y: -100, opacity: 0 }}
+        initial={isFromTransition ? { y: 0, opacity: 0 } : { y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
+        transition={
+          isFromTransition
+            ? { duration: 0.65, delay: 0.75, ease: "easeOut" }
+            : { type: "spring", stiffness: 100, damping: 20, delay: 0.1 }
+        }
         className="hidden md:flex fixed top-4 left-0 right-0 z-[999] items-center justify-between px-6 lg:px-10 pointer-events-none"
       >
         {/* LOGO */}

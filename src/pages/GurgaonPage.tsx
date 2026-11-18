@@ -18,6 +18,8 @@ import { Link } from "react-router-dom";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageSEO from "@/components/PageSEO";
+import CityHeroParallax from "@/components/CityHeroParallax";
+import gurugramImg from "@/assets/city-gurugram.jpg";
 
 const faqItems = [
   {
@@ -205,15 +207,22 @@ const Page = () => {
       <Navbar />
 
       <main>
-        <section className="relative overflow-hidden pt-28 pb-20 px-4 sm:px-6 lg:px-8">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(59,130,246,0.18),transparent_45%),linear-gradient(180deg,#020817_0%,#0f172a_100%)]" />
-          <div className="absolute inset-0 opacity-30" style={{ backgroundImage: "radial-gradient(circle at 1px 1px, rgba(255,255,255,0.1) 1px, transparent 0)", backgroundSize: "28px 28px" }} />
+        {/* ═══════════════════ CINEMATIC FULL-SCREEN PARALLAX CITY HERO SECTION ═══════════════════ */}
+        <CityHeroParallax
+          cityName="Gurgaon"
+          tagline="Corporate Wellness Capital"
+          image={gurugramImg}
+          accentColor="#34D399"
+        />
 
+        {/* ═══════════════════ OVERVIEW & SESSION BOOKING SECTION ═══════════════════ */}
+        <section className="relative overflow-hidden py-14 sm:py-20 px-4 sm:px-6 lg:px-8 border-t border-white/[0.06]">
           <div className="relative mx-auto max-w-7xl">
             <m.div
               initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ duration: 0.6 }}
               className="grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]"
             >
               <div>

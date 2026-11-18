@@ -7,6 +7,7 @@ import FindFitUseSection from "@/components/FindFitUseSection";
 import FindBookTrainSection from "@/components/FindBookTrainSection";
 import PersonalizationSection from "@/components/PersonalizationSection";
 import PartnerTransitionSection from "@/components/PartnerTransitionSection";
+import CityAvailabilitySection from "@/components/CityAvailabilitySection";
 import FAQSection from "@/components/FAQSection";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import PageSEO from "@/components/PageSEO";
@@ -136,7 +137,10 @@ const Index = () => {
           {/* 04. Why FitFare */}
           <WhyFitFareSection />
 
-          {/* 05. FindFitUse (Nearby Discovery, App Experience) */}
+          {/* 05. Cities Availability (Delhi, Noida, Gurugram) */}
+          <CityAvailabilitySection />
+
+          {/* 06. FindFitUse (Nearby Discovery, App Experience) */}
           <FindFitUseSection />
 
           {/* 07. Personalization (Coming Soon) */}
