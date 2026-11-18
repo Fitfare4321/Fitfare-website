@@ -176,6 +176,7 @@ const CompactLandingPage: React.FC = () => {
       {/* ───────────────────────────────────────────────────────────────────
           3. CINEMATIC FOOTER (Identical to Main Landing Page)
           ─────────────────────────────────────────────────────────────────── */}
+      <div id="download" />
       <CinematicFooter />
     </div>
   );

@@ -71,6 +71,13 @@ describe("CompactLandingPage", () => {
     expect(screen.getAllByText(/Options from/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/\*Prices vary by centre, activity and booking. Check the app for current rates and availability./i).length).toBeGreaterThan(0);
 
+    // Auto-moving categories marquee checks
+    expect(screen.getAllByText(/Gyms/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Yoga/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Pilates/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Zumba/i).length).toBeGreaterThan(0);
+    expect(screen.getAllByText(/Calisthenics/i).length).toBeGreaterThan(0);
+
     // How Fit Credits Work checks
     expect(screen.getByText(/HOW FIT CREDITS WORK/i)).toBeDefined();
     expect(screen.getAllByText(/Add Fit Credits/i).length).toBeGreaterThan(0);
