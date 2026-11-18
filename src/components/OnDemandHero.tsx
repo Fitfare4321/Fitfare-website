@@ -96,12 +96,12 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
 );
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   GEOMETRIC ARTISTIC PHOTO FRAMES
-   Matches uploaded screenshots: Sacred geometry arcs, frosted glowing glass,
-   specular sheen & ambient aurora halos
+   MODERN GEOMETRIC PHOTO FRAMES (CLEAN, ELEVATED, NO BLURRY GLOWS)
+   Ultra-crisp continuous perimeter paths, multi-layered deep drop shadows,
+   subtle luxury hairline rim lighting & interactive smooth motion
    ───────────────────────────────────────────────────────────────────────────── */
 
-// 1. Quatrefoil / 4-Leaf Clover Rosette (Clean Shape Without White Strokes)
+// 1. Quatrefoil / 4-Leaf Clover Rosette (Clean Modern Luxury Shape)
 const QuatrefoilCard = ({
   src,
   alt,
@@ -114,31 +114,37 @@ const QuatrefoilCard = ({
   const rawId = React.useId();
   const id = rawId.replace(/[^a-zA-Z0-9_-]/g, "");
   const clipId = `q-clip-${id}`;
+  const shineId = `q-shine-${id}`;
+
+  // Continuous outer perimeter path of the 4-leaf rosette (no internal cross lines)
+  const perimeterPath =
+    "M 76.5 76.5 A 90 90 0 1 1 243.5 76.5 A 90 90 0 1 1 243.5 243.5 A 90 90 0 1 1 76.5 243.5 A 90 90 0 1 1 76.5 76.5 Z";
 
   return (
     <div className={`relative group cursor-pointer ${className}`}>
-      {/* Ambient Magenta/Purple Aurora Halo */}
-      <div className="absolute inset-0 bg-purple-600/30 rounded-full blur-[45px] pointer-events-none group-hover:bg-purple-600/50 transition-all duration-700" />
-
       <svg
         viewBox="0 0 320 320"
-        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-105"
+        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-[1.04]"
         style={{
           filter:
-            "drop-shadow(0 25px 45px rgba(0,0,0,0.85)) drop-shadow(0 0 30px rgba(168,85,247,0.35))",
+            "drop-shadow(0 25px 35px rgba(0,0,0,0.85)) drop-shadow(0 10px 18px rgba(0,0,0,0.65))",
         }}
       >
         <defs>
-          {/* Clean union of 4 circles creating the Quatrefoil silhouette */}
+          {/* Continuous outer silhouette path */}
           <clipPath id={clipId}>
-            <circle cx="160" cy="110" r="90" />
-            <circle cx="160" cy="210" r="90" />
-            <circle cx="110" cy="160" r="90" />
-            <circle cx="210" cy="160" r="90" />
+            <path d={perimeterPath} />
           </clipPath>
+
+          {/* Subtle luxury glass sheen */}
+          <linearGradient id={shineId} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="white" stopOpacity="0.14" />
+            <stop offset="35%" stopColor="white" stopOpacity="0.02" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Clean silhouette without white stroke overlays) */}
+        {/* The Clipped Photo (Centered perfectly on yoga posture) */}
         <image
           href={src}
           x="0"
@@ -147,14 +153,32 @@ const QuatrefoilCard = ({
           height="380"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
-          className="transition-transform duration-700 ease-out group-hover:scale-110"
+          className="transition-transform duration-700 ease-out group-hover:scale-108"
+        />
+
+        {/* Subtle Specular Glass Sheen Overlay */}
+        <rect
+          width="320"
+          height="320"
+          fill={`url(#${shineId})`}
+          clipPath={`url(#${clipId})`}
+          pointerEvents="none"
+        />
+
+        {/* Hairline Luxury Rim Highlight (Only along the outer perimeter) */}
+        <path
+          d={perimeterPath}
+          fill="none"
+          stroke="rgba(255,255,255,0.16)"
+          strokeWidth="1.2"
+          className="transition-colors duration-300 group-hover:stroke-white/35"
         />
       </svg>
     </div>
   );
 };
 
-// 2. Double-Lobed Figure-8 Card (Clean Shape Without White Strokes)
+// 2. Double-Lobed Figure-8 Card (Clean Modern Luxury Shape)
 const Figure8Card = ({
   src,
   alt,
@@ -167,29 +191,37 @@ const Figure8Card = ({
   const rawId = React.useId();
   const id = rawId.replace(/[^a-zA-Z0-9_-]/g, "");
   const clipId = `f8-clip-${id}`;
+  const shineId = `f8-shine-${id}`;
+
+  // Continuous outer perimeter path of the double-lobed figure-8 (no internal cross lines)
+  const perimeterPath =
+    "M 67.5 301.9 A 135 135 0 1 1 232.5 301.9 A 140 140 0 1 1 67.5 301.9 Z";
 
   return (
     <div className={`relative group cursor-pointer ${className}`}>
-      {/* Ambient Electric Blue Aurora Halo */}
-      <div className="absolute inset-0 bg-blue-600/28 rounded-full blur-[55px] pointer-events-none group-hover:bg-blue-600/45 transition-all duration-700" />
-
       <svg
         viewBox="0 0 300 620"
-        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-105"
+        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         style={{
           filter:
-            "drop-shadow(0 30px 60px rgba(0,0,0,0.92)) drop-shadow(0 0 35px rgba(59,130,246,0.35))",
+            "drop-shadow(0 30px 45px rgba(0,0,0,0.9)) drop-shadow(0 12px 22px rgba(0,0,0,0.7))",
         }}
       >
         <defs>
-          {/* Clean union of 2 circles creating the Figure-8 silhouette */}
+          {/* Continuous outer silhouette path */}
           <clipPath id={clipId}>
-            <circle cx="150" cy="195" r="135" />
-            <circle cx="150" cy="415" r="140" />
+            <path d={perimeterPath} />
           </clipPath>
+
+          {/* Subtle luxury glass sheen */}
+          <linearGradient id={shineId} x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="white" stopOpacity="0.12" />
+            <stop offset="30%" stopColor="white" stopOpacity="0.02" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Clean silhouette without white stroke overlays) */}
+        {/* The Clipped Photo (Centered perfectly displaying the gym depth) */}
         <image
           href={src}
           x="0"
@@ -198,14 +230,32 @@ const Figure8Card = ({
           height="620"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
-          className="transition-transform duration-700 ease-out group-hover:scale-108"
+          className="transition-transform duration-700 ease-out group-hover:scale-106"
+        />
+
+        {/* Subtle Specular Glass Sheen Overlay */}
+        <rect
+          width="300"
+          height="620"
+          fill={`url(#${shineId})`}
+          clipPath={`url(#${clipId})`}
+          pointerEvents="none"
+        />
+
+        {/* Hairline Luxury Rim Highlight (Only along the outer perimeter) */}
+        <path
+          d={perimeterPath}
+          fill="none"
+          stroke="rgba(255,255,255,0.16)"
+          strokeWidth="1.2"
+          className="transition-colors duration-300 group-hover:stroke-white/35"
         />
       </svg>
     </div>
   );
 };
 
-// 3. 12-Point Starburst Badge (Clean Shape Without White Strokes)
+// 3. 12-Point Starburst Badge (Clean Modern Silhouette)
 const StarburstBadge = ({
   src,
   alt,
@@ -221,24 +271,24 @@ const StarburstBadge = ({
   const id = rawId.replace(/[^a-zA-Z0-9_-]/g, "");
   const clipId = `star-clip-${id}`;
 
+  const starPoints =
+    "50.0,2.0 59.3,15.2 74.0,8.4 75.5,24.5 91.6,26.0 84.8,40.7 98.0,50.0 84.8,59.3 91.6,74.0 75.5,75.5 74.0,91.6 59.3,84.8 50.0,98.0 40.7,84.8 26.0,91.6 24.5,75.5 8.4,74.0 15.2,59.3 2.0,50.0 15.2,40.7 8.4,26.0 24.5,24.5 26.0,8.4 40.7,15.2";
+
   return (
     <div className={`relative group cursor-pointer ${className}`}>
-      {/* Cyan/Teal Neon Glow */}
-      <div className="absolute inset-0 bg-cyan-400/50 rounded-full blur-[20px] pointer-events-none group-hover:bg-cyan-400/70 transition-all duration-500" />
-
       <svg
         viewBox="0 0 100 100"
         width={size}
         height={size}
-        className="overflow-visible animate-spin-very-slow transition-transform duration-500 ease-out group-hover:scale-115"
+        className="overflow-visible animate-spin-very-slow transition-transform duration-500 ease-out group-hover:scale-110"
         style={{
           filter:
-            "drop-shadow(0 15px 30px rgba(0,0,0,0.85)) drop-shadow(0 0 20px rgba(6,182,212,0.8))",
+            "drop-shadow(0 15px 25px rgba(0,0,0,0.85)) drop-shadow(0 6px 12px rgba(0,0,0,0.65))",
         }}
       >
         <defs>
           <clipPath id={clipId}>
-            <polygon points="50.0,2.0 59.3,15.2 74.0,8.4 75.5,24.5 91.6,26.0 84.8,40.7 98.0,50.0 84.8,59.3 91.6,74.0 75.5,75.5 74.0,91.6 59.3,84.8 50.0,98.0 40.7,84.8 26.0,91.6 24.5,75.5 8.4,74.0 15.2,59.3 2.0,50.0 15.2,40.7 8.4,26.0 24.5,24.5 26.0,8.4 40.7,15.2" />
+            <polygon points={starPoints} />
           </clipPath>
         </defs>
 
@@ -250,12 +300,21 @@ const StarburstBadge = ({
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
         />
+
+        {/* Hairline Luxury Rim Highlight */}
+        <polygon
+          points={starPoints}
+          fill="none"
+          stroke="rgba(255,255,255,0.22)"
+          strokeWidth="1.2"
+          className="transition-colors duration-300 group-hover:stroke-white/40"
+        />
       </svg>
     </div>
   );
 };
 
-// 4. Stadium Capsule Pill (Clean Shape Without White Strokes)
+// 4. Stadium Capsule Pill (Clean Modern Silhouette)
 const StadiumCapsuleCard = ({
   src,
   alt,
@@ -266,15 +325,14 @@ const StadiumCapsuleCard = ({
   className?: string;
 }) => (
   <div className={`relative group cursor-pointer ${className}`}>
-    {/* Sapphire-Blue Ambient Halo */}
-    <div className="absolute inset-0 bg-blue-600/30 rounded-full blur-[35px] pointer-events-none group-hover:bg-blue-600/45 transition-all duration-700" />
-
-    <div className="relative w-full h-full rounded-full overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(59,130,246,0.35)] transition-transform duration-500 ease-out group-hover:scale-105">
+    <div className="relative w-full h-full rounded-full overflow-hidden border border-white/[0.14] shadow-[0_25px_50px_rgba(0,0,0,0.85),0_8px_20px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:scale-105">
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
+        className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.08] transition-transform duration-700 ease-out group-hover:scale-108"
       />
+      {/* Specular Glass Reflection */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] pointer-events-none" />
     </div>
   </div>
 );
