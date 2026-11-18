@@ -124,9 +124,9 @@ const QuatrefoilCard = ({
         className="w-full h-full overflow-visible transition-transform duration-300 ease-out group-hover:scale-[1.04]"
       >
         <defs>
-          {/* Continuous outer silhouette path */}
+          {/* Continuous outer silhouette path tilted 15 degrees to the left */}
           <clipPath id={clipId}>
-            <path d={perimeterPath} />
+            <path d={perimeterPath} transform="rotate(-15 160 160)" />
           </clipPath>
 
           {/* Subtle luxury glass sheen */}
@@ -137,12 +137,12 @@ const QuatrefoilCard = ({
           </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Centered perfectly on yoga posture) */}
+        {/* The Clipped Photo (Centered perfectly on yoga posture, filling shape completely) */}
         <image
           href={src}
-          x="0"
+          x="-30"
           y="-30"
-          width="320"
+          width="380"
           height="380"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
@@ -158,11 +158,12 @@ const QuatrefoilCard = ({
           pointerEvents="none"
         />
 
-        {/* Hairline Luxury Rim Highlight (Only along the outer perimeter) */}
+        {/* Hairline Luxury Rim Highlight (Tilted 15 degrees to match outer perimeter) */}
         <path
           d={perimeterPath}
+          transform="rotate(-15 160 160)"
           fill="none"
-          stroke="rgba(255,255,255,0.16)"
+          stroke="rgba(255,255,255,0.18)"
           strokeWidth="1.2"
           className="transition-colors duration-300 group-hover:stroke-white/35"
         />
