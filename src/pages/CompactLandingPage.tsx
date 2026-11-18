@@ -66,28 +66,28 @@ const FadeIn = ({
 const flowCards = [
   {
     title: "DISCOVER",
-    desc: "Add Fit Credits — Top up your FitFare wallet in the app. Find participating fitness centres near you.",
+    desc: "Add Fit Credits: Top up your FitFare wallet in the app. Find participating fitness centres near you.",
     icon: Search,
     src: discoverImg,
     alt: "Discover",
   },
   {
     title: "CHOOSE",
-    desc: "Find your activity — Choose a fitness centre and the activity you want to try across 650+ centres.",
+    desc: "Find your activity: Choose a fitness centre and the activity you want to try across 650+ centres.",
     icon: CheckCircle,
     src: chooseImg,
     alt: "Choose",
   },
   {
     title: "BOOK & PAY",
-    desc: "Book on demand — Use credits for your chosen workout. Fit Credits expire after 60 days.",
+    desc: "Book on demand: Use credits for your chosen workout. Fit Credits expire after 60 days.",
     icon: CreditCard,
     src: bookAndPayImg,
     alt: "Book & Pay",
   },
   {
     title: "CHECK IN",
-    desc: "Instant QR check-in — Follow the in-app instructions when you arrive at the centre.",
+    desc: "Instant QR check-in: Follow the in-app instructions when you arrive at the centre.",
     icon: QrCode,
     src: checkInImg,
     alt: "Check In",
@@ -96,7 +96,7 @@ const flowCards = [
 
 const CompactLandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-blue-600/30 selection:text-white font-sans antialiased overflow-x-clip relative">
+    <div className="min-h-screen bg-black text-white selection:bg-[#B0E0E6]/30 selection:text-white font-sans antialiased overflow-x-clip relative">
       <PageSEO
         title="Fitness On Demand | FitFare — Pay Only When You Train"
         description="Paying for a full month but showing up for a few days? Meet FitFare. Use prepaid Fit Credits to book individual workouts at 650+ fitness centres. Options from ₹14/day."
@@ -125,8 +125,8 @@ const CompactLandingPage: React.FC = () => {
             <div className="min-h-[500px]">
               <div className="flex flex-col items-center text-center mt-4">
                 <FadeIn>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-semibold text-blue-400 uppercase tracking-widest mb-4">
-                    <Sparkles className="w-3.5 h-3.5 text-blue-400" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#B0E0E6]/10 border border-[#B0E0E6]/25 text-xs font-semibold text-[#B0E0E6] uppercase tracking-widest mb-4">
+                    <Sparkles className="w-3.5 h-3.5 text-[#B0E0E6]" />
                     <span>HOW FIT CREDITS WORK</span>
                   </div>
                   <h2
