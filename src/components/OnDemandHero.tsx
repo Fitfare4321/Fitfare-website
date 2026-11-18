@@ -594,41 +594,49 @@ export default function OnDemandHero() {
                     </h3>
                   </div>
 
-                  {/* Download Now Button & Underneath Android + iOS Store Buttons */}
-                  <div className="mt-5 flex flex-col gap-3">
-                    <div>
-                      <Link
-                        href="#download"
-                        id="download"
-                        className="inline-flex items-center justify-center gap-2 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-6 sm:px-8 py-3 text-xs sm:text-sm font-bold shadow-[0_0_25px_rgba(232,247,252,0.4)] transition-all duration-200 hover:scale-105 active:scale-95"
-                      >
-                        <span>Download Now</span>
-                        <span>→</span>
-                      </Link>
+                  {/* Download Now as text + Large App Store & Google Play Buttons */}
+                  <div className="mt-5 flex flex-col gap-2.5">
+                    <div id="download" className="text-sm sm:text-base font-bold text-white tracking-tight flex items-center gap-2">
+                      <span>Download Now</span>
+                      <span className="text-xs text-neutral-400 font-normal">for iOS & Android</span>
                     </div>
 
-                    {/* "uske neeche 2 button android and ios ka" */}
-                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                    {/* Increased size App Store & Play Store buttons */}
+                    <div className="flex flex-wrap items-center gap-3 pt-0.5">
                       <a
                         href="https://apps.apple.com/in/app/fitfare-pay-per-go-fitness/id6797875405"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 px-3.5 py-1.5 text-xs text-neutral-200 hover:text-white transition-all duration-150 hover:scale-105 active:scale-95"
+                        className="group inline-flex items-center gap-3 rounded-2xl bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 hover:border-white/40 px-4 sm:px-5 py-2.5 sm:py-3 text-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
                         title="Download on Apple App Store"
                       >
-                        <AppleIcon className="w-4 h-4 text-white fill-current shrink-0" />
-                        <span className="text-[11px] font-semibold">App Store</span>
+                        <AppleIcon className="w-6 h-6 text-white fill-current shrink-0 transition-transform group-hover:scale-110" />
+                        <div className="text-left leading-none">
+                          <span className="text-[9.5px] block uppercase tracking-wider text-neutral-400 font-medium mb-1">
+                            Download on the
+                          </span>
+                          <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                            App Store
+                          </span>
+                        </div>
                       </a>
 
                       <a
                         href="https://play.google.com/store/apps/details?id=in.fitfare.app"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="group inline-flex items-center gap-2 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 px-3.5 py-1.5 text-xs text-neutral-200 hover:text-white transition-all duration-150 hover:scale-105 active:scale-95"
+                        className="group inline-flex items-center gap-3 rounded-2xl bg-white/[0.08] hover:bg-white/[0.16] border border-white/20 hover:border-white/40 px-4 sm:px-5 py-2.5 sm:py-3 text-white transition-all duration-200 hover:scale-105 active:scale-95 shadow-md"
                         title="Get it on Google Play"
                       >
-                        <GooglePlayIcon className="w-3.5 h-3.5 text-white fill-current shrink-0" />
-                        <span className="text-[11px] font-semibold">Google Play</span>
+                        <GooglePlayIcon className="w-5 h-5 text-white fill-current shrink-0 transition-transform group-hover:scale-110" />
+                        <div className="text-left leading-none">
+                          <span className="text-[9.5px] block uppercase tracking-wider text-neutral-400 font-medium mb-1">
+                            Get it on
+                          </span>
+                          <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                            Google Play
+                          </span>
+                        </div>
                       </a>
                     </div>
                   </div>
