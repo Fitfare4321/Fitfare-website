@@ -441,26 +441,18 @@ export default function OnDemandHero() {
         
         {/* ────── TOP ROW: Brand Header ────── */}
         <div className="relative z-20 w-full flex items-center justify-between">
-            <Link href="/" className="group flex items-center gap-2.5">
-              <img
-                src={logo}
-                alt="FitFare Logo"
-                className="h-8 w-auto rounded-lg shadow-md group-hover:scale-105 transition-transform"
-              />
-              <span className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
-                Fit<span className="text-blue-500">Fare</span>
-                <span className="text-blue-400">.</span>
-              </span>
-            </Link>
-
-            {/* Minimalist Header Action / Tag */}
-            <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-[11px] sm:text-xs font-semibold text-neutral-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                Fitness On Demand
-              </span>
-            </div>
-          </div>
+          <Link href="/" className="group flex items-center gap-2.5">
+            <img
+              src={logo}
+              alt="FitFare Logo"
+              className="h-8 w-auto rounded-lg shadow-md group-hover:scale-105 transition-transform"
+            />
+            <span className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
+              Fit<span className="text-blue-500">Fare</span>
+              <span className="text-blue-400">.</span>
+            </span>
+          </Link>
+        </div>
 
           {/* ────── CENTER COMPOSITION: Headline + Floating Geometric Photo Frames ────── */}
           <div className="relative z-10 my-auto py-2 sm:py-3 lg:py-4 flex flex-col items-center justify-center">
