@@ -434,44 +434,26 @@ export default function OnDemandHero() {
             </svg>
           </div>
 
-          {/* ────── TOP ROW: Brand Header & Left-to-Right Category Marquee ────── */}
-          <div className="relative z-20 w-full flex flex-col gap-3.5">
-            {/* Top Bar with Brand Logo and Action */}
-            <div className="flex items-center justify-between">
-              <Link href="/" className="group flex items-center gap-2.5">
-                <img
-                  src={logo}
-                  alt="FitFare Logo"
-                  className="h-8 w-auto rounded-lg shadow-md group-hover:scale-105 transition-transform"
-                />
-                <span className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
-                  Fit<span className="text-blue-500">Fare</span>
-                  <span className="text-blue-400">.</span>
-                </span>
-              </Link>
+          {/* ────── TOP ROW: Brand Header ────── */}
+          <div className="relative z-20 w-full flex items-center justify-between">
+            <Link href="/" className="group flex items-center gap-2.5">
+              <img
+                src={logo}
+                alt="FitFare Logo"
+                className="h-8 w-auto rounded-lg shadow-md group-hover:scale-105 transition-transform"
+              />
+              <span className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
+                Fit<span className="text-blue-500">Fare</span>
+                <span className="text-blue-400">.</span>
+              </span>
+            </Link>
 
-              {/* Minimalist Header Action / Tag */}
-              <div className="flex items-center gap-2">
-                <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-xs font-semibold text-neutral-300">
-                  <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
-                  Fitness On Demand
-                </span>
-              </div>
-            </div>
-
-            {/* Auto-moving Category Pills (Left to Right Marquee) */}
-            <div className="relative w-full overflow-hidden py-1 -mx-4 sm:-mx-8 lg:-mx-10 px-4 sm:px-8 lg:px-10 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-              <div className="ff-marquee-ltr flex w-max items-center py-0.5 will-change-transform">
-                {[...ALL_CATEGORIES, ...ALL_CATEGORIES].map((c, idx) => (
-                  <Link
-                    key={`${c}-${idx}`}
-                    href="#download"
-                    className="rounded-full bg-black/45 hover:bg-white hover:text-black border border-white/15 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-all duration-200 backdrop-blur-md whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95"
-                  >
-                    {c}
-                  </Link>
-                ))}
-              </div>
+            {/* Minimalist Header Action / Tag */}
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.06] border border-white/10 backdrop-blur-md text-xs font-semibold text-neutral-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-ping" />
+                Fitness On Demand
+              </span>
             </div>
           </div>
 
@@ -614,10 +596,19 @@ export default function OnDemandHero() {
 
           </div>
 
-          {/* ────── BOTTOM SUBTLE FOOTER BAR ────── */}
-          <div className="relative z-10 w-full pt-2 flex items-center justify-between text-[11px] text-neutral-500 border-t border-white/[0.06]">
-            <span>© 2026 FitFare • Fitness On Demand</span>
-            <span className="hidden sm:inline">Prepaid Fit Credits • No Lock-in</span>
+          {/* ────── BOTTOM ROW: Auto-moving Category Pills (Left to Right Marquee) ────── */}
+          <div className="relative z-20 w-full overflow-hidden pt-3 pb-1 -mx-4 sm:-mx-8 lg:-mx-10 px-4 sm:px-8 lg:px-10 border-t border-white/[0.06] [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
+            <div className="ff-marquee-ltr flex w-max items-center py-0.5 will-change-transform">
+              {[...ALL_CATEGORIES, ...ALL_CATEGORIES].map((c, idx) => (
+                <Link
+                  key={`${c}-${idx}`}
+                  href="#download"
+                  className="rounded-full bg-black/45 hover:bg-white hover:text-black border border-white/15 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-all duration-200 backdrop-blur-md whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none shadow-[0_4px_12px_rgba(0,0,0,0.3)] hover:scale-105 active:scale-95"
+                >
+                  {c}
+                </Link>
+              ))}
+            </div>
           </div>
 
         </div>
