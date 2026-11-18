@@ -1,20 +1,55 @@
 import React, { useState } from "react";
+import { Bookmark } from "lucide-react";
 import gymInteriorImg from "@/assets/gym_interior_color_1790323279413.jpg";
 import heroYogaImg from "@/assets/hero-card-yoga.jpg";
 import zumbaImg from "@/assets/zumba.jpg";
 import dumbbellsImg from "@/assets/dumbbells_color_1790323293289.jpg";
 import logo from "@/assets/blue-background-logo.png";
 
-// Week days & dates matching calendar capsule design
-const WEEK_DAYS = [
-  { day: "Mon", date: 10 },
-  { day: "Tue", date: 11 },
-  { day: "Wed", date: 12 },
-  { day: "Thu", date: 13 },
-  { day: "Fri", date: 14 },
-  { day: "Sat", date: 15 },
-  { day: "Sun", date: 16 },
-];
+// Real current week interface & dynamic calculator
+export interface WeekDay {
+  day: string;
+  date: number;
+  month: string;
+  isToday: boolean;
+  dayIndex: number;
+}
+
+export function getRealCurrentWeek(): WeekDay[] {
+  const today = new Date();
+  const dayOfWeek = today.getDay(); // 0 is Sunday, 1 is Monday...
+  const diffToMonday = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+  const monday = new Date(today.getFullYear(), today.getMonth(), today.getDate() + diffToMonday);
+
+  const dayNames = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  return dayNames.map((dayName, idx) => {
+    const d = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + idx);
+    const isToday =
+      d.getDate() === today.getDate() &&
+      d.getMonth() === today.getMonth() &&
+      d.getFullYear() === today.getFullYear();
+    return {
+      day: dayName,
+      date: d.getDate(),
+      month: d.toLocaleString("en-US", { month: "short" }),
+      isToday,
+      dayIndex: idx,
+    };
+  });
+}
+
+// Inline SVGs for Apple and Google Play store buttons
+const AppleIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.99.6-2.63 1.35-.57.66-.99 1.73-.85 2.76 1 .08 2.03-.52 2.55-1.26z" />
+  </svg>
+);
+
+const GooglePlayIcon = ({ className = "w-4 h-4" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" fill="currentColor" className={className}>
+    <path d="M3.609 1.814L13.793 12 3.61 22.186c-.37-.306-.61-.774-.61-1.312V3.126c0-.538.24-1.006.609-1.312zm11.234 11.236l2.182-2.183-11.7-6.66 9.518 8.843zm2.182-3.896l2.97 1.691c.78.444.78 1.168 0 1.612l-2.97 1.691-2.473-2.473 2.473-2.521zM5.325 21.793l11.7-6.66-2.182-2.183-9.518 8.843z" />
+  </svg>
+);
 
 const ALL_CATEGORIES = [
   "Gyms",
@@ -324,7 +359,9 @@ const StadiumCapsuleCard = ({
 );
 
 export default function OnDemandHero() {
-  // Tue (1), Thu (3), Fri (4 - highlighted active day like in reference screenshot)
+  // Dynamically computed real current week (Monday - Sunday)
+  const [weekDays] = useState<WeekDay[]>(() => getRealCurrentWeek());
+  // Pre-selected workouts (e.g. Tue, Thu, Fri active demo)
   const [bookedDays, setBookedDays] = useState<number[]>([1, 3, 4]);
 
   const toggleDay = (index: number) => {
@@ -497,77 +534,15 @@ export default function OnDemandHero() {
                 </span>
               </h1>
 
-              <p className="ff-fade mt-3 sm:mt-4 max-w-lg mx-auto text-xs sm:text-base md:text-lg text-neutral-300 font-normal leading-relaxed">
-                Busy weeks happen. Your fitness spending should fit your routine.
-              </p>
-
-              {/* Main Pill CTA & Pricing Subtext */}
-              <div className="ff-fade mt-4 sm:mt-5 flex flex-col items-center gap-2">
+              {/* Center Action CTA (Matching "Schedule Now" in Reference Image 1) */}
+              <div className="ff-fade mt-5 sm:mt-6 flex justify-center">
                 <Link
                   href="#download"
-                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-5 sm:px-10 py-2.5 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.5),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-6 sm:px-9 py-3 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.4),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
                 >
                   <span>Find a workout that fits your day</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </Link>
-
-                <div className="text-center">
-                  <span className="text-[11px] sm:text-sm font-medium text-neutral-300">
-                    Options from ₹14/day to ₹500+.*
-                  </span>
-                  <p className="mt-0.5 text-[9.5px] sm:text-[10.5px] text-neutral-400 italic">
-                    *Prices vary by centre, activity and booking. Check the app for current rates and availability.
-                  </p>
-                </div>
-              </div>
-
-              {/* ── Interactive Week Workout Capsule Selector (Fully Responsive) ── */}
-              <div className="ff-fade mt-4 sm:mt-5 w-full max-w-[335px] sm:max-w-md mx-auto rounded-3xl border border-white/10 bg-[#0c0c0e]/90 backdrop-blur-xl p-2.5 sm:p-3 text-neutral-100 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-                <div className="flex items-center justify-between text-xs mb-2">
-                  <span className="flex items-center gap-2 font-medium text-neutral-300 text-[11px] sm:text-xs">
-                    <span className="relative flex h-2 w-2">
-                      <span className="ff-ping absolute inset-0 rounded-full bg-[#E8F7FC] opacity-75" />
-                      <span className="relative h-2 w-2 rounded-full bg-[#E8F7FC] shadow-[0_0_8px_rgba(232,247,252,0.7)]" />
-                    </span>
-                    This week
-                  </span>
-                  <span className="font-semibold text-white text-[11px] sm:text-xs">From ₹14/day</span>
-                </div>
-
-                <div className="flex items-center justify-between gap-1 sm:gap-1.5">
-                  {WEEK_DAYS.map((item, index) => {
-                    const on = bookedDays.includes(index);
-                    return (
-                      <button
-                        key={item.day}
-                        type="button"
-                        onClick={() => toggleDay(index)}
-                        title={`Click to book ${item.day}`}
-                        className={`group relative flex flex-col items-center justify-between rounded-full w-8 sm:w-10 h-12 sm:h-14 py-1.5 transition-colors duration-150 select-none ${
-                          on
-                            ? "bg-[#E8F7FC] text-neutral-950 shadow-[0_0_15px_rgba(232,247,252,0.45)]"
-                            : "bg-white/[0.06] text-neutral-300 hover:bg-white/[0.12]"
-                        }`}
-                      >
-                        <span className={`text-[9px] sm:text-[11px] tracking-tight ${on ? "text-neutral-800 font-semibold" : "text-neutral-400"}`}>
-                          {item.day}
-                        </span>
-                        <span className={`text-[11px] sm:text-sm tracking-tight ${on ? "text-neutral-950 font-bold" : "text-neutral-200"}`}>
-                          {item.date}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-                <div className="mt-2 flex items-center justify-between pt-1.5 border-t border-white/10 text-[11px]">
-                  <p className="text-neutral-400">
-                    <strong className="text-white font-semibold">{bookedDays.length} workouts</strong> booked. Pay for only those.
-                  </p>
-                  <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-white/[0.08] text-neutral-300">
-                    On demand
-                  </span>
-                </div>
               </div>
             </div>
 
@@ -592,6 +567,146 @@ export default function OnDemandHero() {
               </div>
             </div>
 
+          </div>
+
+          {/* ────── DOCKED BOTTOM BENTO CARD (Matching Reference Image 1 Black Card) ────── */}
+          <div className="relative z-20 w-full mt-6 sm:mt-10 mb-2">
+            <div className="relative w-full rounded-2xl sm:rounded-3xl md:rounded-[36px] bg-[#070709] border border-white/10 p-4 sm:p-7 md:p-8 shadow-[0_25px_60px_rgba(0,0,0,0.95)] overflow-hidden">
+              {/* Subtle Ambient Sparkles inside Card (Matching Reference Image 1) */}
+              <SparkleStar size={16} color="#E8F7FC" className="absolute top-4 right-[44%] opacity-40 hidden md:block" />
+              <SparkleStar size={12} color="#E8F7FC" className="absolute bottom-4 left-[28%] opacity-30 hidden md:block" />
+              <SparkleStar size={14} color="#E8F7FC" className="absolute top-8 left-[14%] opacity-25 hidden md:block" />
+
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-center">
+                
+                {/* ── Left Column: Tag, Headline, Download Now CTA, Android & iOS buttons ── */}
+                <div className="lg:col-span-5 flex flex-col justify-between">
+                  <div>
+                    {/* Tag matching "Featured Events" in reference */}
+                    <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#E8F7FC] font-semibold mb-2.5">
+                      <Bookmark className="w-3.5 h-3.5 text-[#E8F7FC] fill-[#E8F7FC]/30" />
+                      <span>FITNESS ON DEMAND</span>
+                    </div>
+
+                    {/* Headline in editorial serif */}
+                    <h3 className="font-serif text-xl sm:text-2xl lg:text-[1.85rem] text-white font-normal leading-snug tracking-tight">
+                      Busy weeks happen. Your fitness spending should fit your routine.
+                    </h3>
+                  </div>
+
+                  {/* Download Now Button & Underneath Android + iOS Store Buttons */}
+                  <div className="mt-5 flex flex-col gap-3">
+                    <div>
+                      <Link
+                        href="#download"
+                        id="download"
+                        className="inline-flex items-center justify-center gap-2 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-6 sm:px-8 py-3 text-xs sm:text-sm font-bold shadow-[0_0_25px_rgba(232,247,252,0.4)] transition-all duration-200 hover:scale-105 active:scale-95"
+                      >
+                        <span>Download Now</span>
+                        <span>→</span>
+                      </Link>
+                    </div>
+
+                    {/* "uske neeche 2 button android and ios ka" */}
+                    <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
+                      <a
+                        href="https://apps.apple.com/in/app/fitfare-pay-per-go-fitness/id6797875405"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 px-3.5 py-1.5 text-xs text-neutral-200 hover:text-white transition-all duration-150 hover:scale-105 active:scale-95"
+                        title="Download on Apple App Store"
+                      >
+                        <AppleIcon className="w-4 h-4 text-white fill-current shrink-0" />
+                        <span className="text-[11px] font-semibold">App Store</span>
+                      </a>
+
+                      <a
+                        href="https://play.google.com/store/apps/details?id=in.fitfare.app"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group inline-flex items-center gap-2 rounded-full bg-white/[0.08] hover:bg-white/[0.16] border border-white/15 px-3.5 py-1.5 text-xs text-neutral-200 hover:text-white transition-all duration-150 hover:scale-105 active:scale-95"
+                        title="Get it on Google Play"
+                      >
+                        <GooglePlayIcon className="w-3.5 h-3.5 text-white fill-current shrink-0" />
+                        <span className="text-[11px] font-semibold">Google Play</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                {/* ── Middle Column: Pricing info, Options from ₹14/day to ₹500+.*, disclaimer ── */}
+                <div className="lg:col-span-3 flex flex-col justify-center border-t lg:border-t-0 lg:border-l lg:border-r border-white/10 pt-4 lg:pt-0 lg:px-6">
+                  <div className="text-[11px] uppercase tracking-wider text-neutral-400 font-semibold mb-1">
+                    Flexible Workout Passes
+                  </div>
+                  <div className="font-serif text-2xl sm:text-3xl text-white font-normal leading-tight">
+                    Options from <span className="text-[#E8F7FC] font-semibold">₹14/day</span> to <span className="text-neutral-200">₹500+.*</span>
+                  </div>
+                  <div className="h-px bg-white/10 my-3 w-full" />
+                  <p className="text-[10px] sm:text-[11px] text-neutral-400 italic leading-relaxed">
+                    *Prices vary by centre, activity and booking. Check the app for current rates and availability.
+                  </p>
+                </div>
+
+                {/* ── Right Column: Real Current Week Calendar (Where photo was in Image 1) ── */}
+                <div className="lg:col-span-4">
+                  <div className="relative w-full rounded-2xl sm:rounded-[26px] bg-[#111116] border border-white/10 p-2.5 sm:p-4 text-white shadow-xl">
+                    <div className="flex items-center justify-between text-xs mb-2.5">
+                      <span className="flex items-center gap-1.5 sm:gap-2 font-medium text-neutral-200 text-[11px] sm:text-xs">
+                        <span className="relative flex h-2 w-2 shrink-0">
+                          <span className="ff-ping absolute inset-0 rounded-full bg-[#E8F7FC] opacity-75" />
+                          <span className="relative h-2 w-2 rounded-full bg-[#E8F7FC] shadow-[0_0_8px_rgba(232,247,252,0.7)]" />
+                        </span>
+                        This week ({weekDays[0]?.month} {weekDays[0]?.date} – {weekDays[6]?.month} {weekDays[6]?.date})
+                      </span>
+                      <span className="font-bold text-[#E8F7FC] text-[11px] sm:text-xs shrink-0">From ₹14/day</span>
+                    </div>
+
+                    {/* 7 Days of the real current week */}
+                    <div className="grid grid-cols-7 gap-1 sm:gap-1.5 w-full">
+                      {weekDays.map((item, index) => {
+                        const on = bookedDays.includes(index);
+                        return (
+                          <button
+                            key={item.day}
+                            type="button"
+                            onClick={() => toggleDay(index)}
+                            title={`${item.day}, ${item.month} ${item.date}${item.isToday ? ' (Today)' : ''} - Click to toggle`}
+                            className={`group relative flex flex-col items-center justify-between rounded-lg sm:rounded-2xl h-13 sm:h-16 py-1 sm:py-1.5 min-w-0 px-0.5 sm:px-1 transition-all duration-150 select-none ${
+                              on
+                                ? "bg-[#E8F7FC] text-neutral-950 font-bold shadow-[0_0_15px_rgba(232,247,252,0.45)] scale-105"
+                                : item.isToday
+                                ? "bg-white/[0.12] text-white border border-[#E8F7FC]/40 hover:bg-white/[0.18]"
+                                : "bg-white/[0.05] text-neutral-300 hover:bg-white/[0.12]"
+                            }`}
+                          >
+                            <span className={`text-[8.5px] sm:text-[10px] uppercase font-semibold ${on ? "text-neutral-800" : item.isToday ? "text-[#E8F7FC]" : "text-neutral-400"}`}>
+                              {item.day}
+                            </span>
+                            <span className={`text-xs sm:text-sm font-bold ${on ? "text-neutral-950" : "text-white"}`}>
+                              {item.date}
+                            </span>
+                            {item.isToday && !on && (
+                              <span className="w-1 h-1 rounded-full bg-[#E8F7FC]" />
+                            )}
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    <div className="mt-2.5 flex items-center justify-between pt-2 border-t border-white/10 text-[10.5px] sm:text-[11px]">
+                      <p className="text-neutral-300">
+                        <strong className="text-white font-semibold">{bookedDays.length} workouts</strong> booked. Pay for only those.
+                      </p>
+                      <span className="text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-[#E8F7FC]/15 text-[#E8F7FC] border border-[#E8F7FC]/25 shrink-0 ml-1">
+                        On Demand
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 
