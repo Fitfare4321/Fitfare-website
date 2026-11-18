@@ -285,7 +285,7 @@ const StarburstBadge = ({
   src,
   alt,
   className = "",
-  size = 96,
+  size,
 }: {
   src: string;
   alt: string;
@@ -305,7 +305,7 @@ const StarburstBadge = ({
         viewBox="0 0 100 100"
         width={size}
         height={size}
-        className="overflow-visible animate-spin-very-slow transition-transform duration-300 ease-out group-hover:scale-110"
+        className="w-full h-full overflow-visible animate-spin-very-slow transition-transform duration-300 ease-out group-hover:scale-110"
       >
         <defs>
           <clipPath id={clipId}>
@@ -492,25 +492,25 @@ export default function OnDemandHero() {
           </Link>
         </div>
 
-          {/* ────── CENTER COMPOSITION: Headline + Floating Geometric Photo Frames ────── */}
-          <div className="relative z-10 my-auto py-2 sm:py-3 lg:py-4 flex flex-col items-center justify-center">
+          {/* ────── CENTER COMPOSITION: Headline + Floating Geometric Photo Frames (Same Composition Desktop & Mobile) ────── */}
+          <div className="relative z-10 w-full my-auto py-2 sm:py-4 lg:py-4 flex flex-col items-center justify-center min-h-[255px] xs:min-h-[280px] sm:min-h-[350px] lg:min-h-0">
             
-            {/* ── 1. Left Geometric Frame: Double-Lobed Figure-8 (Desktop/Tablet) ── */}
-            <div className="hidden lg:block absolute left-0 xl:left-2 top-2 xl:top-4 w-[265px] xl:w-[310px] h-[280px] xl:h-[328px] z-10 animate-float-slow pointer-events-auto">
+            {/* ── 1. Left Geometric Frame: Double-Lobed Figure-8 (Desktop/Tablet/Mobile) ── */}
+            <div className="absolute left-0 sm:left-1 xl:left-2 top-2 xs:top-3 sm:top-2 lg:top-2 xl:top-4 w-[85px] xs:w-[100px] sm:w-[150px] md:w-[200px] lg:w-[265px] xl:w-[310px] h-[90px] xs:h-[106px] sm:h-[158px] md:h-[211px] lg:h-[280px] xl:h-[328px] z-10 animate-float-slow pointer-events-auto">
               <Figure8Card src={gymInteriorImg} alt="Fitness Gym Facility" className="w-full h-full" />
               {/* Starburst Badge Docked at Lower-Right of Figure-8 (Matching BlooZoom Reference) */}
-              <div className="absolute -bottom-16 right-3 xl:-bottom-20 xl:right-6 z-20">
-                <StarburstBadge src={dumbbellsImg} alt="Strength" size={88} />
+              <div className="absolute -bottom-5 right-0 sm:-bottom-8 sm:right-1 lg:-bottom-16 lg:right-3 xl:-bottom-20 xl:right-6 z-20">
+                <StarburstBadge src={dumbbellsImg} alt="Strength" className="w-7 h-7 xs:w-9 xs:h-9 sm:w-12 sm:h-12 lg:w-[88px] lg:h-[88px]" />
               </div>
             </div>
 
             {/* ── 2. Top-Right Geometric Frame: Quatrefoil Rosette (Matching Screenshot 1) ── */}
-            <div className="hidden lg:block absolute right-2 xl:right-8 top-0 xl:top-1 w-[185px] xl:w-[220px] h-[185px] xl:h-[220px] z-10 animate-float-delayed pointer-events-auto">
+            <div className="absolute right-0 sm:right-2 xl:right-8 top-0 sm:top-0 xl:top-1 w-[80px] xs:w-[95px] sm:w-[130px] md:w-[160px] lg:w-[185px] xl:w-[220px] h-[80px] xs:h-[95px] sm:h-[130px] md:h-[160px] lg:h-[185px] xl:h-[220px] z-10 animate-float-delayed pointer-events-auto">
               <QuatrefoilCard src={heroYogaImg} alt="Yoga and Mindfulness Session" className="w-full h-full" />
             </div>
 
             {/* ── 3. Bottom-Right Geometric Frame: Stadium Capsule Pill ── */}
-            <div className="hidden lg:block absolute right-2 xl:right-6 bottom-1 xl:bottom-4 w-[220px] xl:w-[270px] h-[120px] xl:h-[148px] z-10 animate-float-reverse pointer-events-auto">
+            <div className="absolute right-0 sm:right-2 xl:right-6 bottom-0 sm:bottom-1 xl:bottom-4 w-[95px] xs:w-[115px] sm:w-[150px] md:w-[190px] lg:w-[220px] xl:w-[270px] h-[52px] xs:h-[62px] sm:h-[82px] md:h-[104px] lg:h-[120px] xl:h-[148px] z-10 animate-float-reverse pointer-events-auto">
               <StadiumCapsuleCard src={zumbaImg} alt="Zumba and Energy Group Fitness" className="w-full h-full" />
             </div>
 
@@ -524,46 +524,25 @@ export default function OnDemandHero() {
             <DoodleArrow className="hidden lg:block absolute right-[185px] xl:right-[230px] bottom-[125px] xl:bottom-[155px] rotate-[8deg]" />
 
             {/* ── Core Editorial Typography ── */}
-            <div className="relative z-20 text-center max-w-2xl xl:max-w-3xl mx-auto px-2">
-              <h1 className="font-serif tracking-tight text-center leading-[1.1] sm:leading-[1.02] select-none">
-                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white">
+            <div className="relative z-20 text-center max-w-[215px] xs:max-w-[245px] sm:max-w-2xl xl:max-w-3xl mx-auto px-1 sm:px-2">
+              <h1 className="font-serif tracking-tight text-center leading-[1.14] sm:leading-[1.02] select-none">
+                <span className="block text-[1.35rem] xs:text-[1.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
                   Paying for a full month.
                 </span>
-                <span className="block text-2xl sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-1 sm:mt-2">
+                <span className="block text-[1.35rem] xs:text-[1.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-1 sm:mt-2 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
                   Showing up for a few days?
                 </span>
               </h1>
 
               {/* Center Action CTA (Matching "Schedule Now" in Reference Image 1) */}
-              <div className="ff-fade mt-5 sm:mt-6 flex justify-center">
+              <div className="ff-fade mt-4 sm:mt-6 flex justify-center">
                 <Link
                   href="#download"
-                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-6 sm:px-9 py-3 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.4),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
+                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-4 sm:px-9 py-2 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.4),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
                 >
-                  <span>Find a workout that fits your day</span>
+                  <span className="whitespace-nowrap">Find a workout that fits your day</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
                 </Link>
-              </div>
-            </div>
-
-            {/* ── Mobile/Tablet Geometric Frames Row (< lg) ── */}
-            <div className="lg:hidden mt-6 w-full flex items-center justify-center gap-3 sm:gap-5 overflow-x-auto py-2 px-2 [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-              {/* Mini Figure-8 with Starburst */}
-              <div className="relative w-24 h-[101px] shrink-0">
-                <Figure8Card src={gymInteriorImg} alt="Gym" className="w-full h-full" />
-                <div className="absolute -bottom-5 -right-1">
-                  <StarburstBadge src={dumbbellsImg} alt="Strength" size={38} />
-                </div>
-              </div>
-
-              {/* Mini Quatrefoil */}
-              <div className="w-24 h-24 shrink-0">
-                <QuatrefoilCard src={heroYogaImg} alt="Yoga" className="w-full h-full" />
-              </div>
-
-              {/* Mini Stadium Capsule */}
-              <div className="w-28 h-16 shrink-0">
-                <StadiumCapsuleCard src={zumbaImg} alt="Zumba" className="w-full h-full" />
               </div>
             </div>
 
