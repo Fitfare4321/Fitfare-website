@@ -101,7 +101,7 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
    specular sheen & ambient aurora halos
    ───────────────────────────────────────────────────────────────────────────── */
 
-// 1. Quatrefoil / 4-Leaf Clover Rosette (Matching Screenshot 1)
+// 1. Quatrefoil / 4-Leaf Clover Rosette (Clean Shape Without White Strokes)
 const QuatrefoilCard = ({
   src,
   alt,
@@ -114,49 +114,31 @@ const QuatrefoilCard = ({
   const rawId = React.useId();
   const id = rawId.replace(/[^a-zA-Z0-9_-]/g, "");
   const clipId = `q-clip-${id}`;
-  const glowId = `q-glow-${id}`;
-  const shineId = `q-shine-${id}`;
 
   return (
     <div className={`relative group cursor-pointer ${className}`}>
       {/* Ambient Magenta/Purple Aurora Halo */}
-      <div className="absolute inset-0 bg-purple-600/30 rounded-full blur-[45px] pointer-events-none group-hover:bg-purple-600/45 transition-all duration-700" />
+      <div className="absolute inset-0 bg-purple-600/30 rounded-full blur-[45px] pointer-events-none group-hover:bg-purple-600/50 transition-all duration-700" />
 
       <svg
         viewBox="0 0 320 320"
         className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-105"
         style={{
           filter:
-            "drop-shadow(0 25px 45px rgba(0,0,0,0.85)) drop-shadow(0 0 25px rgba(168,85,247,0.4))",
+            "drop-shadow(0 25px 45px rgba(0,0,0,0.85)) drop-shadow(0 0 30px rgba(168,85,247,0.35))",
         }}
       >
         <defs>
-          {/* Union of 4 circles creating the Quatrefoil silhouette */}
+          {/* Clean union of 4 circles creating the Quatrefoil silhouette */}
           <clipPath id={clipId}>
             <circle cx="160" cy="110" r="90" />
             <circle cx="160" cy="210" r="90" />
             <circle cx="110" cy="160" r="90" />
             <circle cx="210" cy="160" r="90" />
           </clipPath>
-
-          {/* Soft bloom glow filter for frosted glass borders */}
-          <filter id={glowId} x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          {/* Glass gloss sheen */}
-          <linearGradient id={shineId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="white" stopOpacity="0.32" />
-            <stop offset="45%" stopColor="white" stopOpacity="0.06" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Centered perfectly on yoga posture) */}
+        {/* The Clipped Photo (Clean silhouette without white stroke overlays) */}
         <image
           href={src}
           x="0"
@@ -167,81 +149,12 @@ const QuatrefoilCard = ({
           clipPath={`url(#${clipId})`}
           className="transition-transform duration-700 ease-out group-hover:scale-110"
         />
-
-        {/* Specular Glass Sheen Overlay */}
-        <rect
-          width="320"
-          height="320"
-          fill={`url(#${shineId})`}
-          clipPath={`url(#${clipId})`}
-          pointerEvents="none"
-        />
-
-        {/* Outer Frosted Glass Rim (Soft glowing backing stroke) */}
-        <circle cx="160" cy="110" r="90" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="6" filter={`url(#${glowId})`} />
-        <circle cx="160" cy="210" r="90" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="6" filter={`url(#${glowId})`} />
-        <circle cx="110" cy="160" r="90" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="6" filter={`url(#${glowId})`} />
-        <circle cx="210" cy="160" r="90" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="6" filter={`url(#${glowId})`} />
-
-        {/* 4 Overlapping Sacred Geometry Circles (Internal Petals & Luminous Rim) */}
-        <circle
-          cx="160"
-          cy="110"
-          r="90"
-          fill="none"
-          stroke="rgba(255,255,255,0.78)"
-          strokeWidth="2.4"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
-        <circle
-          cx="160"
-          cy="210"
-          r="90"
-          fill="none"
-          stroke="rgba(255,255,255,0.78)"
-          strokeWidth="2.4"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
-        <circle
-          cx="110"
-          cy="160"
-          r="90"
-          fill="none"
-          stroke="rgba(255,255,255,0.78)"
-          strokeWidth="2.4"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
-        <circle
-          cx="210"
-          cy="160"
-          r="90"
-          fill="none"
-          stroke="rgba(255,255,255,0.78)"
-          strokeWidth="2.4"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
-
-        {/* Center Intersection Crystal Flairs */}
-        <circle
-          cx="160"
-          cy="160"
-          r="4"
-          fill="white"
-          opacity="0.95"
-          style={{ filter: "drop-shadow(0 0 8px white)" }}
-        />
-        <circle
-          cx="160"
-          cy="160"
-          r="1.5"
-          fill="#fdf4ff"
-        />
       </svg>
     </div>
   );
 };
 
-// 2. Double-Lobed Figure-8 Card (Matching Screenshot 2)
+// 2. Double-Lobed Figure-8 Card (Clean Shape Without White Strokes)
 const Figure8Card = ({
   src,
   alt,
@@ -254,8 +167,6 @@ const Figure8Card = ({
   const rawId = React.useId();
   const id = rawId.replace(/[^a-zA-Z0-9_-]/g, "");
   const clipId = `f8-clip-${id}`;
-  const glowId = `f8-glow-${id}`;
-  const shineId = `f8-shine-${id}`;
 
   return (
     <div className={`relative group cursor-pointer ${className}`}>
@@ -267,34 +178,18 @@ const Figure8Card = ({
         className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-105"
         style={{
           filter:
-            "drop-shadow(0 30px 60px rgba(0,0,0,0.92)) drop-shadow(0 0 35px rgba(59,130,246,0.4))",
+            "drop-shadow(0 30px 60px rgba(0,0,0,0.92)) drop-shadow(0 0 35px rgba(59,130,246,0.35))",
         }}
       >
         <defs>
-          {/* Union of 2 circles creating the Figure-8 silhouette */}
+          {/* Clean union of 2 circles creating the Figure-8 silhouette */}
           <clipPath id={clipId}>
             <circle cx="150" cy="195" r="135" />
             <circle cx="150" cy="415" r="140" />
           </clipPath>
-
-          {/* Soft bloom glow filter for frosted glass borders */}
-          <filter id={glowId} x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="3.5" result="blur" />
-            <feMerge>
-              <feMergeNode in="blur" />
-              <feMergeNode in="SourceGraphic" />
-            </feMerge>
-          </filter>
-
-          {/* Glass gloss sheen */}
-          <linearGradient id={shineId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="white" stopOpacity="0.28" />
-            <stop offset="45%" stopColor="white" stopOpacity="0.05" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
-          </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Centered perfectly displaying the gym depth) */}
+        {/* The Clipped Photo (Clean silhouette without white stroke overlays) */}
         <image
           href={src}
           x="0"
@@ -305,45 +200,12 @@ const Figure8Card = ({
           clipPath={`url(#${clipId})`}
           className="transition-transform duration-700 ease-out group-hover:scale-108"
         />
-
-        {/* Specular Glass Sheen Overlay */}
-        <rect
-          width="300"
-          height="620"
-          fill={`url(#${shineId})`}
-          clipPath={`url(#${clipId})`}
-          pointerEvents="none"
-        />
-
-        {/* Outer Frosted Glass Rim (Soft glowing backing stroke) */}
-        <circle cx="150" cy="195" r="135" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="7" filter={`url(#${glowId})`} />
-        <circle cx="150" cy="415" r="140" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="7" filter={`url(#${glowId})`} />
-
-        {/* 2 Overlapping Geometric Circles (Waist Crossover Arcs) */}
-        <circle
-          cx="150"
-          cy="195"
-          r="135"
-          fill="none"
-          stroke="rgba(255,255,255,0.82)"
-          strokeWidth="2.8"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
-        <circle
-          cx="150"
-          cy="415"
-          r="140"
-          fill="none"
-          stroke="rgba(255,255,255,0.82)"
-          strokeWidth="2.8"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
       </svg>
     </div>
   );
 };
 
-// 3. 12-Point Starburst Badge (Docked with Figure-8 as shown in Screenshot 2)
+// 3. 12-Point Starburst Badge (Clean Shape Without White Strokes)
 const StarburstBadge = ({
   src,
   alt,
@@ -388,21 +250,12 @@ const StarburstBadge = ({
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
         />
-
-        {/* Frosted Glass Outline Border */}
-        <polygon
-          points="50.0,2.0 59.3,15.2 74.0,8.4 75.5,24.5 91.6,26.0 84.8,40.7 98.0,50.0 84.8,59.3 91.6,74.0 75.5,75.5 74.0,91.6 59.3,84.8 50.0,98.0 40.7,84.8 26.0,91.6 24.5,75.5 8.4,74.0 15.2,59.3 2.0,50.0 15.2,40.7 8.4,26.0 24.5,24.5 26.0,8.4 40.7,15.2"
-          fill="none"
-          stroke="rgba(255,255,255,0.85)"
-          strokeWidth="2.4"
-          className="transition-colors duration-300 group-hover:stroke-white"
-        />
       </svg>
     </div>
   );
 };
 
-// 4. Stadium Capsule Pill
+// 4. Stadium Capsule Pill (Clean Shape Without White Strokes)
 const StadiumCapsuleCard = ({
   src,
   alt,
@@ -416,14 +269,12 @@ const StadiumCapsuleCard = ({
     {/* Sapphire-Blue Ambient Halo */}
     <div className="absolute inset-0 bg-blue-600/30 rounded-full blur-[35px] pointer-events-none group-hover:bg-blue-600/45 transition-all duration-700" />
 
-    <div className="relative w-full h-full rounded-full overflow-hidden border-2 border-white/50 shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(59,130,246,0.4)] transition-transform duration-500 ease-out group-hover:scale-105">
+    <div className="relative w-full h-full rounded-full overflow-hidden shadow-[0_25px_60px_rgba(0,0,0,0.9),0_0_30px_rgba(59,130,246,0.35)] transition-transform duration-500 ease-out group-hover:scale-105">
       <img
         src={src}
         alt={alt}
         className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.08] transition-transform duration-700 ease-out group-hover:scale-110"
       />
-      {/* Specular Glass Reflection */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-white/25 pointer-events-none" />
     </div>
   </div>
 );
