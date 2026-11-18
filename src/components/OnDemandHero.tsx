@@ -70,7 +70,6 @@ const SparkleStar = ({
     viewBox="0 0 24 24"
     fill={color}
     className={className}
-    style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.45))" }}
   >
     <path d="M12 0C12 6.627 6.627 12 0 12C6.627 12 12 17.373 12 24C12 17.373 17.373 12 24 12C17.373 12 12 6.627 12 0Z" />
   </svg>
@@ -88,7 +87,6 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
     strokeLinecap="round"
     strokeLinejoin="round"
     className={className}
-    style={{ filter: "drop-shadow(0 2px 8px rgba(0,0,0,0.8))" }}
   >
     <path d="M10 22 C 18 42, 38 42, 44 20" />
     <path d="M33 17 L 44 20 L 44 31" />
@@ -96,9 +94,8 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
 );
 
 /* ─────────────────────────────────────────────────────────────────────────────
-   MODERN GEOMETRIC PHOTO FRAMES (CLEAN, ELEVATED, NO BLURRY GLOWS)
-   Ultra-crisp continuous perimeter paths, multi-layered deep drop shadows,
-   subtle luxury hairline rim lighting & interactive smooth motion
+   MODERN GEOMETRIC PHOTO FRAMES (HARDWARE ACCELERATED & SILKY SMOOTH)
+   Continuous vector silhouettes, crisp hairline rims, GPU composited layers
    ───────────────────────────────────────────────────────────────────────────── */
 
 // 1. Quatrefoil / 4-Leaf Clover Rosette (Clean Modern Luxury Shape)
@@ -124,11 +121,7 @@ const QuatrefoilCard = ({
     <div className={`relative group cursor-pointer ${className}`}>
       <svg
         viewBox="0 0 320 320"
-        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-[1.04]"
-        style={{
-          filter:
-            "drop-shadow(0 25px 35px rgba(0,0,0,0.85)) drop-shadow(0 10px 18px rgba(0,0,0,0.65))",
-        }}
+        className="w-full h-full overflow-visible transition-transform duration-300 ease-out group-hover:scale-[1.04]"
       >
         <defs>
           {/* Continuous outer silhouette path */}
@@ -201,11 +194,7 @@ const Figure8Card = ({
     <div className={`relative group cursor-pointer ${className}`}>
       <svg
         viewBox="0 0 300 620"
-        className="w-full h-full overflow-visible transition-transform duration-500 ease-out group-hover:scale-[1.03]"
-        style={{
-          filter:
-            "drop-shadow(0 30px 45px rgba(0,0,0,0.9)) drop-shadow(0 12px 22px rgba(0,0,0,0.7))",
-        }}
+        className="w-full h-full overflow-visible transition-transform duration-300 ease-out group-hover:scale-[1.03]"
       >
         <defs>
           {/* Continuous outer silhouette path */}
@@ -280,11 +269,7 @@ const StarburstBadge = ({
         viewBox="0 0 100 100"
         width={size}
         height={size}
-        className="overflow-visible animate-spin-very-slow transition-transform duration-500 ease-out group-hover:scale-110"
-        style={{
-          filter:
-            "drop-shadow(0 15px 25px rgba(0,0,0,0.85)) drop-shadow(0 6px 12px rgba(0,0,0,0.65))",
-        }}
+        className="overflow-visible animate-spin-very-slow transition-transform duration-300 ease-out group-hover:scale-110"
       >
         <defs>
           <clipPath id={clipId}>
@@ -325,11 +310,11 @@ const StadiumCapsuleCard = ({
   className?: string;
 }) => (
   <div className={`relative group cursor-pointer ${className}`}>
-    <div className="relative w-full h-full rounded-full overflow-hidden border border-white/[0.14] shadow-[0_25px_50px_rgba(0,0,0,0.85),0_8px_20px_rgba(0,0,0,0.6)] transition-transform duration-500 ease-out group-hover:scale-105">
+    <div className="relative w-full h-full rounded-full overflow-hidden border border-white/[0.14] transition-transform duration-300 ease-out group-hover:scale-105">
       <img
         src={src}
         alt={alt}
-        className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.08] transition-transform duration-700 ease-out group-hover:scale-108"
+        className="w-full h-full object-cover object-center filter brightness-[0.98] contrast-[1.08] transition-transform duration-500 ease-out group-hover:scale-106"
       />
       {/* Specular Glass Reflection */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-white/[0.12] pointer-events-none" />
@@ -349,59 +334,86 @@ export default function OnDemandHero() {
 
   return (
     <section className="ff relative bg-black text-white overflow-hidden min-h-screen flex flex-col justify-between">
-      {/* ── Global Styles & Keyframe Animations ── */}
+      {/* ── Global Styles & Keyframe Animations (Hardware-Accelerated & 60/120fps Optimized) ── */}
       <style>{`
         @keyframes ff-rise {
-          from { transform: translateY(110%); }
-          to { transform: none; }
+          from { transform: translate3d(0, 100%, 0); }
+          to { transform: translate3d(0, 0, 0); }
         }
         @keyframes ff-pop {
-          from { opacity: 0; transform: scale(.97); }
+          from { opacity: 0; transform: scale(.98); }
           to { opacity: 1; transform: none; }
         }
         @keyframes ff-fade {
-          from { opacity: 0; transform: translateY(14px); }
-          to { opacity: 1; transform: none; }
+          from { opacity: 0; transform: translate3d(0, 10px, 0); }
+          to { opacity: 1; transform: translate3d(0, 0, 0); }
         }
         @keyframes ff-ping {
-          75%, 100% { transform: scale(2.4); opacity: 0; }
+          75%, 100% { transform: scale(2.2); opacity: 0; }
         }
         @keyframes ff-marquee-ltr {
-          0% { transform: translateX(-50%); }
-          100% { transform: translateX(0%); }
+          0% { transform: translate3d(-50%, 0, 0); }
+          100% { transform: translate3d(0%, 0, 0); }
         }
         @keyframes ff-float-slow {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(-10px) rotate(0.6deg); }
+          0%, 100% { transform: translate3d(0, 0px, 0); }
+          50% { transform: translate3d(0, -10px, 0); }
         }
         @keyframes ff-float-delayed {
-          0%, 100% { transform: translateY(0px) rotate(0deg); }
-          50% { transform: translateY(8px) rotate(-0.8deg); }
+          0%, 100% { transform: translate3d(0, 0px, 0); }
+          50% { transform: translate3d(0, 8px, 0); }
         }
         @keyframes ff-float-reverse {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-7px); }
+          0%, 100% { transform: translate3d(0, 0px, 0); }
+          50% { transform: translate3d(0, -7px, 0); }
         }
         @keyframes ff-spin-very-slow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
         @keyframes ff-pulse-glow {
-          0%, 100% { opacity: 0.45; transform: scale(1); }
-          50% { opacity: 0.85; transform: scale(1.08); }
+          0%, 100% { opacity: 0.35; }
+          50% { opacity: 0.95; }
         }
 
-        .ff-pop { animation: ff-pop .9s cubic-bezier(.2,.8,.2,1) both; }
-        .ff-fade { animation: ff-fade .9s cubic-bezier(.2,.8,.2,1) both; }
-        .ff-rise { animation: ff-rise 1s cubic-bezier(.2,.8,.2,1) both; }
+        .ff-pop { animation: ff-pop .6s cubic-bezier(.2,.8,.2,1) both; }
+        .ff-fade { animation: ff-fade .6s cubic-bezier(.2,.8,.2,1) both; }
+        .ff-rise { animation: ff-rise .7s cubic-bezier(.2,.8,.2,1) both; }
         .ff-ping { animation: ff-ping 2s cubic-bezier(0,0,.2,1) infinite; }
-        .ff-marquee-ltr { animation: ff-marquee-ltr 32s linear infinite; }
+        .ff-marquee-ltr {
+          animation: ff-marquee-ltr 32s linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+        }
         .ff-marquee-ltr:hover { animation-play-state: paused; }
-        .animate-float-slow { animation: ff-float-slow 6.5s ease-in-out infinite; }
-        .animate-float-delayed { animation: ff-float-delayed 7.5s ease-in-out infinite; animation-delay: -2.5s; }
-        .animate-float-reverse { animation: ff-float-reverse 6s ease-in-out infinite; animation-delay: -1.5s; }
-        .animate-spin-very-slow { animation: ff-spin-very-slow 35s linear infinite; }
-        .animate-pulse-glow { animation: ff-pulse-glow 5s ease-in-out infinite alternate; }
+        .animate-float-slow {
+          animation: ff-float-slow 6.5s ease-in-out infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+        }
+        .animate-float-delayed {
+          animation: ff-float-delayed 7.5s ease-in-out infinite;
+          animation-delay: -2.5s;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+        }
+        .animate-float-reverse {
+          animation: ff-float-reverse 6s ease-in-out infinite;
+          animation-delay: -1.5s;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+        }
+        .animate-spin-very-slow {
+          animation: ff-spin-very-slow 35s linear infinite;
+          will-change: transform;
+          transform: translate3d(0, 0, 0);
+          backface-visibility: hidden;
+        }
+        .animate-pulse-glow { animation: ff-pulse-glow 4s ease-in-out infinite alternate; }
 
         @media (prefers-reduced-motion: reduce) {
           .ff * { animation: none !important; transition: none !important; }
@@ -538,10 +550,10 @@ export default function OnDemandHero() {
                         type="button"
                         onClick={() => toggleDay(index)}
                         title={`Click to book ${item.day}`}
-                        className={`group relative flex flex-col items-center justify-between rounded-full w-8 sm:w-10 h-12 sm:h-14 py-1.5 transition-all duration-300 select-none ${
+                        className={`group relative flex flex-col items-center justify-between rounded-full w-8 sm:w-10 h-12 sm:h-14 py-1.5 transition-colors duration-150 select-none ${
                           on
-                            ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.5)] scale-[1.04]"
-                            : "bg-white/[0.06] text-neutral-300 hover:bg-white/[0.12] hover:scale-[1.02]"
+                            ? "bg-blue-600 text-white shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                            : "bg-white/[0.06] text-neutral-300 hover:bg-white/[0.12]"
                         }`}
                       >
                         <span className={`text-[9px] sm:text-[11px] tracking-tight ${on ? "text-white/90 font-medium" : "text-neutral-400"}`}>
@@ -590,14 +602,18 @@ export default function OnDemandHero() {
           </div>
         </div>
 
-      {/* ────── BOTTOM ROW: Auto-moving Category Pills (Full-bleed Left to Right Marquee) ────── */}
-      <div className="relative z-20 w-full overflow-hidden py-3 border-t border-white/[0.08] bg-black/80 backdrop-blur-md [mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_5%,black_95%,transparent)]">
-        <div className="ff-marquee-ltr flex w-max items-center py-0.5 will-change-transform">
+      {/* ────── BOTTOM ROW: Auto-moving Category Pills (Full-bleed Left to Right Marquee, Hardware Accelerated) ────── */}
+      <div className="relative z-20 w-full overflow-hidden py-3 border-t border-white/[0.08] bg-black">
+        {/* Hardware-accelerated fade gradient masks on left & right */}
+        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-black to-transparent z-10" />
+        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-black to-transparent z-10" />
+
+        <div className="ff-marquee-ltr flex w-max items-center py-0.5">
           {[...ALL_CATEGORIES, ...ALL_CATEGORIES].map((c, idx) => (
             <Link
               key={`${c}-${idx}`}
               href="#download"
-              className="rounded-full bg-neutral-900/80 hover:bg-white hover:text-black border border-white/10 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-all duration-200 backdrop-blur-md whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none shadow-[0_4px_12px_rgba(0,0,0,0.4)] hover:scale-105 active:scale-95"
+              className="rounded-full bg-neutral-900/90 hover:bg-white hover:text-black border border-white/10 px-4 sm:px-5 py-1.5 sm:py-2 text-xs font-semibold text-neutral-200 transition-colors duration-150 whitespace-nowrap mr-2.5 sm:mr-3.5 shrink-0 cursor-pointer select-none hover:scale-105 active:scale-95"
             >
               {c}
             </Link>
