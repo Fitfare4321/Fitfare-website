@@ -96,7 +96,7 @@ const flowCards = [
 
 const CompactLandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#97DBF2]/30 selection:text-white font-sans antialiased overflow-x-clip relative">
+    <div className="min-h-screen bg-black text-white selection:bg-[#E8F7FC]/30 selection:text-white font-sans antialiased overflow-x-clip relative">
       <PageSEO
         title="Fitness On Demand | FitFare — Pay Only When You Train"
         description="Paying for a full month but showing up for a few days? Meet FitFare. Use prepaid Fit Credits to book individual workouts at 650+ fitness centres. Options from ₹14/day."
@@ -125,8 +125,8 @@ const CompactLandingPage: React.FC = () => {
             <div className="min-h-[500px]">
               <div className="flex flex-col items-center text-center mt-4">
                 <FadeIn>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#97DBF2]/10 border border-[#97DBF2]/25 text-xs font-semibold text-[#97DBF2] uppercase tracking-widest mb-4">
-                    <Sparkles className="w-3.5 h-3.5 text-[#97DBF2]" />
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8F7FC]/10 border border-[#E8F7FC]/25 text-xs font-semibold text-[#E8F7FC] uppercase tracking-widest mb-4">
+                    <Sparkles className="w-3.5 h-3.5 text-[#E8F7FC]" />
                     <span>HOW FIT CREDITS WORK</span>
                   </div>
                   <h2
