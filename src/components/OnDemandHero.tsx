@@ -58,7 +58,7 @@ const Link = ({
 const SparkleStar = ({
   className = "",
   size = 20,
-  color = "#B0E0E6",
+  color = "#D6EAF8",
 }: {
   className?: string;
   size?: number;
@@ -82,7 +82,7 @@ const DoodleArrow = ({ className = "" }: { className?: string }) => (
     height="54"
     viewBox="0 0 54 54"
     fill="none"
-    stroke="#B0E0E6"
+    stroke="#D6EAF8"
     strokeWidth="2.2"
     strokeLinecap="round"
     strokeLinejoin="round"
@@ -449,8 +449,8 @@ export default function OnDemandHero() {
               className="h-8 w-auto rounded-lg shadow-md group-hover:scale-105 transition-transform"
             />
             <span className="text-xl sm:text-2xl font-bold tracking-tight text-white font-sans">
-              Fit<span className="text-[#B0E0E6]">Fare</span>
-              <span className="text-[#B0E0E6]">.</span>
+              Fit<span className="text-[#D6EAF8]">Fare</span>
+              <span className="text-[#D6EAF8]">.</span>
             </span>
           </Link>
         </div>
@@ -477,11 +477,11 @@ export default function OnDemandHero() {
               <StadiumCapsuleCard src={zumbaImg} alt="Zumba and Energy Group Fitness" className="w-full h-full" />
             </div>
 
-            {/* ── Floating Sparkle Stars & Doodle Arrow (Powder Blue #B0E0E6 Accent) ── */}
-            <SparkleStar size={24} color="#B0E0E6" className="hidden lg:block absolute left-[19%] top-[8%] animate-pulse-glow" />
-            <SparkleStar size={18} color="#B0E0E6" className="hidden lg:block absolute right-[32%] top-[10%] animate-pulse-glow" />
-            <SparkleStar size={22} color="#B0E0E6" className="hidden lg:block absolute right-[34%] bottom-[46%] animate-pulse-glow" />
-            <SparkleStar size={16} color="#B0E0E6" className="hidden lg:block absolute left-[28%] bottom-[16%] opacity-60" />
+            {/* ── Floating Sparkle Stars & Doodle Arrow (Ice Blue #D6EAF8 Accent) ── */}
+            <SparkleStar size={24} color="#D6EAF8" className="hidden lg:block absolute left-[19%] top-[8%] animate-pulse-glow" />
+            <SparkleStar size={18} color="#D6EAF8" className="hidden lg:block absolute right-[32%] top-[10%] animate-pulse-glow" />
+            <SparkleStar size={22} color="#D6EAF8" className="hidden lg:block absolute right-[34%] bottom-[46%] animate-pulse-glow" />
+            <SparkleStar size={16} color="#D6EAF8" className="hidden lg:block absolute left-[28%] bottom-[16%] opacity-60" />
             
             {/* Curved Hand-Drawn Doodle Arrow */}
             <DoodleArrow className="hidden lg:block absolute right-[185px] xl:right-[230px] bottom-[125px] xl:bottom-[155px] rotate-[8deg]" />
@@ -505,7 +505,7 @@ export default function OnDemandHero() {
               <div className="ff-fade mt-4 sm:mt-5 flex flex-col items-center gap-2">
                 <Link
                   href="#download"
-                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#B0E0E6] hover:bg-[#c4ecf2] text-neutral-950 px-5 sm:px-10 py-2.5 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(176,224,230,0.5),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#B0E0E6]"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#D6EAF8] hover:bg-[#e4f1fb] text-neutral-950 px-5 sm:px-10 py-2.5 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(214,234,248,0.5),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#D6EAF8]"
                 >
                   <span>Find a workout that fits your day</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
@@ -526,8 +526,8 @@ export default function OnDemandHero() {
                 <div className="flex items-center justify-between text-xs mb-2">
                   <span className="flex items-center gap-2 font-medium text-neutral-300 text-[11px] sm:text-xs">
                     <span className="relative flex h-2 w-2">
-                      <span className="ff-ping absolute inset-0 rounded-full bg-[#B0E0E6] opacity-75" />
-                      <span className="relative h-2 w-2 rounded-full bg-[#B0E0E6] shadow-[0_0_8px_rgba(176,224,230,0.7)]" />
+                      <span className="ff-ping absolute inset-0 rounded-full bg-[#D6EAF8] opacity-75" />
+                      <span className="relative h-2 w-2 rounded-full bg-[#D6EAF8] shadow-[0_0_8px_rgba(214,234,248,0.7)]" />
                     </span>
                     This week
                   </span>
@@ -545,7 +545,7 @@ export default function OnDemandHero() {
                         title={`Click to book ${item.day}`}
                         className={`group relative flex flex-col items-center justify-between rounded-full w-8 sm:w-10 h-12 sm:h-14 py-1.5 transition-colors duration-150 select-none ${
                           on
-                            ? "bg-[#B0E0E6] text-neutral-950 shadow-[0_0_15px_rgba(176,224,230,0.45)]"
+                            ? "bg-[#D6EAF8] text-neutral-950 shadow-[0_0_15px_rgba(214,234,248,0.45)]"
                             : "bg-white/[0.06] text-neutral-300 hover:bg-white/[0.12]"
                         }`}
                       >
