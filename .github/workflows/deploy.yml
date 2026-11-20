@@ -1,28 +1,24 @@
-# Workflow for building and deploying static content to GitHub Pages
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ['new-ff-web']
+    branches: ['new-ff-web', 'main']
   workflow_dispatch:
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment per workflow
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build:
     runs-on: ubuntu-latest
+    outputs:
+      pages_enabled: ${{ steps.check_pages.outputs.pages_enabled }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,13 +26,13 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'npm'
 
       - name: Install dependencies
         run: npm ci || npm install
 
-      - name: Build production bundle
+      - name: Build site
         run: npm run build:pages
         env:
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
@@ -44,14 +40,33 @@ jobs:
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_CONTACT_API: ${{ secrets.VITE_CONTACT_API }}
 
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v4
+      - name: Check GitHub Pages status
+        id: check_pages
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh api "repos/${{ github.repository }}/pages" > /dev/null 2>&1; then
+            echo "pages_enabled=true" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages is active on ${{ github.repository }}. Proceeding to upload artifacts and deploy."
+          else
+            echo "pages_enabled=false" >> "$GITHUB_OUTPUT"
+            echo "GitHub Pages is not enabled or not supported on ${{ github.repository }} (e.g. private repository on Free plan). Deployment will be safely skipped."
+          fi
 
       - name: Upload artifact
+        if: steps.check_pages.outputs.pages_enabled == 'true'
         uses: actions/upload-pages-artifact@v3
         with:
           path: './docs'
 
+  deploy:
+    needs: build
+    if: needs.build.outputs.pages_enabled == 'true'
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
+        id: deploy
         uses: actions/deploy-pages@v4
