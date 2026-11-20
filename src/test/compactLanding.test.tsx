@@ -79,7 +79,6 @@ describe("CompactLandingPage", () => {
     expect(screen.getAllByText(/Calisthenics/i).length).toBeGreaterThan(0);
 
     // How Fit Credits Work checks
-    expect(screen.getByText(/HOW FIT CREDITS WORK/i)).toBeDefined();
     expect(screen.getAllByText(/Add Fit Credits/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Top up your FitFare wallet in the app./i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/Find your activity/i).length).toBeGreaterThan(0);

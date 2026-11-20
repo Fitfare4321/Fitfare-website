@@ -2,7 +2,6 @@ import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import {
   ArrowRight,
-  Sparkles,
   CheckCircle,
   Search,
   QrCode,
@@ -125,10 +124,6 @@ const CompactLandingPage: React.FC = () => {
             <div className="min-h-[500px]">
               <div className="flex flex-col items-center text-center mt-4">
                 <FadeIn>
-                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#E8F7FC]/10 border border-[#E8F7FC]/25 text-xs font-semibold text-[#E8F7FC] uppercase tracking-widest mb-4">
-                    <Sparkles className="w-3.5 h-3.5 text-[#E8F7FC]" />
-                    <span>HOW FIT CREDITS WORK</span>
-                  </div>
                   <h2
                     className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-200 to-gray-500 leading-[1.1] mb-4 md:mb-6"
                     style={{ fontFamily: "'DM Sans', sans-serif" }}

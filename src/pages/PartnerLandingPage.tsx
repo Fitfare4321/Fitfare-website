@@ -14,6 +14,7 @@ import heroImg from "@/assets/gym_interior_color_1790323279413.jpg";
 import discoveryImg from "@/assets/get_discovered_color_1790323029540.jpg";
 import partnerToolsImg from "@/assets/bento_manage_bookings.png";
 import { GlassButton } from "@/components/ui/glass-button";
+import { FaqAccordion } from "@/components/ui/faq-chat-accordion";
 import PageSEO from "@/components/PageSEO";
 
 /* ═══════════════════════════════════════════════════════════════════════════
@@ -140,6 +141,12 @@ const PartnerNavbar = () => {
           >
             Onboarding
           </a>
+          <a
+            href="#faq"
+            className="px-3.5 py-1 text-xs font-semibold text-white/60 hover:text-white transition-colors rounded-full hover:bg-white/[0.08]"
+          >
+            FAQs
+          </a>
         </div>
 
         {/* Header CTA */}
@@ -237,7 +244,7 @@ const PartnerHero = () => (
    SECTION 2 — PARTNER BENEFITS (Asymmetric bento grid)
    ───────────────────────────────────────────────────────────────────────── */
 const BenefitsSection = () => (
-  <Section id="benefits" className="bg-black global-bg-grid">
+  <Section id="benefits" className="bg-black">
     {/* Glow */}
     <div
       className="hidden md:block absolute top-0 right-0 w-[500px] h-[500px] rounded-full pointer-events-none transform-gpu"
@@ -376,7 +383,7 @@ const comparisonRows = [
 ];
 
 const ComparisonSection = () => (
-  <Section id="why-fitfare" className="bg-[#060608]">
+  <Section id="why-fitfare" className="bg-black">
     {/* Subtle ambient glow */}
     <div
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full pointer-events-none transform-gpu"
@@ -503,7 +510,7 @@ const onboardingSteps = [
 ];
 
 const OnboardingSection = () => (
-  <Section id="how-it-works" className="bg-black global-bg-grid">
+  <Section id="how-it-works" className="bg-black">
     <div className="text-center mb-16 md:mb-20">
       <FadeIn>
         <h2
@@ -577,6 +584,105 @@ const OnboardingSection = () => (
         </Link>
       </div>
     </FadeIn>
+  </Section>
+);
+
+/* ─────────────────────────────────────────────────────────────────────────
+   FAQ SECTION — Frequently Asked Questions for FitFare Partners
+   Uses the same chat accordion UI as the landing page
+   ───────────────────────────────────────────────────────────────────────── */
+const partnerFaqs = [
+  {
+    id: 1,
+    question: "01. Will partnering with FitFare affect my existing memberships?",
+    answer:
+      "FitFare is designed to complement your existing membership model, not replace it. While traditional memberships cater to regular customers, FitFare targets individuals who hesitate to purchase memberships due to financial commitments, travel, irregular schedules or changing fitness preferences.\n\nBy serving this additional customer segment, FitFare creates an opportunity to generate incremental revenue without requiring you to discontinue your existing membership plans.",
+  },
+  {
+    id: 2,
+    question: "02. Will FitFare convert my existing members into pay-per-session customers?",
+    answer:
+      "FitFare does not encourage existing members to discontinue their memberships. Traditional memberships and pay-per-session fitness serve different consumer needs.\n\nFor regular visitors, traditional memberships may continue to offer better long-term value. FitFare primarily caters to customers seeking flexibility without long-term commitments. Both models can coexist within the same fitness centre.",
+  },
+  {
+    id: 3,
+    question: "03. How does FitFare help fitness centres increase their revenue?",
+    answer:
+      "FitFare enables fitness centres to monetise their underutilised capacity, attract new customers and increase their digital visibility.\n\nThrough FitFare, partners can benefit from:\n• Additional revenue opportunities\n• Increased customer footfall\n• Greater digital discoverability\n• Better utilisation of existing infrastructure\n• Opportunities to convert occasional visitors into regular members\n\nFitFare helps you generate more value from your existing resources without necessarily increasing your operational expenses.",
+  },
+  {
+    id: 4,
+    question: "04. Do I lose control over my pricing or business by partnering with FitFare?",
+    answer:
+      "No. FitFare operates as a facilitator between fitness businesses and consumers, not as an owner or operator of fitness centres.\n\nPartners retain control over their independent business operations, traditional membership plans, infrastructure, staff and brand identity. Pricing and service offerings on FitFare are governed by mutually agreed commercial terms.",
+  },
+  {
+    id: 5,
+    question: "05. Are there any hidden charges for partnering with FitFare?",
+    answer:
+      "FitFare believes in transparent and mutually beneficial partnerships. All applicable commercial terms, charges and settlement conditions are communicated during the onboarding process.\n\nOur objective is to create a sustainable business relationship where both FitFare and its partners benefit from business generated through the platform.",
+  },
+  {
+    id: 6,
+    question: "06. How and when do fitness centre partners receive their payments?",
+    answer:
+      "FitFare follows a structured monthly settlement cycle. Payments for eligible and successfully completed sessions are consolidated and settled on the 5th of every month, in accordance with the agreed partnership terms.\n\nDigital booking records and QR-based check-ins help maintain accountability and transparency throughout the process.",
+  },
+  {
+    id: 7,
+    question: "07. How is FitFare different from traditional fitness aggregators?",
+    answer:
+      "FitFare operates on an on-demand, pay-per-session fitness model rather than requiring consumers to purchase a long-term membership.\n\nThe platform is designed to create an ecosystem where independent fitness businesses retain their identity while gaining access to a broader customer base.\n\nFitFare focuses on creating additional business opportunities for partners rather than replacing their existing revenue models.",
+  },
+  {
+    id: 8,
+    question: "08. Can FitFare users become permanent members of my fitness centre?",
+    answer:
+      "Yes. FitFare provides an additional discovery channel through which customers can experience your fitness centre, facilities, trainers and services.\n\nA positive experience can encourage occasional visitors to become regular customers or purchase traditional memberships directly from your fitness centre, subject to the applicable partnership terms.\n\nThis makes FitFare a potential customer acquisition channel alongside an additional revenue source.",
+  },
+  {
+    id: 9,
+    question: "09. Is FitFare only suitable for gyms and large fitness chains?",
+    answer:
+      "No. FitFare is designed for fitness businesses of different sizes and specialisations, including:\n• Independent gyms and fitness chains\n• Yoga and Pilates studios\n• Zumba and dance studios\n• CrossFit and functional training centres\n• MMA and martial arts academies\n• Calisthenics centres\n• Swimming facilities\n\nWhether you operate an independent fitness studio or a multi-location fitness business, FitFare provides opportunities to reach customers seeking your services.",
+  },
+  {
+    id: 10,
+    question: "10. Is partnering with FitFare safe and sustainable for my fitness business?",
+    answer:
+      "FitFare is built around the principle of mutual growth. Its business model is designed to align the interests of consumers, fitness centre owners and the platform.\n\nThrough transparent commercial terms, digital booking records, QR-based verification and structured settlements, FitFare aims to establish accountable and sustainable partnerships.\n\nRather than disrupting traditional fitness businesses, FitFare seeks to expand the overall fitness market by making fitness accessible to customers who may otherwise remain underserved.",
+  },
+];
+
+const PartnerFAQSection = () => (
+  <Section id="faq" className="bg-black border-t border-white/10">
+    <div className="text-center mb-12 md:mb-16">
+      <FadeIn>
+        <h2
+          className="text-4xl md:text-5xl lg:text-6xl font-black tracking-[-0.03em] text-transparent bg-clip-text bg-gradient-to-b from-white via-white to-white/50 mb-5"
+          style={{ fontFamily: "'DM Sans', 'Inter', sans-serif" }}
+        >
+          Frequently Asked Questions
+        </h2>
+      </FadeIn>
+      <FadeIn delay={0.08}>
+        <p className="text-gray-400 text-lg md:text-xl font-medium max-w-2xl mx-auto">
+          Everything you need to know about growing your fitness business with FitFare.
+        </p>
+      </FadeIn>
+    </div>
+
+    <div className="max-w-4xl mx-auto">
+      <FadeIn delay={0.15}>
+        <FaqAccordion
+          data={partnerFaqs}
+          className="w-full p-0"
+          questionClassName="bg-white/5 hover:bg-white/10 text-white font-bold py-4 px-5 sm:py-5 sm:px-7 text-base sm:text-lg md:text-xl border border-white/5 rounded-2xl"
+          answerClassName="bg-white text-black font-semibold py-4 px-6 md:py-5 md:px-8 text-sm sm:text-base md:text-lg max-w-[92%] md:max-w-2xl shadow-2xl rounded-2xl rounded-tr-sm whitespace-pre-line leading-relaxed"
+          timestamp=""
+        />
+      </FadeIn>
+    </div>
   </Section>
 );
 
@@ -685,52 +791,6 @@ const PartnerFooter = () => {
    PAGE COMPONENT
    ───────────────────────────────────────────────────────────────────────── */
 const PartnerLandingPage = () => {
-  // Mouse-follow grid glow (reused from Index.tsx)
-  useEffect(() => {
-    let rafId: number | null = null;
-    let lastX = -1000;
-    let lastY = -1000;
-    let grids: HTMLElement[] = [];
-
-    const refreshGrids = () => {
-      grids = Array.from(
-        document.querySelectorAll<HTMLElement>(
-          ".global-bg-grid, .footer-bg-grid"
-        )
-      );
-    };
-    refreshGrids();
-    window.addEventListener("resize", refreshGrids, { passive: true });
-
-    const updateVisibleGrids = () => {
-      rafId = null;
-      const vh = window.innerHeight;
-      for (let i = 0; i < grids.length; i++) {
-        const grid = grids[i];
-        const rect = grid.getBoundingClientRect();
-        if (rect.bottom >= 0 && rect.top <= vh) {
-          grid.style.setProperty("--mouse-x", `${lastX - rect.left}px`);
-          grid.style.setProperty("--mouse-y", `${lastY - rect.top}px`);
-        }
-      }
-    };
-
-    const handleMouseMove = (e: MouseEvent) => {
-      lastX = e.clientX;
-      lastY = e.clientY;
-      if (rafId === null) {
-        rafId = requestAnimationFrame(updateVisibleGrids);
-      }
-    };
-
-    window.addEventListener("mousemove", handleMouseMove, { passive: true });
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("resize", refreshGrids);
-      if (rafId !== null) cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   // Hash scroll support for section anchors
   useEffect(() => {
     const hash = window.location.hash;
@@ -758,6 +818,7 @@ const PartnerLandingPage = () => {
         <BenefitsSection />
         <ComparisonSection />
         <OnboardingSection />
+        <PartnerFAQSection />
       </main>
 
       <PartnerFooter />

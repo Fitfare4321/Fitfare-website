@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Bookmark } from "lucide-react";
 import gymInteriorImg from "@/assets/gym_interior_color_1790323279413.jpg";
 import heroYogaImg from "@/assets/hero-card-yoga.jpg";
 import zumbaImg from "@/assets/zumba.jpg";
@@ -172,13 +171,13 @@ const QuatrefoilCard = ({
           </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Centered perfectly on yoga posture, filling shape completely) */}
+        {/* The Clipped Photo (Centered perfectly on yoga posture, filling shape completely with generous bleed) */}
         <image
           href={src}
-          x="-30"
-          y="-30"
-          width="380"
-          height="380"
+          x="-90"
+          y="-90"
+          width="500"
+          height="500"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
           className="transition-transform duration-700 ease-out group-hover:scale-108"
@@ -186,8 +185,10 @@ const QuatrefoilCard = ({
 
         {/* Subtle Specular Glass Sheen Overlay */}
         <rect
-          width="320"
-          height="320"
+          x="-90"
+          y="-90"
+          width="500"
+          height="500"
           fill={`url(#${shineId})`}
           clipPath={`url(#${clipId})`}
           pointerEvents="none"
@@ -246,13 +247,13 @@ const Figure8Card = ({
           </linearGradient>
         </defs>
 
-        {/* The Clipped Photo (Centered perfectly displaying the gym depth) */}
+        {/* The Clipped Photo (Centered perfectly displaying the gym depth with generous bleed) */}
         <image
           href={src}
-          x="0"
-          y="0"
-          width="320"
-          height="338"
+          x="-20"
+          y="-20"
+          width="360"
+          height="378"
           preserveAspectRatio="xMidYMid slice"
           clipPath={`url(#${clipId})`}
           className="transition-transform duration-700 ease-out group-hover:scale-106"
@@ -260,8 +261,10 @@ const Figure8Card = ({
 
         {/* Subtle Specular Glass Sheen Overlay */}
         <rect
-          width="320"
-          height="338"
+          x="-20"
+          y="-20"
+          width="360"
+          height="378"
           fill={`url(#${shineId})`}
           clipPath={`url(#${clipId})`}
           pointerEvents="none"
@@ -562,8 +565,7 @@ export default function OnDemandHero() {
                 <div className="lg:col-span-5 flex flex-col justify-between">
                   <div>
                     {/* Tag matching "Featured Events" in reference */}
-                    <div className="flex items-center gap-2 text-xs uppercase tracking-widest text-[#E8F7FC] font-semibold mb-2.5">
-                      <Bookmark className="w-3.5 h-3.5 text-[#E8F7FC] fill-[#E8F7FC]/30" />
+                    <div className="text-xs uppercase tracking-widest text-[#E8F7FC] font-semibold mb-2.5">
                       <span>FITNESS ON DEMAND</span>
                     </div>
 
@@ -639,12 +641,8 @@ export default function OnDemandHero() {
                 <div className="lg:col-span-4">
                   <div className="relative w-full rounded-2xl sm:rounded-[26px] bg-[#111116] border border-white/10 p-2.5 sm:p-4 text-white shadow-xl">
                     <div className="flex items-center justify-between text-xs mb-2.5">
-                      <span className="flex items-center gap-1.5 sm:gap-2 font-medium text-neutral-200 text-[11px] sm:text-xs">
-                        <span className="relative flex h-2 w-2 shrink-0">
-                          <span className="ff-ping absolute inset-0 rounded-full bg-[#E8F7FC] opacity-75" />
-                          <span className="relative h-2 w-2 rounded-full bg-[#E8F7FC] shadow-[0_0_8px_rgba(232,247,252,0.7)]" />
-                        </span>
-                        This week ({weekDays[0]?.month} {weekDays[0]?.date} – {weekDays[6]?.month} {weekDays[6]?.date})
+                      <span className="font-medium text-neutral-200 text-[11px] sm:text-xs">
+                        This week
                       </span>
                       <span className="font-bold text-[#E8F7FC] text-[11px] sm:text-xs shrink-0">From ₹14/day</span>
                     </div>
