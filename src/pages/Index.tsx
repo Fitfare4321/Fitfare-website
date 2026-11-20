@@ -8,7 +8,6 @@ import FindBookTrainSection from "@/components/FindBookTrainSection";
 import PersonalizationSection from "@/components/PersonalizationSection";
 import PartnerTransitionSection from "@/components/PartnerTransitionSection";
 import CityAvailabilitySection from "@/components/CityAvailabilitySection";
-import GymSearchSection from "@/components/GymSearchSection";
 import FAQSection from "@/components/FAQSection";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 import PageSEO from "@/components/PageSEO";
@@ -140,9 +139,6 @@ const Index = () => {
 
           {/* 05. Cities Availability (Delhi, Noida, Gurugram) */}
           <CityAvailabilitySection />
-
-          {/* 05.5. Gym Search */}
-          <GymSearchSection />
 
           {/* 06. FindFitUse (Nearby Discovery, App Experience) */}
           <FindFitUseSection />
