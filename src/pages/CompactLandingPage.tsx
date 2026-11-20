@@ -11,6 +11,7 @@ import {
 import PageSEO from "@/components/PageSEO";
 import { GlassButton } from "@/components/ui/glass-button";
 import OnDemandHero from "@/components/OnDemandHero";
+import GymSearchSection from "@/components/GymSearchSection";
 import { PhoneCarousel } from "@/components/ui/phone-carousel";
 import { CinematicFooter } from "@/components/ui/motion-footer";
 
@@ -114,10 +115,13 @@ const CompactLandingPage: React.FC = () => {
             ─────────────────────────────────────────────────────────────────── */}
         <OnDemandHero />
 
-
+        {/* ───────────────────────────────────────────────────────────────────
+            2. DISCOVER FITNESS CENTRES (Search & Geolocation)
+            ─────────────────────────────────────────────────────────────────── */}
+        <GymSearchSection />
 
         {/* ───────────────────────────────────────────────────────────────────
-            2. HOW FIT CREDITS WORK / APP EXPERIENCE (Phone Carousel from Image 2)
+            3. HOW FIT CREDITS WORK / APP EXPERIENCE (Phone Carousel from Image 2)
             ─────────────────────────────────────────────────────────────────── */}
         <section id="how-it-works" className="py-24 bg-black relative overflow-hidden text-white border-t border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">

@@ -39,6 +39,8 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.VITE_EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.VITE_EMAILJS_TEMPLATE_ID }}
           VITE_CONTACT_API: ${{ secrets.VITE_CONTACT_API }}
+          # Build-time only: used by scripts/fetch-gyms.cjs, never bundled into the site
+          FITFARE_API_KEY: ${{ secrets.FITFARE_API_KEY }}
 
       - name: Check GitHub Pages status
         id: check_pages

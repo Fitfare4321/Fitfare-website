@@ -12,6 +12,8 @@ dist
 dist-ssr
 .env*
 !.env.example
+# Generated at build time by scripts/fetch-gyms.cjs
+public/data/gyms.json
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

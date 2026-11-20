@@ -495,53 +495,59 @@ export default function OnDemandHero() {
           </Link>
         </div>
 
-          {/* ────── CENTER COMPOSITION: Headline + Floating Geometric Photo Frames (Same Composition Desktop & Mobile) ────── */}
-          <div className="relative z-10 w-full my-auto py-2 sm:py-4 lg:py-4 flex flex-col items-center justify-center min-h-[255px] xs:min-h-[280px] sm:min-h-[350px] lg:min-h-0">
+          {/* ────── CENTER COMPOSITION: Headline + Floating Geometric Photo Frames (Scaled ~3/4 screen on mobile) ────── */}
+          <div className="relative z-10 w-full my-auto py-4 sm:py-4 lg:py-4 flex flex-col items-center justify-center min-h-[65vh] xs:min-h-[70vh] max-h-[620px] xs:max-h-[660px] sm:max-h-none sm:min-h-[350px] lg:min-h-0">
             
             {/* ── 1. Left Geometric Frame: Double-Lobed Figure-8 (Desktop/Tablet/Mobile) ── */}
-            <div className="absolute left-0 sm:left-1 xl:left-2 top-2 xs:top-3 sm:top-2 lg:top-2 xl:top-4 w-[85px] xs:w-[100px] sm:w-[150px] md:w-[200px] lg:w-[265px] xl:w-[310px] h-[90px] xs:h-[106px] sm:h-[158px] md:h-[211px] lg:h-[280px] xl:h-[328px] z-10 animate-float-slow pointer-events-auto">
+            <div className="absolute -left-3 xs:-left-1 sm:left-1 xl:left-2 top-2 xs:top-3 sm:top-2 lg:top-2 xl:top-4 w-[150px] xs:w-[175px] sm:w-[150px] md:w-[200px] lg:w-[265px] xl:w-[310px] h-[160px] xs:h-[185px] sm:h-[158px] md:h-[211px] lg:h-[280px] xl:h-[328px] z-10 animate-float-slow pointer-events-auto">
               <Figure8Card src={gymInteriorImg} alt="Fitness Gym Facility" className="w-full h-full" />
-              {/* Starburst Badge Docked at Lower-Right of Figure-8 (Matching BlooZoom Reference) */}
-              <div className="absolute -bottom-5 right-0 sm:-bottom-8 sm:right-1 lg:-bottom-16 lg:right-3 xl:-bottom-20 xl:right-6 z-20">
-                <StarburstBadge src={dumbbellsImg} alt="Strength" className="w-7 h-7 xs:w-9 xs:h-9 sm:w-12 sm:h-12 lg:w-[88px] lg:h-[88px]" />
+              {/* Starburst Badge Docked at Lower-Right of Figure-8 on Desktop / Tablet (BlooZoom Reference) */}
+              <div className="hidden sm:block absolute -bottom-8 sm:right-1 lg:-bottom-16 lg:right-3 xl:-bottom-20 xl:right-6 z-20">
+                <StarburstBadge src={dumbbellsImg} alt="Strength" className="w-12 sm:w-12 lg:w-[88px] lg:h-[88px]" />
               </div>
             </div>
 
             {/* ── 2. Top-Right Geometric Frame: Quatrefoil Rosette (Matching Screenshot 1) ── */}
-            <div className="absolute right-0 sm:right-2 xl:right-8 top-0 sm:top-0 xl:top-1 w-[80px] xs:w-[95px] sm:w-[130px] md:w-[160px] lg:w-[185px] xl:w-[220px] h-[80px] xs:h-[95px] sm:h-[130px] md:h-[160px] lg:h-[185px] xl:h-[220px] z-10 animate-float-delayed pointer-events-auto">
+            <div className="absolute -right-5 xs:-right-3 sm:right-2 xl:right-8 top-1 xs:top-2 sm:top-0 xl:top-1 w-[140px] xs:w-[165px] sm:w-[130px] md:w-[160px] lg:w-[185px] xl:w-[220px] h-[140px] xs:h-[165px] sm:h-[130px] md:h-[160px] lg:h-[185px] xl:h-[220px] z-10 animate-float-delayed pointer-events-auto">
               <QuatrefoilCard src={heroYogaImg} alt="Yoga and Mindfulness Session" className="w-full h-full" />
             </div>
 
             {/* ── 3. Bottom-Right Geometric Frame: Stadium Capsule Pill ── */}
-            <div className="absolute right-0 sm:right-2 xl:right-6 bottom-0 sm:bottom-1 xl:bottom-4 w-[95px] xs:w-[115px] sm:w-[150px] md:w-[190px] lg:w-[220px] xl:w-[270px] h-[52px] xs:h-[62px] sm:h-[82px] md:h-[104px] lg:h-[120px] xl:h-[148px] z-10 animate-float-reverse pointer-events-auto">
+            <div className="absolute -right-2 xs:right-0 sm:right-2 xl:right-6 bottom-2 xs:bottom-4 sm:bottom-1 xl:bottom-4 w-[170px] xs:w-[200px] sm:w-[150px] md:w-[190px] lg:w-[220px] xl:w-[270px] h-[92px] xs:h-[110px] sm:h-[82px] md:h-[104px] lg:h-[120px] xl:h-[148px] z-10 animate-float-reverse pointer-events-auto">
               <StadiumCapsuleCard src={zumbaImg} alt="Zumba and Energy Group Fitness" className="w-full h-full" />
             </div>
 
+            {/* ── 4. Mobile Bottom-Left Geometric Frame: Starburst Badge Below CTA Button ── */}
+            <div className="block sm:hidden absolute left-3 xs:left-6 bottom-3 xs:bottom-5 w-[90px] xs:w-[110px] h-[90px] xs:h-[110px] z-10 animate-float-slow pointer-events-auto">
+              <StarburstBadge src={dumbbellsImg} alt="Strength Dumbbells" className="w-full h-full" />
+            </div>
+
             {/* ── Floating Sparkle Stars & Doodle Arrow (Frost Blue #E8F7FC Accent) ── */}
-            <SparkleStar size={24} color="#E8F7FC" className="hidden lg:block absolute left-[19%] top-[8%] animate-pulse-glow" />
-            <SparkleStar size={18} color="#E8F7FC" className="hidden lg:block absolute right-[32%] top-[10%] animate-pulse-glow" />
+            {/* Mobile & Desktop Ambient Sparkles to fill empty visual fields */}
+            <SparkleStar size={20} color="#E8F7FC" className="absolute left-[12%] sm:left-[19%] top-[30%] sm:top-[8%] animate-pulse-glow opacity-80" />
+            <SparkleStar size={16} color="#E8F7FC" className="absolute right-[28%] sm:right-[32%] top-[8%] sm:top-[10%] animate-pulse-glow opacity-75" />
+            <SparkleStar size={14} color="#E8F7FC" className="absolute left-[47%] sm:left-[28%] bottom-[6%] sm:bottom-[16%] opacity-75 animate-pulse-glow" />
             <SparkleStar size={22} color="#E8F7FC" className="hidden lg:block absolute right-[34%] bottom-[46%] animate-pulse-glow" />
-            <SparkleStar size={16} color="#E8F7FC" className="hidden lg:block absolute left-[28%] bottom-[16%] opacity-60" />
             
             {/* Curved Hand-Drawn Doodle Arrow */}
             <DoodleArrow className="hidden lg:block absolute right-[185px] xl:right-[230px] bottom-[125px] xl:bottom-[155px] rotate-[8deg]" />
 
             {/* ── Core Editorial Typography ── */}
-            <div className="relative z-20 text-center max-w-[215px] xs:max-w-[245px] sm:max-w-2xl xl:max-w-3xl mx-auto px-1 sm:px-2">
-              <h1 className="font-serif tracking-tight text-center leading-[1.14] sm:leading-[1.02] select-none">
-                <span className="block text-[1.35rem] xs:text-[1.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+            <div className="relative z-20 text-center max-w-[290px] xs:max-w-[340px] sm:max-w-2xl xl:max-w-3xl mx-auto px-1 sm:px-2">
+              <h1 className="font-serif tracking-tight text-center leading-[1.12] sm:leading-[1.02] select-none">
+                <span className="block text-[2.15rem] xs:text-[2.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-white drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
                   Paying for a full month.
                 </span>
-                <span className="block text-[1.35rem] xs:text-[1.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-1 sm:mt-2 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
+                <span className="block text-[2.15rem] xs:text-[2.55rem] sm:text-4xl md:text-5xl lg:text-[4.5rem] xl:text-[5.25rem] font-normal text-neutral-300 italic mt-2 xs:mt-3 sm:mt-2 drop-shadow-[0_2px_14px_rgba(0,0,0,0.9)]">
                   Showing up for a few days?
                 </span>
               </h1>
 
               {/* Center Action CTA (Matching "Schedule Now" in Reference Image 1) */}
-              <div className="ff-fade mt-4 sm:mt-6 flex justify-center">
+              <div className="ff-fade mt-6 xs:mt-8 sm:mt-6 flex justify-center">
                 <Link
                   href="#download"
-                  className="group inline-flex items-center justify-center gap-1.5 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-4 sm:px-9 py-2 sm:py-3.5 text-xs sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.4),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
+                  className="group inline-flex items-center justify-center gap-2 sm:gap-2.5 rounded-full bg-[#E8F7FC] hover:bg-white text-neutral-950 px-6 xs:px-8 sm:px-9 py-3.5 sm:py-3.5 text-xs xs:text-sm sm:text-base font-bold shadow-[0_0_35px_rgba(232,247,252,0.4),0_10px_25px_rgba(0,0,0,0.6)] transition-all duration-300 hover:scale-105 active:scale-95 focus-visible:outline focus-visible:outline-2 focus-visible:outline-[#E8F7FC]"
                 >
                   <span className="whitespace-nowrap">Find a workout that fits your day</span>
                   <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
