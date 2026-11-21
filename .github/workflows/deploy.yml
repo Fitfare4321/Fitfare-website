@@ -3,6 +3,9 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: ['new-ff-web', 'main']
+  schedule:
+    # Automatically fetch fresh fitness centres from the API every day at 00:00 UTC (5:30 AM IST)
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 permissions:
