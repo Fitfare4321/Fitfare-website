@@ -8,7 +8,6 @@ import {
   Navigation,
   Compass,
   Check,
-  Bookmark,
   ChevronLeft,
   ChevronRight,
   RotateCcw,
@@ -456,7 +455,6 @@ const PAGE_SIZE = 12;
 
 function GymCard({ gym, distance, eager }: { gym: Gym; distance?: number | null; eager?: boolean }) {
   const [imgErr, setImgErr] = useState(false);
-  const [bookmarked, setBookmarked] = useState(false);
   const fallback = gymInteriorImg;
   const imageSrc = !imgErr && gym.images && gym.images.length > 0 ? gym.images[0] : fallback;
 
@@ -482,27 +480,11 @@ function GymCard({ gym, distance, eager }: { gym: Gym; distance?: number | null;
       <div className="absolute inset-x-0 bottom-0 h-[72%] bg-gradient-to-t from-black via-black/85 via-50% to-transparent pointer-events-none" />
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-black/60 to-transparent pointer-events-none" />
 
-      {/* ── Top Row: Category Badge (Left) & Bookmark Button (Right) ── */}
+      {/* ── Top Row: Category Badge (Left) ── */}
       <div className="relative z-10 flex items-center justify-between">
         <span className="px-3 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-black/45 text-white text-[11px] sm:text-xs font-semibold tracking-wide border border-white/20 shadow-sm">
           {gym.category || "Fitness"}
         </span>
-
-        <button
-          type="button"
-          onClick={(e) => {
-            e.stopPropagation();
-            setBookmarked((prev) => !prev);
-          }}
-          aria-label="Save centre"
-          className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-black/45 border border-white/20 flex items-center justify-center text-white hover:bg-black/60 active:scale-95 transition-all shadow-sm"
-        >
-          <Bookmark
-            className={`w-3.5 h-3.5 sm:w-4 sm:h-4 transition-colors ${
-              bookmarked ? "fill-white text-white" : "text-white"
-            }`}
-          />
-        </button>
       </div>
 
       {/* ── Bottom Section: Name, Location, Amenities Icons ── */}
