@@ -933,7 +933,7 @@ export default function GymSearchSection() {
         >
           <form
             onSubmit={handleSearchSubmit}
-            className="relative flex items-center bg-white rounded-full p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all hover:shadow-[0_10px_35px_rgba(255,255,255,0.1)] focus-within:ring-2 focus-within:ring-white/40"
+            className="relative flex items-center bg-white rounded-full p-1.5 shadow-[0_8px_30px_rgba(0,0,0,0.4)] transition-all hover:shadow-[0_10px_35px_rgba(255,255,255,0.1)] focus-within:ring-2 focus-within:ring-white/40 selection:bg-neutral-900 selection:text-white"
           >
             {/* Left: Search Magnifying Glass Icon */}
             <div className="pl-4 pr-2 text-neutral-500 flex items-center pointer-events-none">
@@ -952,7 +952,7 @@ export default function GymSearchSection() {
               onFocus={() => setShowDropdown(true)}
               onClick={() => setShowDropdown(true)}
               placeholder="Search"
-              className="flex-1 bg-transparent text-neutral-900 placeholder:text-neutral-400 text-base font-normal outline-none px-1 py-2"
+              className="flex-1 bg-transparent text-neutral-900 placeholder:text-neutral-400 text-base font-normal outline-none px-1 py-2 selection:bg-neutral-900 selection:text-white"
               autoComplete="off"
             />
 

@@ -96,7 +96,7 @@ const flowCards = [
 
 const CompactLandingPage: React.FC = () => {
   return (
-    <div className="min-h-screen bg-black text-white selection:bg-[#E8F7FC]/30 selection:text-white font-sans antialiased overflow-x-clip relative">
+    <div className="min-h-screen bg-black text-white selection:bg-white selection:text-black font-sans antialiased overflow-x-clip relative">
       <PageSEO
         title="Fitness On Demand | FitFare — Pay Only When You Train"
         description="Paying for a full month but showing up for a few days? Meet FitFare. Use prepaid Fit Credits to book individual workouts at 650+ fitness centres. Options from ₹14/day."

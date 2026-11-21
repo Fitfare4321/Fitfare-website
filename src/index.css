@@ -518,8 +518,17 @@
 }
 
 ::selection {
-  background: rgba(59, 130, 245, 0.15);
-  color: var(--text-primary);
+  background: #ffffff;
+  color: #000000;
+}
+
+input::selection,
+textarea::selection,
+.bg-white ::selection,
+.bg-white::selection,
+[data-theme="light"] ::selection {
+  background: #171717 !important;
+  color: #ffffff !important;
 }
 
 
