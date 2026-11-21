@@ -915,9 +915,6 @@ export default function GymSearchSection() {
 
         {/* ── Section Header ── */}
         <div className="text-center mb-8 md:mb-10">
-          <span className="text-[11px] font-mono tracking-widest uppercase text-white/50 px-3 py-1 bg-white/5 border border-white/10 rounded-full inline-block mb-3">
-            PARTNER CENTRES
-          </span>
           <h2
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white mb-3"
             style={{ fontFamily: "'DM Sans', sans-serif" }}
