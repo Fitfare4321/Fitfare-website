@@ -490,7 +490,7 @@ function GymCard({ gym, distance, eager }: { gym: Gym; distance?: number | null;
       {/* ── Bottom Section: Name, Location, Amenities Icons ── */}
       <div className="relative z-10 space-y-2 sm:space-y-2.5 mt-auto">
         {/* Center Name (Large & Bold matching Reference) */}
-        <h3 className="text-white text-base sm:text-lg md:text-xl font-extrabold leading-tight tracking-tight drop-shadow-md group-hover:text-emerald-300 transition-colors line-clamp-2">
+        <h3 className="text-white text-base sm:text-lg md:text-xl font-extrabold leading-tight tracking-tight drop-shadow-md line-clamp-2">
           {gym.name}
         </h3>
 
@@ -507,7 +507,7 @@ function GymCard({ gym, distance, eager }: { gym: Gym; distance?: number | null;
           <span className="line-clamp-1">
             {[gym.location.area, gym.location.city].filter(Boolean).join(", ")}
             {distance != null && (
-              <span className="text-emerald-300 font-semibold"> · {formatDistance(distance)}</span>
+              <span className="text-white/80 font-medium"> · {formatDistance(distance)}</span>
             )}
           </span>
           <ExternalLink className="w-3 h-3 opacity-60 ml-0.5 shrink-0" />
